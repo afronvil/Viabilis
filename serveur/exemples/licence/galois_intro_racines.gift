@@ -1,0 +1,17 @@
+// Licence — Théorie de Galois — introduction à l'irréductibilité : Racines rationnelles
+// À importer au niveau 1 ; chaque affirmation est vérifiée avec SymPy (generer_banques_intro.py).
+$CATEGORY: Licence/Théorie de Galois/Introduction/Racines rationnelles
+
+::Candidats::Théorème des racines rationnelles \: combien y a-t-il de racines rationnelles possibles (candidats) pour x³ − 2x + 4 ?{#6}
+
+::Coefficient dominant::Quelles sont les racines rationnelles possibles de 2x³ + x² + 1 ?{=±1 et ±1/2 ~±1 seulement ~±1 et ±2 ~±1/2 seulement}
+
+::Compter les racines::Combien de racines rationnelles a le polynôme x³ − 7x + 6 ?{#3}
+
+::Une racine cachée::Le polynôme 2x³ + x² + 1 est-il irréductible sur Q ?{=Non \: −1 est racine, donc x + 1 le divise ~Oui \: il n'a aucune racine rationnelle ~Oui \: ce n'est pas un polynôme unitaire ~On ne peut pas savoir en degré 3}
+
+::Degré 3 sans racine::x³ − 3x − 1 est irréductible sur Q.{T#Les seuls candidats sont 1 et −1, qui donnent −3 et 1. Sans racine rationnelle, un polynôme de degré 3 est irréductible sur Q.#Exact. Les seuls candidats sont 1 et −1, qui donnent −3 et 1. Sans racine rationnelle, un polynôme de degré 3 est irréductible sur Q.}
+
+::Le piège du degré 4::x⁴ + 3x² + 2 n'a aucune racine rationnelle, donc il est irréductible sur Q.{F#Faux \: x⁴ + 3x² + 2 \= (x² + 1)(x² + 2). En degré 4, un produit de deux facteurs de degré 2 n'a pas forcément de racine.#Exact. Faux \: x⁴ + 3x² + 2 \= (x² + 1)(x² + 2). En degré 4, un produit de deux facteurs de degré 2 n'a pas forcément de racine.}
+
+::Pourquoi les petits degrés::Un polynôme de degré 3 à coefficients rationnels, réductible sur Q, a forcément…{=un facteur de degré 1, donc une racine rationnelle ~deux facteurs de degré 2 ~une racine double ~une racine complexe non réelle}

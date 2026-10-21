@@ -1,0 +1,53 @@
+// M1 de microbiologie — Système d'exploitation et Linux (4 h) — Évaluation finale (30 minutes)
+// Réponses obtenues en exécutant chaque commande avec bash (generer_banques_linux.py).
+$CATEGORY: Master/Linux/Évaluation finale (30 minutes)
+
+::Le noyau::Qu'est-ce que le noyau d'un système d'exploitation ?{=La partie centrale, qui gère la mémoire, les processus et les périphériques ~L'interface graphique du système ~Le premier logiciel installé par l'utilisateur ~Le dossier personnel de l'administrateur}
+
+::Les fichiers temporaires::Dans quel répertoire se trouvent les fichiers temporaires ?{=/tmp ~/etc ~/home ~/bin}
+
+::Remonter de deux niveaux::Le répertoire personnel de Léa est /home/lea. Qu'affiche la dernière commande ?
+lea@pc\:\~$ cd projet/donnees
+lea@pc\:\~$ cd ../..
+lea@pc\:\~$ pwd{=/home/lea ~/home/lea/projet ~/home ~/ ~/home/lea/projet/donnees}
+
+::Un seul caractère::Le répertoire contient a1.txt, a2.txt, a10.txt et b1.txt. Qu'affiche la dernière commande ?
+lea@pc\:\~$ ls a?.txt | wc -l{#2}
+
+::Copier sous un autre nom::Le répertoire ne contient que notes.txt. Qu'affiche la dernière commande ?
+lea@pc\:\~$ cp notes.txt sauvegarde.txt
+lea@pc\:\~$ echo *{=notes.txt sauvegarde.txt ~sauvegarde.txt ~notes.txt ~notes.txt notes.txt ~Une erreur}
+
+::Retirer la lecture::comptages.txt a les droits -rw-r--r--. Qu'affiche la dernière commande ?
+lea@pc\:\~$ chmod go-r comptages.txt
+lea@pc\:\~$ ls -l comptages.txt | cut -c 1-10{=-rw------- ~-rw-r--r-- ~-r-------- ~-rw-r----- ~----r--r--}
+
+::Droits d'un répertoire::Dans un répertoire vide. Qu'affiche la dernière commande ?
+lea@pc\:\~$ mkdir d
+lea@pc\:\~$ chmod u\=rwx,g\=rx,o\= d
+lea@pc\:\~$ ls -ld d | cut -c 1-10{=drwxr-x--- ~drwxr-xr-x ~-rwxr-x--- ~drwx------ ~drwxrwx---}
+
+::Le PID::Dans la liste affichée par ps -ef, que désigne la colonne PID ?{=Le numéro du processus ~Le numéro du processus père ~Le nom de l'utilisateur ~La mémoire utilisée}
+
+::|| deux fois::Dans un répertoire vide, Léa tape deux fois de suite la même commande. Après le message d'erreur de mkdir, qu'affiche la seconde ?
+lea@pc\:\~$ mkdir test || echo échec
+lea@pc\:\~$ mkdir test || echo échec{=échec ~Rien d'autre ~test ~échec échec ~créé}
+
+::Valeurs distinctes::comptages.txt est le fichier de la séance 3 (une ligne d'en-tête). Attention à l'en-tête. Qu'affiche la dernière commande ?
+Contenu de comptages.txt \:
+echantillon milieu espece colonies
+E1 LB E_coli 230
+E2 LB S_aureus 45
+E3 MH E_coli 1200
+E4 MH P_aeruginosa 8
+E5 LB E_coli 150
+E6 MH S_aureus 87
+E7 LB P_aeruginosa 310
+E8 MH E_coli 64
+lea@pc\:\~$ awk '\{print $2\}' comptages.txt | sort | uniq | wc -l{#3}
+
+::Total par milieu::Même fichier. Qu'affiche la dernière commande ?
+lea@pc\:\~$ awk 'NR>1 && $2\=\="MH" \{s \= s + $4\} END \{print s\}' comptages.txt{#1359}
+
+::Afficher une ligne et remplacer::Même fichier. Qu'affiche la dernière commande ?
+lea@pc\:\~$ sed -n '3p' comptages.txt | sed 's/E2/Echantillon 2/'{=Echantillon 2 LB S_aureus 45 ~E2 LB S_aureus 45 ~Echantillon 2 LB E_coli 230 ~Echantillon 2 ~E1 LB E_coli 230}

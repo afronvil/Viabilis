@@ -1,0 +1,18 @@
+// Licence — Théorie de Galois — niveau 5 : résolubilité par radicaux
+$CATEGORY: Licence/Théorie de Galois/Niveau 5
+
+::Racines réelles::Combien de racines réelles a le polynôme x⁵ − 4x + 2 ?{#3}
+
+::Engendrer S₅::Un sous-groupe de S₅ qui contient un 5-cycle et une transposition est…{=S₅ tout entier ~A₅ ~un groupe d'ordre 10 ~un groupe cyclique}
+
+::Simplicité de A₅::Le groupe alterné A₅ est simple.{T}
+
+::S₄::Le groupe symétrique S₄ est résoluble.{T}
+
+::Ordre de S₅::Quel est l'ordre du groupe S₅ ?{#120}
+
+::Conjugaison complexe::Pour un polynôme irréductible de degré 5 ayant exactement trois racines réelles, la conjugaison complexe agit sur les racines comme…{=une transposition ~un 5-cycle ~l'identité ~un 3-cycle}
+
+::Degré au plus 4::Tout polynôme de degré au plus 4 à coefficients rationnels est résoluble par radicaux.{T#C'est vrai \: S₄ et ses sous-groupes sont résolubles.#Exact \: S₄ et ses sous-groupes sont résolubles.}
+
+::Théorème de Galois::Un polynôme irréductible sur Q est résoluble par radicaux si et seulement si…{=son groupe de Galois est résoluble ~son degré est au plus 4 ~son discriminant est un carré ~toutes ses racines sont réelles}

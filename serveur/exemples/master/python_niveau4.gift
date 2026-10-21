@@ -1,0 +1,47 @@
+// M1 de microbiologie — Introduction à Python — niveau 4 : Fonctions et dictionnaires
+// Réponses obtenues en exécutant chaque programme (generer_banques_python.py).
+$CATEGORY: Master/Python/Niveau 4
+
+::Une fonction::Qu'affiche ce programme ?
+def double(n)\:
+    return 2 * n
+print(double(21)){#42}
+
+::print ou return::Qu'affiche ce programme ?
+def f(x)\:
+    print(x * 2)
+r \= f(3)
+print(r){=6
+None ~6 ~6
+6 ~Une erreur}
+
+::Fonction pourcentage de GC::Qu'affiche ce programme ?
+def gc(s)\:
+    return (s.count('G') + s.count('C')) / len(s) * 100
+print(gc('GGCA')){#75.0}
+
+::Lire un dictionnaire::Qu'affiche ce programme ?
+code \= \{'ATG'\: 'M', 'TGA'\: '*', 'GCC'\: 'A'\}
+print(code['GCC']){=A ~GCC ~M ~Une erreur}
+
+::Codon absent::Ce programme s'arrête sur une erreur. Laquelle ?
+code \= \{'ATG'\: 'M'\}
+print(code['TTT']){=KeyError ~SyntaxError ~NameError ~TypeError}
+
+::Découper en codons::Qu'affiche ce programme ?
+seq \= 'ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG'
+print(len([seq[i\:i + 3] for i in range(0, len(seq), 3)])){#13}
+
+::Traduire::Qu'affiche ce programme ?
+code \= \{'ATG'\: 'M', 'GCC'\: 'A', 'ATT'\: 'I', 'TGA'\: '*'\}
+seq \= 'ATGGCCATTTGA'
+prot \= ''
+for i in range(0, len(seq), 3)\:
+    prot \= prot + code[seq[i\:i + 3]]
+print(prot){=MAI* ~MAI ~ATGGCCATTTGA ~M}
+
+::Compter avec un dictionnaire::Qu'affiche ce programme ?
+d \= \{\}
+for b in 'GATTACA'\:
+    d[b] \= d.get(b, 0) + 1
+print(d['A']){#3}

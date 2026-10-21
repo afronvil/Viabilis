@@ -1,0 +1,23 @@
+// CM1 — Anglais — niveau 1 (très accessible)
+$CATEGORY: CM1/Anglais/Niveau 1
+
+::Colours::Comment dit-on « rouge » en anglais ?{=red ~blue ~green ~yellow}
+
+::Numbers::Quel nombre est « seven » ?{#7}
+
+::Greetings::Le matin, pour dire bonjour, on dit…{=Good morning ~Good night ~Goodbye ~Thank you}
+
+::Animals::Écrivez en anglais le mot « chat ».{=cat}
+
+::Days::« Monday », c'est…{=lundi ~mardi ~dimanche ~samedi}
+
+::Colours match::Associez chaque mot anglais à sa couleur.{
+=blue -> bleu
+=green -> vert
+=yellow -> jaune
+=black -> noir
+}
+
+::Thank you::« Thank you » veut dire « merci ».{T}
+
+::Name::Pour demander à quelqu'un son nom, on dit…{=What's your name? ~How old are you? ~Where are you? ~What colour is it?}

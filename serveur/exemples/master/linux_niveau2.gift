@@ -1,0 +1,28 @@
+// M1 de microbiologie — Système d'exploitation et Linux (4 h) — Utilisateurs, droits d'accès et processus
+// Réponses obtenues en exécutant chaque commande avec bash (generer_banques_linux.py).
+$CATEGORY: Master/Linux/Utilisateurs, droits d'accès et processus
+
+::Lire ls -l::ls -l affiche \: -rw-r--r-- 1 lea lea 1200 oct 19 12\:39 comptages.txt. Que signifie -rw-r--r-- ?{=Un fichier ordinaire \: le propriétaire peut le lire et le modifier, le groupe et les autres peuvent seulement le lire ~Un répertoire que tout le monde peut modifier ~Un fichier que seul le propriétaire peut lire ~Un programme exécutable par tous}
+
+::Retirer un droit::comptages.txt a les droits -rw-r--r--. Qu'affiche la dernière commande ?
+lea@pc\:\~$ chmod u-w comptages.txt
+lea@pc\:\~$ ls -l comptages.txt | cut -c 1-10{=-r--r--r-- ~-rw-r--r-- ~-rw-r----- ~--w-r--r-- ~-r--r-----}
+
+::Rendre exécutable::bonjour.sh a les droits -rw-r--r--. Qu'affiche la dernière commande ?
+lea@pc\:\~$ chmod u+x bonjour.sh
+lea@pc\:\~$ ls -l bonjour.sh | cut -c 1-10{=-rwxr--r-- ~-rwxrwxrwx ~-rw-r--r-x ~-rw-r--r-- ~xrw-r--r--}
+
+::Affecter des droits::liste.txt a les droits -rw-r--r--. Qu'affiche la dernière commande ?
+lea@pc\:\~$ chmod u\=rw,g\=r,o\= liste.txt
+lea@pc\:\~$ ls -l liste.txt | cut -c 1-10{=-rw-r----- ~-rw-r--r-- ~-rw-rw---- ~-rwxr----- ~-r--r-----}
+
+::Le masque::Dans un répertoire vide. Qu'affiche la dernière commande ?
+lea@pc\:\~$ umask 027
+lea@pc\:\~$ touch f
+lea@pc\:\~$ ls -l f | cut -c 1-10{=-rw-r----- ~-rw-r--r-- ~-rwxr-x--- ~----w-rwx ~-rw-rw-rw-}
+
+::Préemptif::Pourquoi dit-on que Linux est un système multitâche préemptif ?{=Il peut interrompre n'importe quel programme à tout moment pour donner le processeur à un autre ~Il attend que chaque application lui rende la main ~Il n'exécute qu'un programme à la fois ~Il réserve le processeur à l'administrateur}
+
+::PID et PPID::Dans ps -ef, que désigne la colonne PPID ?{=Le numéro du processus père, celui qui a lancé le processus ~Le numéro du processus lui-même ~La priorité du processus ~Le terminal sur lequel il s'exécute}
+
+::Arrêter un processus::Léa lance sleep 300 &. ps indique le PID 4321 pour sleep. Que fait kill -9 4321 ?{=Il force l'arrêt du processus (signal 9, SIGKILL) ~Il demande poliment l'arrêt (signal 15), que le processus peut refuser ~Il suspend le processus pendant 9 secondes ~Il arrête les 9 derniers processus lancés}

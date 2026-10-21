@@ -1,0 +1,75 @@
+// M1 de microbiologie — Système d'exploitation et Linux (4 h) — Le shell et le traitement de fichiers texte
+// Réponses obtenues en exécutant chaque commande avec bash (generer_banques_linux.py).
+$CATEGORY: Master/Linux/Le shell et le traitement de fichiers texte
+
+::Une variable::Dans un terminal, Léa tape les commandes suivantes. Qu'affiche la dernière commande ?
+lea@pc\:\~$ projet\=donnees
+lea@pc\:\~$ echo $projet{=donnees ~projet ~$projet ~projet\=donnees ~Une erreur}
+
+::Pas d'espace autour de \=::Léa tape projet \= donnees (avec des espaces). Que se passe-t-il ?{=Une erreur \: le shell cherche une commande nommée projet ~La variable projet vaut donnees ~La variable projet vaut « \= donnees » ~Rien}
+
+::La variable HOME::Le répertoire personnel de Léa est /home/lea. Qu'affiche la dernière commande ?
+lea@pc\:\~$ cd /
+lea@pc\:\~$ cd $HOME
+lea@pc\:\~$ pwd{=/home/lea ~/ ~$HOME ~/home ~/root}
+
+::Modifier PATH::La commande PATH\="$HOME/bin" ajoute $HOME/bin à la liste des répertoires où le shell cherche les commandes.{F#Faux \: elle remplace toute la liste, et des commandes comme ls deviennent introuvables (il faut alors rouvrir le terminal). Pour ajouter un répertoire \: PATH\="$PATH\:$HOME/bin".#Exact. Faux \: elle remplace toute la liste, et des commandes comme ls deviennent introuvables (il faut alors rouvrir le terminal). Pour ajouter un répertoire \: PATH\="$PATH\:$HOME/bin".}
+
+::&& et ||::Le répertoire ne contient pas de répertoire tmp. Après le message d'erreur de cd, qu'affiche la commande ?
+lea@pc\:\~$ cd tmp || echo absent{=absent ~tmp ~Rien d'autre ~absent tmp ~present}
+
+::&& enchaîne si tout va bien::Dans un répertoire vide. Qu'affiche la dernière commande ?
+lea@pc\:\~$ mkdir test && cd test && pwd{=/home/lea/test ~/home/lea ~test ~/test ~Une erreur}
+
+::Les guillemets::notes.txt contient trois lignes \: « souche E coli K12 », « E coli isolée en 2023 » et « S aureus ». Qu'affiche la dernière commande ?
+lea@pc\:\~$ grep -c "E coli" notes.txt{#2}
+
+::Un alias permanent::Léa a créé alias ll\='ls -l'. Comment le garder pour ses prochaines sessions ?{=En ajoutant la ligne alias ll\='ls -l' à son fichier \~/.bashrc (\~/.zshrc sous macOS) ~Il est gardé automatiquement ~En tapant save alias ~En le copiant dans /tmp}
+
+::Compter les lignes::comptages.txt est le fichier de la séance (une ligne d'en-tête, puis un échantillon par ligne). Qu'affiche la dernière commande ?
+Contenu de comptages.txt \:
+echantillon milieu espece colonies
+E1 LB E_coli 230
+E2 LB S_aureus 45
+E3 MH E_coli 1200
+E4 MH P_aeruginosa 8
+E5 LB E_coli 150
+E6 MH S_aureus 87
+E7 LB P_aeruginosa 310
+E8 MH E_coli 64
+lea@pc\:\~$ wc -l < comptages.txt{#9}
+
+::Une colonne avec awk::Même fichier. Qu'affiche la dernière commande ?
+lea@pc\:\~$ awk 'NR\=\=3 \{print $3\}' comptages.txt{=S_aureus ~E2 ~LB ~45 ~E_coli}
+
+::Le nombre de lignes avec awk::Même fichier. Qu'affiche la dernière commande ?
+lea@pc\:\~$ awk 'END \{print NR\}' comptages.txt{#9}
+
+::Additionner une colonne::Même fichier. Qu'affiche la dernière commande ?
+lea@pc\:\~$ awk 'NR>1 \{s \= s + $4\} END \{print s\}' comptages.txt{#2094}
+
+::Les boîtes comptables::Une boîte est comptable entre 30 et 300 colonies. Même fichier. Qu'affiche la dernière commande ?
+lea@pc\:\~$ awk '$4>\=30 && $4<\=300' comptages.txt | wc -l{#5}
+
+::Changer de séparateur::souches.csv utilise le point-virgule comme séparateur. Qu'affiche la dernière commande ?
+Contenu de souches.csv \:
+souche;espece;gram;origine
+S1;Escherichia coli;negatif;urine
+S2;Staphylococcus aureus;positif;peau
+S3;Pseudomonas aeruginosa;negatif;eau
+S4;Enterococcus faecalis;positif;selles
+S5;Klebsiella pneumoniae;negatif;urine
+lea@pc\:\~$ awk -F ";" '$3\=\="negatif"' souches.csv | wc -l{#3}
+
+::Remplacer avec sed::comptages.txt est le fichier de la séance. Qu'affiche la dernière commande ?
+lea@pc\:\~$ sed -n '2p' comptages.txt | sed 's/_/ /g'{=E1 LB E coli 230 ~E1 LB E_coli 230 ~E1 LB E coli ~echantillon milieu espece colonies ~E1_LB_E_coli_230}
+
+::Garder les séquences::sequences.fasta contient 3 séquences, chacune sur une ligne après sa ligne de titre >. Qu'affiche la dernière commande ?
+Contenu de sequences.fasta \:
+>Ecoli_frag1
+ATGGCGAATTCGTTAGCCGATAA
+>Saureus_frag2
+ATGGAATTCAAAGGTTGATGA
+>Paeruginosa_frag3
+ATGCCGGGCGCCGGCTGA
+lea@pc\:\~$ sed '/^>/d' sequences.fasta | wc -l{#3}

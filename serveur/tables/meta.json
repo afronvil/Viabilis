@@ -1,0 +1,5 @@
+{"ells": [0.35, 0.5, 0.65, 0.8, 0.95], "H": 60, "grille": [41, 41, 21, 21],
+"W": 0.005, "kappa_r": 0.5, "commandes_r": [0.0, 0.5, 1.0], "niveaux_commande": [0.0, 0.2, 0.4, 0.6000000000000001, 0.8, 1.0],
+"parametres": {"gamma": 0.5, "kappa": 0.35, "sigma": 0.85, "kphi": 0.3, "ks": 0.45, "rho": 0.25, "theta": 0.5, "rho2": 0.08, "beta": 0.15, "lam": 0.12, "ksM": 0.6, "delta": 0.01, "c_opt": 0.55, "c_w": 0.2, "rhoD": 0.15, "sigmaD": 0.3, "nu": 0.03, "betaD": 0.1, "kD": 0.3},
+"domaine": {"Cmin": 0.2, "Cmax": 0.85, "Amin": 0.3, "Dmin": 0.25, "mfin": 0.6, "TM": 10},
+"horizonAutonomie": 20}

@@ -1,0 +1,27 @@
+// CM1 — Mathématiques — niveau 5 (très exigeant : vers le CM2)
+$CATEGORY: CM1/Mathématiques/Niveau 5
+
+::Proportionnalité::3 cahiers coûtent 4,50 €. Combien coûtent 7 cahiers, en euros ?{#10.5:0.001}
+
+::Décimal et fraction::Quelle écriture est égale à 0,25 ?{=25/100 ~2/5 ~25/10 ~1/25}
+
+::Ordre de grandeur::Quel est le meilleur ordre de grandeur de 398 × 21 ?{=8 000 ~800 ~80 000 ~4 000}
+
+::Trois quarts::Combien valent les trois quarts de 60 ?{#45}
+
+::Conversion de masses::Combien de grammes y a-t-il dans 2,5 kg ?{#2500}
+
+::Cars::On répartit 150 élèves dans des cars de 48 places. Combien de cars faut-il au minimum ?{#4#Avec 3 cars, on ne transporte que 144 élèves.}
+
+::Somme de décimaux::Combien font 12,7 + 3,45 ?{#16.15:0.0001}
+
+::Nombre mystère::Je suis un nombre entre 40 et 50. Je suis dans la table de 6 et dans la table de 8. Qui suis-je ?{#48}
+
+::Angle aigu::Un angle aigu est plus grand qu'un angle droit.{F#Un angle aigu est plus petit qu'un angle droit.#Exact \: il est plus petit qu'un angle droit.}
+
+::Fractions décimales::Associez chaque fraction à son écriture décimale.{
+=1/2 -> 0,5
+=1/4 -> 0,25
+=3/10 -> 0,3
+=7/100 -> 0,07
+}

@@ -1,0 +1,18 @@
+// CM1 — Mathématiques — problème de recherche « Le compte est 24 » — exercices de vérification (à importer au niveau 5)
+$CATEGORY: CM1/Mathématiques/Problème de recherche
+
+::Combien de solutions::Avec 2, 3, 5 et 7 (chaque nombre au plus une fois) et les signes +, − et ×, combien y a-t-il de solutions vraiment différentes pour obtenir 24 ?{#4####Deux calculs qui ne diffèrent que par l'ordre des termes, comme 3 × 7 + 5 − 2 et 5 + 7 × 3 − 2, sont la même solution.}
+
+::Quel calcul donne 24::Quel calcul donne 24 ?{=(5 − 2) × 7 + 3 ~5 − 2 × 7 + 3 ~(5 − 2) × (7 + 3) ~5 × 2 + 7 + 3}
+
+::Priorité::Dans le calcul 3 × 7 + 5 − 2, quelle opération fait-on en premier ?{=la multiplication ~l'addition ~la soustraction}
+
+::Sans parenthèses::Combien fait 2 + 7 × 3 ?{#23####On fait d'abord la multiplication \: 7 × 3 \= 21, puis 2 + 21.}
+
+::Avec parenthèses::Combien fait (2 + 7) × 3 ?{#27####Les parenthèses passent en premier \: 2 + 7 \= 9, puis 9 × 3.}
+
+::Règle du jeu::Le calcul 7 × 3 + 3 est une solution acceptable.{F#Il donne bien 24, mais le nombre 3 y est utilisé deux fois.#Exact \: le nombre 3 y est utilisé deux fois.}
+
+::Partir du résultat::Pour trouver une solution qui utilise 5 et 7 ensemble, quelle décomposition de 24 aide le plus ?{=24 \= 2 × 12 ~24 \= 4 × 6 ~24 \= 20 + 4 ~24 \= 30 − 6}
+
+::Obtenir 1::Avec 2, 3, 5 et 7 (chaque nombre au plus une fois), peut-on obtenir 1 ?{T#Essayez une soustraction de deux nombres qui se suivent.#Oui, par exemple 3 − 2.}

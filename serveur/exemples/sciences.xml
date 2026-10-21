@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question type="category"><category><text>$course$/Sciences</text></category></question>
+  <question type="multichoice">
+    <name><text>État de l'eau</text></name>
+    <questiontext format="html"><text><![CDATA[<p>À quelle température l'eau pure <b>bout-elle</b> au niveau de la mer ?</p>]]></text></questiontext>
+    <generalfeedback format="html"><text>Sous pression normale, l'eau bout à 100 °C.</text></generalfeedback>
+    <single>true</single>
+    <answer fraction="100"><text>100 °C</text><feedback><text>Exact.</text></feedback></answer>
+    <answer fraction="0"><text>0 °C</text><feedback><text>C'est la température de fusion de la glace.</text></feedback></answer>
+    <answer fraction="0"><text>50 °C</text></answer>
+  </question>
+  <question type="truefalse">
+    <name><text>Masse et volume</text></name>
+    <questiontext format="html"><text>Quand l'eau gèle, sa masse augmente.</text></questiontext>
+    <answer fraction="0"><text>true</text><feedback><text>Non : la masse se conserve, c'est le volume qui augmente.</text></feedback></answer>
+    <answer fraction="100"><text>false</text><feedback><text>Oui, la masse se conserve.</text></feedback></answer>
+  </question>
+  <question type="shortanswer">
+    <name><text>Formule de l'eau</text></name>
+    <questiontext format="html"><text>Quelle est la formule chimique de l'eau ?</text></questiontext>
+    <usecase>1</usecase>
+    <answer fraction="100"><text>H2O</text></answer>
+  </question>
+  <question type="numerical">
+    <name><text>Masse volumique</text></name>
+    <questiontext format="html"><text>Quelle est la masse en grammes d'un litre d'eau ?</text></questiontext>
+    <answer fraction="100"><text>1000</text><tolerance>10</tolerance></answer>
+  </question>
+  <question type="matching">
+    <name><text>Changements d'état</text></name>
+    <questiontext format="html"><text>Associez chaque passage à son nom.</text></questiontext>
+    <subquestion format="html"><text>solide vers liquide</text><answer><text>fusion</text></answer></subquestion>
+    <subquestion format="html"><text>liquide vers gaz</text><answer><text>vaporisation</text></answer></subquestion>
+    <subquestion format="html"><text>liquide vers solide</text><answer><text>solidification</text></answer></subquestion>
+  </question>
+  <question type="essay">
+    <name><text>Rédaction</text></name>
+    <questiontext format="html"><text>Décrivez le cycle de l'eau.</text></questiontext>
+  </question>
+</quiz>

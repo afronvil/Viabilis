@@ -1,0 +1,14 @@
+// CM1 — Mathématiques — problème de recherche « Payer 10 € » — exercices de vérification (à importer au niveau 4)
+$CATEGORY: CM1/Mathématiques/Problème de recherche
+
+::Toutes les façons::Avec des pièces de 1 €, 2 € et 5 €, combien y a-t-il de façons différentes de payer exactement 10 € ?{#10####Rangez votre recherche selon le nombre de pièces de 5 € \: 2, puis 1, puis 0.}
+
+::Une seule pièce de 5 €::Combien de façons de payer 10 € utilisent exactement une pièce de 5 € ?{#3####Avec une pièce de 5 €, il reste 5 € à payer avec des pièces de 2 € et de 1 €.}
+
+::Le moins de pièces::Quelle façon de payer 10 € utilise le moins de pièces ?{=deux pièces de 5 € ~cinq pièces de 2 € ~une pièce de 5 € et cinq pièces de 1 € ~dix pièces de 1 €}
+
+::Le plus de pièces::Quel est le plus grand nombre de pièces que l'on peut utiliser pour payer 10 € ?{#10}
+
+::Être sûr de tout trouver::Quelle méthode permet d'être sûr de n'oublier aucune façon ?{=ranger les solutions en commençant par le nombre de pièces de 5 €, puis de 2 € ~écrire les solutions dans l'ordre où on les trouve ~demander à un camarade combien il en a trouvé ~s'arrêter quand on a trouvé cinq solutions}
+
+::Et pour 6 € ?::Avec des pièces de 1 €, 2 € et 5 €, combien y a-t-il de façons de payer exactement 6 € ?{#5####Avec une pièce de 5 € \: 1 façon. Sans pièce de 5 € \: 0, 1, 2 ou 3 pièces de 2 €.}

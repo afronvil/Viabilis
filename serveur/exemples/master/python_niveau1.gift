@@ -1,0 +1,32 @@
+// M1 de microbiologie — Introduction à Python — niveau 1 : Premiers pas : print, variables, calculs, erreurs
+// Réponses obtenues en exécutant chaque programme (generer_banques_python.py).
+$CATEGORY: Master/Python/Niveau 1
+
+::Un premier calcul::Qu'affiche ce programme ?
+print(1000 * 2 ** 6){#64000}
+
+::Variables::Qu'affiche ce programme ?
+N0 \= 1000
+divisions \= 3
+N \= N0 * 2 ** divisions
+print(N){#8000}
+
+::Division décimale::Qu'affiche ce programme ?
+print(120 / 20){=6.0 ~6 ~Une erreur ~0.16666666666666666}
+
+::Division entière::Qu'affiche ce programme ?
+print(130 // 20){=6 ~6.5 ~7 ~10}
+
+::Texte et nombre::Qu'affiche ce programme ?
+N \= 64000
+print(f'Après 2 h \: \{N\} bactéries'){=Après 2 h \: 64000 bactéries ~Après 2 h \: \{N\} bactéries ~Après 2 h \: N bactéries ~Une erreur}
+
+::Variable non définie::Ce programme s'arrête sur une erreur. Laquelle ?
+N0 \= 1000
+print(n0 * 2){=NameError ~SyntaxError ~TypeError ~IndentationError}
+
+::L'opérateur ^::En Python, 2 ^ 3 calcule 2 puissance 3.{F#^ est le « ou exclusif » bit à bit \: 2 ^ 3 vaut 1. La puissance s'écrit 2 ** 3.#Exact. ^ est le « ou exclusif » bit à bit \: 2 ^ 3 vaut 1. La puissance s'écrit 2 ** 3.}
+
+::La virgule décimale::Qu'affiche ce programme ?
+volume \= 0,1
+print(volume){=(0, 1) ~0.1 ~0,1 ~Une erreur}

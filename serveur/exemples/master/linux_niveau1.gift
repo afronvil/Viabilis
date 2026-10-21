@@ -1,0 +1,48 @@
+// M1 de microbiologie — Système d'exploitation et Linux (4 h) — Le système, l'arborescence et les fichiers
+// Réponses obtenues en exécutant chaque commande avec bash (generer_banques_linux.py).
+$CATEGORY: Master/Linux/Le système, l'arborescence et les fichiers
+
+::Le rôle du système::Quel est le rôle d'un système d'exploitation ?{=Faire le lien entre le matériel de l'ordinateur et les applications de l'utilisateur ~Écrire les programmes à la place de l'utilisateur ~Protéger l'ordinateur contre les virus, et seulement cela ~Afficher les pages web}
+
+::Le noyau::Laquelle de ces tâches n'est PAS assurée par le noyau ?{=Corriger l'orthographe d'un document ~Répartir le temps de processeur entre les processus ~Attribuer la mémoire à chaque processus ~Piloter les périphériques}
+
+::Noyau et shell::Dans un système Linux, qu'est-ce que le shell ?{=L'interpréteur qui lit les commandes tapées et lance les programmes correspondants ~Le noyau, qui gère la mémoire et les processeurs ~Le dossier qui contient les fichiers de l'utilisateur ~Une interface graphique}
+
+::Logiciel libre::Un logiciel libre donne le droit de l'exécuter, d'étudier et de modifier son code source, et de le redistribuer, modifié ou non.{T#Vrai \: ce sont les quatre libertés du logiciel libre. Linux est distribué sous la licence libre GPL.#Exact. Vrai \: ce sont les quatre libertés du logiciel libre. Linux est distribué sous la licence libre GPL.}
+
+::GNU et Linux::Qui a lancé le projet GNU, et en quelle année ?{=Richard Stallman, en 1983 ~Linus Torvalds, en 1991 ~Linus Torvalds, en 1983 ~Richard Stallman, en 1991}
+
+::Les systèmes de fichiers::Quel système de fichiers est propre à Linux ?{=ext4 ~ntfs ~fat ~iso 9660}
+
+::L'arborescence::Où se trouvent les fichiers de configuration du système ?{=/etc ~/home ~/tmp ~/dev}
+
+::df et du::Quelle commande affiche la place libre de chaque système de fichiers et son point de montage ?{=df -h ~du -sh ~ls -l ~mount -a}
+
+::Se déplacer::Le répertoire personnel de Léa est /home/lea. Elle tape les commandes suivantes. Qu'affiche la dernière commande ?
+lea@pc\:\~$ cd projet_microbio
+lea@pc\:\~$ cd donnees
+lea@pc\:\~$ cd ..
+lea@pc\:\~$ pwd{=/home/lea/projet_microbio ~/home/lea/projet_microbio/donnees ~/home/lea ~/projet_microbio ~/home/lea/donnees}
+
+::Créer un sous-répertoire::Dans un répertoire vide, Léa tape \:
+lea@pc\:\~$ mkdir projet/donnees
+Que se passe-t-il ?{=Une erreur \: le répertoire projet n'existe pas (il faudrait mkdir -p) ~Les répertoires projet et donnees sont créés ~Un fichier nommé projet/donnees est créé ~Le répertoire donnees est créé dans le répertoire courant}
+
+::Renommer::Le répertoire ne contient que notes.txt. Qu'affiche la dernière commande ?
+lea@pc\:\~$ mv notes.txt journal.txt
+lea@pc\:\~$ ls{=journal.txt ~notes.txt ~journal.txt notes.txt ~notes.txt journal.txt ~Une erreur}
+
+::Copier::Le répertoire contient notes.txt et un répertoire resultats vide. Qu'affiche la dernière commande ?
+lea@pc\:\~$ cp notes.txt resultats/
+lea@pc\:\~$ ls resultats{=notes.txt ~resultats ~Rien \: resultats est vide ~Une erreur ~notes.txt resultats}
+
+::Supprimer::Un fichier supprimé avec rm part dans la corbeille \: on peut le récupérer.{F#Faux \: rm supprime définitivement, sans corbeille. rm * vide tout le répertoire courant \: vérifie avant avec ls.#Exact. Faux \: rm supprime définitivement, sans corbeille. rm * vide tout le répertoire courant \: vérifie avant avec ls.}
+
+::Le méta-caractère ?::Le répertoire contient souche1.fasta, souche2.fasta, souche12.fasta, gelA.png, gelB.png et notes.txt. echo affiche les noms que le shell a substitués au modèle. Qu'affiche la dernière commande ?
+lea@pc\:\~$ echo souche?.fasta{=souche1.fasta souche2.fasta ~souche1.fasta souche2.fasta souche12.fasta ~souche12.fasta ~souche?.fasta ~souche1.fasta}
+
+::Le méta-caractère *::Même répertoire. Qu'affiche la dernière commande ?
+lea@pc\:\~$ ls *.fasta | wc -l{#3}
+
+::Les crochets::Même répertoire. Qu'affiche la dernière commande ?
+lea@pc\:\~$ echo gel[AB].png{=gelA.png gelB.png ~gelA.png ~gel[AB].png ~gelAB.png ~Une erreur}

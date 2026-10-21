@@ -1,0 +1,18 @@
+// Licence — Théorie de Galois — niveau 4 : correspondance, cyclotomie, discriminant
+$CATEGORY: Licence/Théorie de Galois/Niveau 4
+
+::Sous-groupes de S₃::Combien de sous-groupes a S₃, en comptant le sous-groupe trivial et S₃ lui-même ?{#6}
+
+::Corps fixe de A₃::Pour K \= Q(∛2, j), quel est le corps fixe du sous-groupe A₃ de Gal(K/Q) ≅ S₃ ?{=Q(j) ~Q(∛2) ~Q(j∛2) ~K}
+
+::Sous-extensions normales::Combien de sous-corps de Q(∛2, j), autres que Q et Q(∛2, j), sont des extensions normales de Q ?{#1}
+
+::Degré cyclotomique::Quel est le degré [Q(ζ₁₂) \: Q] ?{#4}
+
+::Groupe de Q(ζ₇)::Quel est l'ordre du groupe de Galois de Q(ζ₇)/Q ?{#6}
+
+::Sous-corps quadratique::Quel est l'unique sous-corps quadratique de Q(ζ₅) ?{=Q(√5) ~Q(√−5) ~Q(i) ~Q(√2)}
+
+::Discriminant::Quel est le discriminant de x³ − 3x + 1 ?{#81}
+
+::Groupe d'un cubique::Le groupe de Galois de x³ − x − 1 sur Q est…{=S₃, car le discriminant −23 n'est pas un carré ~A₃, car le polynôme est irréductible ~Z/2Z ~le groupe trivial}

@@ -1,0 +1,37 @@
+// M1 de microbiologie — Introduction à Python — niveau 3 : Chaînes de caractères : séquences d'ADN
+// Réponses obtenues en exécutant chaque programme (generer_banques_python.py).
+$CATEGORY: Master/Python/Niveau 3
+
+::Longueur d'une séquence::Qu'affiche ce programme ?
+seq \= 'ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG'
+print(len(seq)){#39}
+
+::Compter une base::Qu'affiche ce programme ?
+seq \= 'ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG'
+print(seq.count('G')){#14}
+
+::Premier codon::Qu'affiche ce programme ?
+seq \= 'ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG'
+print(seq[0\:3]){=ATG ~ATGG ~TGG ~GAT}
+
+::Première lettre::Qu'affiche ce programme ?
+print('GATTACA'[0]){=G ~A ~Une erreur ~GATTACA}
+
+::Pourcentage de GC::Qu'affiche ce programme ?
+seq \= 'ATGC'
+gc \= (seq.count('G') + seq.count('C')) / len(seq) * 100
+print(gc){#50.0}
+
+::Compter avec une boucle::Qu'affiche ce programme ?
+n \= 0
+for base in 'GATTACA'\:
+    if base \=\= 'A'\:
+        n \= n + 1
+print(n){#3}
+
+::Minuscules::Qu'affiche ce programme ?
+print('atgc'.count('G')){=0 ~1 ~Une erreur ~g}
+
+::Texte et nombre::Ce programme s'arrête sur une erreur. Laquelle ?
+longueur \= 39
+print('Longueur \: ' + longueur){=TypeError ~SyntaxError ~NameError ~IndentationError}

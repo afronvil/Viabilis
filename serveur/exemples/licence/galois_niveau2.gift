@@ -1,0 +1,18 @@
+// Licence — Théorie de Galois — niveau 2 : degré d'une extension
+$CATEGORY: Licence/Théorie de Galois/Niveau 2
+
+::Degré de Q(√2, √3)::Quel est le degré [Q(√2, √3) \: Q] ?{#4}
+
+::Degré de Q(∛2, j)::Quel est le degré [Q(∛2, j) \: Q], où j \= e^(2iπ/3) ?{#6}
+
+::Degré de Q(⁴√2)::Quel est le degré [Q(⁴√2) \: Q] ?{#4}
+
+::Base::Laquelle de ces familles est une base de Q(√2, √3) sur Q ?{=1, √2, √3, √6 ~1, √2, √3 ~1, √6 ~1, √2, √3, √5}
+
+::Multiplicativité::Si Q ⊂ K ⊂ L avec [L \: Q] \= 10 et [K \: Q] \= 2, que vaut [L \: K] ?{#5}
+
+::Élément primitif::√2 + √3 est un élément primitif de Q(√2, √3), c'est-à-dire que Q(√2 + √3) \= Q(√2, √3).{T}
+
+::Faux élément primitif::√6 engendre Q(√2, √3) sur Q.{F#Non \: Q(√6) n'est que de degré 2 sur Q.#Exact \: Q(√6) est de degré 2.}
+
+::Degré de i + √2::Quel est le degré de i + √2 sur Q ?{#4}

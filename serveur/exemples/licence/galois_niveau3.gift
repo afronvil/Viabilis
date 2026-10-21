@@ -1,0 +1,18 @@
+// Licence — Théorie de Galois — niveau 3 : automorphismes et corps de décomposition
+$CATEGORY: Licence/Théorie de Galois/Niveau 3
+
+::Automorphismes de Q(√2, √3)::Combien d'automorphismes de Q(√2, √3) fixent Q ?{#4}
+
+::Automorphismes de Q(∛2)::Combien d'automorphismes de Q(∛2) fixent Q ?{#1}
+
+::Structure du groupe::Le groupe Gal(Q(√2, √3)/Q) est isomorphe à…{=Z/2Z × Z/2Z ~Z/4Z ~S₃ ~Z/2Z}
+
+::Corps de décomposition de x³ − 2::Quel est le degré sur Q du corps de décomposition de x³ − 2 ?{#6}
+
+::Groupe de x³ − 2::Le groupe de Galois de x³ − 2 sur Q est isomorphe à…{=S₃ ~Z/3Z ~Z/6Z ~Z/2Z}
+
+::Normalité::L'extension Q(∛2)/Q est normale.{F#Non \: x³ − 2 n'est pas scindé dans Q(∛2), qui est contenu dans R.#Exact \: x³ − 2 n'y est pas scindé.}
+
+::Groupe de x⁴ − 2::Quel est l'ordre du groupe de Galois de x⁴ − 2 sur Q ?{#8}
+
+::Automorphismes de Q(⁴√2)::Combien d'automorphismes de Q(⁴√2) fixent Q ?{#2}

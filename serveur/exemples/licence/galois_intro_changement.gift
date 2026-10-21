@@ -1,0 +1,17 @@
+// Licence — Théorie de Galois — introduction à l'irréductibilité : Changement de variable
+// À importer au niveau 1 ; chaque affirmation est vérifiée avec SymPy (generer_banques_intro.py).
+$CATEGORY: Licence/Théorie de Galois/Introduction/Changement de variable
+
+::Développer::Si f(x) \= x² + 1, que vaut f(x + 1) ?{=x² + 2x + 2 ~x² + 2 ~x² + x + 2 ~x² + 2x + 1}
+
+::Choisir p après le changement::Pour f(x) \= x² + x + 1, on a f(x + 1) \= x² + 3x + 3. Pour quel nombre premier p le critère d'Eisenstein s'applique-t-il ?{#3}
+
+::Pourquoi cela marche::Si f(x + 1) est irréductible sur Q, alors f(x) l'est aussi.{T#Vrai \: si f(x) \= g(x)h(x) avec g et h non constants, alors f(x + 1) \= g(x + 1)h(x + 1), avec des facteurs de mêmes degrés.#Exact. Vrai \: si f(x) \= g(x)h(x) avec g et h non constants, alors f(x + 1) \= g(x + 1)h(x + 1), avec des facteurs de mêmes degrés.}
+
+::Reconnaître un binôme::Pour f(x) \= x³ + 3x² + 3x − 1, quel changement de variable le transforme en un polynôme d'Eisenstein ?{=Remplacer x par x − 1 \: on obtient x³ − 2 ~Remplacer x par x + 1 \: on obtient x³ − 2 ~Remplacer x par 2x ~Aucun \: il est réductible}
+
+::Terme constant::Pour f(x) \= x⁴ + x³ + x² + x + 1, quel est le terme constant de f(x + 1) ?{#5}
+
+::Le polynôme réciproque::Le polynôme réciproque x³ f(1/x) de f(x) \= 3x³ + 3x + 1 est…{=x³ + 3x² + 3, d'Eisenstein pour p \= 3 ~3x³ + 3x² + 1 ~x³ + 3x + 3 ~1/(3x³ + 3x + 1)}
+
+::x⁴ + 1::Le critère d'Eisenstein s'applique directement à x⁴ + 1 avec p \= 2.{F#Faux \: 2 ne divise pas le terme constant 1. Mais (x + 1)⁴ + 1 \= x⁴ + 4x³ + 6x² + 4x + 2 est d'Eisenstein pour p \= 2, donc x⁴ + 1 est irréductible sur Q.#Exact. Faux \: 2 ne divise pas le terme constant 1. Mais (x + 1)⁴ + 1 \= x⁴ + 4x³ + 6x² + 4x + 2 est d'Eisenstein pour p \= 2, donc x⁴ + 1 est irréductible sur Q.}

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1F2A44">
+<title>Viabilis enseignant</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="../commun/icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../commun/icone-192.png">
+<link rel="stylesheet" href="../commun/style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Viabilis · enseignant</p>
+    <h1 id="titre">Chargement…</h1>
+    <p class="small muted" id="sous-titre"></p>
+  </header>
+  <main id="vue"></main>
+</div>
+<nav class="tabs" id="tabs" hidden aria-label="Navigation">
+  <button data-tab="classe" aria-selected="true">Classe</button>
+  <button data-tab="reglages" aria-selected="false">Réglages</button>
+  <button data-tab="groupes" aria-selected="false">Groupes</button>
+  <button data-tab="exercices" aria-selected="false">Exercices</button>
+  <button data-tab="donnees" aria-selected="false">Données</button>
+</nav>
+<script type="module" src="app.js"></script>
+</body>
+</html>

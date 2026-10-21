@@ -1,0 +1,43 @@
+// M1 de microbiologie — Introduction à Python — niveau 5 : Listes, NumPy, graphiques et fichiers
+// Réponses obtenues en exécutant chaque programme (generer_banques_python.py).
+$CATEGORY: Master/Python/Niveau 5
+
+::Une liste::Qu'affiche ce programme ?
+do \= [0.02, 0.05, 0.13, 0.31]
+print(len(do)){#4}
+
+::Élément d'une liste::Qu'affiche ce programme ?
+do \= [0.02, 0.05, 0.13, 0.31]
+print(do[2]){#0.13}
+
+::Calcul sur un tableau NumPy::Qu'affiche ce programme ?
+import numpy as np
+do \= np.array([0.1, 0.2, 0.4])
+print(do * 10){=[1. 2. 4.] ~[0.1, 0.2, 0.4, 0.1, 0.2, 0.4] ~Une erreur ~[1, 2, 4]}
+
+::Liste et multiplication::Qu'affiche ce programme ?
+do \= [0.1, 0.2]
+print(do * 2){=[0.1, 0.2, 0.1, 0.2] ~[0.2, 0.4] ~Une erreur ~[0.1, 0.2]}
+
+::Pente d'une droite::Qu'affiche ce programme ?
+import numpy as np
+t \= np.array([0, 1, 2, 3])
+y \= 0.5 * t + 1
+print(round(np.polyfit(t, y, 1)[0], 3)){#0.5}
+
+::Temps de génération::Qu'affiche ce programme ? (µ \= 0,693 h⁻¹)
+import math
+print(round(math.log(2) / 0.693 * 60)){#60}
+
+::log et log10::np.log calcule le logarithme décimal (en base 10).{F#np.log est le logarithme népérien (base e) ; le logarithme décimal est np.log10. Les confondre divise le taux de croissance par ln 10 ≈ 2,3.#Exact. np.log est le logarithme népérien (base e) ; le logarithme décimal est np.log10. Les confondre divise le taux de croissance par ln 10 ≈ 2,3.}
+
+::Lire un FASTA::Qu'affiche ce programme ?
+lignes \= ['>s1', 'ATGC', 'GG', '>s2', 'AT']
+seqs \= \{\}
+for l in lignes\:
+    if l.startswith('>')\:
+        nom \= l[1\:]
+        seqs[nom] \= ''
+    else\:
+        seqs[nom] \= seqs[nom] + l
+print(len(seqs['s1'])){#6}

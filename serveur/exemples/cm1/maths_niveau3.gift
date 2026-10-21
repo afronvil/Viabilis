@@ -1,0 +1,29 @@
+// CM1 — Mathématiques — niveau 3 (attendus de fin de CM1)
+$CATEGORY: CM1/Mathématiques/Niveau 3
+
+::Lire un grand nombre::Quel nombre s'écrit « trois cent quatre mille deux cents » ?{=304 200 ~340 200 ~304 020 ~3 004 200}
+
+::Encadrer::Quel nombre est compris entre 125 000 et 126 000 ?{=125 600 ~126 500 ~12 560 ~152 600}
+
+::Multiplication posée::Combien font 236 × 24 ?{#5664}
+
+::Quotient::Dans la division de 47 par 6, quel est le quotient ?{#7}
+
+::Reste::Dans la division de 47 par 6, quel est le reste ?{#5}
+
+::Fraction d'une quantité::Combien vaut un tiers de 24 ?{#8}
+
+::Fractions égales::Quelle fraction est égale à 1/2 ?{=5/10 ~1/5 ~2/5 ~5/2}
+
+::Dixièmes::Écrivez 7/10 sous la forme d'un nombre décimal.{#0.7:0.0001}
+
+::Problème::Une école commande 12 boîtes de 25 crayons. Combien de crayons reçoit-elle ?{#300}
+
+::Contenance::Combien de centilitres y a-t-il dans un litre ?{#100}
+
+::Polygones::Associez chaque polygone à son nombre de côtés.{
+=triangle -> 3
+=quadrilatère -> 4
+=pentagone -> 5
+=hexagone -> 6
+}

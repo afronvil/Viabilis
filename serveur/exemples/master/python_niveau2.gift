@@ -1,0 +1,49 @@
+// M1 de microbiologie — Introduction à Python — niveau 2 : Boucles et conditions
+// Réponses obtenues en exécutant chaque programme (generer_banques_python.py).
+$CATEGORY: Master/Python/Niveau 2
+
+::Une boucle for::Qu'affiche ce programme ?
+s \= 0
+for k in range(1, 5)\:
+    s \= s + k
+print(s){#10}
+
+::range commence à 0::Qu'affiche ce programme ?
+for h in range(3)\:
+    print(h, end\=' '){=0 1 2 ~1 2 3  ~0 1 2 3  ~1 2 }
+
+::Doubler dans une boucle::Qu'affiche ce programme ?
+N \= 1000
+for h in range(3)\:
+    N \= N * 2
+print(N){#8000}
+
+::Boucle while::Qu'affiche ce programme ?
+N, t \= 1000, 0
+while N < 10000\:
+    N \= N * 2
+    t \= t + 20
+print(t){#80}
+
+::Condition::Qu'affiche ce programme ?
+n \= 350
+if 30 <\= n <\= 300\:
+    print('comptable')
+else\:
+    print('non comptable'){=non comptable ~comptable ~Une erreur ~350}
+
+::Compter les boîtes comptables::Qu'affiche ce programme ?
+boites \= [250, 31, 2, 350, 28]
+k \= 0
+for n in boites\:
+    if 30 <\= n <\= 300\:
+        k \= k + 1
+print(k){#2}
+
+::Les deux-points::Ce programme s'arrête sur une erreur. Laquelle ?
+for h in range(3)
+    print(h){=SyntaxError ~NameError ~TypeError ~IndentationError}
+
+::L'indentation::Ce programme s'arrête sur une erreur. Laquelle ?
+for h in range(3)\:
+print(h){=IndentationError ~NameError ~TypeError ~SyntaxError}

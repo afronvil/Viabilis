@@ -1,0 +1,29 @@
+// CM1 — Géographie — niveau 3 (attendus de fin de CM1)
+$CATEGORY: CM1/Géographie/Niveau 3
+
+::Population::Combien d'habitants compte environ la France ?{=68 millions ~6 millions ~680 millions ~6 milliards}
+
+::Régions::Combien la France métropolitaine compte-t-elle de régions ?{#13}
+
+::Outre-mer::Quel territoire est un département et région d'outre-mer ?{=La Réunion ~la Corse ~la Bretagne ~l'Alsace}
+
+::Eau potable::Où l'eau est-elle rendue propre à la consommation avant d'arriver au robinet ?{=dans une usine de traitement d'eau potable ~dans une station d'épuration ~dans une centrale nucléaire ~dans un château d'eau uniquement}
+
+::Eaux usées::Après usage, les eaux usées sont nettoyées dans…{=une station d'épuration ~une usine d'eau potable ~une éolienne ~une déchetterie}
+
+::Énergies renouvelables::Quelles énergies sont renouvelables ?{
+~%34%l'énergie solaire
+~%33%l'énergie éolienne
+~%33%l'énergie hydraulique
+~%-50%le pétrole
+~%-50%le charbon
+}
+
+::Électricité en France::Quelle est la principale source de production d'électricité en France ?{=le nucléaire ~le charbon ~le pétrole ~le bois}
+
+::Activités et lieux::Associez chaque activité au lieu où elle se pratique le plus souvent.{
+=cultiver des céréales -> espace rural
+=travailler dans un bureau -> espace urbain
+=skier -> montagne
+=pêcher en mer -> littoral
+}

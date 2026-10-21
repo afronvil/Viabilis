@@ -1,0 +1,27 @@
+// CM1 — Séquence de recherche : les sommes de nombres consécutifs (modèles rech-cm1-*).
+// Réponses calculées par generer_recherche_consecutifs.py.
+$CATEGORY: CM1/Mathématiques/Recherche : nombres consécutifs
+
+::Les écritures de 15::De combien de façons peut-on écrire 15 comme une somme d'au moins deux nombres entiers consécutifs (à partir de 1) ?{#3####1 + 2 + 3 + 4 + 5 ; 4 + 5 + 6 ; 7 + 8.}
+
+::Les écritures de 21::De combien de façons peut-on écrire 21 comme une somme d'au moins deux nombres entiers consécutifs ?{#3####1 + 2 + 3 + 4 + 5 + 6 ; 6 + 7 + 8 ; 10 + 11.}
+
+::Trois consécutifs::On additionne trois nombres consécutifs ; celui du milieu est 12. Quelle est la somme ?{#36####11 + 12 + 13 \= 36, c'est 3 × 12 \: la somme de trois consécutifs vaut toujours 3 fois celui du milieu.}
+
+::Quatre consécutifs::Quelle est la somme des quatre nombres consécutifs qui commencent par 5 ?{#26####5 + 6 + 7 + 8 \= 26.}
+
+::Le nombre qui résiste::Un seul nombre entre 20 et 40 ne peut pas s'écrire comme une somme d'au moins deux nombres consécutifs. Lequel ?{#32####32 \: comme 1, 2, 4, 8 et 16, c'est le double du nombre qui résiste précédent.}
+
+::Deux consécutifs::37 est la somme de deux nombres consécutifs. Quel est le plus petit des deux ?{#18####18 + 19 \= 37 \: on retire 1, puis on partage en deux.}
+
+::Deux consécutifs, toujours impair ?::La somme de deux nombres consécutifs est toujours un nombre impair.{T#Vrai \: deux nombres consécutifs, c'est un nombre et ce nombre plus 1 ; deux fois le même nombre est pair, plus 1 donne un impair.#Bravo. Vrai \: deux nombres consécutifs, c'est un nombre et ce nombre plus 1 ; deux fois le même nombre est pair, plus 1 donne un impair.}
+
+::Trois consécutifs, toujours pair ?::La somme de trois nombres consécutifs est toujours un nombre pair.{F#Faux \: 2 + 3 + 4 \= 9 est impair. Un seul contre-exemple suffit.#Bravo. Faux \: 2 + 3 + 4 \= 9 est impair. Un seul contre-exemple suffit.}
+
+::Trois consécutifs, multiple de 3 ?::La somme de trois nombres consécutifs est toujours un multiple de 3.{T#Vrai \: on prend 1 au plus grand pour le donner au plus petit, et on obtient trois fois le nombre du milieu.#Bravo. Vrai \: on prend 1 au plus grand pour le donner au plus petit, et on obtient trois fois le nombre du milieu.}
+
+::De 1 à 10::Combien font 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 ?{#55####55 \: on peut grouper 1 + 10, 2 + 9, 3 + 8… cinq paquets de 11.}
+
+::Combien de nombres résistent ?::Parmi les nombres de 1 à 50, combien ne peuvent pas s'écrire comme une somme d'au moins deux nombres consécutifs ?{#6####Six nombres \: 1, 2, 4, 8, 16 et 32.}
+
+::Le premier à trois écritures::Quel est le plus petit nombre qui s'écrit de trois façons comme une somme d'au moins deux nombres consécutifs ?{#15####15 \: 1 + 2 + 3 + 4 + 5 ; 4 + 5 + 6 ; 7 + 8.}

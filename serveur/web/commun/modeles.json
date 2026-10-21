@@ -1,0 +1,2708 @@
+{
+ "niveau": "CM1, licence de mathématiques, master de microbiologie",
+ "modeles": [
+  {
+   "id": "rech-cm1-explorer",
+   "discipline": "Mathématiques",
+   "titre": "Enquête 1 : explorer les nombres consécutifs",
+   "objectif": "Séance de 50 min, première d'une recherche en 6 séances sur un seul problème. Comprendre la question, explorer en écrivant beaucoup de nombres, ranger ses résultats, repérer des nombres qui « résistent ». Conseil : à la fin, choisissez quelques découvertes pour la galerie de la classe ; elles ouvriront la séance suivante.",
+   "tache": "La question de notre recherche : quels nombres peut-on écrire comme une somme d'au moins deux nombres entiers consécutifs (à partir de 1), comme 9 = 4 + 5 ou 9 = 2 + 3 + 4 ?\nAujourd'hui, tu es un chercheur qui explore. Essaie d'écrire chaque nombre de 3 à 30 de cette façon, en trouvant parfois plusieurs écritures pour un même nombre. Range tes résultats dans un tableau. Note les nombres que tu n'arrives pas à écrire : ce sont peut-être des découvertes !",
+   "indices": [
+    "Deux nombres consécutifs se suivent : 4 et 5, ou 11 et 12. Que fait 4 + 5 ? Et 5 + 6 ?",
+    "Essaie aussi avec trois nombres consécutifs : 1 + 2 + 3, 2 + 3 + 4… Quels nombres obtiens-tu ?",
+    "Range ton tableau dans l'ordre des nombres, de 3 à 30, pour voir lesquels manquent."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Élève de CM1 (9-10 ans) qui mène une vraie recherche de mathématicien : écris avec des mots simples, encourage, félicite les découvertes et les questions, et ne donne jamais la réponse finale ni la preuve. Une écriture comme « 9 = 4 + 5 » est juste si les nombres sont entiers, consécutifs (chacun vaut le précédent plus 1), au moins deux, à partir de 1, et si la somme est exacte ; vérifie chaque calcul. Repères pour vérifier : 1, 2, 4, 8 et 16 ne s'écrivent pas (ce sont les seuls entre 1 et 30) ; tous les autres s'écrivent. Exemples : 3 = 1 + 2 ; 6 = 1 + 2 + 3 ; 9 = 4 + 5 = 2 + 3 + 4 ; 10 = 1 + 2 + 3 + 4 ; 15 = 7 + 8 = 4 + 5 + 6 = 1 + 2 + 3 + 4 + 5 ; 21 = 10 + 11 = 6 + 7 + 8 = 1 + … + 6 ; 27 = 13 + 14 = 8 + 9 + 10 = 2 + … + 7 ; 30 = 9 + 10 + 11 = 6 + 7 + 8 + 9 = 4 + 5 + 6 + 7 + 8. Chaque écriture juste est une idée juste ; plusieurs écritures du même nombre sont plusieurs idées justes. Une observation (« je n'arrive pas à écrire 8 », « les nombres impairs marchent toujours avec deux nombres ») est à valoriser comme une découverte, même si elle n'est pas encore prouvée : dis-le à l'élève. Erreurs fréquentes : nombres non consécutifs (9 = 3 + 6) ; un seul nombre (9 = 9) ; utiliser 0 (0 + 1 + 2, refusé ici : on commence à 1) ; erreur d'addition.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Écris chaque nombre de 3 à 15 comme une somme de deux nombres consécutifs (comme 7 = 3 + 4) ou de trois (comme 6 = 1 + 2 + 3). Commence par calculer 1 + 2, 2 + 3, 3 + 4, 4 + 5… et 1 + 2 + 3, 2 + 3 + 4… Quels nombres de 3 à 15 n'as-tu pas obtenus ?",
+     "indices": [
+      "Fais deux listes : les sommes de deux consécutifs, puis de trois.",
+      "Barre dans la liste de 3 à 15 les nombres que tu as obtenus."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Va jusqu'à 50, et trouve toutes les écritures de chaque nombre. Quel nombre jusqu'à 50 a le plus d'écritures ?",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_recherche_consecutifs.gift (niveau 4)",
+   "niveauTache": 2,
+   "suites": {
+    "consolider": null,
+    "prolonger": "rech-cm1-resistants",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "rech-cm1-resistants",
+   "discipline": "Mathématiques",
+   "titre": "Enquête 2 : les nombres qui résistent",
+   "objectif": "Séance de 50 min. Rassembler les résultats, isoler les nombres qui ne s'écrivent pas, formuler des conjectures (« je pense que… »), les tester sur de nouveaux nombres.",
+   "tache": "La question de notre recherche : quels nombres peut-on écrire comme une somme d'au moins deux nombres entiers consécutifs (à partir de 1), comme 9 = 4 + 5 ou 9 = 2 + 3 + 4 ?\nAvec la classe, on a trouvé des nombres qui résistent : on n'arrive pas à les écrire. Cherche tous les nombres qui résistent jusqu'à 40. Que remarques-tu ? Écris tes conjectures : des phrases qui commencent par « Je pense que… » (par exemple sur les nombres qui résistent, ou sur les nombres impairs). Puis teste-les : quel serait le prochain nombre qui résiste après 40 ? Essaie-le vraiment.",
+   "indices": [
+    "Écris la liste des nombres qui résistent dans l'ordre. Comment passe-t-on de l'un au suivant ?",
+    "Regarde les nombres impairs : 3, 5, 7, 9… Peux-tu tous les écrire avec deux nombres consécutifs ?",
+    "Pour tester ta conjecture sur le prochain nombre qui résiste, essaie de l'écrire de toutes les façons possibles."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Élève de CM1 (9-10 ans) qui mène une vraie recherche de mathématicien : écris avec des mots simples, encourage, félicite les découvertes et les questions, et ne donne jamais la réponse finale ni la preuve. Une écriture comme « 9 = 4 + 5 » est juste si les nombres sont entiers, consécutifs (chacun vaut le précédent plus 1), au moins deux, à partir de 1, et si la somme est exacte ; vérifie chaque calcul. Repères : jusqu'à 40, les nombres qui résistent sont 1, 2, 4, 8, 16, 32 ; chacun est le double du précédent ; le suivant est 64 (qui résiste bien), puis 128. Tous les nombres impairs à partir de 3 s'écrivent avec deux consécutifs (n = k + (k + 1)). Une conjecture est juste si elle est vraie, même si elle n'est pas encore prouvée : félicite l'élève et demande-lui comment on pourrait en être sûr. Une conjecture fausse est à revoir : donne un indice pour trouver un contre-exemple, sans le donner. Exemples de conjectures justes : « les nombres qui résistent doublent », « tous les impairs sauf 1 marchent », « les nombres qui résistent sont 1 ou pairs ». Exemple de conjecture fausse : « tous les nombres pairs résistent » (6 = 1 + 2 + 3). Valorise un test sérieux sur un nouveau nombre (64 : l'élève a essayé deux, trois, quatre consécutifs… sans succès).",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Voici les nombres qui résistent jusqu'à 20 : 1, 2, 4, 8, 16. Compare chaque nombre au suivant : que remarques-tu ? D'après toi, quel est le prochain nombre qui résiste ? Essaie de l'écrire avec deux, trois, quatre nombres consécutifs.",
+     "indices": [
+      "Combien faut-il ajouter, ou par combien multiplier, pour passer de 4 à 8 ? Et de 8 à 16 ?",
+      "Si ta conjecture est juste, le prochain résiste : essaie vraiment de l'écrire."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Écris une conjecture qui décrit tous les nombres qui résistent, et une autre sur les nombres qui s'écrivent avec exactement trois consécutifs. Teste-les jusqu'à 100.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_recherche_consecutifs.gift (niveau 4)",
+   "niveauTache": 3,
+   "suites": {
+    "consolider": "rech-cm1-explorer",
+    "prolonger": "rech-cm1-preuves",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "rech-cm1-preuves",
+   "discipline": "Mathématiques",
+   "titre": "Enquête 3 : prouver nos premières découvertes",
+   "objectif": "Séance de 50 min. Passer de « ça marche sur mes exemples » à « c'est toujours vrai » : prouver qu'un nombre impair (à partir de 3) s'écrit avec deux consécutifs, que trois consécutifs donnent trois fois celui du milieu ; chercher une règle pour quatre et cinq consécutifs.",
+   "tache": "La question de notre recherche : quels nombres peut-on écrire comme une somme d'au moins deux nombres entiers consécutifs (à partir de 1), comme 9 = 4 + 5 ou 9 = 2 + 3 + 4 ?\nUn chercheur ne se contente pas d'exemples : il prouve. Aujourd'hui, prouve que tout nombre impair à partir de 3 peut s'écrire avec deux nombres consécutifs (explique comment trouver ces deux nombres pour n'importe quel impair, par exemple 101). Puis observe les sommes de trois nombres consécutifs : quelle règle trouves-tu ? Prouve-la. Cherche ensuite une règle pour cinq nombres consécutifs.",
+   "indices": [
+    "Deux nombres consécutifs, c'est un nombre et ce nombre plus 1. Pour 101, quel calcul fais-tu pour retrouver les deux nombres ?",
+    "Calcule 4 + 5 + 6, 9 + 10 + 11. Compare le résultat au nombre du milieu.",
+    "Dans 4 + 5 + 6, prends 1 au 6 et donne-le au 4 : que deviennent les trois nombres ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Élève de CM1 (9-10 ans) qui mène une vraie recherche de mathématicien : écris avec des mots simples, encourage, félicite les découvertes et les questions, et ne donne jamais la réponse finale ni la preuve. Une écriture comme « 9 = 4 + 5 » est juste si les nombres sont entiers, consécutifs (chacun vaut le précédent plus 1), au moins deux, à partir de 1, et si la somme est exacte ; vérifie chaque calcul. Preuves attendues : un impair à partir de 3, c'est 2 fois un nombre plus 1, donc ce nombre plus le suivant (101 = 50 + 51 : on enlève 1 puis on partage en deux) ; trois consécutifs : on enlève 1 au plus grand et on l'ajoute au plus petit, on obtient trois fois le nombre du milieu (donc la somme est un multiple de 3) ; cinq consécutifs : cinq fois le nombre du milieu (2 + 3 + 4 + 5 + 6 = 20 = 5 × 4). Conséquence à valoriser : tout multiple de 3 à partir de 6 s'écrit avec trois consécutifs. Accepter les preuves en mots, en dessins (tours de cubes qu'on égalise) ou sur un exemple générique bien expliqué (« ça marche pareil pour tous les nombres parce que… »). Une règle vérifiée seulement sur des exemples est juste comme découverte mais à compléter : demander pourquoi c'est toujours vrai. Erreurs fréquentes : « trois consécutifs donnent un nombre pair » (2 + 3 + 4 = 9) ; oublier que 1 ne s'écrit pas ; confondre consécutifs et pairs.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Calcule 2 + 3, 5 + 6, 10 + 11, 20 + 21 : que remarques-tu ? Puis, pour chacun de ces nombres impairs, retrouve les deux nombres consécutifs : 13, 25, 37. Explique comment tu fais.",
+     "indices": [
+      "Le résultat est-il pair ou impair ? Toujours ?",
+      "Pour 13 : enlève 1, puis partage en deux parts égales."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Trouve une règle pour les sommes de quatre consécutifs (1 + 2 + 3 + 4, 2 + 3 + 4 + 5…) et prouve-la. Puis explique pourquoi un nombre qui s'écrit avec trois consécutifs est toujours un multiple de 3, et un nombre qui s'écrit avec cinq consécutifs, un multiple de 5.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_recherche_consecutifs.gift (niveau 4)",
+   "niveauTache": 3,
+   "suites": {
+    "consolider": "rech-cm1-resistants",
+    "prolonger": "rech-cm1-record",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "rech-cm1-record",
+   "discipline": "Mathématiques",
+   "titre": "Enquête 4 : le record d'écritures",
+   "objectif": "Séance de 50 min. Chercher de façon organisée toutes les écritures d'un nombre, trouver le nombre jusqu'à 50 qui en a le plus, et chercher ce qui le rend spécial.",
+   "tache": "La question de notre recherche : quels nombres peut-on écrire comme une somme d'au moins deux nombres entiers consécutifs (à partir de 1), comme 9 = 4 + 5 ou 9 = 2 + 3 + 4 ?\nCertains nombres s'écrivent de plusieurs façons : 15 = 7 + 8 = 4 + 5 + 6 = 1 + 2 + 3 + 4 + 5. Quel nombre jusqu'à 50 a le plus d'écritures ? Organise ta recherche pour être sûr de n'oublier aucune écriture (essaie deux consécutifs, puis trois, puis quatre…). Puis compare les nombres qui ont beaucoup d'écritures : qu'ont-ils de spécial ?",
+   "indices": [
+    "Pour un nombre, essaie d'abord deux consécutifs, puis trois, puis quatre… Quand peux-tu t'arrêter ?",
+    "Utilise les règles de l'enquête 3 : un nombre s'écrit avec trois consécutifs s'il est multiple de 3, avec cinq consécutifs s'il est multiple de 5.",
+    "Compare 15, 21, 27 et 45 : par quels nombres impairs peut-on les diviser ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Élève de CM1 (9-10 ans) qui mène une vraie recherche de mathématicien : écris avec des mots simples, encourage, félicite les découvertes et les questions, et ne donne jamais la réponse finale ni la preuve. Une écriture comme « 9 = 4 + 5 » est juste si les nombres sont entiers, consécutifs (chacun vaut le précédent plus 1), au moins deux, à partir de 1, et si la somme est exacte ; vérifie chaque calcul. Repères : le record jusqu'à 50 est 45, avec 5 écritures (22 + 23 ; 14 + 15 + 16 ; 7 + 8 + 9 + 10 + 11 ; 5 + 6 + … + 10 ; 1 + 2 + … + 9). Avec 3 écritures jusqu'à 50 : 15, 21, 27, 30, 33, 35, 39 et 42. 15 = 7 + 8 = 4 + 5 + 6 = 1 + … + 5 ; 30 = 9 + 10 + 11 = 6 + 7 + 8 + 9 = 4 + 5 + 6 + 7 + 8. Recherche organisée à valoriser : essayer 2, 3, 4… consécutifs dans l'ordre, et s'arrêter quand 1 + 2 + … dépasse le nombre. Découverte à valoriser, même sans preuve : les nombres qui ont beaucoup d'écritures ont beaucoup de diviseurs impairs (45 se divise par 3, 5, 9, 15, 45) ; un nombre qui résiste n'en a aucun à part 1. Une affirmation « 45 est le record » sans recherche organisée est à compléter : demande comment l'élève est sûr. Vérifie chaque écriture donnée.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Trouve toutes les écritures de 15, puis de 21, en essayant deux consécutifs, puis trois, puis quatre, puis cinq, puis six. Combien en trouves-tu pour chacun ?",
+     "indices": [
+      "Deux consécutifs pour 15 : 7 + 8. Trois : le nombre du milieu vaut 15 ÷ 3.",
+      "Pour cinq consécutifs, le nombre du milieu vaut 15 ÷ 5."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Trouve un nombre jusqu'à 100 qui a 5 écritures, autre que 45. Puis essaie d'expliquer le lien entre le nombre d'écritures et les diviseurs impairs du nombre.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_recherche_consecutifs.gift (niveau 4)",
+   "niveauTache": 4,
+   "suites": {
+    "consolider": "rech-cm1-preuves",
+    "prolonger": "rech-cm1-puissances",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "rech-cm1-puissances",
+   "discipline": "Mathématiques",
+   "titre": "Enquête 5 : pourquoi 16 résiste-t-il ?",
+   "objectif": "Séance de 50 min. Prouver une impossibilité en étudiant tous les cas : 16 ne s'écrit ni avec 2, ni 3, ni 4, ni 5 consécutifs, et 6 consécutifs sont déjà trop grands. Prolonger à 32 et 64.",
+   "tache": "La question de notre recherche : quels nombres peut-on écrire comme une somme d'au moins deux nombres entiers consécutifs (à partir de 1), comme 9 = 4 + 5 ou 9 = 2 + 3 + 4 ?\nNous pensons que 1, 2, 4, 8, 16, 32, 64… résistent toujours. Mais un chercheur veut une preuve. Prouve que 16 ne peut pas s'écrire comme une somme de nombres consécutifs, en étudiant tous les cas : avec deux consécutifs, avec trois, avec quatre, avec cinq, avec six ou plus. Pour chaque cas, explique pourquoi c'est impossible (tu peux utiliser les découvertes des enquêtes précédentes). Puis essaie de faire la même preuve pour 32.",
+   "indices": [
+    "Avec deux consécutifs, la somme est toujours… paire ou impaire ? Et 16 ?",
+    "Avec trois consécutifs, la somme est toujours un multiple de 3. 16 est-il un multiple de 3 ? Et avec cinq consécutifs ?",
+    "Quelle est la plus petite somme de six consécutifs (1 + 2 + 3 + 4 + 5 + 6) ? Que peux-tu en conclure ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Élève de CM1 (9-10 ans) qui mène une vraie recherche de mathématicien : écris avec des mots simples, encourage, félicite les découvertes et les questions, et ne donne jamais la réponse finale ni la preuve. Une écriture comme « 9 = 4 + 5 » est juste si les nombres sont entiers, consécutifs (chacun vaut le précédent plus 1), au moins deux, à partir de 1, et si la somme est exacte ; vérifie chaque calcul. Preuve attendue pour 16, cas par cas : deux consécutifs donnent toujours un impair, or 16 est pair ; trois consécutifs donnent un multiple de 3, or 16 n'en est pas un ; quatre consécutifs : 1 + 2 + 3 + 4 = 10, 2 + 3 + 4 + 5 = 14, 3 + 4 + 5 + 6 = 18, on saute 16 (les sommes de quatre consécutifs vont de 4 en 4 : 10, 14, 18…) ; cinq consécutifs donnent un multiple de 5, or 16 n'en est pas un ; six consécutifs ou plus donnent au moins 1 + 2 + … + 6 = 21, plus que 16. Donc 16 résiste. Pour 32 : 2 (impair), 3 (pas multiple de 3), 4 (sommes 10, 14, 18, 22, 26, 30, 34 : on saute 32), 5 (pas multiple de 5), 6 (sommes 21, 27, 33 : on saute 32), 7 (pas multiple de 7), 8 consécutifs ou plus : au moins 36. Valorise chaque cas bien justifié comme une idée juste, et la conclusion « tous les cas sont impossibles » comme l'aboutissement d'une vraie preuve. Un cas affirmé sans raison (« avec quatre, ça ne marche pas ») est à revoir. Un élève qui dit qu'on n'a pas encore prouvé pour 64, 128… a raison : c'est une question ouverte pour la classe.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Prouve que 8 ne peut pas s'écrire comme une somme de nombres consécutifs. Essaie deux consécutifs (3 + 4, 4 + 5 : on saute 8 ?), puis trois (1 + 2 + 3, 2 + 3 + 4), puis quatre (1 + 2 + 3 + 4). Pourquoi est-ce fini après ?",
+     "indices": [
+      "Deux consécutifs donnent toujours un nombre impair.",
+      "1 + 2 + 3 + 4 = 10 : c'est déjà plus que 8."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Prouve que 64 résiste. Puis cherche une explication qui marcherait pour tous les nombres de la liste 1, 2, 4, 8, 16, 32, 64… (indice : qu'ont-ils comme diviseurs impairs ?).",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_recherche_consecutifs.gift (niveau 4)",
+   "niveauTache": 5,
+   "suites": {
+    "consolider": "rech-cm1-record",
+    "prolonger": "rech-cm1-seminaire",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "rech-cm1-seminaire",
+   "discipline": "Mathématiques",
+   "titre": "Enquête 6 : le séminaire des chercheurs",
+   "objectif": "Séance de 50 min. Communiquer une recherche comme des mathématiciens : écrire l'article de la classe (question, découvertes, preuves, questions ouvertes), le présenter, et poser une nouvelle question à chercher.",
+   "tache": "La question de notre recherche : quels nombres peut-on écrire comme une somme d'au moins deux nombres entiers consécutifs (à partir de 1), comme 9 = 4 + 5 ou 9 = 2 + 3 + 4 ?\nNotre recherche touche à sa fin : écris, comme un vrai chercheur, un petit article. Écris une idée par partie :\n1. la question que nous avons cherchée ;\n2. nos découvertes (les conjectures) ;\n3. ce que nous avons prouvé, avec la preuve ;\n4. ce que nous n'avons pas encore prouvé ;\n5. une nouvelle question que tu aimerais chercher (par exemple : et si on avait le droit de commencer à 0 ? et avec des nombres impairs consécutifs, comme 3 + 5 + 7 ?).",
+   "indices": [
+    "Relis ton parcours et la galerie des idées de la classe : quelles découvertes sont les plus importantes ?",
+    "Pour chaque découverte, demande-toi : l'avons-nous prouvée, ou seulement vérifiée sur des exemples ?",
+    "Une bonne nouvelle question change un seul mot du problème : « consécutifs », « à partir de 1 », « au moins deux »…"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Élève de CM1 (9-10 ans) qui mène une vraie recherche de mathématicien : écris avec des mots simples, encourage, félicite les découvertes et les questions, et ne donne jamais la réponse finale ni la preuve. Une écriture comme « 9 = 4 + 5 » est juste si les nombres sont entiers, consécutifs (chacun vaut le précédent plus 1), au moins deux, à partir de 1, et si la somme est exacte ; vérifie chaque calcul. Un article réussi distingue clairement ce qui est prouvé et ce qui est seulement conjecturé. Prouvé dans la séquence : les impairs à partir de 3 s'écrivent avec deux consécutifs ; trois consécutifs donnent trois fois le nombre du milieu ; cinq consécutifs, cinq fois le nombre du milieu ; 8, 16 et 32 résistent (preuve cas par cas). Conjecturé : tous les nombres de la liste 1, 2, 4, 8, 16, 32, 64… résistent, et tous les autres s'écrivent ; le nombre d'écritures dépend des diviseurs impairs. Valorise chaque partie comme une idée : une question bien formulée, une découverte exacte, une preuve correcte, une question ouverte honnête (« nous n'avons pas prouvé pour 128 »), une nouvelle question originale. Signale avec bienveillance une conjecture présentée comme prouvée, ou une découverte fausse. Nouvelles questions intéressantes : si on a le droit de commencer à 0, seul 1 change (1 = 0 + 1) : 2, 4, 8, 16… résistent toujours, car commencer par 0 n'ajoute rien à la somme ; les sommes d'impairs consécutifs à partir de 1 donnent les carrés (1 + 3 + 5 = 9) ; les nombres qui s'écrivent avec exactement deux écritures.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Écris trois phrases pour raconter notre recherche : la question que nous avons cherchée, une découverte que tu as faite, et une chose que tu as réussi à expliquer (pourquoi c'est toujours vrai).",
+     "indices": [
+      "Relis ton parcours : quelle découverte t'a le plus surpris ?",
+      "Commence ta deuxième phrase par « J'ai découvert que… »."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Choisis une nouvelle question (par exemple : quels nombres sont des sommes de nombres impairs consécutifs ?), fais-en une première exploration, et écris tes premières conjectures.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_recherche_consecutifs.gift (niveau 4)",
+   "niveauTache": 4,
+   "suites": {
+    "consolider": "rech-cm1-puissances",
+    "prolonger": null,
+    "approfondir": null
+   }
+  },
+  {
+   "id": "pb-cm1-poignees",
+   "discipline": "Mathématiques",
+   "titre": "Problèmes 1 : les poignées de main",
+   "objectif": "Séance de 45 min. Dénombrer de façon organisée (liste, schéma, tableau, calcul) et s'assurer de n'avoir rien oublié ni compté deux fois ; passer d'un cas à un cas plus grand.",
+   "tache": "6 enfants se retrouvent dans la cour. Chacun serre la main de chacun des autres, une seule fois.\nCombien de poignées de main y a-t-il en tout ?\nTrouve plusieurs façons de chercher (un dessin, une liste, un tableau, un calcul) et explique comment tu es sûr de n'en avoir oublié aucune et de n'en avoir compté aucune deux fois. Puis cherche pour 10 enfants.",
+   "indices": [
+    "Commence avec moins d'enfants : combien de poignées de main avec 2 enfants ? Avec 3 ? Avec 4 ?",
+    "Donne un nom à chaque enfant (A, B, C…). Avec qui A serre-t-il la main ? Et B, en dehors de A ?",
+    "A serre 5 mains. B en serre 4 nouvelles. Et C ? Que remarques-tu ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Élève de CM1 (9-10 ans) : écris tes retours avec des mots simples, encourage la recherche, et ne donne jamais la solution complète. Valorise surtout la démarche : une méthode organisée et une explication de « comment je suis sûr » comptent autant que le bon résultat. Résultats attendus : 15 poignées de main pour 6 enfants (5 + 4 + 3 + 2 + 1), 45 pour 10 enfants (9 + 8 + … + 1). Démarches justes : schéma avec des points reliés par des traits (un trait par poignée de main) ; liste organisée (AB, AC, AD… puis BC, BD…) ; tableau à double entrée en ne gardant qu'une moitié ; calcul 6 × 5 = 30, divisé par 2 parce que chaque poignée de main est comptée deux fois. Erreurs fréquentes à signaler avec bienveillance : 6 × 6 = 36 (un enfant ne se serre pas la main) ; 6 × 5 = 30 sans diviser par 2 (chaque poignée comptée deux fois) ; une liste désordonnée qui oublie ou répète. Une idée qui donne le bon nombre sans dire comment on est sûr est « à revoir » : demande à l'élève comment il sait qu'il n'en manque pas. Deux méthodes différentes qui donnent 15 sont deux idées justes.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "4 enfants se serrent la main, chacun une seule fois avec chacun des autres. Dessine 4 points (un par enfant) et relie-les deux à deux : combien de traits ? Puis recommence avec 5 enfants.",
+     "indices": [
+      "Un trait entre deux points, c'est une poignée de main.",
+      "Compte les traits qui partent du premier point, puis les nouveaux traits du deuxième point."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Combien de poignées de main pour 20 enfants ? Et pour 100 ? Trouve une façon de calculer sans tout dessiner, et explique pourquoi elle marche.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_problemes_cm1.gift (niveau 4)",
+   "niveauTache": 2,
+   "suites": {
+    "consolider": null,
+    "prolonger": "pb-cm1-poules",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "pb-cm1-poules",
+   "discipline": "Mathématiques",
+   "titre": "Problèmes 2 : poules et lapins",
+   "objectif": "Séance de 45 min. Résoudre un problème à deux inconnues par essais organisés (tableau), puis par un raisonnement (« et si tous étaient des poules ? ») ; vérifier une solution.",
+   "tache": "Dans un enclos, il y a des poules et des lapins. On compte 10 têtes et 28 pattes.\nCombien y a-t-il de poules et combien de lapins ?\nTrouve plusieurs façons de chercher : faire des essais et les ranger dans un tableau, dessiner, ou raisonner sans essayer au hasard. Vérifie ta réponse. Puis invente un autre problème de ce type et donne sa solution.",
+   "indices": [
+    "Une poule a 2 pattes, un lapin en a 4. Commence par un essai : 5 poules et 5 lapins, combien de pattes ?",
+    "Range tes essais dans un tableau (poules, lapins, pattes) : quand tu changes une poule en lapin, combien de pattes gagnes-tu ?",
+    "Et si les 10 animaux étaient des poules ? Combien de pattes ? Combien en manque-t-il ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Élève de CM1 (9-10 ans) : écris tes retours avec des mots simples, encourage la recherche, et ne donne jamais la solution complète. Valorise surtout la démarche : une méthode organisée et une explication de « comment je suis sûr » comptent autant que le bon résultat. Résultat attendu : 6 poules et 4 lapins (6 + 4 = 10 têtes ; 12 + 16 = 28 pattes). Démarches justes : tableau d'essais organisés (chaque lapin de plus ajoute 2 pattes) ; dessin de 10 têtes avec 2 pattes chacune, puis 2 pattes de plus jusqu'à 28 ; raisonnement « tout en poules » (20 pattes, il en manque 8, donc 4 lapins). Une vérification écrite (12 + 16 = 28) est à valoriser. Erreurs fréquentes : oublier une des deux conditions (10 têtes, mais pas 28 pattes, ou l'inverse) ; inverser poules et lapins ; essais au hasard sans les ranger. Problème inventé : il est juste si les nombres de têtes et de pattes donnés conduisent bien à la solution annoncée ; signale un problème impossible (nombre de pattes impair, trop ou trop peu de pattes pour ce nombre de têtes) en demandant de vérifier.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Dans un enclos, il y a des poules et des lapins : 5 têtes et 14 pattes. Combien y a-t-il de poules et de lapins ? Range tes essais dans un tableau : poules, lapins, nombre de pattes.",
+     "indices": [
+      "Essaie 4 poules et 1 lapin : combien de pattes ?",
+      "Il faut 14 pattes : faut-il plus de lapins ou plus de poules ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Dans un enclos, il y a 35 têtes et 94 pattes. Combien de poules et de lapins ? Trouve une méthode qui marche pour n'importe quels nombres de têtes et de pattes, sans faire d'essais, et explique-la.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_problemes_cm1.gift (niveau 4)",
+   "niveauTache": 3,
+   "suites": {
+    "consolider": "pb-cm1-poignees",
+    "prolonger": "pb-cm1-mystere",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "pb-cm1-mystere",
+   "discipline": "Mathématiques",
+   "titre": "Problèmes 3 : le nombre mystère",
+   "objectif": "Séance de 45 min. Raisonner avec plusieurs contraintes, trouver toutes les solutions et prouver qu'il n'y en a pas d'autre ; inventer une énigme qui n'a qu'une seule solution.",
+   "tache": "Je suis un nombre de trois chiffres.\nLa somme de mes chiffres est 12.\nMon chiffre des centaines est le double de mon chiffre des unités.\nMon chiffre des dizaines est impair.\nQui suis-je ? Trouve toutes les solutions et explique comment tu es sûr qu'il n'y en a pas d'autre. Puis invente ta propre énigme, qui n'a qu'une seule solution.",
+   "indices": [
+    "Commence par le chiffre des unités : quelles valeurs peut-il prendre pour que son double reste un chiffre ?",
+    "Pour chaque chiffre des unités possible, quel est le chiffre des centaines ? Combien reste-t-il pour les dizaines ?",
+    "Le chiffre des dizaines doit être impair : vérifie chaque cas."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Élève de CM1 (9-10 ans) : écris tes retours avec des mots simples, encourage la recherche, et ne donne jamais la solution complète. Valorise surtout la démarche : une méthode organisée et une explication de « comment je suis sûr » comptent autant que le bon résultat. Solutions attendues : 291 et 633, et aucune autre. Raisonnement attendu : le chiffre des unités vaut 1, 2, 3 ou 4 (son double doit être un chiffre, et pas 0 pour un nombre de trois chiffres) ; centaines 2, 4, 6 ou 8 ; dizaines = 12 − centaines − unités = 9, 6, 3 ou 0 ; seuls 9 et 3 sont impairs, d'où 291 et 633. Une seule des deux solutions est juste mais incomplète : demande s'il y en a d'autres. Une solution sans vérification des quatre conditions est à revoir. Un tableau qui étudie tous les cas est la meilleure preuve qu'il n'y en a pas d'autre ; le valoriser. Erreurs fréquentes : oublier qu'un nombre de trois chiffres ne commence pas par 0 ; confondre chiffre et nombre ; oublier la condition « impair ». Énigme inventée : elle est réussie si elle a exactement une solution ; si elle en a plusieurs ou aucune, dis-le et invite l'élève à ajouter ou changer un indice.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Je suis un nombre de deux chiffres. La somme de mes chiffres est 9. Mon chiffre des dizaines est le double de mon chiffre des unités. Qui suis-je ? Essaie tous les chiffres des unités possibles.",
+     "indices": [
+      "Si le chiffre des unités est 1, celui des dizaines est 2 : la somme fait-elle 9 ?",
+      "Essaie 2, puis 3, puis 4."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Invente une énigme de trois indices sur un nombre de trois chiffres qui n'a qu'une seule solution, puis prouve qu'elle n'en a qu'une. Échange-la avec un camarade.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_problemes_cm1.gift (niveau 4)",
+   "niveauTache": 3,
+   "suites": {
+    "consolider": "pb-cm1-poules",
+    "prolonger": "pb-cm1-allumettes",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "pb-cm1-allumettes",
+   "discipline": "Mathématiques",
+   "titre": "Problèmes 4 : les carrés d'allumettes",
+   "objectif": "Séance de 45 min. Observer une suite de figures, trouver une règle, la justifier par la figure, et l'utiliser pour un grand nombre ou à l'envers.",
+   "tache": "Avec des allumettes, on aligne des carrés collés les uns aux autres : 1 carré demande 4 allumettes, 2 carrés en demandent 7, 3 carrés en demandent 10.\nCombien d'allumettes faut-il pour 10 carrés ? Trouve une règle qui permet de le calculer pour n'importe quel nombre de carrés, et explique-la avec la figure. Puis : avec 100 allumettes, combien de carrés peut-on faire ? Cherche plusieurs façons de voir la figure.",
+   "indices": [
+    "Dessine 4 carrés collés et compte les allumettes. Que se passe-t-il quand tu ajoutes un carré ?",
+    "Chaque nouveau carré ajoute combien d'allumettes ? Pourquoi pas 4 ?",
+    "Tu peux voir la figure comme une première allumette, puis des « C » de 3 allumettes. Combien de « C » pour 10 carrés ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Élève de CM1 (9-10 ans) : écris tes retours avec des mots simples, encourage la recherche, et ne donne jamais la solution complète. Valorise surtout la démarche : une méthode organisée et une explication de « comment je suis sûr » comptent autant que le bon résultat. Résultats attendus : 31 allumettes pour 10 carrés ; 3 × nombre de carrés + 1 ; avec 100 allumettes, 33 carrés exactement (1 + 3 × 33 = 100). Règles justes, à accepter sous plusieurs formes : « 4 pour le premier carré, puis 3 de plus par carré » (4 + 3 × 9) ; « 1 allumette, puis 3 par carré » (1 + 3 × 10) ; « 4 par carré, moins les côtés partagés » (4 × 10 − 9) ; « les allumettes horizontales (2 × 10) plus les verticales (11) ». Une règle justifiée par la figure vaut plus qu'une règle trouvée seulement sur les nombres. Erreurs fréquentes : 4 × 10 = 40 (les côtés communs comptés deux fois) ; proportionnalité fausse (« 2 carrés = 7, donc 10 carrés = 35 ») ; pour 100 allumettes, 100 ÷ 3 sans tenir compte de la première allumette, ou 100 ÷ 4 = 25.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Dessine 1, 2, 3, puis 4 carrés d'allumettes collés et compte les allumettes à chaque fois. Range les nombres dans un tableau. De combien augmente le nombre d'allumettes à chaque carré ajouté ?",
+     "indices": [
+      "Fais le dessin avec des traits, un trait par allumette.",
+      "Compare 7 et 10, puis 10 et 13."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Les carrés forment maintenant une grille de 2 rangées (2 carrés de haut). Combien d'allumettes pour une grille de 2 × 10 carrés ? Trouve une règle et justifie-la avec la figure.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_problemes_cm1.gift (niveau 4)",
+   "niveauTache": 4,
+   "suites": {
+    "consolider": "pb-cm1-mystere",
+    "prolonger": "pb-cm1-produit",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "pb-cm1-produit",
+   "discipline": "Mathématiques",
+   "titre": "Problèmes 5 : le plus grand produit",
+   "objectif": "Séance de 45 min. Chercher un optimum : explorer, organiser les essais, conjecturer une règle, la tester sur d'autres nombres et l'expliquer.",
+   "tache": "Découpe le nombre 10 en une somme de nombres entiers (par exemple 10 = 4 + 6, ou 10 = 2 + 3 + 5), puis multiplie ces nombres entre eux (4 × 6 = 24 ; 2 × 3 × 5 = 30).\nQuel est le plus grand produit que tu peux obtenir ? Cherche de façon organisée et explique comment tu es sûr qu'on ne peut pas faire mieux. Puis cherche le plus grand produit pour 12, et trouve une règle.",
+   "indices": [
+    "Essaie d'abord avec deux nombres seulement : 1 + 9, 2 + 8, 3 + 7… Quel produit est le plus grand ?",
+    "Essaie ensuite avec trois nombres, puis quatre. Est-ce que mettre des 1 aide ?",
+    "Compare 4 et 2 + 2 : 4 et 2 × 2 donnent la même chose. Compare 6 et 3 + 3 : lequel est le meilleur ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Élève de CM1 (9-10 ans) : écris tes retours avec des mots simples, encourage la recherche, et ne donne jamais la solution complète. Valorise surtout la démarche : une méthode organisée et une explication de « comment je suis sûr » comptent autant que le bon résultat. Résultats attendus : pour 10, le plus grand produit est 36 (3 + 3 + 4 → 3 × 3 × 4, ou 3 + 3 + 2 + 2 → 3 × 3 × 2 × 2) ; pour 12, c'est 81 (3 + 3 + 3 + 3). Règle à valoriser : utiliser le plus possible de 3, compléter par des 2, ne jamais mettre de 1 ; pour deux nombres seulement, les prendre égaux ou proches (5 + 5 → 25). Démarches justes : liste organisée des découpages (deux nombres, puis trois…) ; remarques comme « un 1 ne sert à rien car × 1 ne change rien », « 6 = 3 + 3 et 3 × 3 = 9 est plus grand que 6 ». Erreurs fréquentes : additionner au lieu de multiplier ; un découpage dont la somme n'est pas 10 ; conclure trop vite avec deux nombres seulement (25) ; une idée « 36 » sans montrer qu'on a cherché ailleurs est juste mais à compléter par le « comment je suis sûr ».",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Découpe 10 en deux nombres : 1 + 9, 2 + 8, 3 + 7, 4 + 6, 5 + 5. Pour chacun, calcule le produit (1 × 9, 2 × 8…). Lequel est le plus grand ? Range tes résultats dans un tableau.",
+     "indices": [
+      "Commence par 1 × 9 = 9, puis 2 × 8.",
+      "Que remarques-tu quand les deux nombres se rapprochent ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Trouve le plus grand produit pour 20, puis pour 30. Énonce ta règle et explique pourquoi un 4 peut toujours être remplacé par 2 + 2, et pourquoi un 5 ou un 6 ne sont jamais le meilleur choix.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_problemes_cm1.gift (niveau 4)",
+   "niveauTache": 4,
+   "suites": {
+    "consolider": "pb-cm1-allumettes",
+    "prolonger": "pb-cm1-pair",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "pb-cm1-pair",
+   "discipline": "Mathématiques",
+   "titre": "Problèmes 6 : toujours vrai ? Prouver",
+   "objectif": "Séance de 45 min. Distinguer « vrai sur quelques exemples » et « toujours vrai » ; prouver avec un dessin ou un raisonnement ; réfuter par un contre-exemple.",
+   "tache": "Pour chaque phrase, dis si elle est toujours vraie ou si elle est fausse.\n1. La somme de deux nombres impairs est toujours paire.\n2. La somme de trois nombres impairs est toujours paire.\n3. Le produit de deux nombres impairs est toujours impair.\n4. Si on ajoute un nombre pair et un nombre impair, on obtient un nombre impair.\nQuand une phrase est fausse, donne un contre-exemple. Quand elle est vraie, explique pourquoi elle est vraie pour tous les nombres, pas seulement pour tes exemples (avec des jetons rangés par deux, par exemple). Puis invente une phrase vraie et une phrase fausse.",
+   "indices": [
+    "Essaie avec des exemples : 3 + 5, 7 + 9… Mais des exemples suffisent-ils pour être sûr ?",
+    "Dessine un nombre pair avec des jetons rangés par deux. À quoi ressemble un nombre impair ?",
+    "Pour montrer qu'une phrase est fausse, un seul exemple qui ne marche pas suffit."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Élève de CM1 (9-10 ans) : écris tes retours avec des mots simples, encourage la recherche, et ne donne jamais la solution complète. Valorise surtout la démarche : une méthode organisée et une explication de « comment je suis sûr » comptent autant que le bon résultat. Réponses attendues : 1 vraie ; 2 fausse (contre-exemple : 1 + 3 + 5 = 9, impair ; en fait la somme de trois impairs est toujours impaire) ; 3 vraie ; 4 vraie. Preuves à valoriser : jetons rangés par deux (un impair, c'est des paires plus un jeton seul ; deux impairs : les deux jetons seuls font une paire) ; raisonnement sur le chiffre des unités ; pour le produit, le tableau des chiffres des unités impairs. Distinguer clairement : « j'ai essayé trois exemples, ça marche » ne prouve pas que c'est toujours vrai (à revoir, en félicitant l'essai) ; un seul contre-exemple suffit pour prouver qu'une phrase est fausse (juste). Erreurs fréquentes : croire qu'une phrase est vraie parce qu'elle marche sur quelques exemples ; confondre somme et produit ; un « contre-exemple » qui n'en est pas un (calcul faux). Phrases inventées : justes si la vraie est bien toujours vraie (avec une explication) et la fausse réfutée par un contre-exemple.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Pour chaque phrase, essaie au moins trois exemples, puis dis si elle te paraît vraie. 1. La somme de deux nombres impairs est paire. 2. Un nombre pair plus un nombre impair donne un nombre impair. Dessine les nombres avec des jetons rangés par deux pour comprendre pourquoi.",
+     "indices": [
+      "Un nombre pair, ce sont des jetons tous rangés par deux.",
+      "Avec un nombre impair, il reste un jeton seul. Que se passe-t-il quand on met ensemble deux jetons seuls ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Prouve que la somme de trois nombres impairs est toujours impaire, puis que la somme de quatre nombres impairs est toujours paire. Énonce une règle pour n'importe quel nombre de nombres impairs, et prouve-la.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_problemes_cm1.gift (niveau 4)",
+   "niveauTache": 5,
+   "suites": {
+    "consolider": "pb-cm1-produit",
+    "prolonger": null,
+    "approfondir": null
+   }
+  },
+  {
+   "id": "maths-somme-15",
+   "discipline": "Mathématiques",
+   "titre": "Faire 15",
+   "objectif": "Décomposer un nombre en sommes ; compenser.",
+   "tache": "Trouve le plus de façons possible d'obtenir 15 en additionnant des nombres de 1 à 9. Chaque nombre ne peut servir qu'une fois dans un calcul.",
+   "indices": [
+    "Commence avec deux nombres : 9 + combien ?",
+    "Essaie avec trois nombres : 9 + 5 + … ?",
+    "Change un nombre et compense : si tu enlèves 1 à l'un, ajoute 1 à un autre."
+   ],
+   "verification": {
+    "mode": "calcul",
+    "cible": 15,
+    "nombres": "1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; 8 ; 9",
+    "attendu": null,
+    "uneFois": true,
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Trouve le plus de façons possible d'obtenir 10 en additionnant des nombres de 1 à 9, chaque nombre une seule fois dans un calcul.",
+     "indices": [
+      "9 + combien ? 8 + combien ?",
+      "Essaie avec trois nombres."
+     ],
+     "cible": 10,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Trouve des façons d'obtenir 15 en additionnant exactement trois nombres différents de 1 à 9. Combien y en a-t-il ? Comment être sûr de toutes les avoir ?",
+     "indices": [],
+     "cible": 15,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_niveau2.gift (niveau 2)",
+   "niveauTache": 2,
+   "suites": {
+    "consolider": null,
+    "prolonger": "maths-ecritures-100",
+    "approfondir": "maths-1234"
+   }
+  },
+  {
+   "id": "maths-ecritures-100",
+   "discipline": "Mathématiques",
+   "titre": "Mille façons d'écrire 100",
+   "objectif": "Décomposer un nombre ; multiplications et additions ; varier les stratégies.",
+   "tache": "Trouve le plus possible de calculs différents qui donnent 100. Essaie d'utiliser des additions, des soustractions et des multiplications, et des nombres très différents.",
+   "indices": [
+    "100, c'est 10 fois combien ? Et 4 fois combien ?",
+    "Tu peux partir d'un calcul juste et le transformer : 50 + 50, puis 49 + 51…",
+    "Essaie avec trois nombres : 25 + 25 + …"
+   ],
+   "verification": {
+    "mode": "calcul",
+    "cible": 100,
+    "nombres": "",
+    "attendu": null,
+    "uneFois": false,
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Trouve le plus possible de calculs différents qui donnent 20.",
+     "indices": [
+      "20, c'est 10 plus combien ?",
+      "20, c'est 2 fois combien ?"
+     ],
+     "cible": 20,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Trouve le plus possible de calculs différents qui donnent 1 000, avec au moins une multiplication dans chacun.",
+     "indices": [],
+     "cible": 1000,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_niveau3.gift (niveau 3)",
+   "niveauTache": 3,
+   "suites": {
+    "consolider": "maths-somme-15",
+    "prolonger": "maths-1234",
+    "approfondir": "maths-compte-24"
+   }
+  },
+  {
+   "id": "maths-aire-12",
+   "discipline": "Mathématiques",
+   "titre": "Rectangles de 12 carreaux",
+   "objectif": "Aire et multiplication ; chercher toutes les solutions.",
+   "tache": "Sur du papier quadrillé, trouve tous les rectangles faits de 12 carreaux exactement. Pour chacun, écris sa longueur et sa largeur en carreaux.",
+   "indices": [
+    "Dessine une seule ligne de 12 carreaux : c'est un rectangle !",
+    "Essaie avec 2 lignes : combien de carreaux par ligne ?",
+    "Pense aux tables de multiplication : quels calculs donnent 12 ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée donne une longueur et une largeur entières (en carreaux) dont le produit vaut 12 : 12 et 1, 6 et 2, 4 et 3. Le même rectangle tourné (3 et 4 puis 4 et 3) compte une seule fois : c'est un doublon. Une idée dont le produit ne fait pas 12 est à revoir.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Trouve des rectangles faits de 6 carreaux exactement. Écris leur longueur et leur largeur.",
+     "indices": [
+      "Une ligne de 6 carreaux, c'est un rectangle.",
+      "Et avec 2 lignes ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Trouve tous les rectangles de 24 carreaux, puis de 36 carreaux. Lequel des deux nombres en donne le plus ? Pourquoi ?",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_niveau3.gift (niveau 3)",
+   "niveauTache": 3,
+   "suites": {
+    "consolider": "maths-pieces-10",
+    "prolonger": "maths-rectangles",
+    "approfondir": "maths-fractions-moitie"
+   }
+  },
+  {
+   "id": "maths-pieces-10",
+   "discipline": "Mathématiques",
+   "titre": "Payer 10 €",
+   "objectif": "Organiser une recherche exhaustive ; décomposer un nombre en sommes.",
+   "tache": "Avec des pièces de 1 €, de 2 € et de 5 €, trouve toutes les façons de payer exactement 10 €. Comment peux-tu être sûr de les avoir toutes trouvées ?",
+   "indices": [
+    "Commence par les façons qui utilisent le plus de pièces de 5 €.",
+    "Avec une seule pièce de 5 €, combien reste-t-il à payer ? Avec quelles pièces ?",
+    "Range tes solutions dans un tableau : nombre de pièces de 5 €, puis de 2 €, puis de 1 €."
+   ],
+   "verification": {
+    "mode": "calcul",
+    "cible": 10,
+    "nombres": "1 ; 2 ; 5",
+    "attendu": 10,
+    "uneFois": false,
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Avec des pièces de 1 €, de 2 € et de 5 €, trouve toutes les façons de payer exactement 6 €.",
+     "indices": [
+      "Avec une pièce de 5 €, que te manque-t-il ?",
+      "Sans pièce de 5 €, combien de pièces de 2 € peux-tu utiliser ?"
+     ],
+     "cible": 6,
+     "attendu": 5
+    },
+    "exigeante": {
+     "consigne": "Avec des pièces de 1 €, de 2 € et de 5 €, trouve toutes les façons de payer exactement 20 €. Explique ta méthode pour n'en oublier aucune.",
+     "indices": [],
+     "cible": 20,
+     "attendu": 29
+    }
+   },
+   "exercices": "maths_probleme_10euros.gift (niveau 4)",
+   "niveauTache": 4,
+   "suites": {
+    "consolider": "maths-somme-15",
+    "prolonger": "maths-aire-12",
+    "approfondir": "maths-compte-24"
+   }
+  },
+  {
+   "id": "maths-1234",
+   "discipline": "Mathématiques",
+   "titre": "Avec 1, 2, 3 et 4",
+   "objectif": "Combiner des nombres et des opérations ; contrôler une contrainte.",
+   "tache": "Avec les nombres 1, 2, 3 et 4 (chacun une seule fois au plus) et les signes +, − et ×, trouve des calculs qui donnent 10. Puis cherche d'autres résultats : 11, 12, 13…",
+   "indices": [
+    "Commence par additionner les quatre nombres.",
+    "Une multiplication peut aller vite : 2 × 4, c'est combien ?",
+    "Tu peux mettre des parenthèses : (1 + 4) × 2."
+   ],
+   "verification": {
+    "mode": "calcul",
+    "cible": 10,
+    "nombres": "1 ; 2 ; 3 ; 4",
+    "attendu": null,
+    "uneFois": true,
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Avec les nombres 1, 2, 3 et 4 (chacun une seule fois au plus) et le signe +, trouve des calculs qui donnent 7.",
+     "indices": [
+      "Essaie avec deux nombres seulement.",
+      "Et avec trois nombres ?"
+     ],
+     "cible": 7,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Avec les nombres 1, 2, 3 et 4 (chacun une seule fois au plus) et les signes +, − et ×, trouve des calculs qui donnent 24.",
+     "indices": [],
+     "cible": 24,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_niveau3.gift (niveau 3)",
+   "niveauTache": 4,
+   "suites": {
+    "consolider": "maths-ecritures-100",
+    "prolonger": "maths-pieces-10",
+    "approfondir": "maths-compte-24"
+   }
+  },
+  {
+   "id": "maths-rectangles",
+   "discipline": "Mathématiques",
+   "titre": "Rectangles de périmètre 24 cm",
+   "objectif": "Périmètre et aire ; chercher toutes les solutions ; comparer.",
+   "tache": "Trouve tous les rectangles dont les côtés mesurent un nombre entier de centimètres et dont le périmètre est 24 cm. Écris chaque rectangle sous la forme « longueur et largeur ». Lequel a la plus grande aire ?",
+   "indices": [
+    "Le périmètre, c'est longueur + largeur + longueur + largeur.",
+    "Si le périmètre fait 24 cm, combien font longueur + largeur ?",
+    "Essaie une largeur de 1 cm, puis 2 cm, puis 3 cm…"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée doit donner une longueur et une largeur entières (en cm) dont la somme vaut 12, c'est-à-dire un périmètre de 24 cm. Un carré de 6 cm convient aussi. Une idée qui compare les aires est juste si la comparaison est exacte (le carré de 6 cm a la plus grande aire, 36 cm²).",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Trouve des rectangles dont les côtés mesurent un nombre entier de centimètres et dont le périmètre est 12 cm.",
+     "indices": [
+      "Combien font longueur + largeur ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Trouve tous les rectangles à côtés entiers de périmètre 24 cm, calcule l'aire de chacun et explique comment change l'aire quand le rectangle devient plus « carré ».",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_niveau4.gift (niveau 4)",
+   "niveauTache": 4,
+   "suites": {
+    "consolider": "maths-aire-12",
+    "prolonger": "maths-fractions-moitie",
+    "approfondir": "maths-compte-24"
+   }
+  },
+  {
+   "id": "maths-fractions-moitie",
+   "discipline": "Mathématiques",
+   "titre": "Toutes les moitiés",
+   "objectif": "Fractions égales ; le double et la moitié.",
+   "tache": "Écris le plus possible de fractions égales à un demi (1/2). Écris-les avec une barre : par exemple 1/2.",
+   "indices": [
+    "1/2, c'est une part sur deux. Si on coupe chaque part en deux, combien de parts sur combien ?",
+    "Que se passe-t-il si tu multiplies le nombre du haut et celui du bas par le même nombre ?",
+    "Compare le nombre du haut et celui du bas dans 1/2 : lequel est le double de l'autre ?"
+   ],
+   "verification": {
+    "mode": "calcul",
+    "cible": 0.5,
+    "nombres": "",
+    "attendu": null,
+    "uneFois": false,
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Écris le plus possible de fractions égales à 1 (une unité entière), par exemple 2/2.",
+     "indices": [
+      "Une pizza coupée en 4 parts, toutes mangées : quelle fraction ?"
+     ],
+     "cible": 1,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Écris le plus possible de fractions égales à trois quarts (3/4).",
+     "indices": [],
+     "cible": 0.75,
+     "attendu": null
+    }
+   },
+   "exercices": "maths_niveau4.gift (niveau 4)",
+   "niveauTache": 4,
+   "suites": {
+    "consolider": "maths-aire-12",
+    "prolonger": "maths-rectangles",
+    "approfondir": "maths-compte-24"
+   }
+  },
+  {
+   "id": "maths-compte-24",
+   "discipline": "Mathématiques",
+   "titre": "Le compte est 24",
+   "objectif": "Partir du résultat ; priorités opératoires et parenthèses.",
+   "tache": "Avec les nombres 2, 3, 5 et 7, et les signes +, − et ×, trouve le plus de calculs possible qui donnent 24. Chaque nombre peut servir une seule fois ; tu n'es pas obligé de tous les utiliser.",
+   "indices": [
+    "Pars du résultat : 24, c'est 2 fois combien ? Ou 21 plus combien ?",
+    "Comment obtenir 12 avec deux des nombres ?",
+    "Pour obtenir 3, tu peux aussi soustraire deux nombres."
+   ],
+   "verification": {
+    "mode": "calcul",
+    "cible": 24,
+    "nombres": "2 ; 3 ; 5 ; 7",
+    "attendu": 4,
+    "uneFois": true,
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Avec les nombres 2, 3, 5 et 7, et les signes + et ×, trouve des calculs qui donnent 12. Chaque nombre peut servir une seule fois.",
+     "indices": [
+      "12, c'est 5 plus combien ?",
+      "Et 12, c'est 2 fois combien ?"
+     ],
+     "cible": 12,
+     "attendu": 2
+    },
+    "exigeante": {
+     "consigne": "Avec les nombres 2, 3, 5 et 7, et les signes +, − et ×, trouve un calcul qui donne 100. Chaque nombre peut servir une seule fois. Il n'en existe qu'un (à l'ordre près) : explique comment tu l'as cherché.",
+     "indices": [],
+     "cible": 100,
+     "attendu": 1
+    }
+   },
+   "exercices": "maths_probleme_compte24.gift (niveau 5)",
+   "niveauTache": 5,
+   "suites": {
+    "consolider": "maths-1234",
+    "prolonger": "maths-fractions-moitie",
+    "approfondir": "maths-rectangles"
+   }
+  },
+  {
+   "id": "francais-famille-mots",
+   "discipline": "Français",
+   "titre": "La famille de « terre »",
+   "objectif": "Familles de mots : radical, préfixes, suffixes.",
+   "tache": "Trouve le plus de mots possible de la même famille que « terre », c'est-à-dire construits à partir de « terre ».",
+   "indices": [
+    "Ajoute quelque chose au début ou à la fin de « terre ».",
+    "Pense à un animal qui vit dans un trou, ou à l'action de mettre quelque chose dans la terre.",
+    "Pense à un avion qui se pose, et à ce qui se trouve sous la terre."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée est un mot de la famille de « terre » : il contient le radical terr- et son sens est lié à la terre (terrain, terrier, enterrer, déterrer, souterrain, atterrir, terrasse, territoire, terrestre, terreau, pomme de terre…). Un mot du même thème sans le radical (sol, champ, jardin) est à revoir : il parle de la terre mais n'est pas de la même famille.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Trouve des mots de la famille de « dent » (construits à partir de « dent »).",
+     "indices": [
+      "Celui qui soigne les dents…",
+      "Le petit mot pour une petite dent…"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Trouve des mots de la famille de « terre », puis range-les : ceux qui ont un préfixe, ceux qui ont un suffixe, ceux qui ont les deux.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "francais_niveau2.gift (niveau 2)",
+   "niveauTache": 2,
+   "suites": {
+    "consolider": null,
+    "prolonger": "francais-cinq-mots",
+    "approfondir": "francais-suite-histoire"
+   }
+  },
+  {
+   "id": "francais-cinq-mots",
+   "discipline": "Français",
+   "titre": "Une phrase, cinq mots",
+   "objectif": "Construire des phrases correctes et variées ; accords et ponctuation.",
+   "tache": "Écris le plus de phrases différentes possible qui contiennent les cinq mots suivants : chat, jardin, soudain, rouge, courir. Tu peux conjuguer le verbe et accorder les mots.",
+   "indices": [
+    "Commence par imaginer qui fait quoi : le chat ? un enfant ?",
+    "Le mot « soudain » annonce un événement : que se passe-t-il ?",
+    "Change le début de la phrase, le temps du verbe ou le type de phrase (question, exclamation)."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque phrase contient les cinq mots (chat, jardin, soudain, rouge, courir), sous une forme conjuguée ou accordée si besoin, commence par une majuscule, se termine par un point, est correctement accordée et a du sens. Signale les fautes d'accord sans corriger la phrase à la place de l'élève.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Écris le plus de phrases possible qui contiennent les trois mots : chat, jardin, courir.",
+     "indices": [
+      "Qui court ? Où ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Écris des phrases qui contiennent les cinq mots chat, jardin, soudain, rouge, courir, dont au moins une phrase avec « quand » ou « parce que ».",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "francais_niveau3.gift (niveau 3)",
+   "niveauTache": 3,
+   "suites": {
+    "consolider": "francais-famille-mots",
+    "prolonger": "francais-suite-histoire",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "francais-suite-histoire",
+   "discipline": "Français",
+   "titre": "Inventer la suite",
+   "objectif": "Produire des idées narratives cohérentes ; varier les possibles.",
+   "tache": "Début de l'histoire : « Ce matin-là, en ouvrant son cartable, Léa trouva une petite clé dorée qu'elle n'avait jamais vue. » Propose le plus d'idées différentes pour la suite, en une ou deux phrases chacune.",
+   "indices": [
+    "Qu'est-ce que cette clé pourrait ouvrir ?",
+    "Qui a pu la mettre dans le cartable, et pourquoi ?",
+    "Imagine une suite drôle, une suite inquiétante, puis une suite magique."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée est une suite possible de l'histoire : elle est cohérente avec le début (Léa, la clé dorée, le cartable), écrite en phrases correctes, et différente des autres idées de l'élève.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Début : « Léa trouva une petite clé dorée dans son cartable. » Que peut ouvrir cette clé ? Propose plusieurs idées.",
+     "indices": [
+      "Pense aux objets qui ont une serrure."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Écris trois suites très différentes de l'histoire de la clé dorée, chacune en trois phrases au moins, avec une fin.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "francais_niveau3.gift (niveau 3)",
+   "niveauTache": 3,
+   "suites": {
+    "consolider": "francais-cinq-mots",
+    "prolonger": "histoire-enfant-gaulois",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "sciences-graine",
+   "discipline": "Sciences",
+   "titre": "La graine a-t-elle besoin de lumière ?",
+   "objectif": "Concevoir une expérience : ne faire varier qu'un seul facteur, prévoir un témoin.",
+   "tache": "Une graine a-t-elle besoin de lumière pour germer ? Propose des expériences pour le savoir. Pour chacune, dis ce que tu fais, ce que tu gardes pareil et ce que tu observes.",
+   "indices": [
+    "Il faut comparer : une graine dans quelle situation, et une autre dans quelle situation ?",
+    "Qu'est-ce qui doit rester pareil pour les deux graines (eau, terre, température…) ?",
+    "Combien de graines mettre dans chaque groupe pour être plus sûr ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée d'expérience compare au moins deux situations qui ne diffèrent QUE par la lumière (à la lumière / dans le noir), garde les autres conditions identiques (eau, terre, température, type de graine), et dit ce qu'on observe (la graine germe ou non). Une idée qui change plusieurs facteurs à la fois est à revoir.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Une graine a-t-elle besoin d'eau pour germer ? Propose une expérience pour le savoir.",
+     "indices": [
+      "Compare une graine arrosée et une graine…"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Une graine a-t-elle besoin de lumière, d'eau ou de chaleur pour germer ? Propose une série d'expériences qui teste chaque facteur séparément.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "sciences_niveau3.gift (niveau 3)",
+   "niveauTache": 3,
+   "suites": {
+    "consolider": "sciences-glacon",
+    "prolonger": "sciences-flotte",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "sciences-glacon",
+   "discipline": "Sciences",
+   "titre": "Garder un glaçon le plus longtemps",
+   "objectif": "Matériaux isolants ; proposer et justifier des solutions.",
+   "tache": "Comment faire pour qu'un glaçon fonde le plus lentement possible ? Propose le plus d'idées possible et explique pourquoi chacune pourrait marcher.",
+   "indices": [
+    "Qu'est-ce qui fait fondre le glaçon ?",
+    "Pense aux matériaux qui protègent du chaud ou du froid : lesquels connais-tu ?",
+    "Comment pourrais-tu vérifier quelle idée marche le mieux ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée propose un moyen réaliste de ralentir la fonte (isoler le glaçon avec un matériau isolant comme la laine, le polystyrène, le papier journal ; le garder à l'ombre ou au frais ; le garder gros plutôt qu'en morceaux…) et donne une explication liée à la chaleur. Une idée sans explication est à revoir.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Où mettrais-tu un glaçon pour qu'il fonde le plus lentement ? Propose plusieurs idées.",
+     "indices": [
+      "Où fait-il frais dans la classe ou à la maison ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Propose une expérience pour comparer trois emballages et savoir lequel garde le mieux un glaçon. Précise ce qui doit rester pareil.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "sciences_niveau4.gift (niveau 4)",
+   "niveauTache": 3,
+   "suites": {
+    "consolider": null,
+    "prolonger": "sciences-graine",
+    "approfondir": "sciences-flotte"
+   }
+  },
+  {
+   "id": "sciences-flotte",
+   "discipline": "Sciences",
+   "titre": "Faire flotter la pâte à modeler",
+   "objectif": "Flottaison et forme ; tester une hypothèse de façon juste.",
+   "tache": "Une boule de pâte à modeler coule dans l'eau. Comment pourrait-on la faire flotter sans rien lui ajouter ? Propose des idées et une expérience pour les tester.",
+   "indices": [
+    "Pense aux bateaux : ils sont lourds, et pourtant ils flottent. Quelle forme ont-ils ?",
+    "Garde la même quantité de pâte et change seulement sa forme.",
+    "Compare une boule et une forme creuse : que remarques-tu ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée propose de changer la forme de la pâte à modeler (barque, bol, galette aux bords relevés…) sans ajouter de matière ni d'objet, ou décrit une expérience qui compare des formes faites avec la même quantité de pâte. Ajouter un objet qui flotte ne respecte pas la consigne. Une expérience qui change à la fois la forme et la quantité de pâte est à revoir.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Choisis des objets de la classe : lesquels flottent, lesquels coulent ? Propose une expérience pour vérifier tes idées.",
+     "indices": [
+      "Fais deux listes avant de tester : je pense qu'il flotte / je pense qu'il coule."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Fais flotter la pâte à modeler, puis cherche quelle forme peut porter le plus de billes sans couler. Comment comparer les formes de façon juste ?",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "sciences_niveau4.gift (niveau 4)",
+   "niveauTache": 4,
+   "suites": {
+    "consolider": "sciences-glacon",
+    "prolonger": "sciences-graine",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "histoire-enfant-gaulois",
+   "discipline": "Histoire",
+   "titre": "Questions à un enfant gaulois",
+   "objectif": "Se représenter la vie quotidienne d'une époque ; formuler des questions historiques.",
+   "tache": "Si tu pouvais rencontrer un enfant gaulois, quelles questions lui poserais-tu pour comprendre comment il vivait ? Écris le plus de questions différentes possible.",
+   "indices": [
+    "Pense à sa vie de tous les jours : maison, repas, vêtements, jeux.",
+    "Pense au travail de ses parents et à son village.",
+    "Pense aux croyances, aux fêtes, et à l'arrivée des Romains."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée est une vraie question (avec un point d'interrogation), adressée à un enfant gaulois, qui porte sur la vie à l'époque gauloise (habitat, alimentation, artisanat, agriculture, croyances, guerre avec les Romains…) et n'est pas anachronique (pas de télévision, de voiture…).",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Quelles questions poserais-tu à un enfant gaulois sur sa maison et ses repas ?",
+     "indices": [
+      "Comment est sa maison ? Que mange-t-il ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Écris des questions à un enfant gaulois puis, pour chacune, indique quel document ou quelle trace (fouille, objet, texte romain) permettrait d'y répondre aujourd'hui.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "histoire_niveau2.gift (niveau 2)",
+   "niveauTache": 2,
+   "suites": {
+    "consolider": null,
+    "prolonger": "histoire-objet-ancien",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "histoire-objet-ancien",
+   "discipline": "Histoire",
+   "titre": "De quand date cet objet ?",
+   "objectif": "Traces du passé ; démarche d'enquête de l'historien.",
+   "tache": "Tu trouves un vieil objet dans un grenier. Comment pourrais-tu savoir de quelle époque il date ? Propose le plus de moyens possible.",
+   "indices": [
+    "Regarde l'objet : de quoi est-il fait ? Comment a-t-il été fabriqué ?",
+    "Qui pourrait t'aider ? Où trouver des objets qui lui ressemblent ?",
+    "Y a-t-il quelque chose d'écrit sur l'objet : une date, une marque, un nom ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée est un moyen réaliste d'enquêter sur l'âge d'un objet : observer sa matière ou sa fabrication, chercher une date, une marque ou une inscription, le comparer avec des objets de musée ou des images, interroger des personnes âgées ou un spécialiste, chercher dans des livres ou des archives… Une idée sans lien avec la date de l'objet est à revoir.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Une lampe à huile en terre cuite et une lampe électrique : laquelle est la plus ancienne ? Donne le plus d'indices possible.",
+     "indices": [
+      "Comment chacune fait-elle de la lumière ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Propose des moyens de dater un objet, puis classe-les : ceux qui donnent une date précise, ceux qui donnent seulement une période.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "histoire_niveau3.gift (niveau 3)",
+   "niveauTache": 3,
+   "suites": {
+    "consolider": "histoire-enfant-gaulois",
+    "prolonger": null,
+    "approfondir": null
+   }
+  },
+  {
+   "id": "geo-cour-recre",
+   "discipline": "Géographie",
+   "titre": "Une cour pour tous",
+   "objectif": "Habiter un espace proche ; partager un lieu.",
+   "tache": "Comment rendre la cour de récréation plus agréable pour tout le monde ? Propose le plus d'idées possible et dis à qui chacune sert.",
+   "indices": [
+    "Pense aux élèves qui veulent courir et à ceux qui veulent être au calme.",
+    "Que se passe-t-il dans la cour quand il fait très chaud, ou quand il pleut ?",
+    "Fais un petit plan de la cour : où placerais-tu chaque idée ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée propose un aménagement ou une règle réaliste pour la cour (coin calme, jeux au sol, arbres et ombre, bancs, potager, partage des espaces de jeu…) et dit à qui ou à quoi elle sert. Une idée irréaliste pour une école (piscine, manège) ou sans explication est à revoir.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Que pourrait-on ajouter dans la cour pour mieux jouer ensemble ? Propose plusieurs idées.",
+     "indices": [
+      "À quels jeux aimes-tu jouer dans la cour ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Dessine en mots le plan d'une cour idéale : quels espaces, où, et comment chacun est partagé entre les élèves de tous les âges.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "geographie_niveau2.gift (niveau 2)",
+   "niveauTache": 2,
+   "suites": {
+    "consolider": null,
+    "prolonger": "geo-trajet-ecole",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "geo-trajet-ecole",
+   "discipline": "Géographie",
+   "titre": "Aller à l'école en polluant moins",
+   "objectif": "Se déplacer dans sa commune ; mobilités et environnement.",
+   "tache": "Comment les élèves de la classe pourraient-ils venir à l'école en polluant le moins possible ? Propose le plus d'idées possible, en pensant à ceux qui habitent près et à ceux qui habitent loin.",
+   "indices": [
+    "Quels moyens de transport polluent peu ou pas du tout ?",
+    "Pour ceux qui habitent loin, comment partager les trajets ?",
+    "Que faudrait-il changer dans la commune pour que ces idées soient possibles ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée propose un moyen de venir à l'école qui pollue moins que la voiture individuelle (marche, vélo, trottinette, bus, covoiturage, pédibus…), ou un aménagement de la commune qui le rend possible (piste cyclable, trottoir sécurisé…), et elle est réaliste pour des élèves de CM1.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Quels moyens de transport permettent de venir à l'école sans polluer ? Propose-en plusieurs.",
+     "indices": [
+      "Lesquels n'utilisent pas de moteur ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Propose un plan pour que la moitié des élèves de l'école viennent sans voiture : quels moyens, quels aménagements, qui doit agir (mairie, familles, école) ?",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "geographie_niveau3.gift (niveau 3)",
+   "niveauTache": 3,
+   "suites": {
+    "consolider": "geo-cour-recre",
+    "prolonger": null,
+    "approfondir": null
+   }
+  },
+  {
+   "id": "anglais-classroom",
+   "discipline": "Anglais",
+   "titre": "In the classroom",
+   "objectif": "Décrire un lieu : There is / There are, couleurs, nombres.",
+   "tache": "Look around the classroom. Write as many English sentences as you can about what you can see (There is…, There are…, colours, numbers).",
+   "indices": [
+    "Start with: There is a… / There are…",
+    "Add a colour: There is a blue chair.",
+    "Add a number: There are twenty-five chairs."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée est une phrase en anglais, correcte pour le niveau CM1 (A1), qui décrit un objet de la classe (There is a…, There are…, The board is…). Signale gentiment une erreur sans réécrire la phrase à la place de l'élève. Les retours doivent être rédigés en français.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Name objects in the classroom in English, with a colour: a red pen, a blue bag…",
+     "indices": [
+      "a … pen, a … chair, a … bag"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Describe the classroom in English: what there is and where it is (on, under, next to).",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "anglais_niveau2.gift (niveau 2)",
+   "niveauTache": 2,
+   "lecture": "en-GB",
+   "suites": {
+    "consolider": null,
+    "prolonger": "anglais-animal",
+    "approfondir": "anglais-portrait"
+   }
+  },
+  {
+   "id": "anglais-animal",
+   "discipline": "Anglais",
+   "titre": "My favourite animal",
+   "objectif": "Décrire en phrases simples (have got, can, colours, body).",
+   "tache": "Describe your favourite animal in English. Write as many different sentences as you can (colour, body, what it can do, where it lives, what it eats).",
+   "indices": [
+    "Start with: My favourite animal is…",
+    "Use « It has got… » for the body and « It can… » for what it does.",
+    "Use colours and « It lives in… », « It eats… »."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée est une phrase en anglais, correcte pour le niveau CM1 (A1), qui décrit un animal (couleur, parties du corps avec has got, capacités avec can, habitat, nourriture). Signale gentiment une erreur sans réécrire la phrase à la place de l'élève. Les retours doivent être rédigés en français.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Describe your favourite animal in English with three sentences: its name, its colour and what it can do.",
+     "indices": [
+      "My favourite animal is… It is… It can…"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Describe your favourite animal in English, then compare it with another animal (bigger than, smaller than, faster than).",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "anglais_niveau3.gift (niveau 3)",
+   "niveauTache": 3,
+   "lecture": "en-GB",
+   "suites": {
+    "consolider": "anglais-classroom",
+    "prolonger": "anglais-portrait",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "anglais-portrait",
+   "discipline": "Anglais",
+   "titre": "Someone I like",
+   "objectif": "Décrire une personne : has got, can, likes.",
+   "tache": "Describe someone you like (a friend, someone in your family, a hero) in English: what he or she looks like, what he or she can do and likes.",
+   "indices": [
+    "Start with: My friend is called… He/She is … years old.",
+    "Use « has got » for hair and eyes: She has got brown hair.",
+    "Use « can » and « likes »: He can swim. He likes pizza."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée est une phrase en anglais, correcte pour le niveau CM1 (A1), qui décrit une personne (He/She is…, has got…, can…, likes…). Signale gentiment une erreur sans réécrire la phrase à la place de l'élève. Les retours doivent être rédigés en français.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Describe a friend in English with three sentences: name, age, hair.",
+     "indices": [
+      "My friend is called… He/She is … years old. He/She has got … hair."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Describe two people in English and compare them (taller than, older than, both…).",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "anglais_niveau4.gift (niveau 4)",
+   "niveauTache": 4,
+   "lecture": "en-GB",
+   "suites": {
+    "consolider": "anglais-animal",
+    "prolonger": null,
+    "approfondir": null
+   }
+  },
+  {
+   "id": "galois-intro-racines",
+   "titre": "Introduction 1 : racines rationnelles",
+   "niveauTache": 1,
+   "objectif": "Séance d'introduction. Théorème des racines rationnelles ; en degré 2 ou 3, irréductible sur Q équivaut à « sans racine rationnelle » ; cette méthode ne suffit plus en degré 4.",
+   "tache": "Voici six polynômes : x² − 3 ; x³ − 2 ; x³ − 3x − 1 ; x³ − 7x + 6 ; 2x³ + x² + 1 ; x⁴ + 3x² + 2.\nPour chacun, écris la liste de ses racines rationnelles possibles (théorème des racines rationnelles), teste-les, puis conclus : irréductible sur Q, réductible (donne alors une factorisation), ou « cette méthode ne permet pas de conclure ». Invente ensuite tes propres exemples de degré 3 : des irréductibles et des réductibles.",
+   "indices": [
+    "Théorème des racines rationnelles : si p/q, fraction irréductible, est racine de aₙxⁿ + … + a₀ (coefficients entiers), alors p divise a₀ et q divise aₙ. Pour x³ − 7x + 6, les candidats sont ±1, ±2, ±3, ±6.",
+    "Un polynôme de degré 2 ou 3 qui se factorise a forcément un facteur de degré 1, donc une racine rationnelle. Sans racine rationnelle, il est donc irréductible.",
+    "En degré 4, un produit de deux facteurs de degré 2 n'a pas forcément de racine : regarde x⁴ + 3x² + 2 comme un polynôme en x²."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Séance d'introduction : valoriser une démarche complète et soignée (liste des candidats, calcul des valeurs, conclusion) plutôt que la rapidité. Résultats attendus. x² − 3 : candidats ±1, ±3, aucun n'est racine, irréductible (degré 2). x³ − 2 : candidats ±1, ±2, irréductible (degré 3). x³ − 3x − 1 : candidats ±1, valeurs −3 et 1, irréductible. x³ − 7x + 6 : racines 1, 2 et −3, réductible, (x − 1)(x − 2)(x + 3). 2x³ + x² + 1 : candidats ±1, ±1/2 ; −1 est racine, réductible, (x + 1)(2x² − x + 1). x⁴ + 3x² + 2 : aucune racine rationnelle (valeurs toujours positives) mais réductible, (x² + 1)(x² + 2) ; conclure « irréductible » est l'erreur à signaler. Les candidats doivent inclure les fractions quand le coefficient dominant n'est pas 1 (oubli fréquent : ±1/2 pour 2x³ + x² + 1). L'argument « pas de racine donc irréductible » n'est valable qu'en degré 2 ou 3 : son usage en degré 4 ou plus est à revoir. Pour les exemples inventés : un polynôme de degré 3 est correct s'il est bien irréductible (aucun candidat n'est racine) ou bien réductible (une racine rationnelle exhibée).",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Pour x³ − 2, puis pour x³ − 7x + 6 : écris les racines rationnelles possibles, calcule la valeur du polynôme en chacune, et conclus.",
+     "indices": [
+      "Pour x³ − 2, les candidats sont les diviseurs de 2 : ±1 et ±2. Calcule 1³ − 2, (−1)³ − 2, etc.",
+      "Un polynôme de degré 3 sans racine rationnelle est irréductible sur Q."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Montre que x³ − 3x − 1, x³ − x − 1 et 3x³ − x + 1 sont irréductibles sur Q. Trouve ensuite un polynôme de degré 4 sans racine rationnelle mais réductible, autre que x⁴ + 3x² + 2, puis prouve que x⁴ + 2x + 2 est irréductible sans le critère d'Eisenstein, en excluant les racines rationnelles puis toute factorisation (x² + ax + b)(x² + cx + d).",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Théorie de Galois (licence)",
+   "public": "superieur",
+   "exercices": "licence/galois_intro_racines.gift (niveau 1)",
+   "suites": {
+    "consolider": null,
+    "prolonger": "galois-intro-eisenstein",
+    "approfondir": "galois-intro-modulo"
+   }
+  },
+  {
+   "id": "galois-intro-eisenstein",
+   "titre": "Introduction 2 : le critère d'Eisenstein",
+   "niveauTache": 1,
+   "objectif": "Séance d'introduction. Énoncer et appliquer le critère d'Eisenstein en vérifiant ses trois conditions ; comprendre qu'il est suffisant mais pas nécessaire.",
+   "tache": "Pour chacun des polynômes suivants, cherche un nombre premier p pour lequel le critère d'Eisenstein s'applique, en vérifiant les trois conditions une à une : x² − 2 ; x³ + 4x + 2 ; x³ − 6x + 3 ; x⁵ + 10x + 5 ; 2x³ + 6x + 3 ; x³ + 3x + 9 ; x⁴ + 6x² + 4.\nQuand le critère ne s'applique pour aucun p, dis quelle condition échoue, et cherche une autre preuve si tu peux. Fabrique ensuite tes propres polynômes d'Eisenstein de degrés 2 à 5.",
+   "indices": [
+    "Critère d'Eisenstein, pour aₙxⁿ + … + a₀ à coefficients entiers et p premier : (1) p divise a₀, a₁, …, aₙ₋₁ ; (2) p ne divise pas aₙ ; (3) p² ne divise pas a₀. Alors le polynôme est irréductible sur Q.",
+    "Seuls les premiers qui divisent le terme constant peuvent convenir : commence par décomposer a₀ en facteurs premiers.",
+    "Si le critère ne s'applique pas, le polynôme peut quand même être irréductible : pour x³ + 3x + 9, essaie les racines rationnelles."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Séance d'introduction : chaque conclusion doit s'appuyer sur la vérification explicite des trois conditions (p divise tous les coefficients sauf le dominant, p ne divise pas le dominant, p² ne divise pas le terme constant). Résultats attendus. x² − 2 : p = 2. x³ + 4x + 2 : p = 2. x³ − 6x + 3 : p = 3. x⁵ + 10x + 5 : p = 5. 2x³ + 6x + 3 : p = 3 ; le critère s'applique aux polynômes non unitaires (erreur fréquente : croire qu'il faut un polynôme unitaire). x³ + 3x + 9 : seul p = 3 divise les coefficients, mais 9 = 3² divise le terme constant ; le critère ne s'applique pour aucun p, et pourtant le polynôme est irréductible (degré 3, candidats ±1, ±3, ±9, aucun n'est racine). x⁴ + 6x² + 4 : seul p = 2 est possible, mais 4 = 2² ; il est néanmoins irréductible (preuve plus longue, non exigée). Conclure « réductible » parce que le critère échoue est l'erreur principale à signaler : le critère est suffisant, pas nécessaire. Un polynôme inventé est correct si les trois conditions sont vérifiées pour un premier p explicité.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Vérifie une à une les trois conditions du critère d'Eisenstein pour x³ + 4x + 2 avec p = 2, puis pour x³ − 6x + 3 avec p = 3. Pour chacun, conclus.",
+     "indices": [
+      "Pour x³ + 4x + 2 et p = 2 : 2 divise-t-il 0 (coefficient de x²), 4 et 2 ? 2 divise-t-il 1 ? 4 divise-t-il 2 ?",
+      "Si les trois conditions sont vraies, le polynôme est irréductible sur Q."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Montre que xⁿ − 2 est irréductible sur Q pour tout n ≥ 1 et déduis-en le degré de ⁿ√2 sur Q. Pour combien de premiers p le critère s'applique-t-il à x⁴ + 30x + 30 ? Enfin, x⁴ + 6x² + 4 n'est d'Eisenstein pour aucun premier : prouve quand même son irréductibilité.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Théorie de Galois (licence)",
+   "public": "superieur",
+   "exercices": "licence/galois_intro_eisenstein.gift (niveau 1)",
+   "suites": {
+    "consolider": "galois-intro-racines",
+    "prolonger": "galois-intro-modulo",
+    "approfondir": "galois-intro-changement"
+   }
+  },
+  {
+   "id": "galois-intro-modulo",
+   "titre": "Introduction 3 : réduction modulo un nombre premier",
+   "niveauTache": 1,
+   "objectif": "Séance d'introduction. Calculer dans F₂ et F₃ ; si p ne divise pas le coefficient dominant et si la réduction est irréductible sur F_p, le polynôme est irréductible sur Q ; la réciproque est fausse.",
+   "tache": "Prouve l'irréductibilité sur Q de x³ + 3x + 5, x³ − x + 1, x³ + 2x + 4 et x⁴ + 3x + 7 en les réduisant modulo 2 ou modulo 3.\nPour chaque réduction, écris le polynôme obtenu dans F_p[x], cherche ses racines dans F_p (et, en degré 4, ses éventuels facteurs de degré 2), puis conclus. Explique aussi pourquoi la réduction modulo 2 ne permet de conclure ni pour x³ + 2x + 4, ni pour 2x³ + x + 1.",
+   "indices": [
+    "Réduire modulo p, c'est remplacer chaque coefficient par son reste dans la division par p. Théorème : si p ne divise pas le coefficient dominant de f et si la réduction de f est irréductible sur F_p, alors f est irréductible sur Q.",
+    "Dans F₂, il n'y a que deux valeurs à tester, 0 et 1 ; dans F₃, trois : 0, 1 et 2. En degré 2 ou 3 sur F_p, sans racine signifie irréductible.",
+    "En degré 4 sur F₂, il faut aussi vérifier que le polynôme n'est pas divisible par x² + x + 1, le seul polynôme irréductible de degré 2 sur F₂."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Séance d'introduction : valoriser les calculs explicites dans F_p (réduction des coefficients, valeurs en 0, 1, 2) et l'énoncé correct du théorème. Résultats attendus. x³ + 3x + 5 modulo 2 : x³ + x + 1, qui vaut 1 en 0 et en 1, donc irréductible sur F₂, donc x³ + 3x + 5 irréductible sur Q. x³ − x + 1 : modulo 2, x³ + x + 1 (irréductible) ; modulo 3, il vaut 1 en 0, 1 et 2 (irréductible aussi). x³ + 2x + 4 : modulo 2 il devient x³, réductible, ce qui ne permet RIEN de conclure ; modulo 3, x³ + 2x + 1 n'a pas de racine dans F₃, donc irréductible. x⁴ + 3x + 7 modulo 2 : x⁴ + x + 1, sans racine dans F₂ et non divisible par x² + x + 1 (car (x² + x + 1)² = x⁴ + x² + 1), donc irréductible ; un argument limité à l'absence de racine en degré 4 est incomplet. 2x³ + x + 1 : modulo 2, le coefficient dominant s'annule et le degré baisse, le théorème ne s'applique pas. Erreurs à signaler : déduire « réductible sur Q » d'une réduction réductible ; oublier la condition sur le coefficient dominant ; calculs faux dans F_p.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Réduis x³ + 3x + 5 modulo 2. Calcule le polynôme obtenu en 0 et en 1 dans F₂. Qu'en conclus-tu dans F₂[x], puis dans Q[x] ?",
+     "indices": [
+      "Modulo 2, 3 devient 1 et 5 devient 1.",
+      "Dans F₂, 1 + 1 = 0. Un polynôme de degré 3 sans racine dans F₂ est irréductible sur F₂."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Montre que la réciproque du théorème est fausse : x⁴ + 1 est irréductible sur Q, mais factorise sa réduction modulo 2 et modulo 3. Trouve un polynôme de degré 5 à coefficients entiers que la réduction modulo 2 prouve irréductible. Prouve enfin que 2x³ + x + 1 est irréductible sur Q.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Théorie de Galois (licence)",
+   "public": "superieur",
+   "exercices": "licence/galois_intro_modulo.gift (niveau 1)",
+   "suites": {
+    "consolider": "galois-intro-eisenstein",
+    "prolonger": "galois-intro-changement",
+    "approfondir": "galois-irreductibles"
+   }
+  },
+  {
+   "id": "galois-intro-changement",
+   "titre": "Introduction 4 : changement de variable",
+   "niveauTache": 1,
+   "objectif": "Séance d'introduction. f(x) et f(x + a) sont irréductibles en même temps ; un changement de variable bien choisi rend le critère d'Eisenstein applicable ; polynômes cyclotomiques Φ₃, Φ₄, Φ₅, Φ₈.",
+   "tache": "Le polynôme f(x) est irréductible sur Q si et seulement si f(x + a) l'est, pour tout rationnel a. Utilise cette remarque pour prouver l'irréductibilité de x² + 1, x² + x + 1, x³ + 3x² + 3x − 1, x⁴ + 1 et x⁴ + x³ + x² + x + 1.\nPour chacun, choisis un changement de variable (x + 1 ou x − 1), développe soigneusement, puis applique le critère d'Eisenstein. Cherche ensuite d'autres polynômes pour lesquels un changement de variable fonctionne.",
+   "indices": [
+    "Pourquoi f(x) et f(x + a) sont-ils irréductibles en même temps ? Si f(x) = g(x)h(x), que vaut f(x + a) ?",
+    "Développe avec le binôme de Newton : (x + 1)² + 1 = x² + 2x + 2. Quel premier p convient ?",
+    "x³ + 3x² + 3x − 1 ressemble au développement de (x + 1)³ : essaie x − 1. Pour x⁴ + x³ + x² + x + 1, écris-le (x⁵ − 1)/(x − 1) avant de remplacer x par x + 1."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Séance d'introduction : chaque preuve doit justifier pourquoi le changement de variable conserve l'irréductibilité (une factorisation de f(x) donnerait une factorisation de f(x + a) avec les mêmes degrés), donner le développement et vérifier les trois conditions d'Eisenstein. Résultats attendus. x² + 1 : f(x + 1) = x² + 2x + 2, Eisenstein p = 2. x² + x + 1 : f(x + 1) = x² + 3x + 3, p = 3. x³ + 3x² + 3x − 1 = (x + 1)³ − 2 : f(x − 1) = x³ − 2, p = 2 (il n'est d'Eisenstein pour aucun premier sans changement de variable). x⁴ + 1 : f(x + 1) = x⁴ + 4x³ + 6x² + 4x + 2, p = 2. x⁴ + x³ + x² + x + 1 : f(x + 1) = x⁴ + 5x³ + 10x² + 10x + 5, p = 5. Une erreur de développement (coefficients du binôme) est à signaler précisément. Des preuves par une autre méthode (racines rationnelles en degré 2 ou 3) sont correctes mais ne répondent pas à la consigne : le signaler avec bienveillance. Un exemple inventé est correct si le développement est juste et si le critère s'applique au polynôme transformé.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Calcule f(x + 1) pour f(x) = x² + 1, puis pour f(x) = x² + x + 1. Vérifie que le critère d'Eisenstein s'applique à chaque résultat, et conclus pour f.",
+     "indices": [
+      "(x + 1)² = x² + 2x + 1.",
+      "Si f(x + 1) est irréductible sur Q, f(x) l'est aussi : une factorisation de f(x) en donnerait une de f(x + 1)."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Montre que Φ_p(x) = x^(p−1) + … + x + 1 est irréductible sur Q pour tout premier p (prends (x⁵ − 1)/(x − 1) comme modèle). Utilise ensuite un autre changement de variable, x ↦ 1/x : montre que f est irréductible si et seulement si son polynôme réciproque xⁿ f(1/x) l'est (quand f(0) ≠ 0), et déduis-en que 3x³ + 3x + 1 est irréductible.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Théorie de Galois (licence)",
+   "public": "superieur",
+   "exercices": "licence/galois_intro_changement.gift (niveau 1)",
+   "suites": {
+    "consolider": "galois-intro-eisenstein",
+    "prolonger": "galois-irreductibles",
+    "approfondir": "galois-degre"
+   }
+  },
+  {
+   "id": "galois-irreductibles",
+   "titre": "Polynômes irréductibles",
+   "niveauTache": 2,
+   "objectif": "Irréductibilité sur Q : racines rationnelles, critère d'Eisenstein, réduction modulo p, changement de variable.",
+   "tache": "Trouve des polynômes irréductibles sur Q de degrés 2, 3, 4 et 5. Pour chacun, prouve l'irréductibilité en variant les méthodes (absence de racine rationnelle, critère d'Eisenstein, réduction modulo un nombre premier, changement de variable…).",
+   "indices": [
+    "En degré 2 ou 3, que suffit-il de vérifier pour conclure ? Pourquoi cela ne suffit-il plus en degré 4 ?",
+    "Le critère d'Eisenstein demande un premier p qui divise tous les coefficients sauf le dominant, et dont le carré ne divise pas le terme constant. Comment construire des polynômes auxquels il s'applique ?",
+    "Si f(x) n'est pas d'Eisenstein, essaie f(x + 1) ; ou réduis modulo 2 ou 3 : un polynôme unitaire irréductible modulo p est irréductible sur Q."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée doit donner un polynôme à coefficients rationnels effectivement irréductible sur Q, avec une preuve correcte. En degré 2 ou 3, l'absence de racine rationnelle suffit (racines possibles : diviseurs du terme constant sur diviseurs du coefficient dominant). En degré 4 ou plus, elle ne suffit pas : il faut aussi exclure un produit de deux facteurs de degré 2 (par exemple x⁴ + 4 = (x² + 2x + 2)(x² − 2x + 2) n'a pas de racine rationnelle mais est réductible). Eisenstein : p divise tous les coefficients non dominants, ne divise pas le dominant, et p² ne divise pas le terme constant. Réduction modulo p : valable si p ne divise pas le coefficient dominant et si le réduit est irréductible sur F_p ; x⁴ + 1 est irréductible sur Q (Eisenstein pour p = 2 appliqué à (x + 1)⁴ + 1) mais réductible modulo tout premier, donc cette méthode échoue pour lui. Une affirmation sans preuve, ou un critère appliqué hors de ses hypothèses, est à revoir.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Trouve des polynômes irréductibles sur Q de degré 2 et 3, et prouve l'irréductibilité de chacun.",
+     "indices": [
+      "Pour un polynôme de degré 2 ou 3, une factorisation non triviale aurait forcément un facteur de degré 1. Que cela signifie-t-il ?",
+      "Théorème des racines rationnelles : quelles sont les seules racines rationnelles possibles de x³ − 3x + 1 ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Pour chaque n de 2 à 6, trouve un polynôme de degré n irréductible sur Q auquel le critère d'Eisenstein ne s'applique pas directement, et prouve son irréductibilité. Que dire de x⁴ + 1 ?",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Théorie de Galois (licence)",
+   "public": "superieur",
+   "exercices": "licence/galois_niveau1.gift (niveau 2)",
+   "suites": {
+    "consolider": "galois-intro-changement",
+    "prolonger": "galois-degre",
+    "approfondir": "galois-automorphismes"
+   }
+  },
+  {
+   "id": "galois-degre",
+   "titre": "Degré d'une extension",
+   "niveauTache": 2,
+   "objectif": "Degré, base télescopique, polynôme minimal, élément primitif.",
+   "tache": "Montre que [Q(√2, √3) : Q] = 4 de plusieurs façons différentes, puis trouve le plus possible d'éléments primitifs α (tels que Q(√2, √3) = Q(α)), en justifiant chacun.",
+   "indices": [
+    "Multiplicativité des degrés : [Q(√2, √3) : Q] = [Q(√2, √3) : Q(√2)] · [Q(√2) : Q]. Que faut-il prouver pour le premier facteur ?",
+    "Pourquoi √3 n'appartient-il pas à Q(√2) ? Suppose √3 = a + b√2 avec a, b rationnels et élève au carré.",
+    "Pour α = √2 + √3, calcule α² puis exprime √2 et √3 à l'aide de α ; ou compte les conjugués de α."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Le degré vaut 4. Preuves acceptables : multiplicativité des degrés avec √3 ∉ Q(√2), justifié (√3 = a + b√2 mène à une contradiction) ; base {1, √2, √3, √6} dont la liberté sur Q est justifiée ; polynôme minimal de √2 + √3, x⁴ − 10x² + 1, dont l'irréductibilité est prouvée. Éléments primitifs : a√2 + b√3 avec a, b rationnels non nuls (ses quatre conjugués ±a√2 ± b√3 sont distincts) ; √2 + √6 (polynôme minimal x⁴ − 16x² + 16) ; √3 + √6. √2, √3 ou √6 seuls ne conviennent pas (degré 2). Variante exigeante : [Q(∛2, j) : Q] = 6 (2 et 3 divisent le degré, qui vaut au plus 6), et ∛2 + j est un élément primitif. Une idée sans justification est à revoir.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Montre que [Q(√2) : Q] = 2 et que [Q(√2, √3) : Q(√2)] = 2. Quel est le degré de Q(√2, √3) sur Q ?",
+     "indices": [
+      "Quel est le polynôme minimal de √2 sur Q, et pourquoi est-il irréductible ?",
+      "Si √3 = a + b√2, que donne le carré des deux membres ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Calcule [Q(∛2, j) : Q], où j = e^(2iπ/3), de plusieurs façons, et trouve un élément primitif de cette extension.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Théorie de Galois (licence)",
+   "public": "superieur",
+   "exercices": "licence/galois_niveau2.gift (niveau 3)",
+   "suites": {
+    "consolider": "galois-irreductibles",
+    "prolonger": "galois-automorphismes",
+    "approfondir": "galois-decomposition"
+   }
+  },
+  {
+   "id": "galois-automorphismes",
+   "titre": "Automorphismes d'un corps",
+   "niveauTache": 3,
+   "objectif": "Q-automorphismes, action sur les racines, extensions normales.",
+   "tache": "Détermine tous les automorphismes de Q(√2, √3) qui fixent Q, puis ceux de Q(∛2). Compare les deux situations : qu'est-ce qui fait la différence ?",
+   "indices": [
+    "Un automorphisme qui fixe Q envoie une racine d'un polynôme à coefficients rationnels sur une racine du même polynôme. Où peut-il envoyer √2 ? √3 ?",
+    "Un automorphisme de Q(√2, √3) est déterminé par les images de √2 et de √3. Combien de choix, et sont-ils tous réalisés ?",
+    "Où sont les racines de x³ − 2 dans C ? Lesquelles appartiennent à Q(∛2), qui est contenu dans R ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Q(√2, √3) a exactement quatre automorphismes fixant Q, déterminés par √2 ↦ ±√2 et √3 ↦ ±√3 ; ils forment un groupe isomorphe à Z/2Z × Z/2Z (tout élément est d'ordre au plus 2, le groupe n'est pas cyclique). Q(∛2) n'a que l'identité : ∛2 doit aller sur une racine réelle de x³ − 2, et ∛2 est la seule. Le nombre d'automorphismes égale le degré dans le premier cas (extension galoisienne, c'est-à-dire normale et séparable) mais pas dans le second (Q(∛2)/Q n'est pas normale : x³ − 2 n'y est pas scindé). Variantes : Q(√2) et Q(i) ont chacun deux automorphismes (groupe Z/2Z) ; Q(⁴√2) en a deux (⁴√2 ↦ ±⁴√2) pour un degré 4 ; Q(⁴√2, i) en a huit (groupe diédral D₄). Toute affirmation doit être justifiée.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Détermine tous les automorphismes de Q(√2) qui fixent Q, puis ceux de Q(i). Quel est leur groupe ?",
+     "indices": [
+      "Un automorphisme fixe 1 : que devient a + b√2 si l'on connaît l'image de √2 ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Détermine le groupe des automorphismes de Q(⁴√2) fixant Q, puis celui de Q(⁴√2, i). Conjecture une règle reliant ce nombre et le degré, et énonce-la précisément.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Théorie de Galois (licence)",
+   "public": "superieur",
+   "exercices": "licence/galois_niveau3.gift (niveau 4)",
+   "suites": {
+    "consolider": "galois-degre",
+    "prolonger": "galois-decomposition",
+    "approfondir": "galois-correspondance"
+   }
+  },
+  {
+   "id": "galois-decomposition",
+   "titre": "Corps de décomposition de x³ − 2",
+   "niveauTache": 3,
+   "objectif": "Corps de décomposition, groupe de Galois comme groupe de permutations des racines.",
+   "tache": "Décris le corps de décomposition K de x³ − 2 sur Q, calcule son degré et identifie son groupe de Galois. Propose plusieurs façons de montrer que Gal(K/Q) est isomorphe à S₃.",
+   "indices": [
+    "Les racines de x³ − 2 sont ∛2, j∛2 et j²∛2, avec j = e^(2iπ/3). Quel corps engendrent-elles ?",
+    "Le groupe de Galois agit fidèlement sur les trois racines : c'est un sous-groupe de S₃. Quel est son ordre ?",
+    "Est-il abélien ? Pense à un sous-corps qui n'est pas normal, ou au discriminant de x³ − 2."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "K = Q(∛2, j) = Q(∛2, i√3), de degré 6 sur Q. Gal(K/Q) s'injecte dans S₃ (action fidèle sur les trois racines) et a pour ordre [K : Q] = 6, donc c'est S₃. Autres arguments valides : le groupe n'est pas abélien car Q(∛2)/Q n'est pas normale ; le discriminant de x³ − 2 vaut −108, qui n'est pas un carré dans Q, donc le groupe n'est pas contenu dans A₃ ; on peut exhiber σ : ∛2 ↦ j∛2, j ↦ j (d'ordre 3) et la conjugaison complexe (d'ordre 2), qui ne commutent pas. Variante exigeante : le corps de décomposition de x⁴ − 2 est Q(⁴√2, i), de degré 8, et son groupe de Galois est le groupe diédral D₄. Une réponse qui affirme sans justification que le groupe est S₃ est à revoir.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Quelles sont les racines complexes de x³ − 2 ? Montre que le corps qu'elles engendrent est Q(∛2, j) et calcule son degré sur Q.",
+     "indices": [
+      "Écris les racines sous la forme ∛2 · e^(2ikπ/3)."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Fais le même travail pour x⁴ − 2 : corps de décomposition, degré, groupe de Galois (à identifier au groupe diédral D₄ d'ordre 8).",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Théorie de Galois (licence)",
+   "public": "superieur",
+   "exercices": "licence/galois_niveau3.gift (niveau 4)",
+   "suites": {
+    "consolider": "galois-automorphismes",
+    "prolonger": "galois-correspondance",
+    "approfondir": "galois-cyclotomie"
+   }
+  },
+  {
+   "id": "galois-correspondance",
+   "titre": "La correspondance de Galois",
+   "niveauTache": 4,
+   "objectif": "Théorème fondamental : sous-groupes et sous-corps, normalité.",
+   "tache": "Pour K = Q(∛2, j), associe à chaque sous-groupe de Gal(K/Q) ≅ S₃ son corps fixe. Décris les deux treillis et indique les sous-extensions normales. Vérifie sur cet exemple le plus de propriétés de la correspondance que tu peux.",
+   "indices": [
+    "S₃ a six sous-groupes : lesquels ? Quel est l'indice de chacun ?",
+    "Le corps fixe d'une transposition est de degré 3 sur Q : quels éléments de K sont fixés par la conjugaison complexe ?",
+    "Un sous-groupe distingué correspond à une sous-extension normale : lequel est distingué dans S₃, et quel corps lui correspond ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Correspondance attendue : {id} ↔ K ; A₃ (ordre 3) ↔ Q(j) = Q(√−3), de degré 2, normale sur Q ; les trois sous-groupes d'ordre 2 (transpositions) ↔ Q(∛2), Q(j∛2), Q(j²∛2), de degré 3, non normales et conjuguées entre elles ; S₃ ↔ Q. Propriétés vérifiables : renversement des inclusions ; [K : K^H] = |H| et [K^H : Q] = indice de H ; sous-groupe distingué ↔ sous-extension normale, avec Gal(Q(j)/Q) ≅ S₃/A₃ ≅ Z/2Z ; sous-groupes conjugués ↔ corps conjugués. Variante accessible : pour Q(√2, √3), les cinq sous-groupes correspondent à K, Q(√2), Q(√3), Q(√6) et Q. Variante exigeante : le corps de décomposition de x⁴ − 2 a un groupe D₄ à dix sous-groupes. Chaque association doit être justifiée (corps fixé et de bon degré).",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Pour K = Q(√2, √3), associe à chacun des cinq sous-groupes de Gal(K/Q) son corps fixe.",
+     "indices": [
+      "Quel sous-corps de degré 2 est fixé par l'automorphisme qui change √2 en −√2 et fixe √3 ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Établis le treillis complet pour le corps de décomposition de x⁴ − 2 (groupe D₄, dix sous-groupes), et indique les sous-extensions normales.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Théorie de Galois (licence)",
+   "public": "superieur",
+   "exercices": "licence/galois_niveau4.gift (niveau 5)",
+   "suites": {
+    "consolider": "galois-decomposition",
+    "prolonger": "galois-cyclotomie",
+    "approfondir": "galois-discriminant"
+   }
+  },
+  {
+   "id": "galois-cyclotomie",
+   "titre": "Extensions cyclotomiques",
+   "niveauTache": 4,
+   "objectif": "Polynômes cyclotomiques, Gal(Q(ζₙ)/Q) ≅ (Z/nZ)ˣ, sous-corps.",
+   "tache": "Étudie Q(ζₙ), où ζₙ = e^(2iπ/n), pour plusieurs valeurs de n : degré, groupe de Galois, sous-corps quadratiques. Formule des conjectures et teste-les sur d'autres valeurs de n.",
+   "indices": [
+    "Le polynôme minimal de ζₙ est le n-ième polynôme cyclotomique Φₙ : quel est son degré ?",
+    "Un automorphisme envoie ζₙ sur une autre racine primitive ζₙᵃ, avec a premier à n : quel groupe obtient-on ?",
+    "Pour n = 5, la somme ζ₅ + ζ₅⁴ est fixée par un sous-groupe d'ordre 2 : cherche son polynôme minimal."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "[Q(ζₙ) : Q] = φ(n) (indicatrice d'Euler), car Φₙ est irréductible sur Q, et Gal(Q(ζₙ)/Q) ≅ (Z/nZ)ˣ par σₐ(ζₙ) = ζₙᵃ. Exemples justes : n = 5 → groupe cyclique d'ordre 4, unique sous-corps quadratique Q(√5) (ζ₅ + ζ₅⁴ a pour polynôme minimal x² + x − 1) ; n = 7 → cyclique d'ordre 6, sous-corps quadratique Q(√−7) et sous-corps cubique Q(ζ₇ + ζ₇⁻¹) (polynôme minimal x³ + x² − 2x − 1) ; n = 8 → (Z/8Z)ˣ ≅ Z/2Z × Z/2Z, sous-corps quadratiques Q(i), Q(√2), Q(√−2) ; n = 12 → (Z/2Z)², sous-corps Q(i), Q(√3), Q(√−3). Pour p premier impair, le sous-corps quadratique de Q(ζₚ) est Q(√p*), avec p* = (−1)^((p−1)/2) p. Vérifie chaque calcul ; une conjecture fausse présentée comme vraie est à revoir, une conjecture prudente et testée est bienvenue.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Étudie Q(ζ₃) et Q(ζ₄) = Q(i) : degré, groupe de Galois, éléments. Puis Q(ζ₅).",
+     "indices": [
+      "Quelles sont les racines de x² + x + 1 ? Et de x⁴ + x³ + x² + x + 1 ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Montre que le sous-corps quadratique de Q(ζₚ), pour p premier impair, est Q(√p*) avec p* = (−1)^((p−1)/2) p, à l'aide d'une somme de Gauss.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Théorie de Galois (licence)",
+   "public": "superieur",
+   "exercices": "licence/galois_niveau4.gift (niveau 5)",
+   "suites": {
+    "consolider": "galois-correspondance",
+    "prolonger": "galois-discriminant",
+    "approfondir": "galois-resolubilite"
+   }
+  },
+  {
+   "id": "galois-discriminant",
+   "titre": "Discriminant et cubiques",
+   "niveauTache": 4,
+   "objectif": "Groupe de Galois d'un polynôme de degré 3 (et 4), rôle du discriminant.",
+   "tache": "Trouve des polynômes de degré 3 irréductibles sur Q dont le groupe de Galois est A₃, et d'autres dont il est S₃. Justifie chaque cas, en variant les méthodes.",
+   "indices": [
+    "Pour un cubique irréductible, le groupe de Galois est A₃ ou S₃. Quel critère les distingue ?",
+    "Pour x³ + px + q, le discriminant vaut −4p³ − 27q². Quand est-il un carré dans Q ?",
+    "Un cubique irréductible avec une seule racine réelle ne peut pas avoir A₃ pour groupe : pourquoi ? Pense à la conjugaison complexe."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Le polynôme doit être irréductible sur Q (justifié). Critère : le groupe est A₃ si et seulement si le discriminant est un carré dans Q, sinon S₃. Pour x³ + px + q, Δ = −4p³ − 27q². Exemples justes : x³ − 3x + 1 (Δ = 81, groupe A₃) ; x³ − 7x + 7 (Δ = 49, A₃) ; x³ − x − 1 (Δ = −23, S₃) ; x³ − 2 (Δ = −108, S₃). Argument valide aussi : si Δ < 0, une seule racine est réelle, la conjugaison complexe est une transposition, donc le groupe est S₃. Variante exigeante (degré 4, avec la résolvante cubique et le discriminant) : x⁴ − x − 1 → S₄ ; x⁴ + 8x + 12 → A₄ ; x⁴ − 2 → D₄ ; x⁴ − 4x² + 2 → Z/4Z ; x⁴ + 1 → Z/2Z × Z/2Z. Les calculs de discriminant doivent être exacts : vérifie-les.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Calcule le discriminant de x³ − 3x + 1 et de x³ − x − 1, montre que ces polynômes sont irréductibles et déduis-en leur groupe de Galois.",
+     "indices": [
+      "Applique la formule Δ = −4p³ − 27q² avec les bonnes valeurs de p et q."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Trouve des polynômes de degré 4 dont les groupes de Galois sont S₄, A₄, D₄, Z/4Z et Z/2Z × Z/2Z, en utilisant la résolvante cubique et le discriminant.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Théorie de Galois (licence)",
+   "public": "superieur",
+   "exercices": "licence/galois_niveau4.gift (niveau 5)",
+   "suites": {
+    "consolider": "galois-cyclotomie",
+    "prolonger": "galois-resolubilite",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "galois-resolubilite",
+   "titre": "Résolubilité par radicaux",
+   "niveauTache": 5,
+   "objectif": "Théorème de Galois, polynômes de degré 5 non résolubles.",
+   "tache": "Montre que x⁵ − 4x + 2 n'est pas résoluble par radicaux, puis trouve d'autres polynômes de degré 5 dont le groupe de Galois est S₅. Explique chaque étape de l'argument.",
+   "indices": [
+    "Commence par l'irréductibilité : quel critère s'applique directement ?",
+    "Combien de racines réelles ? Étudie les variations, ou le signe de f(−2), f(−1), f(0), f(1) et f(2).",
+    "Un sous-groupe de S₅ qui contient un 5-cycle et une transposition est S₅ tout entier. D'où viennent ce 5-cycle et cette transposition ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Argument attendu : irréductibilité par Eisenstein (p = 2) ; exactement trois racines réelles (f(−2) = −22, f(−1) = 5, f(0) = 2, f(1) = −1, f(2) = 26, et la dérivée 5x⁴ − 4 ne s'annule que deux fois, donc au plus trois racines réelles) ; 5 divise l'ordre du groupe (degré d'un corps de rupture), donc le groupe contient un élément d'ordre 5, c'est-à-dire un 5-cycle (Cauchy) ; la conjugaison complexe échange les deux racines non réelles et fixe les trois réelles : c'est une transposition ; un 5-cycle et une transposition engendrent S₅ (5 est premier) ; S₅ n'est pas résoluble car A₅ est simple et non abélien ; donc le polynôme n'est pas résoluble par radicaux (théorème de Galois). Autres exemples justes : x⁵ − 6x + 3 (Eisenstein pour p = 3, trois racines réelles) ; plus généralement un polynôme irréductible de degré premier p ayant exactement p − 2 racines réelles. Variante exigeante : x⁵ − x − 1 n'a qu'une racine réelle, mais son groupe est S₅ (modulo 2, il se factorise en facteurs irréductibles de degrés 2 et 3 ; modulo 5, il est irréductible ; théorème de Dedekind). Vérifie les calculs numériques ; un maillon manquant rend l'argument à revoir.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Explique pas à pas pourquoi x⁵ − 6x + 3 a un groupe de Galois isomorphe à S₅ : irréductibilité, nombre de racines réelles, puis éléments du groupe.",
+     "indices": [
+      "Le critère d'Eisenstein s'applique-t-il, et pour quel premier ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Pourquoi tout polynôme de degré au plus 4 est-il résoluble par radicaux ? Trouve ensuite un polynôme de degré 5 irréductible, non résoluble, qui n'a pas exactement trois racines réelles, et justifie (par exemple avec le théorème de Dedekind).",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Théorie de Galois (licence)",
+   "public": "superieur",
+   "exercices": "licence/galois_niveau5.gift (niveau 5)",
+   "suites": {
+    "consolider": "galois-discriminant",
+    "prolonger": null,
+    "approfondir": null
+   }
+  },
+  {
+   "id": "lin-4h-systeme",
+   "titre": "1. Le système Linux et ses fichiers (1 h 15)",
+   "niveauTache": 1,
+   "objectif": "Cours, diapositives 2 à 31 et 58 à 63. Rôle du système d'exploitation, noyau, bibliothèques et shell ; GNU/Linux, logiciel libre, distributions ; façons d'installer Linux et systèmes de fichiers ; arborescence (/home, /etc, /tmp, /usr) ; pwd, ls, cd, mkdir, touch, cp, mv, rm, cat, find ; man et --help ; Tab, historique, ~ ; méta-caractères *, ? et [ ].",
+   "tache": "Ouvre un terminal : Terminal sous macOS, Ubuntu avec WSL sous Windows.\n1. En quelques lignes : à quoi sert un système d'exploitation ? Que sont le noyau et le shell ? Que montrent uname -s, uname -r et echo $SHELL sur ta machine ?\n2. Liste la racine / et dis à quoi servent /home, /etc, /tmp et /usr/bin.\n3. Crée projet_microbio/ avec les sous-répertoires donnees, resultats et scripts. Dans donnees, crée les fichiers vides souche1.fasta, souche2.fasta, souche12.fasta, gelA.png et gelB.png.\n4. Avec *, ? et [ ], liste seulement les .fasta, puis seulement souche1.fasta et souche2.fasta ; copie les deux images dans resultats en une seule commande ; supprime le répertoire scripts.\nTrouve plusieurs façons quand c'est possible (chemins relatifs ou absolus, modèles différents), consulte man ou --help pour chaque commande nouvelle, et colle tes commandes avec ce que le terminal affiche.",
+   "indices": [
+    "Le système d'exploitation est l'intermédiaire entre le matériel et les applications. Le noyau (uname -r) gère la mémoire, les processus et les périphériques ; le shell (echo $SHELL) lit tes commandes et lance les programmes.",
+    "pwd : où suis-je ? ls : que contient ce répertoire ? cd nom, cd .., cd ~ pour se déplacer ; mkdir (-p pour plusieurs niveaux), touch, cp, mv, rm (définitif, sans corbeille !). Tab complète les noms, ↑ retrouve les commandes.",
+    "* remplace n'importe quelle suite de caractères, ? un seul caractère, [12] un caractère de la liste : souche?.fasta désigne souche1.fasta et souche2.fasta, mais pas souche12.fasta."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Séance d'introduction pour des débutants : valoriser des réponses justes, des commandes vérifiées (pwd, ls) et comprises plus que la concision. Tu ne peux pas exécuter les commandes : vérifie qu'elles font ce qui est demandé et que les sorties collées sont cohérentes. Les étudiants travaillent sur leur ordinateur : Linux, WSL (Ubuntu sous Windows) ou macOS ; les différences d'affichage entre ces systèmes (/Users et apfs sous macOS, /mnt/c sous WSL, droits par défaut) ne sont pas des erreurs. Attendus. 1. Le système d'exploitation est l'intermédiaire entre le matériel et les applications (mémoire, processeur, périphériques, fichiers, utilisateurs) ; le noyau en est la partie centrale ; le shell est l'interpréteur de commandes. uname -s : Linux (Linux, WSL) ou Darwin (macOS, un Unix qui n'est pas Linux) ; uname -r : version du noyau ; $SHELL : /bin/bash ou /bin/zsh. 2. /home répertoires personnels, /etc configuration, /tmp fichiers temporaires, /usr/bin programmes de l'utilisateur. 3. mkdir pas à pas, mkdir -p, ou mkdir -p projet_microbio/{donnees,resultats,scripts} ; touch avec plusieurs noms. 4. ls *.fasta : 3 fichiers ; ls souche?.fasta ou ls souche[12].fasta : souche1.fasta et souche2.fasta ; cp *.png ../resultats/ (ou gel?.png, gel[AB].png) ; rmdir scripts ou rm -r scripts. Erreurs fréquentes à expliquer à partir du message affiché : « No such file or directory » (mauvais répertoire courant, à vérifier avec pwd), espace oublié, majuscules, souche*.fasta qui inclut souche12.fasta, confusion entre noyau et distribution ou entre shell et terminal. rm * ou rm -r sur le mauvais répertoire est à signaler fermement : rm est définitif. Deux façons vraiment différentes sont deux idées réussies.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Tape une à une les commandes suivantes. Pour chacune, explique en une phrase ce qu'elle fait, en t'aidant de ce qu'affiche le terminal :\nuname -s\npwd\nls /\nmkdir projet_microbio\ncd projet_microbio\nmkdir donnees resultats scripts\ncd donnees\ntouch souche1.fasta souche2.fasta souche12.fasta\nls *.fasta\nls souche?.fasta",
+     "indices": [
+      "pwd veut dire « print working directory » : le répertoire où tu te trouves.",
+      "Si une commande affiche une erreur, lis le message : il dit souvent quel fichier ou répertoire est introuvable."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Explique les quatre libertés du logiciel libre, la différence entre Linux, GNU et une distribution, et trois façons d'installer Linux à côté de Windows (machine virtuelle, version live sur clé USB, double boot) avec leurs limites. Affiche la place libre des systèmes de fichiers (df -h) et retrouve tous les .fasta de ton répertoire personnel (find ~ -name '*.fasta').",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Système d'exploitation et Linux (M1 microbiologie, 4 h)",
+   "public": "superieur",
+   "saisieCode": true,
+   "exercices": "master/linux_niveau1.gift (niveau 1)",
+   "suites": {
+    "consolider": null,
+    "prolonger": "lin-4h-droits",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "lin-4h-droits",
+   "titre": "2. Utilisateurs, droits et processus (1 h)",
+   "niveauTache": 2,
+   "objectif": "Cours, diapositives 19 et 32 à 52. Système multi-utilisateur, root, /etc/passwd ; lire les droits avec ls -l (type, u, g, o ; r, w, x) ; chmod (u, g, o, a ; +, -, =) ; multitâche préemptif, PID et PPID, ps, top, kill.",
+   "tache": "1. Qui es-tu pour le système ? Tape whoami et id, puis head -n 3 /etc/passwd, et explique les champs d'une ligne.\n2. Dans projet_microbio/donnees, crée resultats.txt et un script bonjour.sh qui contient echo Bonjour. Affiche les droits avec ls -l et explique chaque partie d'une ligne.\n3. Avec chmod, de plusieurs façons (+, -, = ; u, g, o, a) : protège resultats.txt contre l'écriture, rends-le illisible pour les autres, puis rétablis ses droits ; rends bonjour.sh exécutable et lance-le avec ./bonjour.sh. Vérifie chaque fois avec ls -l.\n4. Lance sleep 600 &, retrouve son PID avec ps (ou ps -ef | grep sleep), puis arrête-le avec kill et vérifie.\nColle les commandes avec ce qu'elles affichent.",
+   "indices": [
+    "Dans -rw-r--r--, le premier caractère est le type (- fichier, d répertoire), puis trois groupes rwx : propriétaire (u), groupe (g), autres (o). r lecture, w écriture, x exécution.",
+    "chmod u+x f ajoute un droit, chmod go-r f en retire, chmod u=rw,g=r,o= f les fixe ; a désigne tout le monde.",
+    "& lance une commande en arrière-plan ; ps affiche les processus et leur PID ; kill PID demande l'arrêt (signal 15), kill -9 PID le force."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Séance pratique pour des débutants : valoriser des commandes justes, vérifiées avec ls -l et expliquées. Tu ne peux pas exécuter les commandes : vérifie qu'elles font ce qui est demandé et que les sorties collées sont cohérentes. Les étudiants travaillent sur leur ordinateur : Linux, WSL (Ubuntu sous Windows) ou macOS ; les différences d'affichage entre ces systèmes (/Users et apfs sous macOS, /mnt/c sous WSL, droits par défaut) ne sont pas des erreurs. Attendus. 1. whoami : nom ; id : UID, GID, groupes ; /etc/passwd : nom:x:UID:GID:commentaire:répertoire:shell (sous macOS, l'utilisateur courant n'y figure pas : ce n'est pas une erreur). 2. Type, droits u, g, o, nombre de liens, propriétaire, groupe, taille, date, nom. 3. chmod u-w ou a-w : -r--r--r-- ; chmod o-r : -rw-r----- ; rétablir avec chmod u+w,o+r (ou u=rw,go=r) ; chmod u+x bonjour.sh : -rwxr--r-- ; ./bonjour.sh affiche Bonjour. 4. sleep 600 & affiche [1] et le PID ; ps -ef | grep sleep montre aussi la ligne du grep lui-même ; kill PID ; ps ne montre plus sleep. Erreurs fréquentes : confondre o (les autres) et le propriétaire ; oublier ./ ; chmod -R ou sudo sur tout le répertoire personnel (à signaler fermement) ; kill -9 utilisé d'emblée ; arrêter un processus au hasard.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Tape une à une les commandes suivantes et explique ce qui change :\ntouch resultats.txt\nls -l resultats.txt\nchmod u-w resultats.txt\nls -l resultats.txt\nchmod u+w resultats.txt\nsleep 600 &\nps\nkill PID   (remplace PID par le numéro de sleep)",
+     "indices": [
+      "Compare les dix premiers caractères des lignes de ls -l.",
+      "Le PID est le numéro affiché à côté de sleep."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Donne l'équivalent octal (chmod 640, 755…) de chaque réglage et explique ce que changent r, w et x sur un répertoire (essaie chmod u-x donnees puis cd donnees, puis rétablis). Explique la différence entre un système multitâche coopératif et préemptif. Retrouve le processus père de ton shell grâce à son PPID (ps -ef).",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Système d'exploitation et Linux (M1 microbiologie, 4 h)",
+   "public": "superieur",
+   "saisieCode": true,
+   "exercices": "master/linux_niveau2.gift (niveau 2)",
+   "suites": {
+    "consolider": "lin-4h-systeme",
+    "prolonger": "lin-4h-texte",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "lin-4h-texte",
+   "titre": "3. Le shell et le traitement de fichiers texte (1 h 15)",
+   "niveauTache": 3,
+   "objectif": "Cours, diapositives 53 à 76. Rôle du shell, variables d'environnement (HOME, USER, PATH), variables et alias, guillemets, && et || ; wc ; awk (champs, NR, END, -F) ; sed (s///g, d, -n p) ; enregistrer un résultat avec >.",
+   "tache": "Dans projet_microbio/donnees, crée les deux fichiers ci-dessous (nano, ou cat > fichier, puis coller, puis Ctrl+D).\n1. Shell : affiche HOME, USER et PATH avec echo ; crée la variable projet=~/projet_microbio (sans espace autour de =) et utilise-la (cd $projet) ; crée l'alias ll='ls -l'. Tape deux fois cd ~/tmp || mkdir ~/tmp et explique la différence.\n2. Avec wc, awk et sed sur comptages.txt : combien d'échantillons ? Quelles espèces (colonne 3) ? Combien de colonies au total ? Quelles boîtes sont comptables (30 à 300 colonies) ? Remplace les _ par des espaces, puis supprime la ligne d'en-tête.\n3. Ne garde que les séquences de sequences.fasta.\nEnregistre chaque résultat dans ../resultats avec >, de plusieurs façons quand c'est possible, et colle chaque commande avec ce qu'elle affiche.\n\ncomptages.txt :\nechantillon milieu espece colonies\nE1 LB E_coli 230\nE2 LB S_aureus 45\nE3 MH E_coli 1200\nE4 MH P_aeruginosa 8\nE5 LB E_coli 150\nE6 MH S_aureus 87\nE7 LB P_aeruginosa 310\nE8 MH E_coli 64\n\nsequences.fasta :\n>Ecoli_frag1\nATGGCGAATTCGTTAGCCGATAA\n>Saureus_frag2\nATGGAATTCAAAGGTTGATGA\n>Paeruginosa_frag3\nATGCCGGGCGCCGGCTGA\n",
+   "indices": [
+    "Une variable se crée sans espace (projet=~/projet_microbio) et se lit avec $ (echo $projet). commande1 || commande2 : la seconde ne s'exécute que si la première échoue ; && : seulement si elle réussit.",
+    "awk découpe chaque ligne en champs $1, $2… : awk '{print $3}' comptages.txt. NR est le numéro de ligne, END s'exécute à la fin : awk 'NR>1 {s = s + $4} END {print s}' comptages.txt.",
+    "sed 's/_/ /g' remplace partout ; sed '1d' supprime la ligne 1 ; sed '/^>/d' supprime les lignes qui commencent par >. Les apostrophes autour des programmes awk et sed sont indispensables."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Séance pratique : valoriser des commandes justes, vérifiées et expliquées. Tu ne peux pas exécuter les commandes : vérifie qu'elles font ce qui est demandé et que les sorties collées sont cohérentes. Les étudiants travaillent sur leur ordinateur : Linux, WSL (Ubuntu sous Windows) ou macOS ; les différences d'affichage entre ces systèmes (/Users et apfs sous macOS, /mnt/c sous WSL, droits par défaut) ne sont pas des erreurs. Attendus. 1. echo $HOME, $USER, $PATH (liste séparée par des deux-points) ; projet=~/projet_microbio puis cd $projet ; alias ll='ls -l' ; cd ~/tmp || mkdir ~/tmp crée tmp la première fois seulement (la seconde, cd réussit). 2. comptages.txt : 9 lignes, 8 échantillons (wc -l moins l'en-tête, awk 'END {print NR}', sed '1d' | wc -l) ; espèces E_coli, S_aureus, P_aeruginosa ; total 2094 colonies ; comptables E1, E2, E5, E6, E8 (awk '$4>=30 && $4<=300') ; sed 's/_/ /g' ; sed '1d'. 3. sed '/^>/d' sequences.fasta (ou grep -v '>') : 3 séquences. Erreurs fréquentes : espaces autour de = (command not found) ; oublier $ ; oublier les apostrophes autour d'un programme awk ou sed ; compter l'en-tête dans le total ou les échantillons ; grep > sans guillemets, qui vide le fichier ; > qui écrase un fichier existant (>> ajoute) ; sed -i qui modifie l'original.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Après avoir créé comptages.txt, tape une à une les commandes suivantes. Pour chacune, explique en une phrase ce qu'elle affiche :\necho $HOME\nwc -l comptages.txt\nawk '{print $3}' comptages.txt\nawk 'END {print NR}' comptages.txt\nsed '1d' comptages.txt\nsed 's/_/ /g' comptages.txt",
+     "indices": [
+      "Les apostrophes autour des programmes awk et sed sont indispensables.",
+      "La première ligne est un en-tête, pas un échantillon."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Avec awk, calcule le total de colonies par espèce (tableau s[$3]) et la moyenne par boîte sur milieu LB. Avec sed, affiche seulement les lignes 2 à 4. Écris une boucle for qui applique la même commande sed à tous les .txt du répertoire et enregistre les résultats dans ../resultats, sans modifier les originaux.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Système d'exploitation et Linux (M1 microbiologie, 4 h)",
+   "public": "superieur",
+   "saisieCode": true,
+   "exercices": "master/linux_niveau3.gift (niveau 3)",
+   "suites": {
+    "consolider": "lin-4h-droits",
+    "prolonger": "lin-4h-evaluation",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "lin-4h-evaluation",
+   "titre": "4. Évaluation (30 min)",
+   "niveauTache": 2,
+   "objectif": "Évaluation finale de 30 minutes, sans IA ni coup de pouce : 12 questions corrigées automatiquement (environ 20 minutes), puis un court exercice pratique (environ 10 minutes). Une seule réponse par question, sans correction affichée ; les scores apparaissent dans la fiche de chaque élève. Les critères ci-dessous servent de corrigé pour l'exercice pratique.",
+   "tache": "Évaluation, sans IA ni coup de pouce. Commencez par les questions, puis faites l'exercice pratique.\nDans un nouveau répertoire eval, crée le fichier comptages.txt ci-dessous, puis, avec des commandes :\n1. rends comptages.txt lisible par toi seul, et vérifie avec ls -l ;\n2. affiche le nombre d'échantillons sur milieu LB ;\n3. calcule le total des colonies des échantillons de E_coli ;\n4. enregistre dans ecoli.txt les lignes de E_coli, sans l'en-tête, et affiche ecoli.txt.\nColle chaque commande avec ce qu'elle affiche.\n\ncomptages.txt :\nechantillon milieu espece colonies\nE1 LB E_coli 230\nE2 LB S_aureus 45\nE3 MH E_coli 1200\nE4 MH P_aeruginosa 8\nE5 LB E_coli 150\nE6 MH S_aureus 87\nE7 LB P_aeruginosa 310\nE8 MH E_coli 64\n",
+   "indices": [
+    "Relisez la question avant de valider : une seule réponse est possible.",
+    "Pour l'exercice pratique, vérifiez chaque résultat avec ls -l ou cat.",
+    "Gardez du temps pour coller vos commandes avec leur sortie."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Corrigé de l'exercice pratique (4 points, un par question ; une commande différente qui donne le bon résultat est juste). Tu ne peux pas exécuter les commandes : vérifie qu'elles font ce qui est demandé et que les sorties collées sont cohérentes. Les étudiants travaillent sur leur ordinateur : Linux, WSL (Ubuntu sous Windows) ou macOS ; les différences d'affichage entre ces systèmes (/Users et apfs sous macOS, /mnt/c sous WSL, droits par défaut) ne sont pas des erreurs. 1. chmod go-r comptages.txt (ou chmod u=rw,go= , ou chmod 600) ; ls -l affiche -rw------- . 2. 4 échantillons sur LB (E1, E2, E5, E7) : awk '$2==\"LB\"' comptages.txt | wc -l, ou grep -c LB comptages.txt. 3. 1644 colonies (230 + 1200 + 150 + 64) : awk '$3==\"E_coli\" {s = s + $4} END {print s}' comptages.txt. 4. grep E_coli comptages.txt > ecoli.txt (l'en-tête ne contient pas E_coli) ou awk 'NR>1 && $3==\"E_coli\"' comptages.txt > ecoli.txt ; cat ecoli.txt montre E1, E3, E5 et E8. Demi-point si la démarche est juste mais le résultat faux (en-tête compté, apostrophes oubliées). Variante exigeante : E_coli 1644, S_aureus 132, P_aeruginosa 318.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Évaluation, sans IA ni coup de pouce. Dans un nouveau répertoire eval, crée le fichier comptages.txt de la séance 3, puis, avec des commandes : 1. affiche ses droits avec ls -l et explique-les ; 2. affiche le nombre de lignes du fichier ; 3. affiche seulement la colonne des espèces. Colle chaque commande avec ce qu'elle affiche.",
+     "indices": [
+      "Relisez la question avant de valider.",
+      "Vérifiez chaque résultat avec ls -l ou cat."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Évaluation, sans IA ni coup de pouce. Faites l'exercice pratique de la consigne standard, puis calculez en une seule commande awk le total des colonies de chaque espèce, et enregistrez-le trié par total décroissant dans totaux.txt.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Système d'exploitation et Linux (M1 microbiologie, 4 h)",
+   "public": "superieur",
+   "saisieCode": true,
+   "exercices": "master/linux_evaluation.gift (niveau 5)",
+   "suites": {
+    "consolider": "lin-4h-texte",
+    "prolonger": null,
+    "approfondir": null
+   },
+   "evaluation": true
+  },
+  {
+   "id": "pyb-premiers-pas",
+   "titre": "1. Premiers pas : calculer avec Python",
+   "niveauTache": 1,
+   "objectif": "Séance de 2 h, pour qui n'a jamais programmé. Écrire et exécuter un programme dans un notebook (par exemple Basthon dans le navigateur, sans installation, ou Jupyter), print, variables, opérations (+ − * / ** //), types int, float et str, f-strings, lire un message d'erreur.",
+   "tache": "Une culture contient N₀ = 1000 bactéries qui se divisent toutes les 20 minutes. En utilisant des variables (N0, g pour le temps de génération, t pour le temps), écris de plusieurs façons un programme qui calcule et affiche le nombre de bactéries après 2 heures, puis après 3 heures. Écris ensuite un programme qui calcule la concentration d'une suspension (UFC/mL) : la dilution 10⁻⁶ donne 87 colonies pour 0,1 mL étalé. Essaie d'afficher les résultats avec une phrase, par exemple « Après 2 h : 64000 bactéries ». Exécute chaque programme, puis colle-le ici avec, en dessous, ce qu'il a affiché, précédé de # (par exemple : # 64000).",
+   "indices": [
+    "Commence par une seule ligne : print(1000 * 2 ** 6). En 2 heures, il y a 120 / 20 = 6 divisions, et chaque division double la population.",
+    "Une variable garde une valeur : N0 = 1000, puis g = 20, puis t = 120. Le nombre de divisions s'écrit t / g, et le résultat N0 * 2 ** (t / g). En Python, la puissance s'écrit ** (et non ^).",
+    "Pour afficher une phrase : print(f\"Après 2 h : {N} bactéries\"). Pour les UFC : 87 / 0.1 / 1e-6 (nombre de colonies, divisé par le volume, divisé par la dilution). Note le point décimal : 0.1 et non 0,1."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "L'étudiant n'a jamais programmé : sois encourageant, explique les messages d'erreur en mots simples et ne reproche pas un style maladroit si le programme est juste. Valeurs attendues : 64 000 bactéries après 2 h (6 divisions), 512 000 après 3 h (9 divisions) ; concentration 87 / 0,1 / 10⁻⁶ = 8,7·10⁸ UFC/mL (Python affiche 870000000.0). Façons différentes acceptées : calcul direct, variables, formule N0 * 2 ** (t / g), multiplication répétée, phrase avec f-string. Remarque utile, pas une erreur : t / g donne un nombre décimal, donc le résultat s'affiche 64000.0 ; t // g donne un entier. Erreurs fréquentes à expliquer simplement : ^ utilisé pour la puissance (en Python c'est un autre opérateur, il faut **) ; virgule décimale au lieu du point (0,1 crée un couple de nombres) ; parenthèses oubliées dans 2 ** t / g ; minutes et heures mélangées ; variable utilisée avant d'être définie (NameError) ; guillemets oubliés dans print. Un programme sans sortie affichée est à revoir : demande de l'exécuter et de coller ce qu'il affiche.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Complète et exécute ce programme, puis modifie-le pour calculer le nombre de bactéries après 3 heures :\n\nN0 = 1000\ndivisions = 6\nN = N0 * 2 ** divisions\nprint(N)",
+     "indices": [
+      "En 3 heures, il y a 180 / 20 = 9 divisions : change la valeur de la variable divisions."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Écris un programme qui demande à l'utilisateur N₀, le temps de génération et la durée (avec input et float), puis affiche le nombre de bactéries ; puis un programme qui calcule la concentration en UFC/mL et l'affiche en notation scientifique avec 2 décimales (format :.2e).",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Python pour la microbiologie (M1, débutants, 12 h)",
+   "public": "superieur",
+   "saisieCode": true,
+   "exercices": "master/python_niveau1.gift (niveau 1)",
+   "suites": {
+    "consolider": null,
+    "prolonger": "pyb-boucles",
+    "approfondir": "pyb-sequences"
+   }
+  },
+  {
+   "id": "pyb-boucles",
+   "titre": "2. Répéter et décider : boucles et conditions",
+   "niveauTache": 2,
+   "objectif": "Séance de 2 h. Boucle for avec range, boucle while, condition if / elif / else, comparaisons, indentation.",
+   "tache": "Écris plusieurs programmes qui suivent la croissance de la culture (N₀ = 1000, une division toutes les 20 minutes) : un tableau du nombre de bactéries d'heure en heure pendant 4 heures (boucle for), puis le temps nécessaire pour dépasser 10⁹ bactéries (boucle while). Écris ensuite un programme qui, pour une liste de comptages de colonies [250, 31, 2, 350, 28], affiche pour chaque boîte si elle est comptable (entre 30 et 300 colonies) ou non. Exécute chaque programme, puis colle-le ici avec, en dessous, ce qu'il a affiché, précédé de # (par exemple : # 64000).",
+   "indices": [
+    "for h in range(1, 5): répète le bloc indenté pour h = 1, 2, 3, 4. Dans le bloc, calcule N = 1000 * 2 ** (3 * h) : 3 divisions par heure.",
+    "Pour while : N = 1000 et t = 0, puis tant que N <= 1e9 (« while N <= 1e9: »), on double N et on ajoute 20 à t. Après la boucle, affiche t.",
+    "Pour les boîtes : for n in [250, 31, 2, 350, 28]: puis if 30 <= n <= 300: print(n, 'comptable') else: print(n, 'non comptable'). Attention aux deux-points et à l'indentation."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "L'étudiant n'a jamais programmé : sois encourageant, explique les messages d'erreur en mots simples et ne reproche pas un style maladroit si le programme est juste. Valeurs attendues : 8 000 bactéries après 1 h, 64 000 après 2 h, 512 000 après 3 h, 4 096 000 après 4 h ; 10⁹ est dépassé après 400 minutes (20 divisions, N = 1 048 576 000) ; boîtes comptables : 250 et 31 ; non comptables : 2, 350 et 28. Erreurs fréquentes à expliquer simplement : deux-points oubliés après for, while, if ou else (SyntaxError) ; indentation absente ou irrégulière (IndentationError) ; range(4) qui commence à 0 au lieu de 1 ; condition de while qui ne change jamais (boucle infinie : la variable n'est pas modifiée dans la boucle) ; = (affectation) confondu avec == (comparaison) ; condition 30 < n < 300 qui exclut les bornes. Deux programmes qui ne diffèrent que par le nom des variables sont des doublons.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Complète ce programme pour qu'il affiche le nombre de bactéries après 1, 2, 3 et 4 heures, puis exécute-le :\n\nfor h in range(1, 5):\n    N = 1000 * 2 ** (3 * h)\n    print(h, N)",
+     "indices": [
+      "Exécute-le tel quel d'abord : que veut dire chaque nombre affiché ? Puis remplace print(h, N) par une phrase."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Écris une boucle qui simule la croissance minute par minute pendant 8 heures avec une capacité maximale de 10⁹ bactéries (la population ne peut pas la dépasser), et qui affiche les heures où la population est multipliée par plus de 4 en une heure.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Python pour la microbiologie (M1, débutants, 12 h)",
+   "public": "superieur",
+   "saisieCode": true,
+   "exercices": "master/python_niveau2.gift (niveau 2)",
+   "suites": {
+    "consolider": "pyb-premiers-pas",
+    "prolonger": "pyb-sequences",
+    "approfondir": "pyb-fonctions"
+   }
+  },
+  {
+   "id": "pyb-sequences",
+   "titre": "3. Séquences d'ADN : chaînes de caractères",
+   "niveauTache": 2,
+   "objectif": "Séance de 2 h. Chaînes de caractères, len, count, indices et tranches, boucle for sur une chaîne, upper, pourcentages.",
+   "tache": "Pour la séquence seq = \"ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG\", écris plusieurs programmes qui calculent sa longueur, le nombre de chaque base (A, T, G, C), le pourcentage de GC et le premier codon. Essaie au moins deux façons de compter les bases : avec la méthode count, et avec une boucle for qui parcourt la séquence lettre par lettre. Exécute chaque programme, puis colle-le ici avec, en dessous, ce qu'il a affiché, précédé de # (par exemple : # 64000).",
+   "indices": [
+    "len(seq) donne la longueur ; seq.count(\"G\") compte les G ; seq[0:3] donne les trois premières lettres.",
+    "Le pourcentage de GC : (nombre de G + nombre de C) / longueur * 100.",
+    "Avec une boucle : n = 0, puis for base in seq: et, dans le bloc, if base == \"G\" or base == \"C\": n = n + 1."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "L'étudiant n'a jamais programmé : sois encourageant, explique les messages d'erreur en mots simples et ne reproche pas un style maladroit si le programme est juste. Valeurs attendues pour ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG : longueur 39 ; A = 9, T = 8, G = 14, C = 8 ; GC = 22/39 ≈ 56,41 % ; premier codon ATG. Erreurs fréquentes à expliquer simplement : séquence sans guillemets (NameError) ; pourcentage non multiplié par 100 ; parenthèses oubliées dans (g + c) / longueur * 100 ; == confondu avec = dans la condition ; compteur remis à zéro à l'intérieur de la boucle ; minuscules non comptées. Variante exigeante : le brin complémentaire inverse est CTATCGGGCACCCTTTCAGCGGCCCATTACAATGGCCAT ; attention, seq.replace('A', 'T').replace('T', 'A') ne donne pas le complémentaire (le second remplacement défait le premier).",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Exécute ce programme, puis complète-le pour compter aussi les C et calculer le pourcentage de GC :\n\nseq = \"ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG\"\nprint(len(seq))\nprint(seq.count(\"G\"))",
+     "indices": [
+      "Ajoute une ligne print(seq.count(\"C\")), puis calcule (G + C) / longueur * 100."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Écris un programme qui construit le brin complémentaire inverse de la séquence (A↔T, G↔C, puis lecture à l'envers) avec une boucle, puis avec seq[::-1] et str.maketrans ; explique pourquoi deux replace enchaînés ne marchent pas, et cherche la position du site EcoRI (GAATTC) avec find.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Python pour la microbiologie (M1, débutants, 12 h)",
+   "public": "superieur",
+   "saisieCode": true,
+   "exercices": "master/python_niveau3.gift (niveau 3)",
+   "suites": {
+    "consolider": "pyb-boucles",
+    "prolonger": "pyb-fonctions",
+    "approfondir": "pyb-courbes"
+   }
+  },
+  {
+   "id": "pyb-fonctions",
+   "titre": "4. Fonctions et dictionnaires : le code génétique",
+   "niveauTache": 3,
+   "objectif": "Séance de 2 h. Définir une fonction (def, paramètres, return), différence entre print et return, dictionnaires, boucle avec un pas.",
+   "tache": "Écris une fonction gc(seq) qui renvoie le pourcentage de GC d'une séquence, puis une fonction traduire(seq) qui traduit une séquence en protéine grâce au dictionnaire ci-dessous (codon → acide aminé, * pour un codon stop). Teste-les sur seq = \"ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG\" et sur d'autres séquences de ton choix. Propose plusieurs versions de traduire (s'arrêter ou non au premier codon stop…).\n\ncode = {'ATG': 'M', 'GCC': 'A', 'ATT': 'I', 'GTA': 'V', 'GGC': 'G', 'CGC': 'R', 'TGA': '*', 'AAG': 'K', 'GGT': 'G', 'CGA': 'R', 'TAG': '*'}\n\nExécute chaque programme, puis colle-le ici avec, en dessous, ce qu'il a affiché, précédé de # (par exemple : # 64000).",
+   "indices": [
+    "Une fonction se définit avec def gc(seq): et renvoie son résultat avec return. Pour la tester : print(gc(\"ATGC\")) doit afficher 50.0.",
+    "Les codons sont les tranches seq[i:i + 3] pour i = 0, 3, 6… : for i in range(0, len(seq), 3):",
+    "code[\"ATG\"] donne \"M\". Pour construire la protéine : proteine = \"\" puis, dans la boucle, proteine = proteine + code[codon]."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "L'étudiant n'a jamais programmé : sois encourageant, explique les messages d'erreur en mots simples et ne reproche pas un style maladroit si le programme est juste. Valeurs attendues : gc(\"ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG\") ≈ 56,41 ; gc(\"ATGC\") = 50.0 ; traduire(seq) = MAIVMGR*KGAR* en traduisant toute la séquence, MAIVMGR en s'arrêtant au premier codon stop (TGA). Le dictionnaire fourni contient exactement les 11 codons nécessaires ; avec un autre codon, code[codon] provoque une KeyError, et code.get(codon, '?') l'évite. Erreurs fréquentes à expliquer simplement : print au lieu de return dans la fonction (elle renvoie alors None) ; fonction définie mais jamais appelée ; range sans pas de 3 ; protéine remise à vide dans la boucle ; return placé dans la boucle (la fonction s'arrête au premier codon). Variante exigeante : code génétique complet de 64 codons et six cadres de lecture (par exemple cadre +2 : WPL*WAAERVPD).",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Complète et teste cette fonction, puis écris de la même façon une fonction qui compte les A :\n\ndef nombre_de_G(seq):\n    return seq.count(\"G\")\n\nprint(nombre_de_G(\"ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG\"))",
+     "indices": [
+      "La fonction pour les A ressemble beaucoup : def nombre_de_A(seq): return seq.count(\"A\")."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Construis le dictionnaire complet du code génétique (64 codons) à partir de la chaîne bases = \"TCAG\" et d'une chaîne de 64 acides aminés, écris une fonction qui traduit dans les six cadres de lecture, et une fonction qui trouve les ORF (d'un ATG au premier codon stop en phase).",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Python pour la microbiologie (M1, débutants, 12 h)",
+   "public": "superieur",
+   "saisieCode": true,
+   "exercices": "master/python_niveau4.gift (niveau 4)",
+   "suites": {
+    "consolider": "pyb-sequences",
+    "prolonger": "pyb-courbes",
+    "approfondir": "pyb-fasta"
+   }
+  },
+  {
+   "id": "pyb-courbes",
+   "titre": "5. Courbe de croissance : listes, NumPy et graphiques",
+   "niveauTache": 3,
+   "objectif": "Séance de 2 h. Listes, bibliothèques (import), NumPy (tableaux, np.log, np.polyfit), matplotlib (tracer une courbe), temps de génération.",
+   "tache": "Voici la densité optique d'une culture mesurée toutes les 30 minutes. Mets les données dans deux listes, trace la courbe de croissance avec matplotlib, puis trace ln(DO) en fonction du temps pour repérer la phase exponentielle (là où c'est une droite). Calcule le taux de croissance µ (la pente de cette droite, avec np.polyfit) et le temps de génération ln 2 / µ, en minutes. Essaie plusieurs choix de points pour la phase exponentielle et compare.\n\nt (h) : 0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8\nDO600 : 0.020 0.033 0.053 0.085 0.134 0.205 0.305 0.431 0.577 0.725 0.859 0.967 1.047 1.102 1.139 1.162 1.177\n\nExécute chaque programme, puis colle-le ici avec, en dessous, ce qu'il a affiché, précédé de # (par exemple : # 64000).",
+   "indices": [
+    "t = [0, 0.5, 1, …] et do = [0.020, 0.033, …] : deux listes de même longueur. Puis import matplotlib.pyplot as plt ; plt.plot(t, do, \"o\") ; plt.show().",
+    "import numpy as np, puis do = np.array(do) : np.log(do) calcule le logarithme de toutes les valeurs d'un coup. Pendant la phase exponentielle, ln(DO) est une droite.",
+    "Pour la pente sur les points 2 à 6 (de 1 h à 3 h) : np.polyfit(t[2:7], np.log(do[2:7]), 1)[0]. Le temps de génération en minutes est np.log(2) / µ * 60."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "L'étudiant n'a jamais programmé : sois encourageant, explique les messages d'erreur en mots simples et ne reproche pas un style maladroit si le programme est juste. Données issues d'un modèle logistique (taux réel r = 1,0 h⁻¹). Selon les points choisis : µ ≈ 0,95 h⁻¹ (g ≈ 44 min) pour DO entre 0,02 et 0,2 ; µ ≈ 0,92 h⁻¹ (g ≈ 45 min) entre 0,03 et 0,3 ; µ ≈ 0,88 h⁻¹ (g ≈ 48 min) entre 0,05 et 0,4. Plus la fenêtre déborde sur le ralentissement, plus µ est sous-estimé : un bon retour fait comparer les choix. Erreurs fréquentes à expliquer simplement : bibliothèque non importée (NameError np ou plt) ; listes de longueurs différentes ; régression sur la DO au lieu de ln(DO) ; np.log10 au lieu de np.log (µ divisé par 2,3) ; temps de génération en heures alors qu'on annonce des minutes ; plt.show() oublié hors notebook. Variante exigeante : ajustement du modèle logistique avec scipy.optimize.curve_fit, qui retrouve K ≈ 1,20, DO₀ ≈ 0,020, r ≈ 1,00 h⁻¹ (g ≈ 41,6 min).",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Exécute ce programme, puis ajoute des titres aux axes (plt.xlabel, plt.ylabel) et passe l'axe vertical en échelle logarithmique (plt.yscale(\"log\")) :\n\nimport matplotlib.pyplot as plt\nt = [0, 1, 2, 3, 4, 5, 6, 7, 8]\ndo = [0.020, 0.053, 0.134, 0.305, 0.577, 0.859, 1.047, 1.139, 1.177]\nplt.plot(t, do, \"o-\")\nplt.show()",
+     "indices": [
+      "En échelle logarithmique, la phase exponentielle devient une droite : de quelle heure à quelle heure ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Ajuste le modèle logistique DO(t) = K / (1 + (K/DO₀ − 1) · e^(−rt)) avec scipy.optimize.curve_fit, trace les mesures et la courbe ajustée, compare r au µ obtenu sur la phase exponentielle, et explique la différence.\n\nt (h) : 0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 7.5 8\nDO600 : 0.020 0.033 0.053 0.085 0.134 0.205 0.305 0.431 0.577 0.725 0.859 0.967 1.047 1.102 1.139 1.162 1.177",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Python pour la microbiologie (M1, débutants, 12 h)",
+   "public": "superieur",
+   "saisieCode": true,
+   "exercices": "master/python_niveau5.gift (niveau 5)",
+   "suites": {
+    "consolider": "pyb-fonctions",
+    "prolonger": "pyb-fasta",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "pyb-fasta",
+   "titre": "6. Mini-projet guidé : analyser un fichier FASTA",
+   "niveauTache": 4,
+   "objectif": "Séance de 2 h. Réutiliser les fonctions des séances précédentes, lire un fichier (with open), dictionnaires, tableau pandas, export CSV.",
+   "tache": "Enregistre le texte ci-dessous dans un fichier sequences.fasta (ce sont des fragments fictifs). Écris un programme qui le lit ligne par ligne, rassemble chaque séquence (certaines tiennent sur deux lignes), puis affiche pour chacune son nom, sa longueur, son %GC (avec ta fonction gc de la séance 4) et la présence du site EcoRI (GAATTC). Si tu as le temps, range les résultats dans un tableau pandas, trie-le et enregistre-le en CSV.\n\n>seq1 fragment fictif A\nATGGCCATTGTAATGGGCC\nGCTGAAAGGGTGCCCGATAG\n>seq2 fragment fictif B\nATGAAAAAATTAGAATTCAAAGCAT\nTTGAAAAGC\n>seq3 fragment fictif C\nATGAAATTATTAAAAAATTAATAA\n\nExécute chaque programme, puis colle-le ici avec, en dessous, ce qu'il a affiché, précédé de # (par exemple : # 64000).",
+   "indices": [
+    "with open(\"sequences.fasta\") as f: puis for ligne in f: — et ligne = ligne.strip() pour enlever le retour à la ligne.",
+    "Une ligne qui commence par > est un nom : ligne.startswith(\">\"). Garde les séquences dans un dictionnaire seqs[nom] = \"\", puis ajoute les lignes suivantes : seqs[nom] = seqs[nom] + ligne.",
+    "Une fois le dictionnaire rempli : for nom in seqs: print(nom, len(seqs[nom]), gc(seqs[nom]), \"GAATTC\" in seqs[nom])."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "L'étudiant n'a jamais programmé : sois encourageant, explique les messages d'erreur en mots simples et ne reproche pas un style maladroit si le programme est juste. Résultats attendus : seq1, 39 bases, 56,41 % GC, pas de site EcoRI ; seq2, 34 bases, 23,53 % GC, site EcoRI présent ; seq3, 24 bases, 4,17 % GC, pas de site. Points à vérifier : lignes d'une même séquence recollées (sinon seq1 n'aurait que 19 bases) ; ligne d'en-tête non comptée dans la séquence ; strip() pour enlever les retours à la ligne ; fichier ouvert avec with. Erreurs fréquentes à expliquer simplement : FileNotFoundError (fichier enregistré dans un autre dossier que le notebook) ; nom de séquence qui garde le > ; dernière séquence oubliée. Le tableau pandas et l'export CSV sont un plus, pas une obligation.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Enregistre seulement la première séquence ci-dessous dans un fichier seq1.fasta, puis exécute et complète ce programme pour afficher la longueur (39) et le %GC de la séquence :\n\nseq = \"\"\nwith open(\"seq1.fasta\") as f:\n    for ligne in f:\n        ligne = ligne.strip()\n        if not ligne.startswith(\">\"):\n            seq = seq + ligne\nprint(seq)\n\n>seq1 fragment fictif A\nATGGCCATTGTAATGGGCC\nGCTGAAAGGGTGCCCGATAG",
+     "indices": [
+      "Ajoute à la fin : print(len(seq)), puis calcule le %GC comme à la séance 3."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Range les résultats dans un DataFrame pandas, trie-le par %GC, exporte-le en CSV et trace un diagramme en barres ; compare ensuite ta lecture du fichier avec Bio.SeqIO (Biopython), puis simule l'expérience de Luria et Delbrück avec NumPy (mutations de résistance aléatoires pendant la croissance) et compare la distribution du nombre de mutants à une loi de Poisson.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Python pour la microbiologie (M1, débutants, 12 h)",
+   "public": "superieur",
+   "saisieCode": true,
+   "exercices": "master/python_niveau5.gift (niveau 5)",
+   "suites": {
+    "consolider": "pyb-courbes",
+    "prolonger": null,
+    "approfondir": null
+   }
+  },
+  {
+   "id": "creole-anticiper",
+   "discipline": "Créole guyanais",
+   "titre": "Konpè Lapen : anticiper",
+   "objectif": "Émettre des hypothèses sur le sens d'un conte à partir d'indices (titre, mots-clés), et les justifier.",
+   "tache": "Konpè Lapen ké Konpè Tig. Voici des mots du conte : lasèchrès – roun pi – Konpè Lapen pa travay – poupé lagonm – zépin. De quoi parle ce conte, à ton avis ? Écris le plus d'hypothèses possible, une par une, et dis pourquoi tu penses cela (« Mo pansé ki… paskè… »).",
+   "indices": [
+    "Cherche d'abord les mots que tu connais : qui sont les personnages ?",
+    "Lasèchrès : quand il ne pleut plus, de quoi les animaux ont-ils besoin ?",
+    "Dans les contes, Konpè Lapen est souvent rusé : que pourrait-il faire avec un puits et une poupée ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée est une hypothèse sur le sens du conte (les personnages, le problème, ce qui va se passer) qui s'appuie sur au moins un des indices donnés (titre, lasèchrès, pi, Lapen pa travay, poupé lagonm, zépin) et qui dit pourquoi. Une hypothèse sans justification est à revoir. Il n'y a ni bonne ni mauvaise hypothèse : ne dis jamais si elle se réalisera dans le conte. Les élèves de 5e apprennent le créole guyanais (niveau A1 à A2) : ils peuvent écrire en créole ou en français. Juge le sens, pas l'orthographe. Écris tes retours en français, avec des phrases courtes et simples.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Konpè Lapen ké Konpè Tig. Mots du conte : lasèchrès (la sécheresse), roun pi (un puits), Konpè Lapen pa travay (Lapin ne travaille pas). De quoi parle ce conte ? Écris tes idées et dis pourquoi.",
+     "indices": [
+      "Qui sont les personnages ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Konpè Lapen ké Konpè Tig : lasèchrès – roun pi – Konpè Lapen pa travay – poupé lagonm – zépin. Écris tes hypothèses en créole, chacune avec « Mo pansé ki… paskè… », et range-les de la plus probable à la moins probable.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "",
+   "niveauTache": 2,
+   "lecture": "fr-FR",
+   "lectureActive": false,
+   "suites": {
+    "consolider": null,
+    "prolonger": "creole-episode1",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "creole-episode1",
+   "discipline": "Créole guyanais",
+   "titre": "Konpè Lapen : épisode 1, la sécheresse",
+   "objectif": "Comprendre un récit en s'appuyant sur des indices ; anticiper la suite et la justifier par le texte.",
+   "tache": "Lontan, lontan, an mitan granbwa Lagwiyann, lapli pa té tonbé pandan twa mwa. Lariviyè té sèk. Tout bèt té swaf. Konpè Tig rasanblé tout bèt : « Annou fouyé roun pi ansanm ! Sa ki ké travay ké pé bwè. » Konpè Makak, Konpè Tòti, Konpè Kayman pran pikwa ké pèl. Konpè Lapen mèm di : « Mo pa pé travay, mo gen gro lafyèv. » Pandan sèt jou, tout bèt fouyé, fouyé, fouyé. Konpè Lapen té ka dòmi anba roun pyé mango. Apré sèt jou, dlo fré monté an fon pi-a. Tout bèt bwè, tout bèt chanté. — Konpè Lapen pa travay. Kisa i ké fè ? Écris tes hypothèses sur la suite, une par une, avec pour chacune un indice du texte.",
+   "indices": [
+    "Qui travaille ? Qui ne travaille pas ? Pourquoi, d'après ce qu'il dit ?",
+    "Le puits est fini et il y a de l'eau : de quoi Lapin a-t-il besoin, lui aussi ?",
+    "Relis la phrase de Konpè Tig : « Sa ki ké travay ké pé bwè. » Que va-t-il se passer pour Lapin ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée est une hypothèse sur la suite du conte qui tient compte de l'épisode 1 (la sécheresse, le puits creusé par les animaux, Lapin qui ne travaille pas en disant qu'il a de la fièvre, la règle « sa ki ké travay ké pé bwè ») et qui cite ou désigne un indice du texte. Une hypothèse contraire au texte (par exemple : Lapin a creusé le puits) est à revoir, avec une question pour relire. Ne révèle jamais la suite du conte. Les élèves de 5e apprennent le créole guyanais (niveau A1 à A2) : ils peuvent écrire en créole ou en français. Juge le sens, pas l'orthographe. Écris tes retours en français, avec des phrases courtes et simples.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Lontan, lontan, an mitan granbwa Lagwiyann, lapli pa té tonbé pandan twa mwa. Lariviyè té sèk. Tout bèt té swaf. Konpè Tig rasanblé tout bèt : « Annou fouyé roun pi ansanm ! Sa ki ké travay ké pé bwè. » Konpè Makak, Konpè Tòti, Konpè Kayman pran pikwa ké pèl. Konpè Lapen mèm di : « Mo pa pé travay, mo gen gro lafyèv. » Pandan sèt jou, tout bèt fouyé, fouyé, fouyé. Konpè Lapen té ka dòmi anba roun pyé mango. Apré sèt jou, dlo fré monté an fon pi-a. Tout bèt bwè, tout bèt chanté. — Que va faire Konpè Lapen ? Écris tes idées (en français ou en créole).",
+     "indices": [
+      "Lapin a-t-il travaillé ? A-t-il soif ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Lontan, lontan, an mitan granbwa Lagwiyann, lapli pa té tonbé pandan twa mwa. Lariviyè té sèk. Tout bèt té swaf. Konpè Tig rasanblé tout bèt : « Annou fouyé roun pi ansanm ! Sa ki ké travay ké pé bwè. » Konpè Makak, Konpè Tòti, Konpè Kayman pran pikwa ké pèl. Konpè Lapen mèm di : « Mo pa pé travay, mo gen gro lafyèv. » Pandan sèt jou, tout bèt fouyé, fouyé, fouyé. Konpè Lapen té ka dòmi anba roun pyé mango. Apré sèt jou, dlo fré monté an fon pi-a. Tout bèt bwè, tout bèt chanté. — Écris en créole au moins trois suites différentes, chacune avec « Mo pansé ki… paskè… » et un indice du texte.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "",
+   "niveauTache": 2,
+   "lecture": "fr-FR",
+   "lectureActive": false,
+   "suites": {
+    "consolider": "creole-anticiper",
+    "prolonger": "creole-episode2",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "creole-episode2",
+   "discipline": "Créole guyanais",
+   "titre": "Konpè Lapen : épisode 2, la poupée de gomme",
+   "objectif": "Repérer les indices d'un récit (traces, piège, réactions) ; imaginer et justifier plusieurs dénouements.",
+   "tache": "Mé lannuit, roun moun ka vini bò pi-a. I ka bwè, i ka benyen andidan, i ka sal dlo-a. Bonmaten, tout bèt wè tras pyé piti-piti a rantou pi-a. Konpè Kayman di : « Sa sé tras Konpè Lapen ! I pa travay, mé i ka vòlè nou dlo. » Konpè Tòti di : « Annou fè roun poupé ké lagonm. Nou ké mété li bò pi-a, é nou ké wè. » Lannuit, Konpè Lapen rivé. I wè poupé-a. « Bonswa ! » Poupé-a pa réponn. « To pa ka di bonswa ? » Poupé-a pa réponn. Lapen fè kòlè. I bay poupé-a roun kalòt : so lanmen kolé. I bay roun kout pyé : so pyé kolé. I bay roun kout tèt : so tèt kolé. Bonmaten, tout bèt trapé Konpè Lapen, kolé kou roun mouch. — Konpè Lapen kolé. Kouman i ké sòti ? Imagine plusieurs fins possibles et, pour chacune, dis pourquoi elle est possible.",
+   "indices": [
+    "Qui a fabriqué le piège, et pourquoi ?",
+    "Lapin ne peut plus bouger : que lui reste-t-il pour se sauver ? Ses mains ? Sa voix ?",
+    "Dans les contes, Lapin gagne souvent par la ruse plutôt que par la force : quelle ruse pourrait-il trouver ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée est une fin possible du conte qui tient compte de l'épisode 2 (Lapin vient boire la nuit et salit l'eau ; les animaux reconnaissent ses traces ; Tortue fait une poupée de gomme ; Lapin la frappe et reste collé ; les animaux l'attrapent) et qui explique pourquoi elle est possible. Une fin qui ignore que Lapin est collé ou attrapé est à revoir. Ne révèle jamais la vraie fin du conte. Les élèves de 5e apprennent le créole guyanais (niveau A1 à A2) : ils peuvent écrire en créole ou en français. Juge le sens, pas l'orthographe. Écris tes retours en français, avec des phrases courtes et simples.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Mé lannuit, roun moun ka vini bò pi-a. I ka bwè, i ka benyen andidan, i ka sal dlo-a. Bonmaten, tout bèt wè tras pyé piti-piti a rantou pi-a. Konpè Kayman di : « Sa sé tras Konpè Lapen ! I pa travay, mé i ka vòlè nou dlo. » Konpè Tòti di : « Annou fè roun poupé ké lagonm. Nou ké mété li bò pi-a, é nou ké wè. » Lannuit, Konpè Lapen rivé. I wè poupé-a. « Bonswa ! » Poupé-a pa réponn. « To pa ka di bonswa ? » Poupé-a pa réponn. Lapen fè kòlè. I bay poupé-a roun kalòt : so lanmen kolé. I bay roun kout pyé : so pyé kolé. I bay roun kout tèt : so tèt kolé. Bonmaten, tout bèt trapé Konpè Lapen, kolé kou roun mouch. — Lapin est collé. Comment peut-il s'en sortir ? Écris tes idées.",
+     "indices": [
+      "Lapin peut encore parler : à qui, et pour dire quoi ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Mé lannuit, roun moun ka vini bò pi-a. I ka bwè, i ka benyen andidan, i ka sal dlo-a. Bonmaten, tout bèt wè tras pyé piti-piti a rantou pi-a. Konpè Kayman di : « Sa sé tras Konpè Lapen ! I pa travay, mé i ka vòlè nou dlo. » Konpè Tòti di : « Annou fè roun poupé ké lagonm. Nou ké mété li bò pi-a, é nou ké wè. » Lannuit, Konpè Lapen rivé. I wè poupé-a. « Bonswa ! » Poupé-a pa réponn. « To pa ka di bonswa ? » Poupé-a pa réponn. Lapen fè kòlè. I bay poupé-a roun kalòt : so lanmen kolé. I bay roun kout pyé : so pyé kolé. I bay roun kout tèt : so tèt kolé. Bonmaten, tout bèt trapé Konpè Lapen, kolé kou roun mouch. — Écris en créole deux fins opposées (Lapin gagne, Lapin perd), et dis laquelle te paraît la plus juste, et pourquoi.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "",
+   "niveauTache": 3,
+   "lecture": "fr-FR",
+   "lectureActive": false,
+   "suites": {
+    "consolider": "creole-episode1",
+    "prolonger": "creole-morale",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "creole-morale",
+   "discipline": "Créole guyanais",
+   "titre": "Konpè Lapen : épisode 3, la ruse",
+   "objectif": "Comprendre comment un personnage argumente ; dégager la morale d'un conte et donner son avis.",
+   "tache": "Konpè Tig di : « Kisa nou ké fè ké li ? » Konpè Kayman di : « Annou jété li an lariviyè ! » Konpè Lapen kriyé : « Wi, wi ! Jété mo an lariviyè, jété mo an difé, fè sa zòt lé ! Mé pa jété mo an mitan zépin ! Pa zépin, souplé ! » Konpè Tig té lé fè li soufrè plis. I trapé Lapen pa so zorèy, é i jété li an mitan zépin. Konpè Lapen sòti lòt bò. I ri : « Mèsi, Konpè Tig ! Zépin sé mo kaz. Mo fèt la ! » É i kouri, i kouri, jiska jòdi. — Comment Konpè Lapen convainc-il Konpè Tig ? Propose des morales pour ce conte et dis si tu es d'accord avec Lapin. Une idée par envoi.",
+   "indices": [
+    "Que demande Lapin ? Que veut-il vraiment ?",
+    "Pourquoi Tig fait-il exactement ce que Lapin ne veut pas, d'après lui ?",
+    "Une morale commence souvent par « Sa ki… » ou « Il ne faut pas… » : qu'apprend-on de Lapin, et de Tig ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée explique la ruse de Lapin (il fait semblant d'avoir peur des épines pour que Tig, qui veut le faire souffrir, l'y jette, alors que c'est sa maison), ou propose une morale du conte, ou donne un avis sur Lapin, justifié par le texte. Une morale ou un avis sans justification est à revoir. Toutes les opinions sont acceptées si elles sont justifiées. Les élèves de 5e apprennent le créole guyanais (niveau A1 à A2) : ils peuvent écrire en créole ou en français. Juge le sens, pas l'orthographe. Écris tes retours en français, avec des phrases courtes et simples.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Konpè Tig di : « Kisa nou ké fè ké li ? » Konpè Kayman di : « Annou jété li an lariviyè ! » Konpè Lapen kriyé : « Wi, wi ! Jété mo an lariviyè, jété mo an difé, fè sa zòt lé ! Mé pa jété mo an mitan zépin ! Pa zépin, souplé ! » Konpè Tig té lé fè li soufrè plis. I trapé Lapen pa so zorèy, é i jété li an mitan zépin. Konpè Lapen sòti lòt bò. I ri : « Mèsi, Konpè Tig ! Zépin sé mo kaz. Mo fèt la ! » É i kouri, i kouri, jiska jòdi. — Lapin dit : « Pa zépin ! ». Pourquoi dit-il cela ? Écris tes idées.",
+     "indices": [
+      "Où Lapin est-il né, d'après la fin ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Konpè Tig di : « Kisa nou ké fè ké li ? » Konpè Kayman di : « Annou jété li an lariviyè ! » Konpè Lapen kriyé : « Wi, wi ! Jété mo an lariviyè, jété mo an difé, fè sa zòt lé ! Mé pa jété mo an mitan zépin ! Pa zépin, souplé ! » Konpè Tig té lé fè li soufrè plis. I trapé Lapen pa so zorèy, é i jété li an mitan zépin. Konpè Lapen sòti lòt bò. I ri : « Mèsi, Konpè Tig ! Zépin sé mo kaz. Mo fèt la ! » É i kouri, i kouri, jiska jòdi. — Écris en créole une morale pour Tig et une morale pour Lapin, puis dis qui avait raison dans tout le conte : les animaux qui ont travaillé, ou Lapin ?",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "",
+   "niveauTache": 3,
+   "lecture": "fr-FR",
+   "lectureActive": false,
+   "suites": {
+    "consolider": "creole-episode2",
+    "prolonger": "creole-recit",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "creole-recit",
+   "discipline": "Créole guyanais",
+   "titre": "Préparer un récit argumentatif",
+   "objectif": "Planifier un conte qui défend une idée : un personnage convainc les autres par ses arguments.",
+   "tache": "Tu vas écrire un petit conte où un personnage doit convaincre les autres, et qui défend une idée (sa morale). Prépare-le idée par idée : 1. la situation (qui, où) ; 2. le problème ; 3. ce que dit le personnage pour convaincre (un argument par envoi) ; 4. la fin ; 5. la morale. Écris en créole quand tu peux.",
+   "indices": [
+    "Choisis d'abord l'idée que ton conte va défendre : par exemple, partager l'eau, ou réfléchir avant d'agir.",
+    "Ton personnage doit donner au moins deux raisons : « Paskè… », « É osi… ».",
+    "La fin montre si les arguments ont marché ; la morale dit ce qu'on en apprend."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée est une étape du conte à écrire : la situation, le problème, un argument d'un personnage pour convaincre les autres (avec une raison), la fin ou la morale. Un argument sans raison est à revoir. La morale doit correspondre à l'idée que le conte défend. Vérifie aussi que les étapes vont ensemble, sans réécrire le conte à la place de l'élève. Les élèves de 5e apprennent le créole guyanais (niveau A1 à A2) : ils peuvent écrire en créole ou en français. Juge le sens, pas l'orthographe. Écris tes retours en français, avec des phrases courtes et simples.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Prépare un petit conte où un animal doit convaincre les autres de partager l'eau. Écris : qui, le problème, deux raisons que donne l'animal, la fin.",
+     "indices": [
+      "Commence par : « Lontan, lontan, … »"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Prépare en créole un conte où deux personnages s'opposent avec des arguments, et où la morale n'est pas celle qu'on attend. Écris chaque étape et chaque argument, avec ses raisons.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "",
+   "niveauTache": 3,
+   "lecture": "fr-FR",
+   "lectureActive": false,
+   "suites": {
+    "consolider": "creole-morale",
+    "prolonger": null,
+    "approfondir": null
+   }
+  },
+  {
+   "id": "creole-mq-anticiper",
+   "discipline": "Créole martiniquais",
+   "titre": "Compè Tigue épi compè Lapin : anticiper",
+   "objectif": "Émettre des hypothèses sur la suite d'un conte à partir d'indices du texte, et les justifier.",
+   "tache": "[Contexte : début du conte. Tigue rentre de la pêche avec sa charrette pleine de poissons.] Compè Tigue épi compè Lapin, cété deux compè qui pas té ka guè enten-n', pass' Lapin cété an malin qui toujou té ka couyon-nain Tigu'. Aussi jou ta là, quand gros bête la qui té sôti la pêche, oti i té prend an cabrouet poisson té ka rentré bien content la case li, quand i join-n' Lapin couché an chumin an con an bête qui mô. A couè dit jôdi a cé jou chance moin, pensé compè Tigue, et, i baissé, i ranmassé Lapin et i voyé en lè cé pan-nier poisson a, et i ka dit con ça : « An malin pris, cé pli belle pièce moin prend jôdi a, et moin kaille prend an plaisi mangé ï épi pois rouges. » — Lapin mô toubonnman ? Kisa ki kay rivé lè Tigue rivé lakay li ? Écris tes hypothèses une par une, et pour chacune l'indice du texte qui te le fait penser.",
+   "indices": [
+    "Relis la première phrase : comment le conte présente-t-il Lapin ?",
+    "Pourquoi le texte dit-il « an con an bête qui mô » et pas « mô » ?",
+    "Où Tigue a-t-il mis Lapin ? Qu'y a-t-il à côté de lui ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée est une hypothèse sur la suite du conte (Lapin est-il vraiment mort ? que va-t-il se passer ?) qui s'appuie sur un indice de l'extrait : Lapin « an malin qui toujou té ka couyon-nain Tigu' », « an con an bête qui mô », Lapin jeté sur les paniers de poissons, Tigue trop content. Une hypothèse sans indice est à revoir, avec une question pour relire. Il n'y a ni bonne ni mauvaise hypothèse : ne révèle jamais la suite du conte. Les élèves de 5e parlent le créole martiniquais : encourage-les à écrire en créole, mais ils peuvent aussi écrire en français. Le conte est écrit dans une graphie ancienne et chaque élève écrit avec sa propre graphie : juge le sens, jamais l'orthographe. Ne corrige pas le créole de l'élève et n'écris pas toi-même en créole : écris tes retours en français, avec des phrases courtes.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "[Contexte : début du conte. Tigue rentre de la pêche avec sa charrette pleine de poissons.] Compè Tigue épi compè Lapin, cété deux compè qui pas té ka guè enten-n', pass' Lapin cété an malin qui toujou té ka couyon-nain Tigu'. Aussi jou ta là, quand gros bête la qui té sôti la pêche, oti i té prend an cabrouet poisson té ka rentré bien content la case li, quand i join-n' Lapin couché an chumin an con an bête qui mô. A couè dit jôdi a cé jou chance moin, pensé compè Tigue, et, i baissé, i ranmassé Lapin et i voyé en lè cé pan-nier poisson a, et i ka dit con ça : « An malin pris, cé pli belle pièce moin prend jôdi a, et moin kaille prend an plaisi mangé ï épi pois rouges. » Mots utiles : couyon-nain = tromper ; cabrouet = charrette ; an con an bête qui mô = comme une bête morte ; voyé en lè = jeter sur. — Lapin est-il vraiment mort ? Que va-t-il se passer ? Écris tes idées et dis pourquoi.",
+     "indices": [
+      "Le texte dit que Lapin est « an malin » : qu'est-ce qu'un malin pourrait faire ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "[Contexte : début du conte. Tigue rentre de la pêche avec sa charrette pleine de poissons.] Compè Tigue épi compè Lapin, cété deux compè qui pas té ka guè enten-n', pass' Lapin cété an malin qui toujou té ka couyon-nain Tigu'. Aussi jou ta là, quand gros bête la qui té sôti la pêche, oti i té prend an cabrouet poisson té ka rentré bien content la case li, quand i join-n' Lapin couché an chumin an con an bête qui mô. A couè dit jôdi a cé jou chance moin, pensé compè Tigue, et, i baissé, i ranmassé Lapin et i voyé en lè cé pan-nier poisson a, et i ka dit con ça : « An malin pris, cé pli belle pièce moin prend jôdi a, et moin kaille prend an plaisi mangé ï épi pois rouges. » — Écris en créole au moins trois suites possibles, de la plus probable à la moins probable, chacune avec un indice du texte. Laquelle choisirais-tu si tu étais le conteur ? Pourquoi ?",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "",
+   "niveauTache": 2,
+   "lecture": "fr-FR",
+   "lectureActive": false,
+   "suites": {
+    "consolider": null,
+    "prolonger": "creole-mq-episode1",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "creole-mq-episode1",
+   "discipline": "Créole martiniquais",
+   "titre": "Compè Tigue épi compè Lapin : la charrette vide",
+   "objectif": "Comprendre l'implicite d'un récit (ce que le texte ne dit pas) en s'appuyant sur des indices ; anticiper la suite.",
+   "tache": "[Contexte : Tigue a trouvé Lapin couché sur le chemin, « an con an bête qui mô ». Tout content, il l'a jeté sur les paniers de poissons de sa charrette pour le manger chez lui avec des pois rouges.] A pein-n' i rivé bô case li, i crié toute moune pou vini débarassé charette la, pendant li même ka détiré cô ï pass' i té lasse épi content, i ka dit ba madame li : « Jôdi a moin fè an fameux prise, moin prend compè Lapin, ou kaille fè ï sauté pou nous mangé au souè a. » Toute ti Tigue coummencé filé langue, épi yo couri gâdé dans charette la. Mais i té vide ; pas té ni, ni poisson, ni Lapin. Man Tigue répon'n con ça : « Ou pas lasse fé plaisanterie non Tigue ? » Tigue couri vini gâdé et i cé pé mô quand i compren-n' qui jeu Lapin té fè ï la. Toute ces iches la viré rentré la case la queue yo entr' deux jam-m' yo. Triss', press' pou pléré. Tigue épi man Tigue raché chuveux yo dans tête yo ; mais foc bien yo té admett' que Lapin té badinin yo an fois encô. Pas moin, à fôce réfléchi, Tigue fè an plan pou prend ruvenge li assou Lapin. — Le texte ne dit pas ce que Lapin a fait. 1) Explique-le, avec les indices du texte. 2) Quel plan Tigue a-t-il pu imaginer pour se venger ? Écris une idée par envoi.",
+   "indices": [
+    "Qu'est-ce qui manque dans la charrette ? Une chose, ou deux ?",
+    "Rappelle-toi où Tigue avait mis Lapin.",
+    "Pour attraper un malin qui fait le mort, que pourrait faire Tigue ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Les idées sont de deux sortes. (1) L'explication de ce qui s'est passé : Lapin faisait semblant d'être mort et a profité du trajet pour vider la charrette des poissons et s'enfuir ; elle doit s'appuyer sur un indice (la charrette vide, « ni poisson, ni Lapin », Lapin posé sur les paniers, « jeu Lapin té fè ï la »). (2) Des hypothèses sur le plan de vengeance de Tigue, chacune justifiée. Une idée contraire au texte est à revoir, avec une question pour relire. Ne révèle jamais le plan de Tigue ni la fin du conte. Les élèves de 5e parlent le créole martiniquais : encourage-les à écrire en créole, mais ils peuvent aussi écrire en français. Le conte est écrit dans une graphie ancienne et chaque élève écrit avec sa propre graphie : juge le sens, jamais l'orthographe. Ne corrige pas le créole de l'élève et n'écris pas toi-même en créole : écris tes retours en français, avec des phrases courtes.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "[Contexte : Tigue a trouvé Lapin couché sur le chemin, « an con an bête qui mô ». Tout content, il l'a jeté sur les paniers de poissons de sa charrette pour le manger chez lui avec des pois rouges.] A pein-n' i rivé bô case li, i crié toute moune pou vini débarassé charette la, pendant li même ka détiré cô ï pass' i té lasse épi content, i ka dit ba madame li : « Jôdi a moin fè an fameux prise, moin prend compè Lapin, ou kaille fè ï sauté pou nous mangé au souè a. » Toute ti Tigue coummencé filé langue, épi yo couri gâdé dans charette la. Mais i té vide ; pas té ni, ni poisson, ni Lapin. Man Tigue répon'n con ça : « Ou pas lasse fé plaisanterie non Tigue ? » Tigue couri vini gâdé et i cé pé mô quand i compren-n' qui jeu Lapin té fè ï la. Toute ces iches la viré rentré la case la queue yo entr' deux jam-m' yo. Triss', press' pou pléré. Tigue épi man Tigue raché chuveux yo dans tête yo ; mais foc bien yo té admett' que Lapin té badinin yo an fois encô. Pas moin, à fôce réfléchi, Tigue fè an plan pou prend ruvenge li assou Lapin. Mots utiles : filé langue = se lécher les babines ; badinin = se moquer de, rouler ; prend ruvenge = se venger. — Qu'a fait Lapin pendant le trajet ? Comment Tigue peut-il se venger ? Écris tes idées et dis pourquoi.",
+     "indices": [
+      "Ni poisson, ni Lapin : où sont-ils passés ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "[Contexte : Tigue a trouvé Lapin couché sur le chemin, « an con an bête qui mô ». Tout content, il l'a jeté sur les paniers de poissons de sa charrette pour le manger chez lui avec des pois rouges.] A pein-n' i rivé bô case li, i crié toute moune pou vini débarassé charette la, pendant li même ka détiré cô ï pass' i té lasse épi content, i ka dit ba madame li : « Jôdi a moin fè an fameux prise, moin prend compè Lapin, ou kaille fè ï sauté pou nous mangé au souè a. » Toute ti Tigue coummencé filé langue, épi yo couri gâdé dans charette la. Mais i té vide ; pas té ni, ni poisson, ni Lapin. Man Tigue répon'n con ça : « Ou pas lasse fé plaisanterie non Tigue ? » Tigue couri vini gâdé et i cé pé mô quand i compren-n' qui jeu Lapin té fè ï la. Toute ces iches la viré rentré la case la queue yo entr' deux jam-m' yo. Triss', press' pou pléré. Tigue épi man Tigue raché chuveux yo dans tête yo ; mais foc bien yo té admett' que Lapin té badinin yo an fois encô. Pas moin, à fôce réfléchi, Tigue fè an plan pou prend ruvenge li assou Lapin. — En créole : explique ce que Lapin a fait sans que le texte le dise, puis imagine deux plans de vengeance différents pour Tigue, et dis lequel a le plus de chances de réussir contre un malin comme Lapin.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "",
+   "niveauTache": 2,
+   "lecture": "fr-FR",
+   "lectureActive": false,
+   "suites": {
+    "consolider": "creole-mq-anticiper",
+    "prolonger": "creole-mq-episode2",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "creole-mq-episode2",
+   "discipline": "Créole martiniquais",
+   "titre": "Compè Tigue épi compè Lapin : la veillée",
+   "objectif": "Interpréter les paroles d'un personnage (ce qu'il veut vraiment) et anticiper le dénouement en le justifiant.",
+   "tache": "[Contexte : Tigue est arrivé chez lui : la charrette était vide, ni poissons ni Lapin. Lapin l'a « couillonné » encore une fois. Tigue, furieux, a réfléchi à un plan pour se venger.] Yo té kaille prend ï dans an zattrappe, et coup ta là, i pas té kaille chappé. Tigue té kaille fè rôle mô, man Tigue té kaille réglé, et quand Lapin té kaille vini ouè Tigue, yo té kaille tombé an lè ï con lan misè assou lé pauv'. Alors Tigue fè rôle mô... Madame li mété rhélé à tè : « Mon Dié mari moin Tigu' mô là, soucou, soucou... » Toute voisin prend couri vini... Tigue couché dans cham-m' raide con an banza. Mais Lapin pas vini tout suite. Quand nouè coummencé faite, i rivé, i mandé pou Madame Tigue, yo dit i dans cham-m' ka veillé mari ï... Quand man Tigue ten-n' i rivé, i vini bô pôte cham-m' la pou ruçuvrè ï. Lapin allé join-n' i mais i resté bô la pôte la : « Alors ma coumè, cé ça qui rivé compè moin ?... An si bon bougue magré ça... foinque i fè moin la pein-n'... Ah moin pas té lé couè zoreille moin quand moin ten-n' ça !!! » « Entré non compè pou ou oué coumment i mô sibitt', tout gros, gras épi vaillant. » « Hen... dit Lapin, i mô sibitt' pauv' malhéré. Mais ma coumè, dit moin ti brin... est ce i ja pété ? pass' si i pôccô pété nous pé ni an espoua du sauvé ï ? » « Ah... mais non compè, i pôccô pété... Ou ka dit ni moyen fè quéchose baille hein si i pôccô pété ? » — Pourquoi Lapin reste-t-il « bô la pôte la » ? Pourquoi demande-t-il « est ce i ja pété ? » ? Que va faire Tigue ? Écris tes hypothèses une par une, avec les indices du texte.",
+   "indices": [
+    "Lapin arrive tard, à la nuit : pourquoi, à ton avis ?",
+    "Lapin croit-il vraiment qu'un mort peut péter ? Que cherche-t-il à savoir ?",
+    "Tigue entend toute la conversation : que va-t-il vouloir faire croire ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée interprète l'attitude ou les paroles de Lapin (il se méfie, il reste près de la porte pour pouvoir fuir, sa question est un piège pour vérifier si Tigue est vraiment mort) ou fait une hypothèse sur ce que Tigue va faire, en s'appuyant sur un indice de l'extrait. Une idée sans indice est à revoir. Ne révèle jamais la fin du conte. Les élèves de 5e parlent le créole martiniquais : encourage-les à écrire en créole, mais ils peuvent aussi écrire en français. Le conte est écrit dans une graphie ancienne et chaque élève écrit avec sa propre graphie : juge le sens, jamais l'orthographe. Ne corrige pas le créole de l'élève et n'écris pas toi-même en créole : écris tes retours en français, avec des phrases courtes.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "[Contexte : Tigue est arrivé chez lui : la charrette était vide, ni poissons ni Lapin. Lapin l'a « couillonné » encore une fois. Tigue, furieux, a réfléchi à un plan pour se venger.] Yo té kaille prend ï dans an zattrappe, et coup ta là, i pas té kaille chappé. Tigue té kaille fè rôle mô, man Tigue té kaille réglé, et quand Lapin té kaille vini ouè Tigue, yo té kaille tombé an lè ï con lan misè assou lé pauv'. Alors Tigue fè rôle mô... Madame li mété rhélé à tè : « Mon Dié mari moin Tigu' mô là, soucou, soucou... » Toute voisin prend couri vini... Tigue couché dans cham-m' raide con an banza. Mais Lapin pas vini tout suite. Quand nouè coummencé faite, i rivé, i mandé pou Madame Tigue, yo dit i dans cham-m' ka veillé mari ï... Quand man Tigue ten-n' i rivé, i vini bô pôte cham-m' la pou ruçuvrè ï. Lapin allé join-n' i mais i resté bô la pôte la : « Alors ma coumè, cé ça qui rivé compè moin ?... An si bon bougue magré ça... foinque i fè moin la pein-n'... Ah moin pas té lé couè zoreille moin quand moin ten-n' ça !!! » « Entré non compè pou ou oué coumment i mô sibitt', tout gros, gras épi vaillant. » « Hen... dit Lapin, i mô sibitt' pauv' malhéré. Mais ma coumè, dit moin ti brin... est ce i ja pété ? pass' si i pôccô pété nous pé ni an espoua du sauvé ï ? » « Ah... mais non compè, i pôccô pété... Ou ka dit ni moyen fè quéchose baille hein si i pôccô pété ? » Mots utiles : zattrappe = piège ; rhélé = crier, pleurer fort ; raide con an banza = raide comme un bâton ; pôccô = pas encore ; sibitt' = subitement. — Lapin croit-il que Tigue est mort ? Pourquoi pose-t-il sa question ? Que va faire Tigue ? Écris tes idées et dis pourquoi.",
+     "indices": [
+      "Où Lapin reste-t-il pendant qu'il parle ?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "[Contexte : Tigue est arrivé chez lui : la charrette était vide, ni poissons ni Lapin. Lapin l'a « couillonné » encore une fois. Tigue, furieux, a réfléchi à un plan pour se venger.] Yo té kaille prend ï dans an zattrappe, et coup ta là, i pas té kaille chappé. Tigue té kaille fè rôle mô, man Tigue té kaille réglé, et quand Lapin té kaille vini ouè Tigue, yo té kaille tombé an lè ï con lan misè assou lé pauv'. Alors Tigue fè rôle mô... Madame li mété rhélé à tè : « Mon Dié mari moin Tigu' mô là, soucou, soucou... » Toute voisin prend couri vini... Tigue couché dans cham-m' raide con an banza. Mais Lapin pas vini tout suite. Quand nouè coummencé faite, i rivé, i mandé pou Madame Tigue, yo dit i dans cham-m' ka veillé mari ï... Quand man Tigue ten-n' i rivé, i vini bô pôte cham-m' la pou ruçuvrè ï. Lapin allé join-n' i mais i resté bô la pôte la : « Alors ma coumè, cé ça qui rivé compè moin ?... An si bon bougue magré ça... foinque i fè moin la pein-n'... Ah moin pas té lé couè zoreille moin quand moin ten-n' ça !!! » « Entré non compè pou ou oué coumment i mô sibitt', tout gros, gras épi vaillant. » « Hen... dit Lapin, i mô sibitt' pauv' malhéré. Mais ma coumè, dit moin ti brin... est ce i ja pété ? pass' si i pôccô pété nous pé ni an espoua du sauvé ï ? » « Ah... mais non compè, i pôccô pété... Ou ka dit ni moyen fè quéchose baille hein si i pôccô pété ? » — En créole : explique le piège de Tigue et le contre-piège de Lapin. Montre, avec deux indices au moins, que Lapin s'est méfié dès le début. Puis écris la réplique que va faire Tigue, selon toi.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "",
+   "niveauTache": 3,
+   "lecture": "fr-FR",
+   "lectureActive": false,
+   "suites": {
+    "consolider": "creole-mq-episode1",
+    "prolonger": "creole-mq-debat",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "creole-mq-debat",
+   "discipline": "Créole martiniquais",
+   "titre": "Compè Tigue épi compè Lapin : malin ou méchant ?",
+   "objectif": "Prendre position sur un personnage et défendre son avis par des arguments appuyés sur le texte.",
+   "tache": "[Contexte : Tigue fait le mort pour attirer Lapin. Lapin est venu à la veillée mais reste près de la porte. Il a demandé à Madame Tigue si son mari avait déjà pété ; elle a répondu : « non, i pôccô pété ».] Tigue qui ten-n' ça et qui lé yo compren-n' i mô, an-ni pété broum !! Quand Lapin ten-n' ça, la poussiè chayé ï, i disparait' dans la brise. Tigue épi madame li compren-n' alors, que cé pas té fois ta là que yo té kaille quimbé Lapin encô. — Lapin, cé an malin oben an méchan ? Tigue, cé an couillon oben an viktim ? Choisis ta position. Écris un argument par envoi, chacun avec une preuve tirée du conte, puis un argument de ceux qui pensent le contraire et ta réponse.",
+   "indices": [
+    "Relis tout le conte : qui a commencé ? Qui voulait manger l'autre ?",
+    "Un argument, c'est une raison (« pass'… ») et une preuve (ce que dit ou fait un personnage).",
+    "Quelle leçon le conteur veut-il donner à ceux qui l'écoutent ?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée est un argument qui défend une position sur Lapin ou sur Tigue (malin, méchant, naïf, victime…), avec une raison et une preuve tirée du conte (un fait ou une parole d'un épisode : Lapin fait le mort et vole les poissons, Tigue veut manger Lapin, Lapin reste près de la porte, la question « est ce i ja pété ? », Tigue pète pour faire croire qu'il est mort). On attend aussi au moins un contre-argument et une réponse à ce contre-argument. Un argument sans preuve est à revoir. Toutes les positions sont acceptables si elles sont prouvées : ne donne pas ton avis. Les élèves de 5e parlent le créole martiniquais : encourage-les à écrire en créole, mais ils peuvent aussi écrire en français. Le conte est écrit dans une graphie ancienne et chaque élève écrit avec sa propre graphie : juge le sens, jamais l'orthographe. Ne corrige pas le créole de l'élève et n'écris pas toi-même en créole : écris tes retours en français, avec des phrases courtes.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "[Contexte : Tigue fait le mort pour attirer Lapin. Lapin est venu à la veillée mais reste près de la porte. Il a demandé à Madame Tigue si son mari avait déjà pété ; elle a répondu : « non, i pôccô pété ».] Tigue qui ten-n' ça et qui lé yo compren-n' i mô, an-ni pété broum !! Quand Lapin ten-n' ça, la poussiè chayé ï, i disparait' dans la brise. Tigue épi madame li compren-n' alors, que cé pas té fois ta là que yo té kaille quimbé Lapin encô. Mots utiles : an-ni = seulement, rien que ; chayé = emporter ; quimbé = attraper, tenir. — Lapin est-il malin ou méchant ? Donne ton avis et deux raisons, avec ce qui se passe dans le conte.",
+     "indices": [
+      "Commence par : « Moin ka pensé Lapin cé… pass'… »"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "[Contexte : Tigue fait le mort pour attirer Lapin. Lapin est venu à la veillée mais reste près de la porte. Il a demandé à Madame Tigue si son mari avait déjà pété ; elle a répondu : « non, i pôccô pété ».] Tigue qui ten-n' ça et qui lé yo compren-n' i mô, an-ni pété broum !! Quand Lapin ten-n' ça, la poussiè chayé ï, i disparait' dans la brise. Tigue épi madame li compren-n' alors, que cé pas té fois ta là que yo té kaille quimbé Lapin encô. — En créole : défends une position sur Lapin ET une sur Tigue, avec deux arguments prouvés pour chacune ; puis réfute l'argument le plus fort du camp adverse. Termine par la morale du conte, dans tes mots.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "",
+   "niveauTache": 3,
+   "lecture": "fr-FR",
+   "lectureActive": false,
+   "suites": {
+    "consolider": "creole-mq-episode2",
+    "prolonger": "creole-mq-recit",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "creole-mq-recit",
+   "discipline": "Créole martiniquais",
+   "titre": "Écrire un récit argumentatif : la revanche de Tigue",
+   "objectif": "Planifier puis écrire un conte qui défend une idée : un personnage en convainc un autre par ses arguments.",
+   "tache": "Tigue n'a pas renoncé. Tu vas écrire un nouvel épisode du conte, en créole : Tigue (ou Man Tigue) tente une troisième ruse, et l'un des personnages doit convaincre l'autre par des arguments. Ton conte défend une idée (sa morale). Prépare-le idée par idée : 1. la situation ; 2. la nouvelle ruse ; 3. un argument pour convaincre par envoi (avec sa raison) ; 4. la fin ; 5. la morale.",
+   "indices": [
+    "Choisis d'abord l'idée que ton conte défend : par exemple « an malin ka touvé pli malin pasé'y ».",
+    "Comme Lapin à la veillée, ton personnage peut convaincre avec une question piège ou de fausses raisons : écris-les.",
+    "Garde le style du conteur : « Aussi jou ta là… », les dialogues, les exclamations."
+   ],
+   "verification": {
+    "mode": "ia",
+    "criteres": "Chaque idée est une étape du nouvel épisode : la situation, la nouvelle ruse de Tigue, un argument d'un personnage pour convaincre l'autre (avec sa raison), la fin ou la morale. L'épisode doit rester cohérent avec le conte (les personnages, leur caractère : Lapin malin et méfiant, Tigue rancunier). Un argument sans raison est à revoir. La morale doit correspondre à ce que montre la fin. Vérifie que les étapes vont ensemble, sans réécrire le conte à la place de l'élève. Les élèves de 5e parlent le créole martiniquais : encourage-les à écrire en créole, mais ils peuvent aussi écrire en français. Le conte est écrit dans une graphie ancienne et chaque élève écrit avec sa propre graphie : juge le sens, jamais l'orthographe. Ne corrige pas le créole de l'élève et n'écris pas toi-même en créole : écris tes retours en français, avec des phrases courtes.",
+    "maximum": 3
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Écris un nouvel épisode : Tigue essaie encore d'attraper Lapin. Écris : la nouvelle ruse, ce que dit un personnage pour convaincre l'autre (deux raisons), la fin.",
+     "indices": [
+      "Commence par : « Aussi jou ta là… »"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Écris en créole un nouvel épisode où Tigue et Lapin s'affrontent par la parole : chacun donne au moins deux arguments, et le plus convaincant gagne. La morale ne doit pas être celle qu'on attend.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "exercices": "",
+   "niveauTache": 3,
+   "lecture": "fr-FR",
+   "lectureActive": false,
+   "suites": {
+    "consolider": "creole-mq-debat",
+    "prolonger": null,
+    "approfondir": null
+   }
+  }
+ ]
+}

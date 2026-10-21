@@ -1,0 +1,504 @@
+<title>Viabilis classe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Domine:wght@600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap">
+<style>
+/* Mise en page : colonne unique pensée pour le téléphone, qui s'élargit en grille sur tablette ; barre d'onglets en bas côté enseignant. */
+:root{
+  --bg:#F5F3EE; --panel:#FDFCF9; --ink:#1F2A44; --muted:#5B6779; --line:#DCD8CC; --soft:#E9EEF4;
+  --accent:#B4561A; --blue:#2F6DB5; --green:#2E7D5B; --violet:#6B4C9A;
+  --ok:#2E7D5B; --warn:#9A6A00; --ko:#B42318; --okbg:#E3F1EA; --warnbg:#FBF1D9; --kobg:#FBE9E7;
+  --display:'Domine', Georgia, serif; --body:'Nunito Sans', 'Segoe UI', Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141A26; --panel:#1C2433; --ink:#E8ECF3; --muted:#A3AEC0; --line:#33405A; --soft:#232D40;
+  --accent:#F0A35E; --blue:#7FB0EA; --green:#6CC79B; --violet:#B79BE3;
+  --ok:#6CC79B; --warn:#E8C26A; --ko:#F28B7D; --okbg:#1E3A2E; --warnbg:#3D3420; --kobg:#45221F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141A26; --panel:#1C2433; --ink:#E8ECF3; --muted:#A3AEC0; --line:#33405A; --soft:#232D40;
+  --accent:#F0A35E; --blue:#7FB0EA; --green:#6CC79B; --violet:#B79BE3;
+  --ok:#6CC79B; --warn:#E8C26A; --ko:#F28B7D; --okbg:#1E3A2E; --warnbg:#3D3420; --kobg:#45221F; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;padding-inline:16px;padding-block:16px 96px}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+h1{font-family:var(--display);font-size:clamp(22px,4vw,30px);line-height:1.2;margin:0;text-wrap:balance}
+h2{font-family:var(--display);font-size:19px;margin:0}
+h3{font-size:15px;margin:0}
+p{margin:0}
+.muted{color:var(--muted)}
+.small{font-size:13.5px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px}
+button,.btn{font:inherit;font-weight:700;border-radius:12px;padding:12px 16px;border:1px solid var(--line);background:var(--soft);color:var(--ink);cursor:pointer;min-height:44px}
+button.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button.ghost{background:transparent}
+button:disabled{opacity:.5;cursor:not-allowed}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+input[type=text],textarea,select{font:inherit;width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+textarea{min-height:72px;resize:vertical}
+input[type=range]{width:100%;accent-color:var(--accent)}
+label{font-weight:700;font-size:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.scale button{padding:10px 4px;font-size:14px}
+.scale button[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ideas{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.ideas li{background:var(--soft);border-radius:10px;padding:8px 12px;display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.ideas li .tag{font-size:12px;font-weight:800;color:var(--muted);white-space:nowrap}
+.chat{display:flex;flex-direction:column;gap:8px;max-height:46vh;overflow-y:auto;padding-right:4px}
+.msg{padding:10px 12px;border-radius:12px;max-width:88%;white-space:pre-wrap}
+.msg.ia{background:var(--soft);align-self:flex-start}
+.msg.el{background:var(--ink);color:var(--bg);align-self:flex-end}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-size:12.5px;font-weight:800;background:var(--soft)}
+.pill.ok{background:var(--okbg);color:var(--ok)} .pill.warn{background:var(--warnbg);color:var(--warn)} .pill.ko{background:var(--kobg);color:var(--ko)}
+.notice{border-radius:12px;padding:12px 14px;background:var(--soft)}
+.notice.warn{background:var(--warnbg)} .notice.ko{background:var(--kobg)}
+.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:1px solid var(--line);display:flex;justify-content:center;gap:4px;padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px))}
+.tabs button{flex:1;max-width:200px;border:0;background:transparent;font-size:14px;min-height:48px}
+.tabs button[aria-selected="true"]{background:var(--soft);color:var(--accent)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tablewrap{overflow-x:auto}
+.bars{display:grid;grid-template-columns:auto 1fr auto;gap:4px 8px;align-items:center;font-size:13px;min-width:170px}
+.bar{height:8px;border-radius:4px;background:var(--soft);position:relative;overflow:hidden}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.studentcard{display:flex;flex-direction:column;gap:10px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.kpi{background:var(--soft);border-radius:12px;padding:10px 12px}
+.kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums}
+details summary{cursor:pointer;font-weight:700}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+
+<div class="wrap" id="app">
+  <header class="row" style="justify-content:space-between">
+    <div>
+      <p class="eyebrow" id="role-label">Chargement…</p>
+      <h1 id="titre">Viabilis classe</h1>
+    </div>
+    <button class="ghost small" id="switch-view" hidden>Voir la vue élève</button>
+  </header>
+  <main id="view"><div class="card"><p class="muted">Connexion à la classe…</p></div></main>
+</div>
+<nav class="tabs" id="tabs" hidden aria-label="Navigation enseignant">
+  <button data-tab="classe" aria-selected="true">Classe</button>
+  <button data-tab="reglages" aria-selected="false">Réglages</button>
+  <button data-tab="export" aria-selected="false">Données</button>
+</nav>
+
+<script>
+/* =====================================================================
+   Viabilis classe — prototype pilote.
+   Vue élève : déclarer la charge, produire ses idées, utiliser une IA dont
+   l'ordre et le mode sont réglés par l'enseignant ; chaque étape est une trace.
+   Vue enseignant : estimation de l'état de chaque élève (C, A, D, M),
+   ruptures menacées, recommandation (règle de la séquence), réglages, export.
+   Données : db de l'artefact. config/classe (enseignant), notes/classe
+   (enseignant, privé), traces/<id élève> (chaque élève écrit le sien,
+   seul l'enseignant lit tout).
+   ===================================================================== */
+const DEFAUT = {
+  seance: 0, ouverte: false, tache: "",
+  ordre: "adaptatif",          // "reflexion" | "ia" | "adaptatif"
+  mode: "questionner",         // "questionner" | "elements"
+  minIdees: 3,
+  seuilCharge: 0.7, retraitAgentivite: 0.8, seuilMaitrise: 0.5,
+  eleves: {}                   // id -> {ordre?, mode?, retrait?: bool}
+};
+const S = { db:null, user:null, sample:null, downloads:null, uid:null, admin:false, vue:null,
+  config:{...DEFAUT}, traces:{}, notes:{}, monDoc:null, onglet:"classe", detail:null };
+
+const $ = (s, r=document) => r.querySelector(s);
+const el = (tag, attrs={}, ...kids) => { const e = document.createElement(tag);
+  for (const [k,v] of Object.entries(attrs)) { if (k === "class") e.className = v; else if (k.startsWith("on")) e.addEventListener(k.slice(2), v); else if (v === true) e.setAttribute(k, ""); else if (v !== false && v != null) e.setAttribute(k, v); }
+  for (const k of kids.flat()) if (k != null && k !== false) e.append(k.nodeType ? k : document.createTextNode(String(k)));
+  return e; };
+const fr = (v, n=2) => (v == null || isNaN(v)) ? "–" : v.toFixed(n).replace(".", ",");
+const now = () => new Date().toISOString();
+
+/* ---------------------------------------------------------------- texte : similarité */
+const VIDES = new Set("les des une un le la de du et a au aux en pour par sur avec dans ce ces cet cette son sa ses leur leurs qui que quoi ne pas plus est sont etre faire on il elle ils elles nous vous je tu me te se mon ma mes ton ta tes y d l qu c s n j m t peut peuvent tres comme ou mais donc car si aussi bien tout tous toute toutes".split(" "));
+function mots(t){ return new Set(String(t).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9 ]+/g," ").split(/\s+/)
+  .filter(w => w.length >= 3 && !VIDES.has(w)).map(w => w.replace(/(s|x)$/,""))); }
+function jaccard(a, b){ const A = a instanceof Set ? a : mots(a), B = b instanceof Set ? b : mots(b); if (!A.size || !B.size) return 0;
+  let n = 0; for (const w of A) if (B.has(w)) n++; return n / (A.size + B.size - n); }
+function distinctes(textes){ const reps = []; for (const t of textes){ const m = mots(t); if (!m.size) continue; if (!reps.some(r => jaccard(r, m) >= 0.5)) reps.push(m); } return reps.length; }
+
+/* ---------------------------------------------------------------- estimation de l'état */
+const echelle = x => x == null ? null : 0.1 + 0.2 * (x - 1);           // 1..5 -> 0,1..0,9
+function moy(xs){ const v = xs.filter(x => x != null && !isNaN(x)); return v.length ? v.reduce((a,b)=>a+b,0)/v.length : null; }
+function brut(s, autres, noteEns){
+  const avant = (s.ideesAvant||[]).map(i => i.texte), apres = (s.ideesApres||[]).map(i => i.texte), toutes = avant.concat(apres);
+  const phrasesIA = (s.echanges||[]).filter(e => e.role === "ia").flatMap(e => e.texte.split(/[.?!\n]+/)).filter(p => mots(p).size >= 2).map(mots);
+  const reprises = apres.filter(t => phrasesIA.some(p => jaccard(t, p) >= 0.4)).length;
+  const reprise = apres.length ? reprises / apres.length : 0;
+  const autresIdees = autres.map(mots);
+  const originales = toutes.filter(t => !autresIdees.some(o => jaccard(t, o) >= 0.5)).length;
+  const originalite = toutes.length ? originales / toutes.length : null;
+  const nDist = distinctes(toutes);
+  const autonomie = Math.min(1, (s.ideesAvantAide ?? avant.length) / 3);
+  let C = moy([echelle(s.chargeDebut), echelle(s.chargeFin)]); if (C != null && s.bloque) C = Math.min(1, C + 0.1);
+  const A = toutes.length || s.premiereDemande != null ? 0.5 * (1 - reprise) + 0.5 * autonomie : null;
+  const D = toutes.length ? 0.4 * Math.min(1, nDist / 5) + 0.3 * (originalite ?? 0) + 0.3 * (1 - reprise) : null;
+  const M = moy([echelle(s.compris), noteEns == null ? null : noteEns / 4]);
+  return {C, A, D, M, reprise, originalite, nDist, nAvant: avant.length, nApres: apres.length};
+}
+function etatEleve(uid){
+  const doc = S.traces[uid]; if (!doc) return null;
+  const nums = Object.keys(doc.seances || {}).map(Number).sort((a,b)=>a-b);
+  let etat = {C:null, A:null, D:null, M:null}, dernier = null;
+  for (const n of nums){
+    const s = doc.seances[n];
+    const autres = Object.entries(S.traces).filter(([u]) => u !== uid).flatMap(([,d]) => { const x = d.seances?.[n]; return x ? [...(x.ideesAvant||[]), ...(x.ideesApres||[])].map(i => i.texte) : []; });
+    const b = brut(s, autres, S.notes[uid]?.[n]);
+    for (const k of ["C","A","D","M"]) if (b[k] != null) etat[k] = etat[k] == null ? b[k] : 0.4 * etat[k] + 0.6 * b[k];   // lissage entre séances
+    dernier = {n, ...b};
+  }
+  return {etat, dernier, nums};
+}
+function ruptures(e, cfg){
+  const r = [];
+  const t = (v, cond, nom, proche) => { if (v == null) return; if (cond(v, 0)) r.push({nom, niv:"ko"}); else if (cond(v, proche)) r.push({nom, niv:"warn"}); };
+  t(e.C, (v,m) => v > 0.85 - m, "surcharge", 0.1);
+  t(e.C, (v,m) => v < 0.2 + m, "ennui", 0.1);
+  t(e.A, (v,m) => v < 0.3 + m, "dépendance", 0.1);
+  t(e.D, (v,m) => v < 0.25 + m, "rigidité", 0.1);
+  t(e.M, (v,m) => v < cfg.seuilMaitrise + m, "maîtrise insuffisante", 0.1);
+  return r;
+}
+function recommandation(e, cfg){
+  if (e.C == null) return {ordre:null, mode:null, retrait:false, texte:"Pas encore de trace : suivre la règle de la classe."};
+  if (e.C >= cfg.seuilCharge) return {ordre:"ia", mode:"elements", retrait:false, texte:"Charge élevée : l'aide vient d'abord, avec des éléments de réponse."};
+  if (e.A != null && e.A >= cfg.retraitAgentivite) return {ordre:"reflexion", mode:"questionner", retrait:true, texte: e.C < 0.3 ? "Autonome et peu chargé : retirer l'IA et relever l'exigence de la tâche." : "Autonome : retirer l'IA."};
+  if (e.D != null && e.D < 0.35) return {ordre:"reflexion", mode:"questionner", retrait:false, texte:"Pensée divergente basse : réflexion d'abord, puis une IA qui questionne."};
+  return {ordre:"reflexion", mode:"questionner", retrait:false, texte:"Réflexion d'abord, puis une IA qui questionne."};
+}
+const NOM_ORDRE = {reflexion:"Réflexion d'abord", ia:"IA d'abord", adaptatif:"Adaptatif (selon la charge déclarée)"};
+const NOM_MODE = {questionner:"IA qui questionne", elements:"IA qui donne des éléments"};
+
+/* ---------------------------------------------------------------- démarrage */
+async function demarrer(){
+  try { S.user = await claude.use("user"); } catch { S.user = null; }
+  try { S.db = await claude.use("db"); } catch { S.db = null; }
+  S.uid = S.user ? await S.user.id() : null;
+  S.admin = S.user ? await S.user.canEdit() : false;
+  if (!S.db || !S.uid){ afficherAbsent(); return; }
+  S.vue = (S.admin && location.hash !== "#eleve") ? "enseignant" : "eleve";
+  S.db.doc("config/classe").onSnapshot(snap => { S.config = {...DEFAUT, ...(snap.exists ? snap.data() : {})}; rendre(); }, erreurDb);
+  if (S.admin){
+    S.db.collection("traces").onSnapshot(q => { S.traces = Object.fromEntries(q.docs.map(d => [d.id, d.data()])); rendre(); }, erreurDb);
+    S.db.doc("notes/classe").onSnapshot(snap => { S.notes = snap.exists ? JSON.parse(JSON.stringify(snap.data())) : {}; rendre(); }, erreurDb);
+  }
+  S.db.doc("traces/" + S.uid).onSnapshot(snap => { if (!S.monDoc || !snap.metadata.hasPendingWrites) { S.monDoc = snap.exists ? JSON.parse(JSON.stringify(snap.data())) : null; if (!S.local) rendre(); } }, erreurDb);
+  claude.use("sample").then(x => { S.sample = x; rendre(); });
+  claude.use("downloads").then(x => { S.downloads = x; });
+  const sw = $("#switch-view");
+  if (S.admin){ sw.hidden = false; sw.onclick = () => { S.vue = S.vue === "enseignant" ? "eleve" : "enseignant"; sw.textContent = S.vue === "enseignant" ? "Voir la vue élève" : "Revenir à la vue enseignant"; rendre(); }; }
+  rendre();
+}
+function erreurDb(e){ console.warn("db", e?.code); }
+function afficherAbsent(){
+  $("#role-label").textContent = "Accès";
+  $("#view").replaceChildren(el("div", {class:"card"},
+    el("h2", {}, "Connectez-vous pour participer"),
+    el("p", {}, "Cette page enregistre vos productions dans la classe : ouvrez-la connecté à votre compte, avec un accès « Contributeur » donné par votre enseignant.")));
+}
+
+function rendre(){
+  if (!S.db || !S.uid) return;
+  $("#tabs").hidden = S.vue !== "enseignant";
+  if (S.vue === "enseignant") vueEnseignant(); else vueEleve();
+}
+
+/* =====================================================================
+   VUE ÉLÈVE
+   ===================================================================== */
+let L = null;   // état local de la séance en cours (évite d'écrire à chaque frappe)
+function maSeance(){ const n = S.config.seance; return S.monDoc?.seances?.[n] || null; }
+function reglagesEleve(){
+  const c = S.config, perso = c.eleves?.[S.uid] || {};
+  let ordre = perso.ordre || c.ordre, mode = perso.mode || c.mode;
+  if (ordre === "adaptatif" && L?.chargeDebut != null){
+    const surcharge = echelle(L.chargeDebut) >= c.seuilCharge;
+    ordre = surcharge ? "ia" : "reflexion"; if (!perso.mode) mode = surcharge ? "elements" : "questionner";
+  }
+  return {ordre, mode, retrait: !!perso.retrait};
+}
+async function sauver(){
+  const n = S.config.seance; const doc = S.monDoc ? JSON.parse(JSON.stringify(S.monDoc)) : {seances:{}};
+  doc.pseudo = L.pseudo || doc.pseudo || ""; doc.maj = now(); doc.seances = doc.seances || {}; doc.seances[n] = {...L, pseudo: undefined};
+  delete doc.seances[n].pseudo;
+  S.monDoc = doc;
+  try { await S.db.doc("traces/" + S.uid).set(doc); $("#etat-sauv") && ($("#etat-sauv").textContent = "Enregistré"); }
+  catch (e) { $("#etat-sauv") && ($("#etat-sauv").textContent = e.code === "invalid_argument" ? "Vous n'avez pas le droit d'écrire : demandez l'accès « Contributeur »." : "Enregistrement impossible pour l'instant, réessayez."); }
+}
+function vueEleve(){
+  $("#role-label").textContent = S.admin ? "Vue élève (aperçu enseignant)" : "Élève";
+  const c = S.config, v = $("#view");
+  if (!c.ouverte || !c.seance){
+    $("#titre").textContent = "En attente de la séance";
+    v.replaceChildren(el("div", {class:"card"}, el("p", {}, "Votre enseignant n'a pas encore ouvert de séance. Cette page se mettra à jour toute seule."))); L = null; return;
+  }
+  $("#titre").textContent = "Séance " + c.seance;
+  if (!L || L.num !== c.seance){
+    const deja = maSeance();
+    L = deja ? JSON.parse(JSON.stringify(deja)) : {num:c.seance, phase:"pseudo", tache:c.tache, debut:null, chargeDebut:null, chargeFin:null, compris:null,
+      ideesAvant:[], ideesApres:[], echanges:[], premiereDemande:null, ideesAvantAide:null, bloque:false, ordre:null, mode:null};
+    L.pseudo = S.monDoc?.pseudo || "";
+    if (L.phase === "pseudo" && L.pseudo) L.phase = "charge";
+    S.local = true;
+  }
+  const r = reglagesEleve();
+  const fiche = el("div", {class:"card"}, el("p", {class:"eyebrow"}, "La tâche"), el("p", {}, c.tache || "(consigne non renseignée)"));
+  const etat = el("p", {class:"small muted", id:"etat-sauv", "aria-live":"polite"});
+  const blocs = [fiche];
+
+  if (L.phase === "pseudo"){
+    const inp = el("input", {type:"text", id:"pseudo", maxlength:"24", placeholder:"Par exemple : Panda 7", autocomplete:"off"});
+    blocs.push(el("div", {class:"card"}, el("label", {for:"pseudo"}, "Choisissez un pseudonyme"),
+      el("p", {class:"small muted"}, "Pas votre vrai nom : l'enseignant vous reconnaîtra par ce pseudonyme."), inp,
+      el("button", {class:"primary", onclick: () => { const p = inp.value.trim(); if (!p) return; L.pseudo = p; L.phase = "charge"; vueEleve(); }}, "Continuer")));
+  }
+  else if (L.phase === "charge"){
+    blocs.push(el("div", {class:"card"}, el("h2", {}, "Avant de commencer"),
+      echelleUI("Cette tâche me paraît…", ["très facile","facile","moyenne","difficile","très difficile"], L.chargeDebut, x => { L.chargeDebut = x; vueEleve(); }),
+      el("button", {class:"primary", disabled: L.chargeDebut == null, onclick: async () => {
+        L.debut = now(); const rr = reglagesEleve(); L.ordre = rr.retrait ? "autonomie" : rr.ordre; L.mode = rr.mode;
+        L.phase = (L.ordre === "ia") ? "ia" : "reflexion"; if (L.phase === "ia") L.ideesAvantAide = 0;
+        await sauver(); vueEleve(); }}, "Commencer")));
+  }
+  else if (L.phase === "reflexion"){
+    const autonome = L.ordre === "autonomie";
+    blocs.push(el("div", {class:"card"},
+      el("h2", {}, autonome ? "Aujourd'hui, vous travaillez en autonomie" : "D'abord, vos idées"),
+      el("p", {class:"small muted"}, autonome ? "Écrivez vos idées, puis terminez la séance." : `Écrivez au moins ${c.minIdees} idée${c.minIdees > 1 ? "s" : ""} avant d'ouvrir l'IA. Si vous êtes vraiment bloqué, dites-le.`),
+      listeIdees(L.ideesAvant, "avant"), saisieIdee(t => { L.ideesAvant.push({t: now(), texte:t}); S.focusIdee = true; vueEleve(); sauver(); }),
+      el("div", {class:"row"},
+        autonome ? el("button", {class:"primary", onclick: async () => { L.phase = "fin"; await sauver(); vueEleve(); }}, "Terminer")
+          : el("button", {class:"primary", disabled: L.ideesAvant.length < c.minIdees, onclick: async () => { L.ideesAvantAide = L.ideesAvant.length; L.phase = "ia"; await sauver(); vueEleve(); }}, "Ouvrir l'IA"),
+        autonome ? null : el("button", {onclick: async () => { L.bloque = true; L.ideesAvantAide = L.ideesAvant.length; L.phase = "ia"; await sauver(); vueEleve(); }}, "Je suis bloqué"))));
+  }
+  else if (L.phase === "ia"){
+    blocs.push(el("div", {class:"grid2"}, carteIA(r), el("div", {class:"card"},
+      el("h2", {}, "Mes idées"),
+      L.ideesAvant.length ? el("p", {class:"small muted"}, "Avant l'IA :") : null, listeIdees(L.ideesAvant, "avant"),
+      el("p", {class:"small muted"}, "Depuis l'IA :"), listeIdees(L.ideesApres, "après"),
+      saisieIdee(t => { L.ideesApres.push({t: now(), texte:t}); S.focusIdee = true; vueEleve(); sauver(); }),
+      el("button", {class:"primary", disabled: (L.ideesAvant.length + L.ideesApres.length) === 0, onclick: async () => { L.phase = "fin"; await sauver(); vueEleve(); }}, "J'ai terminé"))));
+  }
+  else if (L.phase === "fin"){
+    blocs.push(el("div", {class:"card"}, el("h2", {}, "Pour finir"),
+      echelleUI("Finalement, la tâche m'a paru…", ["très facile","facile","moyenne","difficile","très difficile"], L.chargeFin, x => { L.chargeFin = x; vueEleve(); }),
+      echelleUI("J'ai compris ce qu'il fallait apprendre…", ["pas du tout","un peu","moyennement","bien","très bien"], L.compris, x => { L.compris = x; vueEleve(); }),
+      el("button", {class:"primary", disabled: L.chargeFin == null || L.compris == null, onclick: async () => { L.fin = now(); L.phase = "envoye"; await sauver(); vueEleve(); }}, "Envoyer")));
+  }
+  else if (L.phase === "envoye"){
+    blocs.push(el("div", {class:"card"}, el("h2", {}, "Merci, c'est envoyé"), el("p", {}, `${L.ideesAvant.length + L.ideesApres.length} idées enregistrées. Vous pourrez retrouver cette page à la prochaine séance.`)));
+  }
+  blocs.push(etat);
+  v.replaceChildren(...blocs);
+  if (S.focusIdee){ S.focusIdee = false; $('textarea[aria-label="Nouvelle idée"]')?.focus(); }
+}
+function echelleUI(question, libelles, val, choisir){
+  const id = "q" + Math.random().toString(36).slice(2,7);
+  return el("div", {class:"field", role:"group", "aria-labelledby":id}, el("p", {id, style:"font-weight:700"}, question),
+    el("div", {class:"scale"}, libelles.map((lib, i) => el("button", {"aria-pressed": String(val === i+1), onclick: () => choisir(i+1)}, lib))));
+}
+function listeIdees(liste, tag){
+  if (!liste.length) return el("p", {class:"small muted"}, "Aucune idée pour l'instant.");
+  return el("ol", {class:"ideas"}, liste.map(i => el("li", {}, el("span", {}, i.texte), el("span", {class:"tag"}, tag))));
+}
+function saisieIdee(ajouter){
+  const ta = el("textarea", {rows:"2", placeholder:"Une idée par envoi", "aria-label":"Nouvelle idée"});
+  const go = () => { const t = ta.value.trim(); if (!t) return; ajouter(t.slice(0, 400)); };
+  ta.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey){ e.preventDefault(); go(); } });
+  return el("div", {class:"field"}, ta, el("button", {onclick: go}, "Ajouter l'idée"));
+}
+let ctlIA = null;
+function carteIA(r){
+  const zone = el("div", {class:"chat", "aria-live":"polite"}, L.echanges.map(e => el("div", {class:"msg " + (e.role === "ia" ? "ia" : "el")}, e.texte)));
+  const ta = el("textarea", {rows:"2", placeholder: r.mode === "questionner" ? "Expliquez votre idée ou votre difficulté" : "Posez votre question", "aria-label":"Message à l'IA"});
+  const envoyer = el("button", {class:"primary"}, "Envoyer");
+  const info = el("p", {class:"small muted"});
+  if (!S.sample){ info.textContent = "L'IA n'est pas disponible sur cet appareil. Continuez avec vos idées."; envoyer.disabled = true; }
+  envoyer.onclick = async () => {
+    const msg = ta.value.trim(); if (!msg || !S.sample) return;
+    if (L.premiereDemande == null){ L.premiereDemande = Math.round((Date.now() - Date.parse(L.debut)) / 1000); if (L.ideesAvantAide == null) L.ideesAvantAide = L.ideesAvant.length; }
+    L.echanges.push({role:"el", texte: msg.slice(0, 1000), t: now()}); ta.value = "";
+    const bulle = el("div", {class:"msg ia"}, "Réflexion…"); zone.append(el("div", {class:"msg el"}, msg), bulle); zone.scrollTop = zone.scrollHeight;
+    envoyer.disabled = true; ctlIA = new AbortController();
+    try {
+      const { text } = await S.sample(promptIA(r), {modelTier:"quick", cache:false, signal: ctlIA.signal, onText: ({text}) => { bulle.textContent = text; zone.scrollTop = zone.scrollHeight; }});
+      L.echanges.push({role:"ia", texte: text, t: now()}); await sauver();
+      if (!bulle.isConnected) vueEleve();
+    } catch (e) {
+      bulle.textContent = e.code === "not_granted" || e.code === "sampling_disabled" ? "L'IA n'est pas autorisée ici. Continuez avec vos idées." : e.code === "rate_limited" ? "Trop de demandes : attendez un peu." : "L'IA n'a pas répondu. Réessayez.";
+      L.echanges.pop();
+    } finally { envoyer.disabled = false; }
+  };
+  return el("div", {class:"card"}, el("h2", {}, r.mode === "questionner" ? "L'IA vous pose des questions" : "L'IA vous donne un coup de pouce"),
+    el("p", {class:"small muted"}, r.mode === "questionner" ? "Elle ne donne pas de réponse : elle vous aide à aller plus loin." : "Elle donne un élément à la fois : à vous de continuer."),
+    zone, ta, el("div", {class:"row"}, envoyer), info);
+}
+function promptIA(r){
+  const regles = r.mode === "questionner"
+    ? "Tu accompagnes un élève de façon socratique. Tu ne donnes JAMAIS la réponse, ni une liste d'idées, ni un exemple d'idée. Tu poses UNE seule question courte à la fois, qui l'aide à approfondir, justifier, ou explorer une piste différente de celles qu'il a déjà ; ou tu proposes un contre-exemple. Deux phrases au maximum, en français, adaptées à un élève."
+    : "Tu aides un élève qui a besoin d'un coup de pouce. Tu donnes UN seul élément de réponse ou un exemple partiel, jamais une liste complète, puis tu poses une courte question pour qu'il continue seul. Trois phrases au maximum, en français, adaptées à un élève.";
+  const idees = [...L.ideesAvant, ...L.ideesApres].map(i => "- " + i.texte).join("\n") || "(aucune pour l'instant)";
+  const contexte = `${regles}\n\nLa tâche de la classe : ${S.config.tache || "(non précisée)"}\n\nLes idées déjà écrites par l'élève :\n${idees}\n\nRéponds seulement à l'élève, sans préambule.`;
+  const tours = [{role:"user", content: contexte}];
+  for (const e of L.echanges.slice(-10)) tours.push({role: e.role === "ia" ? "assistant" : "user", content: e.texte});
+  if (tours.at(-1).role !== "user") tours.push({role:"user", content:"Continue."});
+  return tours;
+}
+
+/* =====================================================================
+   VUE ENSEIGNANT
+   ===================================================================== */
+async function majConfig(patch){
+  const cfg = JSON.parse(JSON.stringify({...S.config, ...patch}));
+  S.config = cfg; rendre();
+  try { await S.db.doc("config/classe").set(cfg); } catch (e) { toast("Réglage non enregistré : " + (e.code || "erreur")); }
+}
+function toast(t){ const n = el("div", {class:"notice warn", role:"status"}, t); $("#view").prepend(n); setTimeout(() => n.remove(), 4000); }
+document.querySelectorAll("#tabs button").forEach(b => b.addEventListener("click", () => { S.onglet = b.dataset.tab; S.detail = null;
+  document.querySelectorAll("#tabs button").forEach(x => x.setAttribute("aria-selected", String(x === b))); rendre(); }));
+
+function vueEnseignant(){
+  $("#role-label").textContent = "Enseignant";
+  const c = S.config;
+  $("#titre").textContent = c.ouverte ? `Séance ${c.seance} en cours` : (c.seance ? `Séance ${c.seance} fermée` : "Aucune séance ouverte");
+  if (S.onglet === "reglages") return ongletReglages();
+  if (S.onglet === "export") return ongletDonnees();
+  if (S.detail) return detailEleve(S.detail);
+  ongletClasse();
+}
+function barre(lbl, v, couleur){ return [el("span", {}, lbl), el("div", {class:"bar", role:"img", "aria-label": `${lbl} ${fr(v)}`}, el("i", {style:`width:${v == null ? 0 : Math.round(v*100)}%;background:${couleur}`})), el("span", {class:"small"}, fr(v))]; }
+function ongletClasse(){
+  const c = S.config, uids = Object.keys(S.traces);
+  const ligneSeance = el("div", {class:"card"},
+    el("div", {class:"row", style:"justify-content:space-between"},
+      el("div", {}, el("p", {class:"eyebrow"}, "Séance"), el("p", {}, c.tache ? c.tache : el("span", {class:"muted"}, "Consigne à saisir dans Réglages"))),
+      c.ouverte ? el("button", {onclick: () => majConfig({ouverte:false})}, "Fermer la séance")
+        : el("button", {class:"primary", onclick: () => { if (!c.tache){ S.onglet = "reglages"; toast("Saisissez d'abord la consigne de la tâche."); rendre(); return; } majConfig({seance: (c.seance||0) + 1, ouverte:true}); }}, `Ouvrir la séance ${(c.seance||0) + 1}`)),
+    el("p", {class:"small muted"}, `Règle de classe : ${NOM_ORDRE[c.ordre]} · ${NOM_MODE[c.mode]} · ${c.minIdees} idées avant l'IA.`));
+  if (!uids.length){
+    $("#view").replaceChildren(el("div", {class:"wrap"}, ligneSeance, el("div", {class:"card"}, el("h2", {}, "Aucun élève pour l'instant"),
+      el("p", {}, "Partagez cette page avec vos élèves en leur donnant le rôle « Contributeur » : ils arrivent sur la vue élève, choisissent un pseudonyme et leurs traces apparaissent ici."))));
+    return;
+  }
+  // indicateurs de classe pour la séance courante
+  const n = c.seance, ideesSeance = uids.flatMap(u => { const s = S.traces[u].seances?.[n]; return s ? [...(s.ideesAvant||[]), ...(s.ideesApres||[])].map(i => i.texte) : []; });
+  const actifs = uids.filter(u => S.traces[u].seances?.[n]);
+  const finis = actifs.filter(u => S.traces[u].seances[n].phase === "envoye");
+  const kpis = el("div", {class:"kpis"},
+    el("div", {class:"kpi"}, el("span", {class:"small muted"}, "Élèves dans la séance"), el("b", {}, `${actifs.length}`), el("span", {class:"small muted"}, `${finis.length} ont terminé`)),
+    el("div", {class:"kpi"}, el("span", {class:"small muted"}, "Idées de la classe"), el("b", {}, `${ideesSeance.length}`), el("span", {class:"small muted"}, `${distinctes(ideesSeance)} distinctes`)),
+    el("div", {class:"kpi"}, el("span", {class:"small muted"}, "Diversité"), el("b", {}, ideesSeance.length ? fr(distinctes(ideesSeance) / ideesSeance.length) : "–"), el("span", {class:"small muted"}, "part d'idées distinctes")));
+  const cartes = uids.map(u => {
+    const doc = S.traces[u], est = etatEleve(u), e = est?.etat || {}, rup = ruptures(e, c), reco = recommandation(e, c), perso = c.eleves?.[u] || {};
+    const s = doc.seances?.[n];
+    const statut = !s ? el("span", {class:"pill"}, "absent de la séance") : s.phase === "envoye" ? el("span", {class:"pill ok"}, "terminé") : el("span", {class:"pill"}, "en cours : " + ({pseudo:"accueil", charge:"accueil", reflexion:"réflexion", ia:"avec l'IA", fin:"bilan"}[s.phase] || s.phase));
+    const applique = (perso.ordre === reco.ordre && perso.mode === reco.mode && !!perso.retrait === reco.retrait);
+    return el("div", {class:"card studentcard"},
+      el("div", {class:"row", style:"justify-content:space-between"}, el("h3", {}, doc.pseudo || "Sans pseudonyme"), statut),
+      el("div", {class:"bars"}, barre("Charge", e.C, "var(--blue)"), barre("Agentivité", e.A, "var(--accent)"), barre("Pensée div.", e.D, "var(--green)"), barre("Maîtrise", e.M, "var(--violet)")),
+      el("div", {class:"row"}, rup.length ? rup.map(x => el("span", {class:"pill " + x.niv}, (x.niv === "ko" ? "rupture : " : "menace : ") + x.nom)) : el("span", {class:"pill ok"}, "dans le domaine")),
+      el("p", {class:"small"}, el("b", {}, "Recommandation : "), reco.texte),
+      el("p", {class:"small muted"}, "Réglage actuel : " + (perso.retrait ? "IA retirée" : `${NOM_ORDRE[perso.ordre || c.ordre]}, ${NOM_MODE[perso.mode || c.mode]}`)),
+      el("div", {class:"row"},
+        reco.ordre ? el("button", {disabled: applique, onclick: () => appliquer(u, reco)}, applique ? "Recommandation appliquée" : "Appliquer") : null,
+        Object.keys(perso).length ? el("button", {class:"ghost", onclick: () => appliquer(u, null)}, "Règle de la classe") : null,
+        el("button", {class:"ghost", onclick: () => { S.detail = u; rendre(); }}, "Détail")));
+  });
+  const tout = el("button", {onclick: () => { const patch = {...(c.eleves||{})}; for (const u of uids){ const r = recommandation(etatEleve(u)?.etat || {}, c); if (r.ordre) patch[u] = {ordre:r.ordre, mode:r.mode, retrait:r.retrait}; } majConfig({eleves: patch}); }}, "Appliquer toutes les recommandations");
+  $("#view").replaceChildren(el("div", {class:"wrap"}, ligneSeance, kpis, el("div", {class:"row", style:"justify-content:space-between"}, el("h2", {}, "Élèves"), tout), el("div", {class:"grid2"}, cartes),
+    el("details", {class:"card"}, el("summary", {}, "Comment l'état est-il estimé ?"),
+      el("p", {class:"small"}, "Charge : moyenne des difficultés déclarées en début et en fin de séance (de 0,1 à 0,9), plus 0,1 si l'élève s'est déclaré bloqué. Agentivité : pour moitié la part d'idées non reprises des réponses de l'IA, pour moitié le nombre d'idées produites avant toute aide (3 et plus = 1). Pensée divergente : nombre d'idées distinctes (5 et plus = 1, poids 0,4), originalité par rapport au reste de la classe (0,3) et absence de reprise (0,3). Maîtrise : compréhension déclarée et note de l'enseignant si elle existe. Les séances successives sont lissées (60 % pour la dernière). Les seuils de rupture sont ceux du modèle : surcharge au-dessus de 0,85, ennui sous 0,2, dépendance sous 0,3, rigidité sous 0,25 ; « menace » à moins de 0,1 d'un seuil."),
+      el("p", {class:"small muted"}, "Ces indicateurs sont des estimations grossières tirées des traces : ils aident à regarder un élève, ils ne le mesurent pas."))));
+}
+function appliquer(u, reco){
+  const patch = {...(S.config.eleves || {})};
+  if (reco) patch[u] = {ordre: reco.ordre, mode: reco.mode, retrait: reco.retrait}; else delete patch[u];
+  majConfig({eleves: patch});
+}
+function detailEleve(u){
+  const doc = S.traces[u], est = etatEleve(u), c = S.config;
+  if (!doc){ S.detail = null; return ongletClasse(); }
+  const nums = est?.nums || [];
+  const seances = nums.slice().reverse().map(n => {
+    const s = doc.seances[n], note = S.notes[u]?.[n];
+    return el("div", {class:"card"},
+      el("div", {class:"row", style:"justify-content:space-between"}, el("h3", {}, `Séance ${n}`), el("span", {class:"pill"}, s.ordre === "autonomie" ? "IA retirée" : `${NOM_ORDRE[s.ordre] || "–"} · ${NOM_MODE[s.mode] || "–"}`)),
+      el("p", {class:"small muted"}, `Difficulté déclarée : ${s.chargeDebut ?? "–"}/5 au début, ${s.chargeFin ?? "–"}/5 à la fin · compréhension ${s.compris ?? "–"}/5 · ${s.bloque ? "s'est déclaré bloqué · " : ""}${s.premiereDemande != null ? "première demande à l'IA après " + Math.round(s.premiereDemande/60) + " min" : "aucune demande à l'IA"}`),
+      el("p", {class:"small", style:"font-weight:700"}, "Idées avant l'IA"), listeIdees(s.ideesAvant || [], "avant"),
+      el("p", {class:"small", style:"font-weight:700"}, "Idées après l'IA"), listeIdees(s.ideesApres || [], "après"),
+      (s.echanges || []).length ? el("details", {}, el("summary", {}, `Échanges avec l'IA (${s.echanges.length})`), el("div", {class:"chat"}, s.echanges.map(e => el("div", {class:"msg " + (e.role === "ia" ? "ia" : "el")}, e.texte)))) : null,
+      el("div", {class:"field"}, el("p", {style:"font-weight:700"}, "Votre appréciation de la maîtrise"),
+        el("div", {class:"scale"}, ["non atteint","fragile","en cours","atteint","dépassé"].map((lib, i) => el("button", {"aria-pressed": String(note === i), onclick: () => noter(u, n, i)}, lib)))));
+  });
+  $("#view").replaceChildren(el("div", {class:"wrap"},
+    el("div", {class:"row"}, el("button", {class:"ghost", onclick: () => { S.detail = null; rendre(); }}, "← Classe"), el("h2", {}, doc.pseudo || "Élève")),
+    ...seances));
+}
+async function noter(u, n, v){
+  const notes = JSON.parse(JSON.stringify(S.notes)); notes[u] = notes[u] || {}; notes[u][n] = v; S.notes = notes; rendre();
+  try { await S.db.doc("notes/classe").set(notes); } catch { toast("Note non enregistrée."); }
+}
+function ongletReglages(){
+  const c = S.config;
+  const tache = el("textarea", {id:"tache", rows:"3"}); tache.value = c.tache || "";
+  const curseur = (id, lbl, min, max, pas, val, aide) => { const i = el("input", {type:"range", id, min, max, step:pas, value:val}); const o = el("output", {}, fr(+val)); i.addEventListener("input", () => o.textContent = fr(+i.value));
+    return el("div", {class:"field"}, el("label", {for:id, class:"row", style:"justify-content:space-between"}, lbl, o), i, el("p", {class:"small muted"}, aide)); };
+  const choix = (id, lbl, val, opts) => el("div", {class:"field"}, el("label", {for:id}, lbl), el("select", {id}, Object.entries(opts).map(([k, t]) => el("option", {value:k, selected: k === val}, t))));
+  $("#view").replaceChildren(el("div", {class:"wrap"},
+    el("div", {class:"card"}, el("h2", {}, "La tâche"), el("label", {for:"tache"}, "Consigne affichée aux élèves"), tache,
+      el("p", {class:"small muted"}, "Une tâche ouverte se prête bien aux traces : usages d'un objet, hypothèses, titres, solutions possibles.")),
+    el("div", {class:"card"}, el("h2", {}, "Règle de la classe"),
+      choix("ordre", "Ordre dans la séance", c.ordre, NOM_ORDRE),
+      choix("mode", "Rôle de l'IA", c.mode, NOM_MODE),
+      curseur("minIdees", "Idées à écrire avant d'ouvrir l'IA", 0, 6, 1, c.minIdees, "En réflexion d'abord. L'élève peut toujours se déclarer bloqué."),
+      curseur("seuilCharge", "Seuil de charge", 0.5, 0.85, 0.05, c.seuilCharge, "Au-dessus, l'aide vient d'abord (ordre adaptatif et recommandations). « Difficile » correspond à 0,7."),
+      curseur("retraitAgentivite", "Agentivité de retrait", 0.4, 1, 0.05, c.retraitAgentivite, "Au-dessus, on recommande de retirer l'IA à l'élève."),
+      curseur("seuilMaitrise", "Maîtrise attendue", 0.2, 0.9, 0.05, c.seuilMaitrise, "Sous ce niveau, la maîtrise est signalée comme insuffisante.")),
+    el("button", {class:"primary", onclick: () => majConfig({tache: $("#tache").value.trim(), ordre: $("#ordre").value, mode: $("#mode").value,
+      minIdees: +$("#minIdees").value, seuilCharge: +$("#seuilCharge").value, retraitAgentivite: +$("#retraitAgentivite").value, seuilMaitrise: +$("#seuilMaitrise").value}).then(() => toast("Réglages enregistrés."))}, "Enregistrer les réglages"),
+    el("p", {class:"small muted"}, "Les réglages s'appliquent tout de suite aux élèves qui commencent la séance ; un réglage individuel (onglet Classe) l'emporte sur la règle de la classe.")));
+}
+function lignesCSV(){
+  const tete = ["pseudo","seance","ordre","mode","charge_debut","charge_fin","compris","note_enseignant","bloque","premiere_demande_s","idees_avant","idees_apres","idees_distinctes","reprise_ia","originalite","C_estime","A_estime","D_estime","M_estime"];
+  const lignes = [tete.join(";")];
+  for (const [u, doc] of Object.entries(S.traces)){
+    for (const n of Object.keys(doc.seances || {}).map(Number).sort((a,b)=>a-b)){
+      const s = doc.seances[n];
+      const autres = Object.entries(S.traces).filter(([x]) => x !== u).flatMap(([,d]) => { const x = d.seances?.[n]; return x ? [...(x.ideesAvant||[]), ...(x.ideesApres||[])].map(i => i.texte) : []; });
+      const b = brut(s, autres, S.notes[u]?.[n]);
+      const v = [doc.pseudo || "", n, s.ordre || "", s.mode || "", s.chargeDebut ?? "", s.chargeFin ?? "", s.compris ?? "", S.notes[u]?.[n] ?? "", s.bloque ? 1 : 0, s.premiereDemande ?? "",
+        b.nAvant, b.nApres, b.nDist, fr(b.reprise, 3), fr(b.originalite, 3), fr(b.C, 3), fr(b.A, 3), fr(b.D, 3), fr(b.M, 3)];
+      lignes.push(v.map(x => String(x).replace(/;/g, ",").replace(/\n/g, " ")).join(";"));
+    }
+  }
+  return lignes.join("\n");
+}
+function ongletDonnees(){
+  const nb = Object.values(S.traces).reduce((a, d) => a + Object.keys(d.seances || {}).length, 0);
+  const etat = el("p", {class:"small muted", "aria-live":"polite"});
+  const bouton = el("button", {class:"primary", disabled: !nb}, "Télécharger le tableau (CSV)");
+  bouton.onclick = async () => {
+    if (!S.downloads){ etat.textContent = "Le téléchargement n'est pas disponible dans cette vue."; return; }
+    try { await S.downloads.save({filename: "traces_classe.csv", data: "﻿" + lignesCSV()}); etat.textContent = "Fichier enregistré."; }
+    catch (e) { etat.textContent = e.code === "declined" ? "Téléchargement annulé." : "Téléchargement impossible ici."; }
+  };
+  $("#view").replaceChildren(el("div", {class:"wrap"},
+    el("div", {class:"card"}, el("h2", {}, "Export pour l'analyse"),
+      el("p", {}, `${Object.keys(S.traces).length} élèves, ${nb} séances enregistrées. Une ligne par élève et par séance ; les élèves n'apparaissent que par leur pseudonyme. Les échanges complets avec l'IA ne sont pas exportés.`),
+      el("div", {class:"row"}, bouton), etat),
+    el("div", {class:"card"}, el("h2", {}, "Ce qui est enregistré"),
+      el("p", {class:"small"}, "Pour chaque élève et chaque séance : pseudonyme, difficulté déclarée au début et à la fin, compréhension déclarée, idées avant et après l'IA avec leur heure, échanges avec l'IA, délai avant la première demande, déclaration de blocage, ordre et rôle de l'IA appliqués. Les élèves ne voient que leurs propres données ; seuls les éditeurs de la page voient celles de la classe."),
+      el("p", {class:"small muted"}, "Prototype de recherche : à utiliser avec des adultes volontaires (étudiants, pilote). Pour des élèves mineurs, utilisez la version à héberger par l'établissement, après avis du délégué à la protection des données."))));
+}
+
+demarrer();
+</script>

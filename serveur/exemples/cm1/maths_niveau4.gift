@@ -1,0 +1,27 @@
+// CM1 — Mathématiques — niveau 4 (exigeant)
+$CATEGORY: CM1/Mathématiques/Niveau 4
+
+::Comparer des décimaux::Quel est le plus grand nombre ?{=3,5 ~3,45 ~3,09 ~3,499}
+
+::Centièmes::Écrivez 245/100 sous la forme d'un nombre décimal.{#2.45:0.0001}
+
+::Intercaler::Donnez un nombre décimal compris entre 4,2 et 4,3.{#4.201..4.299}
+
+::Problème à étapes::Lina a 50 €. Elle achète 3 livres à 12 € chacun. Combien d'euros lui reste-t-il ?{#14}
+
+::Division::Combien font 864 divisé par 4 ?{#216}
+
+::Aire::Un rectangle mesure 8 cm de long et 5 cm de large. Quelle est son aire, en centimètres carrés ?{#40}
+
+::Périmètre du rectangle::Quel est le périmètre d'un rectangle de 8 cm sur 5 cm, en centimètres ?{#26}
+
+::Plus grand que 1::Quelles fractions sont plus grandes que 1 ?{
+~%50%5/4
+~%50%7/3
+~%-50%2/3
+~%-50%4/5
+}
+
+::Durée en minutes::Combien de minutes y a-t-il dans 2 h 15 min ?{#135}
+
+::Axes de symétrie::Un carré a 4 axes de symétrie.{T#Pensez aux deux médianes et aux deux diagonales.#Oui \: deux médianes et deux diagonales.}

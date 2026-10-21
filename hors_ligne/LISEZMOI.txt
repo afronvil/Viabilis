@@ -1,0 +1,53 @@
+VIABILIS HORS LIGNE (CLÉ USB)
+=============================
+
+Pour travailler sur son propre ordinateur, sans le serveur de la classe.
+Hors ligne, il n'y a pas d'IA : on cherche seul, avec les coups de pouce, et les exercices sont corrigés sur place.
+
+
+POUR L'ENSEIGNANT : PRÉPARER LA CLÉ
+-----------------------------------
+1. Copiez sur la clé tout le dossier « application » (celui qui contient ce dossier hors_ligne et le dossier serveur).
+2. Dans la page enseignant, onglet Données, carte « Travail hors ligne », touchez « Télécharger le kit de la classe ».
+   Copiez le fichier téléchargé dans ce dossier hors_ligne et renommez-le kit.json.
+3. Pour des ordinateurs sous Windows sans Python, ajoutez un Python portable (voir plus bas).
+
+Le kit contient les séances et les exercices de la classe. Il ne contient ni les critères de réussite, ni les réglages,
+ni les idées des autres élèves. Les réponses des exercices y figurent (elles servent à les corriger sur place) :
+un étudiant qui ouvre kit.json avec un éditeur de texte peut les lire.
+
+
+POUR L'ÉTUDIANT : TRAVAILLER
+----------------------------
+Ouvrez ce dossier hors_ligne sur la clé (ou une copie sur votre ordinateur), puis :
+
+  Windows : double-cliquez sur lancer.bat
+  macOS   : double-cliquez sur lancer.command
+            (la première fois, si macOS refuse : clic droit sur lancer.command, puis « Ouvrir »)
+  Linux   : dans un terminal, sh lancer.sh
+
+Une fenêtre noire s'ouvre, puis la page Viabilis dans votre navigateur.
+Laissez la fenêtre noire ouverte pendant tout votre travail ; fermez-la pour arrêter.
+Votre travail est enregistré dans le dossier hors_ligne/travail : ne le supprimez pas.
+
+À LA FIN : touchez « Exporter mon travail ». Un fichier viabilis_....json arrive dans vos Téléchargements.
+Remettez-le à votre enseignant (par courriel, sur Moodle ou sur une clé). Vous pouvez exporter autant de fois que vous voulez :
+c'est le dernier fichier qui compte.
+
+
+PYTHON
+------
+Viabilis a besoin de Python 3.9 ou plus récent (aucun module supplémentaire).
+  Linux : déjà installé en général (sinon : paquet python3).
+  macOS : la première fois, macOS propose d'installer les « outils de développement en ligne de commande » : acceptez.
+          Sinon, installez Python depuis https://www.python.org.
+  Windows : installez Python depuis https://www.python.org (cochez « Add python.exe to PATH »),
+            OU, sans rien installer : téléchargez sur python.org le « Windows embeddable package (64-bit) »,
+            et décompressez-le dans un dossier nommé « python » à l'intérieur de ce dossier hors_ligne
+            (on doit trouver hors_ligne/python/python.exe). lancer.bat l'utilise alors automatiquement.
+
+
+EN CAS DE PROBLÈME
+------------------
+« Kit introuvable » : le fichier kit.json n'est pas dans le dossier hors_ligne.
+La page ne s'ouvre pas : ouvrez vous-même l'adresse affichée dans la fenêtre noire (http://127.0.0.1:8765/eleve/).

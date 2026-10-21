@@ -1,0 +1,29 @@
+// CM1 — Géographie — niveau 2 (accessible)
+$CATEGORY: CM1/Géographie/Niveau 2
+
+::Plus haut sommet::Quel est le plus haut sommet de France ?{=le mont Blanc ~le puy de Dôme ~le mont Ventoux ~le Canigou}
+
+::Plus long fleuve::Quel est le plus long fleuve de France ?{=la Loire ~la Seine ~le Rhône ~la Garonne}
+
+::Façades maritimes::Quelles mers et quel océan bordent la France métropolitaine ?{
+~%25%la Manche
+~%25%la mer du Nord
+~%25%l'océan Atlantique
+~%25%la mer Méditerranée
+~%-100%l'océan Indien
+}
+
+::Pays voisins::Quel pays a une frontière avec la France ?{=l'Espagne ~le Portugal ~l'Autriche ~la Pologne}
+
+::Rose des vents::Associez chaque point cardinal à sa position sur une carte orientée.{
+=nord -> en haut
+=sud -> en bas
+=est -> à droite
+=ouest -> à gauche
+}
+
+::Logement::Dans une grande ville, la plupart des habitants vivent en…{=appartement ~ferme ~cabane ~château}
+
+::Département de Brest::Brest se trouve dans le département du…{=Finistère ~Morbihan ~Calvados ~Var}
+
+::Loisirs::Un lieu aménagé au bord de la mer pour les vacances s'appelle une station…{=balnéaire ~de ski ~thermale ~spatiale}

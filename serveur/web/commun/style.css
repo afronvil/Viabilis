@@ -1,0 +1,138 @@
+/* Viabilis classe — styles communs (polices système : aucune requête vers un service tiers). */
+:root{
+  --bg:#F5F3EE; --panel:#FDFCF9; --ink:#1F2A44; --muted:#5B6779; --line:#DCD8CC; --soft:#E9EEF4;
+  --accent:#B4561A; --blue:#2F6DB5; --green:#2E7D5B; --violet:#6B4C9A;
+  --ok:#2E7D5B; --warn:#9A6A00; --ko:#B42318; --okbg:#E3F1EA; --warnbg:#FBF1D9; --kobg:#FBE9E7;
+  --display:Georgia, 'Times New Roman', serif; --body:system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#141A26; --panel:#1C2433; --ink:#E8ECF3; --muted:#A3AEC0; --line:#33405A; --soft:#232D40;
+  --accent:#F0A35E; --blue:#7FB0EA; --green:#6CC79B; --violet:#B79BE3;
+  --ok:#6CC79B; --warn:#E8C26A; --ko:#F28B7D; --okbg:#1E3A2E; --warnbg:#3D3420; --kobg:#45221F; color-scheme:dark}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;padding-inline:16px;padding-block:calc(16px + env(safe-area-inset-top,0px)) 96px}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+h1{font-family:var(--display);font-size:clamp(22px,4vw,30px);line-height:1.2;margin:0}
+h2{font-family:var(--display);font-size:19px;margin:0}
+h3{font-size:15px;margin:0}
+p{margin:0}
+.muted{color:var(--muted)} .small{font-size:13.5px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px}
+button{font:inherit;font-weight:700;border-radius:12px;padding:12px 16px;border:1px solid var(--line);background:var(--soft);color:var(--ink);cursor:pointer;min-height:44px}
+button.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button.ghost{background:transparent}
+button.danger{color:var(--ko);border-color:var(--ko);background:transparent}
+button:disabled{opacity:.5;cursor:not-allowed}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+input[type=text],input[type=password],textarea,select{font:inherit;width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+textarea{min-height:72px;resize:vertical}
+input[type=range]{width:100%;accent-color:var(--accent)}
+label{font-weight:700;font-size:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.scale button{padding:10px 4px;font-size:14px}
+.scale button[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ideas{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.ideas li{background:var(--soft);border-radius:10px;padding:8px 12px;display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.ideas li .texte-idee{white-space:pre-wrap;min-width:0}
+.code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;font-size:13.5px;line-height:1.45;tab-size:4}
+pre.code{white-space:pre-wrap;margin:0;min-width:0;overflow-x:auto;flex:1}
+textarea.code{white-space:pre;overflow-x:auto}
+.ideas li .tag{font-size:12px;font-weight:800;color:var(--muted);white-space:nowrap}
+.chat{display:flex;flex-direction:column;gap:8px;max-height:46vh;overflow-y:auto;padding-right:4px}
+.msg{padding:10px 12px;border-radius:12px;max-width:88%;white-space:pre-wrap}
+.msg.ia{background:var(--soft);align-self:flex-start}
+.msg.el{background:var(--ink);color:var(--bg);align-self:flex-end}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-size:12.5px;font-weight:800;background:var(--soft)}
+.pill.ok{background:var(--okbg);color:var(--ok)} .pill.warn{background:var(--warnbg);color:var(--warn)} .pill.ko{background:var(--kobg);color:var(--ko)}
+.notice{border-radius:12px;padding:12px 14px;background:var(--soft)} .notice.ok{background:var(--okbg)} .notice.warn{background:var(--warnbg)} .notice.ko{background:var(--kobg)}
+main{display:flex;flex-direction:column;gap:16px}
+.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:1px solid var(--line);display:flex;justify-content:center;gap:4px;padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px))}
+.tabs button{flex:1;max-width:200px;border:0;background:transparent;font-size:14px;min-height:48px}
+.tabs button[aria-selected="true"]{background:var(--soft);color:var(--accent)}
+.bars{display:grid;grid-template-columns:auto 1fr auto;gap:4px 8px;align-items:center;font-size:13px;min-width:170px}
+.bar{height:8px;border-radius:4px;background:var(--soft);position:relative;overflow:hidden}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.kpi{background:var(--soft);border-radius:12px;padding:10px 12px}
+.kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums}
+details summary{cursor:pointer;font-weight:700}
+[hidden]{display:none!important}
+
+.ecouter{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;min-height:44px;font-size:14px}
+table.codes{border-collapse:collapse;width:100%;max-width:420px;font-size:15px}
+table.codes th,table.codes td{text-align:left;padding:8px 10px;border:1px dashed var(--line)}
+table.codes td:last-child{font-variant-numeric:tabular-nums;font-weight:800;letter-spacing:.15em}
+@media print{.tabs,header,button{display:none!important} body{background:#fff;color:#000} .card{border:0}}
+.pseudos{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.pseudos button{min-height:52px}
+/* propositions de séances suivantes */
+.suites{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:12px 0}
+button.suite{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;white-space:normal;background:var(--panel);border:2px solid var(--line);color:inherit;padding:12px;border-radius:12px;font-weight:400}
+button.suite.choisie{border-color:var(--accent)}
+/* préférences d'affichage de l'élève */
+body.pref-grand{zoom:1.2}
+body.pref-facile{font-family:Verdana,Tahoma,Arial,sans-serif;letter-spacing:.04em;word-spacing:.16em;line-height:1.8}
+body.pref-facile h1,body.pref-facile h2{font-family:inherit;letter-spacing:.02em}
+body.pref-facile p,body.pref-facile li{text-align:left}
+body.pref-facile em,body.pref-facile i{font-style:normal}
+body.pref-images .scale button{font-size:15px}
+
+/* choix de la langue de la page enseignant, en haut à droite */
+header { position: relative; }
+header select.langue { position: absolute; top: 0; right: 0; width: auto; padding: 4px 8px; font-size: .85rem; }
+
+/* ---------- visuels de la page élève (commun/visuels.js) : couleurs par discipline, style par niveau ---------- */
+body{--c1:#B4561A;--c2:#2F6DB5;--c3:#2E7D5B}
+.theme-maths{--c1:#2F6DB5;--c2:#D98A1C;--c3:#2E7D5B}
+.theme-algebre{--c1:#6B4C9A;--c2:#2F6DB5;--c3:#B4561A}
+.theme-terminal{--c1:#1F2A44;--c2:#2E9D6B;--c3:#C08A12}
+.theme-code{--c1:#2E7D5B;--c2:#2F6DB5;--c3:#B4561A}
+.theme-creole{--c1:#2E7D4F;--c2:#E39A06;--c3:#C4420C}
+.theme-langues{--c1:#B8195A;--c2:#2F6DB5;--c3:#D98A1C}
+.theme-francais{--c1:#B4561A;--c2:#6B4C9A;--c3:#2F6DB5}
+.theme-histoire{--c1:#8A5A2B;--c2:#A07C12;--c3:#5B6779}
+.theme-geographie{--c1:#1B739A;--c2:#2E7D5B;--c3:#B9762A}
+.theme-sciences{--c1:#2E7D5B;--c2:#7B3FA0;--c3:#2F6DB5}
+body{--d1:var(--c1);--d2:var(--c2);--d3:var(--c3)}
+@media (prefers-color-scheme: dark){body.visuels{--d1:color-mix(in srgb,var(--c1) 55%,#fff);--d2:color-mix(in srgb,var(--c2) 60%,#fff);--d3:color-mix(in srgb,var(--c3) 60%,#fff)}}
+.banniere{display:block;width:calc(100% + 32px);height:96px;margin:-16px -16px 0;padding:8px 12px;border-radius:14px 14px 0 0;background:color-mix(in srgb,var(--d1) 13%,var(--panel))}
+body.visuels.public-ecole .banniere{border-radius:20px 20px 0 0}
+.public-college .banniere{height:80px}
+.banniere.trait{height:80px}
+.banniere .v1,.bravo .v1{fill:var(--d1)} .banniere .v2,.bravo .v2{fill:var(--d2)} .banniere .v3,.bravo .v3{fill:var(--d3)}
+.banniere .sur{fill:var(--panel);stroke:var(--panel)}
+.banniere .ligne,.bravo .ligne{stroke-width:3;stroke-linecap:round}
+.banniere .v1.ligne,.bravo .v1.ligne{stroke:var(--d1)} .banniere .v2.ligne{stroke:var(--d2)} .banniere .v3.ligne,.bravo .v3.ligne{stroke:var(--d3)}
+.banniere .epais,.bravo .epais{stroke-width:9}
+.banniere [fill="none"],.bravo [fill="none"]{fill:none}
+.banniere .v1[fill="none"]{stroke:var(--d1);stroke-width:4} .banniere .v2[fill="none"]{stroke:var(--d2)}
+.banniere .txt{font-family:var(--body);font-weight:800}
+.banniere.trait{background:color-mix(in srgb,var(--d1) 7%,var(--panel))}
+.banniere.trait :is(.v1,.v2,.v3){fill:none;stroke-width:2.2} .banniere.trait .v1{stroke:var(--d1)} .banniere.trait .v2{stroke:var(--d2)} .banniere.trait .v3{stroke:var(--d3)}
+.banniere.trait .sur{fill:none;stroke:var(--d1);stroke-width:1.5}
+.banniere.trait .txt{font-weight:600;stroke:none} .banniere.trait .txt.v1,.banniere.trait .txt.sur{fill:var(--d1)} .banniere.trait .txt.v2{fill:var(--d2)} .banniere.trait .txt.v3{fill:var(--d3)}
+.bravo{width:96px;height:96px;flex:none} .bravo.trait{width:56px;height:56px}
+/* école : plante qui pousse avec les idées */
+.plante{width:104px;height:110px;flex:none}
+.plante .halo{fill:color-mix(in srgb,var(--d1) 12%,var(--panel))}
+.plante .pot{fill:var(--d3)} .plante .tige{stroke:var(--d1);stroke-width:4;stroke-linecap:round}
+.plante .feuille{fill:var(--d1)} .plante .petale{fill:var(--d2)} .plante .coeur{fill:var(--panel)} .plante .graine{fill:var(--d3)}
+.plante.pousse .feuille:last-of-type{animation:pousse .6s ease-out}
+@keyframes pousse{from{transform:scale(.2);transform-origin:60px 90px;opacity:.3}}
+@media (prefers-reduced-motion: reduce){.plante.pousse .feuille:last-of-type{animation:none}}
+.compteur-idees{display:flex;align-items:center;gap:10px}
+/* école et collège : couleurs de la discipline, boutons plus ronds ; école : un peu plus grand */
+@media (prefers-color-scheme: light){body.visuels.style-illustre{--accent:var(--c1)}}
+body.visuels.style-illustre .eyebrow{color:var(--d1)}
+body.visuels.style-illustre button.primary{background:var(--d1);border-color:var(--d1);color:#fff}
+@media (prefers-color-scheme: dark){body.visuels.style-illustre button.primary{color:#141A26}}
+body.visuels.public-ecole{font-size:17px}
+body.visuels.public-ecole button{border-radius:18px}
+body.visuels.public-ecole .card{border-radius:20px}
+body.visuels.public-ecole h1,body.visuels.public-ecole h2{font-family:ui-rounded,'Arial Rounded MT Bold','Nunito',var(--body)}

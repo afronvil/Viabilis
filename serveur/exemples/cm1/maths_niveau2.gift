@@ -1,0 +1,27 @@
+// CM1 — Mathématiques — niveau 2 (accessible)
+$CATEGORY: CM1/Mathématiques/Niveau 2
+
+::Écrire un nombre::Écrivez en chiffres le nombre « vingt-trois mille quarante ».{=23040 =23 040}
+
+::Chiffre des milliers::Dans le nombre 58 302, quel est le chiffre des milliers ?{#8}
+
+::Multiplier par 10::Combien font 46 × 10 ?{#460}
+
+::Multiplier par 100::Combien font 37 × 100 ?{#3700}
+
+::Fraction d'une pizza::Une pizza est coupée en 4 parts égales. Léo en mange 1. Quelle fraction de la pizza a-t-il mangée ?{=1/4 ~1/3 ~4/1 ~1/2}
+
+::Rendre la monnaie::J'ai 5 € et j'achète un cahier à 3,40 €. Combien me rend-on, en euros ?{#1.6:0.001}
+
+::Périmètre du carré::Quel est le périmètre d'un carré de 6 cm de côté, en centimètres ?{#24}
+
+::Unités::Associez chaque mesure à sa valeur.{
+=1 m -> 100 cm
+=1 km -> 1 000 m
+=1 kg -> 1 000 g
+=1 h -> 60 min
+}
+
+::Nombre pair::Le nombre 3 457 est un nombre pair.{F#Regardez le chiffre des unités \: 7 est impair.#Bien vu \: il se termine par 7, il est impair.}
+
+::Durée::Un dessin animé commence à 14 h 20 et dure 30 minutes. À quelle heure finit-il ?{=14 h 50 ~14 h 30 ~15 h 20 ~14 h 40}

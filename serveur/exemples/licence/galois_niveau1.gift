@@ -1,0 +1,18 @@
+// Licence — Théorie de Galois — niveau 1 : polynômes irréductibles
+$CATEGORY: Licence/Théorie de Galois/Niveau 1
+
+::Racines rationnelles::Combien de racines rationnelles a le polynôme x³ − 3x + 1 ?{#0}
+
+::Critère d'Eisenstein::Pour quel nombre premier p le critère d'Eisenstein s'applique-t-il directement à x⁴ + 6x² + 3x + 3 ?{#3}
+
+::Degré 4 sans racine::Le polynôme x⁴ + 4 n'a aucune racine rationnelle. Il est donc irréductible sur Q.{F#Non \: x⁴ + 4 \= (x² + 2x + 2)(x² − 2x + 2). En degré 4, l'absence de racine ne suffit pas.#Exact \: x⁴ + 4 \= (x² + 2x + 2)(x² − 2x + 2).}
+
+::Changement de variable::Pour prouver que x⁴ + x³ + x² + x + 1 est irréductible sur Q, on applique le critère d'Eisenstein au polynôme f(x + 1). Pour quel nombre premier p ?{#5}
+
+::Réduction modulo 2::Le polynôme x³ + x + 1 est irréductible sur F₂. Qu'en déduit-on pour x³ + 5x + 3 sur Q ?{=Il est irréductible sur Q, car il est unitaire et sa réduction modulo 2 est irréductible ~Rien, une réduction modulo 2 ne dit rien sur Q ~Il a une racine rationnelle ~Il est réductible sur Q}
+
+::x⁴ + 1::Le polynôme x⁴ + 1 est irréductible sur Q, bien qu'il soit réductible modulo tout nombre premier.{T#C'est vrai \: Eisenstein pour p \= 2 s'applique à (x + 1)⁴ + 1 \= x⁴ + 4x³ + 6x² + 4x + 2.#Exact.}
+
+::Polynôme minimal de ∛2::Quel est le degré du polynôme minimal de ∛2 sur Q ?{#3}
+
+::Polynôme minimal de √2 + √3::Quel est le polynôme minimal de √2 + √3 sur Q ?{=x⁴ − 10x² + 1 ~x⁴ − 5x² + 6 ~x² − 5 ~x⁴ + 10x² + 1}
