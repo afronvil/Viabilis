@@ -22,6 +22,7 @@ Variables d'environnement (voir LISEZMOI.md) :
     VIABILIS_CONSERVATION_JOURS  durée de conservation des traces (défaut 365)
 """
 import argparse
+import base64
 import csv
 import hashlib
 import hmac
@@ -49,6 +50,7 @@ import noyau as NOYAU
 import verification as VERIF
 import comptes as CPT
 import zpdes as ZPDES
+import pdf_texte as PDF
 from langues import T, NOM_POUR_IA, langue_valide, traduire_texte
 
 RACINE = os.path.dirname(os.path.abspath(__file__))
@@ -67,6 +69,7 @@ def _disciplines_des_modeles():
 DISCIPLINE_DU_MODELE = _disciplines_des_modeles()
 TAILLE_MAX = 256 * 1024
 TAILLE_MAX_TRAVAIL = 4 * 1024 * 1024    # travail hors ligne d'un étudiant, importé par l'enseignante
+TAILLE_MAX_PDF = 10 * 1024 * 1024       # document PDF d'une séance
 HORS_LIGNE = None                      # {code, nom, kit} quand le serveur tourne sur l'ordinateur d'un étudiant (--hors-ligne)
 IA_MAX_PAR_SEANCE = 40
 DEFAUT_CONFIG = {
@@ -95,8 +98,9 @@ DEFAUT_CONFIG = {
     "archives": {},              # consigne et réglages de la tâche de chaque séance, figés quand une séance plus récente existe
     "codePersonnel": False,      # exiger le code personnel pour revenir sous un pseudonyme existant
     "supprimees": [],            # séances effacées par l'enseignant (leurs numéros ne sont pas réutilisés)
+    "document": 0,               # document PDF de la séance, consultable par les élèves (table documents), 0 si aucun
 }
-INSTANTANE = ("tache", "indices", "variantes", "verification", "exercices", "niveauTache", "minIdees", "lecture", "modele", "saisieCode", "evaluation")
+INSTANTANE = ("tache", "indices", "variantes", "verification", "exercices", "niveauTache", "minIdees", "lecture", "modele", "saisieCode", "evaluation", "document")
 VARIANTES = ("accessible", "standard", "exigeante")
 GROUPES = ("atelier", "accompagne", "defi")
 LANGUES = ("fr-FR", "en-GB", "en-US", "es-ES", "de-DE", "it-IT")
@@ -139,6 +143,8 @@ CREATE TABLE IF NOT EXISTS journal (id INTEGER PRIMARY KEY AUTOINCREMENT, classe
     eleve TEXT, seance INTEGER, origine TEXT, avant TEXT, apres TEXT, cree TEXT);
 CREATE TABLE IF NOT EXISTS reponses (eleve TEXT NOT NULL REFERENCES eleves(id) ON DELETE CASCADE, seance INTEGER NOT NULL, exercice INTEGER NOT NULL,
     tentatives INTEGER NOT NULL DEFAULT 0, score REAL, premier_score REAL, duree INTEGER, maj TEXT, PRIMARY KEY(eleve, seance, exercice));
+CREATE TABLE IF NOT EXISTS documents (id INTEGER PRIMARY KEY AUTOINCREMENT, classe TEXT NOT NULL REFERENCES classes(code) ON DELETE CASCADE,
+    nom TEXT NOT NULL, contenu BLOB NOT NULL, texte TEXT NOT NULL DEFAULT '', taille INTEGER NOT NULL, cree TEXT);
 """
 
 
@@ -194,9 +200,9 @@ DESTINATAIRE = {
     "ecole": "adaptées à un élève d'école élémentaire, avec des mots simples",
     "college": "adaptées à un élève de collège",
     "lycee": "adaptées à un élève de lycée",
-    "superieur": ("adaptées à un étudiant de l'enseignement supérieur : vocabulaire mathématique précis, exigence de rigueur "
-                  "(hypothèses, justifications, contre-exemples). Écris les formules en texte simple lisible sans LaTeX, "
-                  "par exemple √2, ∛2, ζ₅, Gal(K/Q), [K:Q], x³ − 2, ≅, ∈"),
+    "superieur": ("adaptées à un étudiant de l'enseignement supérieur : vocabulaire précis de la discipline, exigence de rigueur "
+                  "(hypothèses, justifications, sources, contre-exemples). S'il y a des formules, écris-les en texte simple lisible "
+                  "sans LaTeX, par exemple √2, ∛2, ζ₅, Gal(K/Q), [K:Q], x³ − 2, ≅, ∈"),
 }
 
 
@@ -267,6 +273,63 @@ def appeler_ia(systeme, tours, max_tokens=300, delai=60):
     return texte.strip()
 
 
+# ---------------------------------------------------------------- séance préparée par l'IA à partir d'un document
+CONSIGNE_BROUILLON = (
+    "Tu es concepteur pédagogique. À partir du document fourni par l'enseignant, tu prépares UNE séance de travail pour Viabilis, "
+    "une plateforme où chaque élève écrit ses propres idées sur une tâche ouverte, avec un tuteur IA qui ne donne pas les réponses. "
+    "Public visé : {public}. {discipline}"
+    "Règles. La tâche est ouverte : plusieurs idées, solutions, exemples ou démarches sont possibles, et elle se travaille en une séance. "
+    "Elle s'appuie uniquement sur le contenu du document, sans inventer de faits, de chiffres ni de références qui n'y figurent pas. "
+    "Elle demande de produire, justifier, comparer ou appliquer, pas de recopier le document. "
+    "Les trois coups de pouce sont gradués, du plus léger au plus précis, et ne donnent jamais la réponse. "
+    "La variante accessible guide davantage (étapes, exemple de départ) ; la variante exigeante va plus loin. "
+    "Les critères de réussite servent à l'IA qui vérifiera les idées des élèves : ce qui rend une idée juste, les attendus tirés du document, "
+    "les erreurs fréquentes à signaler. Écris tous les textes {langue}. "
+    "Réponds uniquement par un objet JSON, sans autre texte, de cette forme : "
+    '{{"titre": "…", "tache": "…", "indices": ["…", "…", "…"], "accessible": {{"consigne": "…", "indices": ["…", "…"]}}, '
+    '"exigeante": {{"consigne": "…"}}, "criteres": "…", "niveauTache": 3}}. '
+    "La tâche fait 1500 caractères au plus, les critères 1500 caractères au plus ; niveauTache va de 1 (très accessible) à 5 (très exigeant).")
+
+
+def brouillon_seance(nom, texte, souhait, cfg):
+    """Brouillon de séance (consigne, coups de pouce, variantes, critères) à partir du texte d'un document ; l'enseignant le relit."""
+    langue = langue_valide(cfg.get("langue"))
+    if os.environ.get("VIABILIS_IA", "fausse") == "fausse":        # IA factice (essais) : un brouillon simple, tiré du document
+        debut = re.sub(r"\s+", " ", texte)[:160]
+        return {"titre": nom, "tache": f"Lis le document « {nom} » ({debut}…). Propose le plus d'idées possible qui en appliquent le contenu, et justifie chacune.",
+                "indices": ["Relis le titre et les intertitres.", "Choisis un passage et explique-le avec tes mots.", "Cherche un exemple qui n'est pas dans le document."],
+                "variantes": {"actives": True, "accessible": {"consigne": f"Relève trois idées importantes du document « {nom} » et explique-les.", "indices": ["Commence par la première page."], "cible": None, "attendu": None},
+                              "exigeante": {"consigne": f"Critique le document « {nom} » : une limite, une objection, un prolongement.", "indices": [], "cible": None, "attendu": None}},
+                "verification": {"mode": "ia", "criteres": "Une idée est juste si elle s'appuie sur le document et qu'elle est justifiée.", "maximum": 3},
+                "niveauTache": 3}
+    disc = cfg.get("discipline") if cfg.get("discipline") not in ("", "*") else ""
+    systeme = CONSIGNE_BROUILLON.format(public=DESTINATAIRE.get(cfg.get("public"), DESTINATAIRE["ecole"]).replace("adaptées à ", "", 1),
+                                        discipline=f"Discipline : {disc}. " if disc else "", langue=NOM_POUR_IA.get(langue, "en français"))
+    demande = f"Document « {nom} » :\n\n{texte[:40000]}"
+    if souhait:
+        demande += f"\n\nCe que l'enseignant attend de la séance : {souhait}"
+    brut = appeler_ia(systeme, [{"role": "user", "content": demande}], max_tokens=2500, delai=180)
+    debut, fin = brut.find("{"), brut.rfind("}")
+    if debut < 0 or fin <= debut:
+        raise ValueError("réponse sans objet JSON")
+    d = json.loads(brut[debut:fin + 1])
+    liste = lambda l, n: [str(x).strip()[:300] for x in (l or []) if str(x).strip()][:n]
+    acc, exi = d.get("accessible") or {}, d.get("exigeante") or {}
+    tache = str(d.get("tache") or "").strip()[:2000]
+    if not tache:
+        raise ValueError("brouillon sans consigne")
+    try:
+        niveau = min(5, max(1, int(d.get("niveauTache") or 3)))
+    except (TypeError, ValueError):
+        niveau = 3
+    return {"titre": str(d.get("titre") or nom).strip()[:200], "tache": tache, "indices": liste(d.get("indices"), 3),
+            "variantes": {"actives": bool(acc.get("consigne") or exi.get("consigne")),
+                          "accessible": {"consigne": str(acc.get("consigne") or "").strip()[:2000], "indices": liste(acc.get("indices"), 3), "cible": None, "attendu": None},
+                          "exigeante": {"consigne": str(exi.get("consigne") or "").strip()[:2000], "indices": liste(exi.get("indices"), 3), "cible": None, "attendu": None}},
+            "verification": {"mode": "ia", "criteres": str(d.get("criteres") or "").strip()[:2000], "maximum": 3},
+            "niveauTache": niveau}
+
+
 # ---------------------------------------------------------------- utilitaires
 def config_valide(cfg):
     """Ne garde que les champs connus, bornés : l'enseignant ne peut pas casser la configuration."""
@@ -280,6 +343,7 @@ def config_valide(cfg):
     out["visuels"] = bool(cfg.get("visuels", True))
     out["saisieCode"] = bool(cfg.get("saisieCode", False))
     out["evaluation"] = bool(cfg.get("evaluation", False))
+    out["document"] = max(0, int(cfg.get("document") or 0)) if str(cfg.get("document") or 0).isdigit() else 0
     out["modele"] = str(cfg.get("modele") or "") if re.fullmatch(r"[a-z0-9\-]{0,64}", str(cfg.get("modele") or "")) else ""
     out["ordre"] = cfg.get("ordre") if cfg.get("ordre") in ORDRES else "adaptatif"
     out["mode"] = cfg.get("mode") if cfg.get("mode") in MODES else "questionner"
@@ -856,6 +920,8 @@ class Gestionnaire(SimpleHTTPRequestHandler):
             return self.api_signalements(verbe, code)
         if rest and rest[0] == "exercices":
             return self.api_exercices(verbe, code, rest[1:])
+        if rest and rest[0] == "documents":
+            return self.api_documents(verbe, code, cl, rest[1:])
         if rest == ["viabilite"] and verbe == "POST":
             return self.viabilite()
         if rest == ["kit"] and verbe == "GET":                   # mode hors ligne : séances et exercices pour la clé USB
@@ -872,6 +938,69 @@ class Gestionnaire(SimpleHTTPRequestHandler):
             except (ValueError, KeyError, TypeError) as exc:
                 return self.erreur(400, "Import impossible : {exc}.", exc=exc)
             return self.json(200, res)
+        return self.erreur(404, "Ressource inconnue.")
+
+    # -- documents PDF des séances
+    def nom_document(self, classe, ident):
+        """{id, nom} du document d'une séance, ou None."""
+        if not ident:
+            return None
+        with self.base.cnx() as c:
+            r = c.execute("SELECT id, nom FROM documents WHERE id = ? AND classe = ?", (ident, classe)).fetchone()
+        return {"id": r["id"], "nom": r["nom"]} if r else None
+
+    def envoyer_pdf(self, nom, contenu):
+        nom_ascii = re.sub(r"[^\w.\- ]", "_", nom.encode("ascii", "replace").decode())[:120] or "document.pdf"
+        self.send_response(200)
+        self.send_header("Content-Type", "application/pdf")
+        self.send_header("Content-Disposition", f'inline; filename="{nom_ascii}"')
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("Content-Length", str(len(contenu)))
+        self.end_headers()
+        self.wfile.write(contenu)
+
+    def api_documents(self, verbe, code, cl, p):
+        """Documents PDF de la classe : dépôt (en base64), liste, lecture, effacement, brouillon de séance par l'IA."""
+        if p == [] and verbe == "GET":
+            with self.base.cnx() as c:
+                rows = c.execute("SELECT id, nom, taille, length(texte) AS caracteres, cree FROM documents WHERE classe = ? ORDER BY id DESC", (code,)).fetchall()
+            return self.json(200, [dict(r) for r in rows])
+        if p == [] and verbe == "POST":
+            d = self.corps(TAILLE_MAX_PDF * 4 // 3 + 4096)
+            try:
+                contenu = base64.b64decode(str(d.get("contenu", "")), validate=False)
+            except (ValueError, TypeError):
+                contenu = b""
+            if not contenu.startswith(b"%PDF"):
+                return self.erreur(400, "Le fichier n'est pas un PDF.")
+            if len(contenu) > TAILLE_MAX_PDF:
+                return self.erreur(413, "PDF trop volumineux : {mo} Mo au plus.", mo=TAILLE_MAX_PDF // (1024 * 1024))
+            nom = re.sub(r"[\r\n\t/\\]", " ", str(d.get("nom") or "document.pdf")).strip()[:120] or "document.pdf"
+            texte = PDF.extraire(contenu)
+            with VERROU, self.base.cnx() as c:
+                ident = c.execute("INSERT INTO documents (classe, nom, contenu, texte, taille, cree) VALUES (?, ?, ?, ?, ?, ?)",
+                                  (code, nom, contenu, texte, len(contenu), maintenant())).lastrowid
+            return self.json(201, {"id": ident, "nom": nom, "taille": len(contenu), "caracteres": len(texte)})
+        if len(p) >= 1 and p[0].isdigit():
+            with self.base.cnx() as c:
+                doc = c.execute("SELECT * FROM documents WHERE id = ? AND classe = ?", (int(p[0]), code)).fetchone()
+            if not doc:
+                return self.erreur(404, "Document introuvable.")
+            if len(p) == 1 and verbe == "GET":
+                return self.envoyer_pdf(doc["nom"], doc["contenu"])
+            if len(p) == 1 and verbe == "DELETE":
+                with VERROU, self.base.cnx() as c:
+                    c.execute("DELETE FROM documents WHERE id = ?", (doc["id"],))
+                return self.json(200, {"supprime": doc["id"]})
+            if p[1:] == ["brouillon"] and verbe == "POST":
+                if len((doc["texte"] or "").strip()) < 200:
+                    return self.erreur(422, "Aucun texte lisible dans ce PDF (document scanné ?) : écrivez la consigne vous-même.")
+                cfg = config_valide(json.loads(cl["config"]))
+                souhait = str(self.corps().get("souhait") or "").strip()[:1000]
+                try:
+                    return self.json(200, brouillon_seance(doc["nom"], doc["texte"], souhait, cfg))
+                except Exception as exc:             # IA indisponible ou réponse illisible : l'enseignant écrit la séance lui-même
+                    return self.erreur(502, "L'IA n'a pas pu préparer la séance : {exc}.", exc=exc)
         return self.erreur(404, "Ressource inconnue.")
 
     def effacer_seance(self, code, cl, n):
@@ -1089,9 +1218,17 @@ class Gestionnaire(SimpleHTTPRequestHandler):
                                               "public": cfg.get("public", "ecole"), "langue": langue_valide(cfg.get("langue")), "visuels": bool(cfg.get("visuels", True)),
                                               "discipline": DISCIPLINE_DU_MODELE.get(cfgS.get("modele") or "") or (cfg.get("discipline") if cfg.get("discipline") != "*" else ""),
                                               "saisieCode": bool(cfgS.get("saisieCode")), "evaluation": bool(cfgS.get("evaluation")), "tache": consigne,
+                                              "document": self.nom_document(e["classe"], cfgS.get("document")),
                                               "exercices": {"actifs": ex["actifs"], "placement": ex["placement"]},
                                               "verification": {k: (cfgS.get("verification") or DEFAUT_CONFIG["verification"])[k] for k in ("mode", "maximum")}},
                                    "perso": {k: v for k, v in perso.items() if k != "variante"}, "seances": {str(k): v for k, v in rows.items()}, "derniereVerification": derniere})
+        if p == ["document"] and verbe == "GET":            # document PDF de la séance (ouverte, ou déjà travaillée par l'élève)
+            with self.base.cnx() as c:
+                deja = c.execute("SELECT 1 FROM traces WHERE eleve = ? AND seance = ?", (e["id"], n)).fetchone()
+                d = c.execute("SELECT nom, contenu FROM documents WHERE id = ? AND classe = ?", (cfgS.get("document") or 0, e["classe"])).fetchone()
+            if not d or (n not in ouv and not deja):
+                return self.erreur(404, "Aucun document pour cette séance.")
+            return self.envoyer_pdf(d["nom"], d["contenu"])
         if p == ["terminer"] and verbe == "POST":
             return self.terminer(e, cfgS)
         if p == ["correction"] and verbe == "GET":

@@ -1,7 +1,7 @@
 // Viabilis classe — application élève.
 import {tx, adopterLangue} from "../commun/langues.js";
 import {appliquerTheme, banniere, plante, bravo} from "../commun/visuels.js";
-import {$, el, now, api, echelleUI, listeIdees, NOM_MODE, boutonEcouter, dicteeLocaleDisponible, boutonDicter, texteIdee} from "../commun/etat.js";
+import {$, el, now, api, ouvrirPdf, echelleUI, listeIdees, NOM_MODE, boutonEcouter, dicteeLocaleDisponible, boutonDicter, texteIdee} from "../commun/etat.js";
 
 // lecture à voix haute : seulement si l'enseignant l'a activée et qu'une voix est installée sur l'appareil
 const ecoute = (texte, etiquette) => moi?.lecture?.active ? boutonEcouter(texte, moi.lecture.langue, etiquette) : null;
@@ -299,7 +299,11 @@ function seance() {
   if ((L.essais || 1) > 1 && L.phase !== "envoye") blocs.push(el("div", {class: "notice", role: "status"}, el("p", {}, tx`Essai n° ${L.essais} : complétez ou corrigez vos idées, vous pouvez à nouveau les faire vérifier.`)));
   blocs.push(el("div", {class: "card"}, visuels() ? banniere(c.discipline, c.public) : null,
     el("div", {class: "row", style: "justify-content:space-between"}, el("p", {class: "eyebrow"}, tx("La tâche")), ecoute(c.tache)),
-    el("p", {style: "white-space:pre-wrap"}, c.tache || tx("(consigne non renseignée)"))));
+    el("p", {style: "white-space:pre-wrap"}, c.tache || tx("(consigne non renseignée)")),
+    c.document && !moi.horsLigne ? el("div", {class: "row"}, el("button", {class: "ghost", onclick: async ev => {
+      try { await ouvrirPdf("eleve/document?seance=" + c.seance, session.jeton, c.document.nom); }
+      catch (e) { ev.target.after(el("p", {class: "small muted", role: "status"}, e.message)); }
+    }}, tx("📄 Ouvrir le document de la séance")), el("span", {class: "small muted"}, c.document.nom)) : null));
   if (L.phase === "charge") {
     blocs.push(el("div", {class: "card"}, el("h2", {}, tx("Avant de commencer")),
       echelleUI(tx("Cette tâche me paraît…"), DIFFICULTE(), L.chargeDebut, x => { L.chargeDebut = x; seance(); }),

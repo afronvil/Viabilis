@@ -1,10 +1,10 @@
 // Viabilis classe — application enseignant.
 import {tx, LANGUE, LANGUES, LOCALE, menuLangue} from "../commun/langues.js";
-import {$, el, fr, api, listeIdees, etatEleve, ruptures, recommandation, brut, ideesDesAutres, distinctes, jaccard, mots, NOM_ORDRE, NOM_MODE, NOM_VARIANTE, GROUPES, groupeSuggere, numeroSeance, prochainNumero, niveauEffectif} from "../commun/etat.js";
+import {$, el, fr, api, ouvrirPdf, listeIdees, etatEleve, ruptures, recommandation, brut, ideesDesAutres, distinctes, jaccard, mots, NOM_ORDRE, NOM_MODE, NOM_VARIANTE, GROUPES, groupeSuggere, numeroSeance, prochainNumero, niveauEffectif} from "../commun/etat.js";
 const N = n => numeroSeance(S.config, n);          // numéro affiché (rang parmi les séances qui existent encore)
 import {proposerSuites, GENRES, PROFILS, modeleDeSeance} from "../commun/suites.js";
 
-const S = {jeton: null, classes: [], code: null, config: null, traces: {}, notes: {}, onglet: "classe", detail: null, confirmer: null, exos: null, importMsg: null, viab: {}, brouillon: null, seanceEditee: null, modeles: null, modele: null, modeleChoisi: null, suite: false, suiteChoisie: null, messages: [], signalements: [], galerieChoix: null};
+const S = {jeton: null, classes: [], code: null, config: null, traces: {}, notes: {}, onglet: "classe", detail: null, confirmer: null, exos: null, importMsg: null, viab: {}, brouillon: null, seanceEditee: null, modeles: null, modele: null, modeleChoisi: null, suite: false, suiteChoisie: null, messages: [], signalements: [], galerieChoix: null, documents: null, pdfEtat: null};
 const PUBLICS = {ecole: tx("École élémentaire"), college: tx("Collège"), lycee: tx("Lycée"), superieur: tx("Enseignement supérieur")};
 const DEFAUT = {seance: 0, ouverte: false, tache: "", public: "ecole", ordre: "adaptatif", mode: "questionner", minIdees: 3, seuilCharge: 0.7, retraitAgentivite: 0.8, seuilMaitrise: 0.5, eleves: {},
   exercices: {actifs: false, nombre: 3, placement: "avant", niveau: 2, choix: "niveau"}, niveauTache: 3,
@@ -499,11 +499,21 @@ function ongletReglages() {
     return el("div", {class: "field"}, el("label", {for: id, class: "row", style: "justify-content:space-between"}, lbl, o), i, el("p", {class: "small muted"}, aide)); };
   const choix = (id, lbl, val, opts) => el("div", {class: "field"}, el("label", {for: id}, lbl), el("select", {id}, Object.entries(opts).map(([k, t]) => el("option", {value: k, selected: k === val}, t))));
   const {autonomie, ...ordres} = NOM_ORDRE;
+  const lire = () => ({tache: $("#tache").value.trim(), saisieCode: $("#saisie-code").checked, evaluation: $("#seance-evaluation").checked, langue: $("#langue").value, visuels: $("#visuels").checked, public: $("#public").value, discipline: $("#discipline").value, ordre: $("#ordre").value, mode: $("#mode").value, minIdees: +$("#minIdees").value,
+      seuilCharge: +$("#seuilCharge").value, retraitAgentivite: +$("#retraitAgentivite").value, seuilMaitrise: +$("#seuilMaitrise").value, niveauTache: +$("#niveauTache").value,
+      modele: c.modele || "", indices: lireIndices("std"), variantes: lireVariantes(), lecture: {active: $("#lecture-active").checked, langue: $("#lecture-langue").value, dictee: $("#lecture-dictee").checked},
+      verification: {mode: $("#v-mode").value, cible: +String($("#v-cible").value).replace(",", "."), nombres: $("#v-nombres").value, attendu: +$("#v-attendu").value || 0,
+        criteres: $("#v-criteres").value, maximum: +$("#v-maximum").value, uneFois: $("#v-unefois").checked}});
+  const fermee = c.seance && !(c.ouvertes || []).includes(c.seance);
+  const ouvrir = async () => { await majConfig({...lire(), ouvertes: [...(c.ouvertes || []), c.seance].sort((a, b) => a - b), ouverte: true}); S.modele = null; toast(tx`Séance ${N(c.seance)} enregistrée et ouverte aux élèves.`); };
   $("#vue").replaceChildren(el("div", {class: "wrap"},
     c.seance ? el("div", {class: "notice"}, el("p", {}, tx`La tâche, les variantes et la vérification ci-dessous sont celles de la séance ${N(c.seance)}, la plus récente. Pour une séance précédente, utilisez « Modifier » dans la carte Séances (onglet Classe).`)) : null,
+    fermee ? el("div", {class: "notice warn"}, el("p", {}, tx`La séance ${N(c.seance)} est fermée : les élèves ne la voient pas encore. Relisez la consigne et les réglages ci-dessous, puis ouvrez-la.`),
+      el("button", {class: "primary", onclick: ouvrir}, tx`Enregistrer et ouvrir la séance ${N(c.seance)} aux élèves`)) : null,
+    carteNouvelle(c),
     carteModeles(n, true),
     el("div", {class: "card"}, el("h2", {}, tx("La tâche")), el("label", {for: "tache"}, tx("Consigne affichée aux élèves")), tache, caseCode(c),
-      champsIndices("std", c.indices)),
+      champsIndices("std", c.indices), c.seance ? ligneDocument(c, v => majConfig({...lire(), document: v})) : null),
     carteVariantes(c),
     el("div", {class: "card"}, el("h2", {}, tx("Règle de la classe")),
       choix("langue", tx("Langue de la classe"), c.langue || "fr", LANGUES),
@@ -527,23 +537,19 @@ function ongletReglages() {
       el("div", {class: "field"}, el("label", {for: "niveauTache"}, tx("Difficulté de la tâche ouverte pour le modèle")),
         el("select", {id: "niveauTache"}, [1, 2, 3, 4, 5].map(n => el("option", {value: n, selected: n === (c.niveauTache ?? 3)}, tx`Niveau ${n}` + ["", tx(" (très accessible)"), tx(" (accessible)"), tx(" (moyen)"), tx(" (exigeant)"), tx(" (très exigeant)")][n]))),
         el("p", {class: "small muted"}, tx("Sert à situer les élèves dans les tables du modèle de viabilité quand les exercices ne sont pas activés ; sinon, c'est le niveau d'exercices de chaque élève qui est utilisé.")))),
-    el("button", {class: "primary", onclick: async () => { await majConfig({tache: $("#tache").value.trim(), saisieCode: $("#saisie-code").checked, evaluation: $("#seance-evaluation").checked, langue: $("#langue").value, visuels: $("#visuels").checked, public: $("#public").value, discipline: $("#discipline").value, ordre: $("#ordre").value, mode: $("#mode").value, minIdees: +$("#minIdees").value,
-      seuilCharge: +$("#seuilCharge").value, retraitAgentivite: +$("#retraitAgentivite").value, seuilMaitrise: +$("#seuilMaitrise").value, niveauTache: +$("#niveauTache").value,
-      modele: c.modele || "", indices: lireIndices("std"), variantes: lireVariantes(), lecture: {active: $("#lecture-active").checked, langue: $("#lecture-langue").value, dictee: $("#lecture-dictee").checked},
-      verification: {mode: $("#v-mode").value, cible: +String($("#v-cible").value).replace(",", "."), nombres: $("#v-nombres").value, attendu: +$("#v-attendu").value || 0,
-        criteres: $("#v-criteres").value, maximum: +$("#v-maximum").value, uneFois: $("#v-unefois").checked}}); S.modele = null; toast(tx("Réglages enregistrés.")); }}, tx("Enregistrer les réglages"))));
+    el("button", {class: "primary", onclick: async () => { await majConfig(lire()); S.modele = null; toast(tx("Réglages enregistrés.")); }}, tx("Enregistrer les réglages"))));
 }
 /** Modifier une séance précédente : seulement sa tâche (consigne, coups de pouce, variantes, vérification). */
 function reglagesSeance(n) {
   const c = S.config, arch = (c.archives || {})[n] || {};
   const src = {...c, ...arch, ...(S.modele && S.modele.seance === n ? S.modele.reglages : {})};
   const tache = el("textarea", {id: "tache", rows: "3"}); tache.value = src.tache || "";
-  const enregistrer = async () => {
-    const instant = {...arch, modele: src.modele || "", saisieCode: $("#saisie-code").checked, evaluation: $("#seance-evaluation").checked, tache: $("#tache").value.trim(), indices: lireIndices("std"), variantes: lireVariantes(),
+  const lire = () => ({...arch, modele: src.modele || "", saisieCode: $("#saisie-code").checked, evaluation: $("#seance-evaluation").checked, tache: $("#tache").value.trim(), indices: lireIndices("std"), variantes: lireVariantes(),
       verification: {mode: $("#v-mode").value, cible: +String($("#v-cible").value).replace(",", "."), nombres: $("#v-nombres").value, attendu: +$("#v-attendu").value || 0,
         criteres: $("#v-criteres").value, maximum: +$("#v-maximum").value, uneFois: $("#v-unefois").checked},
-      lecture: {active: $("#lecture-active").checked, langue: $("#lecture-langue").value, dictee: $("#lecture-dictee").checked}};
-    await majConfig({archives: {...(c.archives || {}), [n]: instant}});
+      lecture: {active: $("#lecture-active").checked, langue: $("#lecture-langue").value, dictee: $("#lecture-dictee").checked}});
+  const enregistrer = async () => {
+    await majConfig({archives: {...(c.archives || {}), [n]: lire()}});
     S.modele = null; toast(tx`Séance ${N(n)} modifiée.`);
   };
   const retour = () => { S.seanceEditee = null; S.modele = null; S.onglet = "classe"; document.querySelectorAll("#tabs button").forEach(x => x.setAttribute("aria-selected", String(x.dataset.tab === "classe"))); rendre(); };
@@ -552,7 +558,8 @@ function reglagesSeance(n) {
       el("p", {class: "small"}, tx("Les changements sont visibles tout de suite par les élèves, y compris ceux qui ont déjà commencé cette séance. Leurs idées et leurs résultats sont conservés. La règle de la classe et la viabilité se règlent pour toute la classe, depuis l'onglet Réglages.")),
       el("button", {class: "ghost", onclick: retour}, tx("← Retour à la classe"))),
     carteModeles(n, false),
-    el("div", {class: "card"}, el("h2", {}, tx`La tâche de la séance ${N(n)}`), el("label", {for: "tache"}, tx("Consigne affichée aux élèves")), tache, caseCode(src), champsIndices("std", src.indices)),
+    el("div", {class: "card"}, el("h2", {}, tx`La tâche de la séance ${N(n)}`), el("label", {for: "tache"}, tx("Consigne affichée aux élèves")), tache, caseCode(src), champsIndices("std", src.indices),
+      ligneDocument(src, v => majConfig({archives: {...(c.archives || {}), [n]: {...lire(), document: v}}}))),
     carteVariantes(src),
     carteVerification(src),
     carteLecture(src),
@@ -630,6 +637,85 @@ function carteModeles(n, courante) {
       courante ? el("button", {class: "primary", onclick: creer}, tx`Créer la séance ${prochainNumero(c)} avec ce modèle`) : null),
     courante && c.seance ? el("p", {class: "small muted"}, tx`« Créer la séance ${prochainNumero(c)} » garde la séance ${N(c.seance)} telle quelle et ouvre aussitôt la nouvelle séance aux élèves.`) : null);
 }
+/* ---------- nouvelle séance : vide, ou à partir d'un document PDF ---------- */
+const TAILLE_PDF = 10 * 1024 * 1024;
+const seanceVide = () => ({tache: "", indices: [], variantes: JSON.parse(JSON.stringify(DEFAUT.variantes)), verification: {...DEFAUT.verification}, modele: "", saisieCode: false, evaluation: false, document: 0, niveauTache: 3});
+function lireBase64(f) { return new Promise((ok, ko) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(",")[1] || ""); r.onerror = ko; r.readAsDataURL(f); }); }
+async function chargerDocuments() { try { S.documents = await appel(`classes/${S.code}/documents`); } catch { S.documents = []; } rendre(); }
+async function deposerPdf(f) {
+  if (!f) throw new Error(tx("Choisissez d'abord un fichier PDF."));
+  if (f.size > TAILLE_PDF) throw new Error(tx("PDF trop volumineux : 10 Mo au plus."));
+  const d = await appel(`classes/${S.code}/documents`, {methode: "POST", corps: {nom: f.name, contenu: await lireBase64(f)}});
+  S.documents = null;
+  return d;
+}
+/** Crée la séance suivante, fermée, avec ces réglages de tâche : l'enseignant la relit dans Réglages, puis l'ouvre. */
+async function creerSeanceFermee(reglages, message) {
+  const c = S.config, k = (c.seance || 0) + 1;
+  await majConfig({...seanceVide(), ...reglages, verification: {...DEFAUT.verification, ...(reglages.verification || {})}, seance: k, ouvertes: c.ouvertes || [], ouverte: false});
+  S.modele = null; S.seanceEditee = null; S.suite = false; S.onglet = "reglages";
+  document.querySelectorAll("#tabs button").forEach(x => x.setAttribute("aria-selected", String(x.dataset.tab === "reglages")));
+  rendre(); window.scrollTo(0, 0); toast(message);
+}
+function carteNouvelle(c) {
+  const k = prochainNumero(c);
+  const vide = () => creerSeanceFermee({}, tx`Séance ${k} créée, vide et fermée : écrivez la consigne et les réglages ci-dessous, enregistrez, puis ouvrez-la aux élèves.`);
+  const depuisPdf = async () => {
+    const f = $("#pdf-fichier").files[0], montrer = $("#pdf-eleves").checked, avecIA = $("#pdf-ia").checked, souhait = $("#pdf-souhait").value.trim();
+    if (!montrer && !avecIA) return toast(tx("Cochez au moins une des deux cases : faire préparer la séance par l'IA, ou montrer le PDF aux élèves."));
+    try {
+      S.pdfEtat = tx("Envoi et lecture du PDF…"); rendre();
+      const doc = await deposerPdf(f);
+      let reglages = {}, note = "";
+      if (avecIA) {
+        S.pdfEtat = tx("L'IA prépare la séance à partir du PDF : cela peut prendre une minute…"); rendre();
+        try { const {titre, ...b} = await appel(`classes/${S.code}/documents/${doc.id}/brouillon`, {methode: "POST", corps: {souhait}}); reglages = b; }
+        catch (e) { note = " " + e.message; }
+      }
+      if (!montrer) await appel(`classes/${S.code}/documents/${doc.id}`, {methode: "DELETE"}).catch(() => {});
+      S.pdfEtat = null;
+      await creerSeanceFermee({...reglages, document: montrer ? doc.id : 0}, (avecIA && !note
+        ? tx`Séance ${k} préparée à partir de « ${doc.nom} » et fermée : relisez et corrigez la consigne, les coups de pouce, les variantes et les critères ci-dessous, enregistrez, puis ouvrez-la aux élèves.`
+        : tx`Séance ${k} créée avec « ${doc.nom} » et fermée : écrivez la consigne ci-dessous, enregistrez, puis ouvrez-la aux élèves.`) + note);
+    } catch (e) { S.pdfEtat = null; rendre(); toast(e.message); }
+  };
+  return el("div", {class: "card"}, el("h2", {}, tx`Créer la séance ${k}`),
+    el("p", {class: "small muted"}, tx("À partir d'un modèle (carte suivante), d'une séance vide que vous écrivez entièrement, ou d'un document PDF. La nouvelle séance est créée fermée : les élèves ne la voient qu'une fois ouverte, et les séances précédentes gardent leur consigne.")),
+    el("h3", {}, tx("Séance vide")),
+    el("p", {class: "small muted"}, tx("Vous écrivez vous-même la consigne, les coups de pouce, les variantes et la vérification.")),
+    el("button", {class: "ghost", onclick: vide, disabled: !!S.pdfEtat}, tx`Créer la séance ${k} vide`),
+    el("h3", {}, tx("À partir d'un document PDF")),
+    el("div", {class: "field"}, el("label", {for: "pdf-fichier"}, tx("Document PDF (10 Mo au plus)")), el("input", {type: "file", id: "pdf-fichier", accept: "application/pdf,.pdf"})),
+    el("label", {for: "pdf-ia", class: "row", style: "gap:8px"}, el("input", {type: "checkbox", id: "pdf-ia", checked: true}),
+      tx("L'IA prépare la consigne, les coups de pouce, les variantes et les critères de réussite à partir du PDF")),
+    el("div", {class: "field"}, el("label", {for: "pdf-souhait"}, tx("Ce que vous attendez de la séance (facultatif)")),
+      el("textarea", {id: "pdf-souhait", rows: "2", placeholder: tx("Par exemple : faire appliquer la notion du chapitre 2 à un cas nouveau, en 1 h 30.")})),
+    el("label", {for: "pdf-eleves", class: "row", style: "gap:8px"}, el("input", {type: "checkbox", id: "pdf-eleves", checked: true}), tx("Les élèves peuvent ouvrir le PDF pendant la séance")),
+    el("p", {class: "small muted"}, tx("Pour préparer la séance, le texte du PDF est envoyé au fournisseur d'IA de la plateforme. Un PDF scanné (des images, sans texte) ne peut pas être lu par l'IA : il peut seulement être montré aux élèves.")),
+    S.pdfEtat ? el("p", {class: "notice", role: "status"}, S.pdfEtat) : null,
+    el("button", {class: "primary", onclick: depuisPdf, disabled: !!S.pdfEtat}, tx`Créer la séance ${k} à partir du PDF`));
+}
+/** Document PDF d'une séance (src.document) : l'ouvrir, le retirer, ou en joindre un. ecrire(id) enregistre la séance avec ce document. */
+function ligneDocument(src, ecrire) {
+  if (S.documents == null) { chargerDocuments(); return null; }
+  const id = src.document || 0, doc = S.documents.find(d => d.id === id);
+  const retirer = async () => {
+    await ecrire(0);
+    const c = S.config, encore = c.document === id || Object.values(c.archives || {}).some(a => a.document === id);
+    if (!encore) { await appel(`classes/${S.code}/documents/${id}`, {methode: "DELETE"}).catch(() => {}); S.documents = null; rendre(); }
+  };
+  const joindre = async () => {
+    try { const d = await deposerPdf($("#doc-fichier").files[0]); await ecrire(d.id); toast(tx`« ${d.nom} » joint à la séance (réglages enregistrés).`); }
+    catch (e) { toast(e.message); }
+  };
+  return el("div", {class: "field"}, el("label", {for: "doc-fichier"}, tx("Document PDF pour les élèves")),
+    id && doc
+      ? el("div", {class: "row"}, el("span", {}, "📄 " + doc.nom),
+          el("button", {class: "ghost", onclick: () => ouvrirPdf(`classes/${S.code}/documents/${id}`, S.jeton, doc.nom).catch(e => toast(e.message))}, tx("Ouvrir")),
+          el("button", {class: "ghost", onclick: retirer}, tx("Retirer")))
+      : el("div", {class: "row"}, el("input", {type: "file", id: "doc-fichier", accept: "application/pdf,.pdf"}), el("button", {class: "ghost", onclick: joindre}, tx("Joindre"))),
+    el("p", {class: "small muted"}, tx("Les élèves l'ouvrent depuis la carte « La tâche ». Joindre ou retirer un document enregistre aussi les réglages de la séance. Le document n'est pas copié dans le kit hors ligne.")));
+}
 function carteLecture(c) {
   return el("div", {class: "card"}, el("h2", {}, tx("Lecture à voix haute")),
       el("label", {for: "lecture-active", class: "row", style: "gap:8px"}, el("input", {type: "checkbox", id: "lecture-active", checked: (c.lecture || DEFAUT.lecture).active}), tx("Proposer le bouton « Écouter » aux élèves")),
@@ -648,7 +734,7 @@ function carteSuites(c) {
   const fermer = () => { S.suite = false; S.suiteChoisie = null; rendre(); };
   const allerReglages = () => { S.suite = false; S.onglet = "reglages"; document.querySelectorAll("#tabs button").forEach(x => x.setAttribute("aria-selected", String(x.dataset.tab === "reglages"))); rendre(); window.scrollTo(0, 0); };
   if (!P.propositions.length) return el("div", {class: "card"}, el("h2", {}, tx`Créer la séance ${prochainNumero(c)}`), el("p", {}, tx("Aucun modèle à proposer.")),
-    el("div", {class: "row"}, el("button", {class: "primary", onclick: allerReglages}, tx("Écrire une consigne (Réglages)")), el("button", {class: "ghost", onclick: fermer}, tx("Annuler"))));
+    el("div", {class: "row"}, el("button", {class: "primary", onclick: allerReglages}, tx("Séance vide ou à partir d'un PDF (Réglages)")), el("button", {class: "ghost", onclick: fermer}, tx("Annuler"))));
   const p = P.propositions.find(x => x.modele.id === S.suiteChoisie) || P.propositions.find(x => x.conseille);
   const r = P.resume, actifs = r.difficulte + r.attendu + r.aise;
   const bilan = actifs
@@ -687,7 +773,7 @@ function carteSuites(c) {
     el("label", {for: "suite-garder", class: "row", style: "gap:8px"}, el("input", {type: "checkbox", id: "suite-garder", checked: repr.length > 0 || !actifs}),
       tx`Garder la séance ${N(n)} ouverte` + (repr.length ? tx` pour qu'ils la terminent ou la reprennent : ${repr.join(", ")}` : "")),
     el("div", {class: "row"}, el("button", {class: "primary", onclick: creer}, tx`Créer la séance ${prochainNumero(c)} : « ${p.modele.titre} »`),
-      el("button", {class: "ghost", onclick: allerReglages}, tx("Autre modèle ou consigne libre")),
+      el("button", {class: "ghost", onclick: allerReglages}, tx("Séance vide, PDF ou autre modèle")),
       el("button", {class: "ghost", onclick: fermer}, tx("Annuler"))));
 }
 function caseCode(c) {

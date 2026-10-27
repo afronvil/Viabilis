@@ -1,5 +1,5 @@
 {
- "niveau": "CM1, licence de mathématiques, master de microbiologie",
+ "niveau": "CM1, licence de mathématiques, master de microbiologie, master de marketing",
  "modeles": [
   {
    "id": "rech-cm1-explorer",
@@ -2700,6 +2700,219 @@
    "lectureActive": false,
    "suites": {
     "consolider": "creole-mq-debat",
+    "prolonger": null,
+    "approfondir": null
+   }
+  },
+  {
+   "id": "mkt-1-cible",
+   "titre": "1. Market and target: who runs in recycled shoes? (1 h 30)",
+   "niveauTache": 2,
+   "objectif": "Segmentation, targeting and personas (the S and T of STP) for the launch of recycled running shoes. Segmentation bases (demographic, behavioural, psychographic, benefits sought), criteria of an effective segment, attitude–behaviour gap on sustainability, evidence-based personas. Prepares the positioning of session 2.",
+   "tache": "You are a junior marketing specialist at a company that makes sustainable sportswear. The company is about to launch a new line of running shoes made from recycled materials. Before choosing a positioning, the team needs to know who could buy them.\n1. Name at least three market segments for these shoes (for example by running practice, motivation, price sensitivity or attitude to sustainability). For each, give the criterion that defines it and one need it has.\n2. Choose the segment you would target first and justify your choice (size, reachability, fit with the brand, competition, willingness to pay).\n3. Write a short persona for this target: age, running habits, what they value, what makes them hesitate.\nEach segment, justification or persona is one idea. Give a reason or a source for every claim about the market; when you are not sure, say so.",
+   "indices": [
+    "Segmentation bases: demographic (age, income), behavioural (how often and where they run), psychographic (values, lifestyle) and benefits sought (performance, comfort, ethics, style).",
+    "A good target segment is measurable, large enough, reachable through your channels, and one where your brand has a credible advantage.",
+    "Think about the attitude–behaviour gap: many consumers say they care about sustainability but do not pay more for it. Which segment actually acts on it?"
+   ],
+   "verification": {
+    "mode": "ia",
+    "maximum": 3,
+    "criteres": "Level: first-year master's students in marketing. Judge reasoning, not style. An idea is \"juste\" when: a segment is defined by an explicit criterion and a need, and is really distinct from the other segments; the choice of target is justified by at least two criteria (size, reachability, fit with a sustainable sportswear brand, competition, willingness to pay); the persona is concrete (habits, values, hesitations) and consistent with the chosen target. An idea is \"a_revoir\" when: a segment is only a demographic label without a need; the target is \"all runners\" or \"everyone who cares about the planet\"; market figures are stated as facts without a source (ask where the figure comes from rather than correcting it); the persona contradicts the target. Value ideas that take the hesitations into account: price premium, doubts about the performance or durability of recycled materials, scepticism about green claims. Do not require precise market figures. Two segments built on different criteria are two different ideas."
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Here are three runners. Anna, 24, runs three times a week and trains for a marathon; she wants performance. Marc, 45, runs at weekends, buys mostly organic food and is ready to pay more for ethical products. Léa, 19, a student, runs now and then, follows fashion trends on social media and has a limited budget.\nFor each of them, say what they would look for in a running shoe and whether recycled materials would matter to them. Then choose the one you would target first for the launch and explain why.",
+     "indices": [
+      "Ask yourself for each runner: what problem does a running shoe solve for them?",
+      "Who would notice, and value, that the shoe is made from recycled materials?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Estimate the size of your target segment in one European country with a top-down approach (population, then runners, then regular runners, then buyers driven by sustainability), stating every assumption and its source. Then compare your target with that of two real brands that sell running shoes made with recycled materials, without stating facts you cannot verify.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Marketing and generative AI (M1)",
+   "public": "superieur",
+   "lecture": "en-GB",
+   "exercices": "master/marketing_niveau1.gift (niveau 1)",
+   "suites": {
+    "consolider": null,
+    "prolonger": "mkt-2-positionnement",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "mkt-2-positionnement",
+   "titre": "2. Choosing a launch positioning with a generative AI (1 h 30)",
+   "niveauTache": 3,
+   "objectif": "The case study: generate positioning proposals with the AI assistant, assess them and recommend one to the team. Positioning statement (target, frame of reference, point of difference, reason to believe), points of parity and difference, the desirable–deliverable–distinctive test, credibility of environmental claims. Recommended settings for this session: \"AI first\" and \"AI that gives elements\", so that students ask the AI for proposals one at a time.",
+   "tache": "You are a junior marketing specialist at a company that makes sustainable sportswear. The company is about to launch a new line of running shoes made from recycled materials. You are asked to identify the most suitable launch positioning. You have a generative AI assistant at your disposal: use it to generate several positioning proposals, then choose the one you would bring to your team, justifying your choice.\n1. Ask the AI assistant for proposals, one at a time. Add each proposal you keep as an idea, rewritten in your own words in this form: For [target], [brand] is the [frame of reference] that [point of difference], because [reason to believe].\n2. For each proposal, add your assessment: is it desirable for the target, distinctive from competitors, deliverable by the brand, and honest about what \"recycled\" really covers?\n3. Finish with your recommendation to the team: the positioning you choose, why you prefer it to the others, and its main risk.",
+   "indices": [
+    "A positioning statement answers four questions: for whom (target), in which category (frame of reference), what makes it different (point of difference), and why should people believe it (reason to believe).",
+    "Test each proposal: is it desirable for the target, deliverable and provable by the brand, distinctive from competitors? If every competitor also uses recycled materials, \"recycled\" is a point of parity, not a point of difference.",
+    "The AI's proposals are a starting point, not an answer. Check whether one of them makes claims the product cannot prove, such as \"100 % sustainable\" or \"zero impact\"."
+   ],
+   "verification": {
+    "mode": "ia",
+    "maximum": 3,
+    "criteres": "Level: first-year master's students in marketing; they used a generative AI to produce proposals, and what is assessed is their own critical work. An idea is \"juste\" when: a positioning statement contains its four elements (target, frame of reference, point of difference, reason to believe) and the reason to believe could actually be proved; an assessment applies explicit criteria (desirable, distinctive, deliverable, credibility, honesty of the environmental claim) and reaches a conclusion; the final recommendation chooses one positioning, compares it with at least one alternative and names a concrete risk (greenwashing accusations, price premium, doubts about performance, positioning shared with competitors). An idea is \"a_revoir\" when: it is an AI proposal pasted without being rewritten or assessed (ask what the student thinks of it); an element of the statement is missing; it relies on a vague or unprovable environmental claim (\"eco-friendly\", \"sustainable\", \"zero impact\", \"carbon neutral\"): under EU rules applicable since 27 September 2026 (Directive 2024/825), generic environmental claims without recognised excellent environmental performance, and neutrality claims based on offsetting, are banned; ask how the claim would be proved. Different angles (performance, ethics, community, style, price) are different ideas; the same angle reworded is a duplicate."
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "A generative AI assistant has proposed five launch positionings:\nA. For competitive runners, the high-performance shoe that matches the best brands, now made from recycled materials.\nB. For runners who care about the planet, the 100 % sustainable, zero-impact running shoe.\nC. For city runners, the stylish everyday running shoe that turns waste into something you are proud to wear.\nD. For running clubs, the shoe of a community that runs to clean up its city.\nE. For students, the most affordable running shoe with recycled materials.\nFor each proposal, say in one or two sentences whether it is desirable for its target, distinctive and credible. Find the one that makes claims the brand cannot prove. Then choose the proposal you would bring to your team and explain why.",
+     "indices": [
+      "Can the brand really prove \"100 % sustainable\" and \"zero impact\"?",
+      "Which proposal would be hard for a competitor to copy?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Build a perceptual map with two axes that matter to your target (for example running performance and credibility of the environmental commitment). Place your brand and at least three competitors, justifying each position, and show where your chosen positioning finds an empty space that consumers actually value. Then describe how you would test the positioning with consumers before the launch: method, sample, and the result that would make you change your mind.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Marketing and generative AI (M1)",
+   "public": "superieur",
+   "lecture": "en-GB",
+   "exercices": "master/marketing_niveau2.gift (niveau 2)",
+   "suites": {
+    "consolider": "mkt-1-cible",
+    "prolonger": "mkt-3-messages",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "mkt-3-messages",
+   "titre": "3. From positioning to messages, without greenwashing (1 h 30)",
+   "niveauTache": 3,
+   "objectif": "Value proposition, key messages and tagline consistent with the positioning; specific, quantified and provable environmental claims; detecting and rewriting greenwashing (vague claims, hidden trade-offs, neutrality by offsetting, self-made labels, irrelevant claims) in the light of Directive (EU) 2024/825, applicable since 27 September 2026.",
+   "tache": "Your team has adopted a launch positioning for the recycled running shoes. Turn it into the launch messages.\n1. Write a value proposition (one sentence) and three key messages for your target: one functional (performance, comfort, durability), one environmental, one emotional or social.\n2. For the environmental message, state precisely what is recycled, in what proportion, and how you would prove it (certification, life-cycle data). You may invent the product data, but present it as an assumption.\n3. Ask the AI assistant for message ideas, then review its suggestions and your own messages for greenwashing: find at least two claims that would be misleading or not allowed, explain why, and rewrite them.\n4. Write one tagline.",
+   "indices": [
+    "A value proposition links the target's main need to the product's main benefit: \"For runners who…, our shoe gives… thanks to…\".",
+    "Specific beats generic: \"Upper made from 70 % recycled polyester, certified to the Global Recycled Standard\" can be verified; \"eco-friendly shoe\" cannot. In the EU, generic environmental claims without proof of excellent environmental performance are banned since 27 September 2026.",
+    "Watch for hidden trade-offs: a recycled upper does not make the whole shoe sustainable (sole, glue, transport, end of life). Say what the claim covers and what it does not."
+   ],
+   "verification": {
+    "mode": "ia",
+    "maximum": 3,
+    "criteres": "Level: first-year master's students in marketing. An idea is \"juste\" when: the value proposition is consistent with a positioning and names a target, a need and a benefit; the three messages are really distinct (functional, environmental, emotional or social); the environmental claim is specific, quantified, says what it covers (which part of the shoe) and names a means of proof (certification such as the Global Recycled Standard, life-cycle assessment); a greenwashing case is correctly identified (vague or generic claim, unprovable superlative, hidden trade-off, product neutrality based on offsetting, label not based on a certification scheme, irrelevant claim such as \"CFC-free\") and rewritten into a compliant, specific claim; the tagline is short and consistent with the positioning. An idea is \"a_revoir\" when: the rewrite is still vague; invented data is presented as fact instead of an assumption; the environmental message claims more than the product delivers; the message contradicts the positioning. Do not require real figures for the product."
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Classify each claim as acceptable or misleading, explain why in one sentence, and rewrite the misleading ones:\n1. Eco-friendly running shoes.\n2. Upper made from 70 % recycled polyester (Global Recycled Standard certified).\n3. Carbon neutral thanks to our tree-planting partners.\n4. The greenest running shoe on the market.\n5. Contains recycled materials (only the laces are recycled).\n6. CFC-free.",
+     "indices": [
+      "Could a customer check the claim? What exactly does it cover?",
+      "Is the claim about the product itself, or about something done elsewhere (offsetting)?"
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "List the main sources of environmental impact of a running shoe over its life cycle (materials, manufacturing, transport, use, end of life), explain which ones recycled materials reduce and which they do not, and propose a take-back or repair programme that would make the environmental message more credible, with one indicator to measure it.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Marketing and generative AI (M1)",
+   "public": "superieur",
+   "lecture": "en-GB",
+   "exercices": "master/marketing_niveau3.gift (niveau 3)",
+   "suites": {
+    "consolider": "mkt-2-positionnement",
+    "prolonger": "mkt-4-lancement",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "mkt-4-lancement",
+   "titre": "4. Launch plan and pitch to the team (1 h 30)",
+   "niveauTache": 4,
+   "objectif": "Marketing mix consistent with the positioning (range, price and price premium, distribution, communication), launch KPIs with targets, risks and mitigations, a five-sentence pitch; break-even analysis in the challenging variant. The AI assistant is used to raise objections that the student answers.",
+   "tache": "Prepare the launch of the recycled running shoe line.\n1. Propose the marketing mix for the launch: product range and price (justify the price premium, if any), distribution channels and communication channels for your target.\n2. Choose three KPIs to judge the launch after three months, with a target value and its rationale for each.\n3. Identify two risks (for example criticism of the environmental claims, the price, doubts about performance) and a way to reduce each.\n4. Write the five-sentence pitch you would give to your team.\nUse the AI assistant to challenge your plan: ask it for objections, then answer them in your ideas.",
+   "indices": [
+    "Keep the mix consistent with the positioning: a premium performance positioning and a launch at a discount price send contradictory signals.",
+    "Good KPIs are specific and measurable: sell-through rate, share of new customers, conversion rate, return rate, sentiment in reviews, participation in a take-back programme.",
+    "A pitch follows a simple arc: the opportunity, the target, the positioning, the plan, and what you need from the team."
+   ],
+   "verification": {
+    "mode": "ia",
+    "maximum": 3,
+    "criteres": "Level: first-year master's students in marketing. An idea is \"juste\" when: the marketing mix is consistent with the positioning and the target (channels where the persona actually shops and gets information); the price is justified by at least one argument (willingness to pay, competitors' prices, costs, positioning); each KPI is measurable, has a target value and a rationale; each risk is specific and has a concrete mitigation; the pitch is short, follows a clear arc and asks the team for something; an objection raised by the AI is answered with an argument rather than accepted or ignored. An idea is \"a_revoir\" when: the mix contradicts the positioning (premium positioning with heavy discounts, sustainability positioning with fast-fashion channels); a KPI is vague (\"increase awareness\", \"be more sustainable\"); invented figures are presented as facts rather than assumptions. For a break-even calculation (challenging variant): volume = fixed costs / (price − unit variable cost), rounded up; check the arithmetic."
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Complete the launch plan, one idea per line:\nPrice: … because …\nWhere to sell: … because …\nWhere to communicate: … because …\nOne KPI and its target after three months: …\nOne risk and how to reduce it: …",
+     "indices": [
+      "Where does your persona buy running shoes, and where do they get information?",
+      "A KPI needs a number and a date."
+     ],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "Build a simple break-even analysis for the first year: fixed costs, unit variable cost, price and break-even volume, stating your assumptions. Then compute how the break-even volume changes if the recycled materials raise the unit variable cost by 15 %, and discuss whether the price premium should change.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Marketing and generative AI (M1)",
+   "public": "superieur",
+   "lecture": "en-GB",
+   "exercices": "master/marketing_niveau4.gift (niveau 4)",
+   "suites": {
+    "consolider": "mkt-3-messages",
+    "prolonger": "mkt-5-evaluation",
+    "approfondir": null
+   }
+  },
+  {
+   "id": "mkt-5-evaluation",
+   "titre": "5. Final assessment, without AI (45 min)",
+   "niveauTache": 3,
+   "evaluation": true,
+   "objectif": "Assessment session: no AI, no hints, no verification. Ten questions marked automatically (about 15 minutes), then a short case on a new product (about 30 minutes): it checks that students can position a product on their own once the AI is withdrawn. The success criteria below are the teacher's marking guide (10 points).",
+   "tache": "Work without any AI assistant. You are a junior marketing specialist at the same sustainable sportswear company. It now launches a line of hiking jackets made from 80 % recycled polyester (assumption).\n1. Define the target segment in two or three sentences and justify the choice.\n2. Write two positioning statements with different angles (target, frame of reference, point of difference, reason to believe), then choose one and justify your choice with explicit criteria.\n3. Write one environmental claim that complies with EU rules, and explain why the claim \"The planet's favourite jacket, 100 % sustainable\" is not acceptable.\n4. Name one KPI for the launch, with a target value.",
+   "indices": [
+    "Target: who, which need, why this segment first.",
+    "Positioning statement: For [target], [brand] is the [frame of reference] that [point of difference], because [reason to believe].",
+    "A compliant claim is specific, quantified, covers a stated part of the product and can be proved."
+   ],
+   "verification": {
+    "mode": "ia",
+    "maximum": 3,
+    "criteres": "Marking guide, 10 points. 1. Target (2 points): a segment defined by a criterion and a need (1), justified by at least one criterion such as size, reachability, fit with the brand or willingness to pay (1). 2. Positioning (4 points): two complete statements with four elements each and really different angles (2), a reasoned choice using explicit criteria such as desirable, distinctive, deliverable or credible (2). 3. Environmental claims (3 points): a specific, quantified and provable claim, for example \"Outer fabric made from 80 % recycled polyester, certified to the Global Recycled Standard\" (1.5); the claim \"The planet's favourite jacket, 100 % sustainable\" is unacceptable because it is a generic, unprovable superlative and an absolute sustainability claim that no product can demonstrate; under Directive (EU) 2024/825, applicable since 27 September 2026, generic environmental claims without recognised excellent environmental performance are banned (1.5). 4. KPI (1 point): measurable, with a target value and a time frame, for example a sell-through rate of 60 % after three months."
+   },
+   "variantes": {
+    "accessible": {
+     "consigne": "Work without any AI assistant. The company launches hiking jackets made from 80 % recycled polyester (assumption).\n1. Who would you target first, and why?\n2. Complete this positioning statement: For …, [brand] is the … that …, because …\n3. Is the claim \"100 % sustainable jacket\" acceptable? Why? Write a better one.\n4. Give one KPI with a target value.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    },
+    "exigeante": {
+     "consigne": "In addition to the task, estimate the break-even volume of the jacket line for the first year with fixed costs of 200 000 €, a price of 180 € and a unit variable cost of 110 €, and say what price premium over a conventional jacket you would recommend, with your argument.",
+     "indices": [],
+     "cible": null,
+     "attendu": null
+    }
+   },
+   "discipline": "Marketing and generative AI (M1)",
+   "public": "superieur",
+   "lecture": "en-GB",
+   "exercices": "master/marketing_evaluation.gift (niveau 5)",
+   "suites": {
+    "consolider": "mkt-4-lancement",
     "prolonger": null,
     "approfondir": null
    }

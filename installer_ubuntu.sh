@@ -114,6 +114,7 @@ demander MODELE "Modèle Albert" "$DEFAUT_MODELE"
 echo "-- 1. Paquets"
 apt-get update -qq
 apt-get install -y -qq python3 sqlite3 certbot python3-certbot-apache >/dev/null
+apt-get install -y -qq python3-pypdf >/dev/null 2>&1 || echo "   (python3-pypdf indisponible : Viabilis lira les PDF avec son lecteur intégré)"
 python3 -c 'import sys; assert sys.version_info >= (3, 9), "Python 3.9 ou plus récent est nécessaire"'
 
 echo "-- 2. Compte de service et dossiers"

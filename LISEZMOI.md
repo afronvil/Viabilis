@@ -507,6 +507,51 @@ Une séance créée à partir d'un modèle prend le niveau d'exercices indiqué 
 
 **Conseil.** La classe est réglée sur « réflexion d'abord, puis IA qui questionne » : chacun écrit ses idées avant d'ouvrir l'IA, qui ne donne jamais d'éléments de réponse.
 
+## 6 quinquies bis. Marketing et IA générative (M1, en anglais, 6 h 45)
+
+Cours de marketing pour des étudiants de M1, entièrement en anglais, construit autour d'un cas : une entreprise de vêtements de sport durables lance une ligne de chaussures de course en matériaux recyclés. La séance 2 reprend la consigne d'origine (« Sei un/una junior marketing specialist… »), traduite en anglais.
+
+**Réglages de la classe** (Réglages → Règle de la classe) : public « enseignement supérieur », langue de l'interface « English ». L'interface, le tuteur IA et les retours de la vérification sont alors en anglais. La discipline des modèles est « Marketing and generative AI (M1) ».
+
+| Séance | Durée | Contenu | Exercices |
+|---|---|---|---|
+| 1. Market and target | 1 h 30 | segments, choix de la cible, persona ; écart entre attitude et comportement | 6, niveau 1 |
+| 2. Choosing a launch positioning with a generative AI | 1 h 30 | le cas : propositions de positionnement obtenues avec l'IA, évaluées, puis une recommandation à l'équipe | 6, niveau 2 |
+| 3. From positioning to messages, without greenwashing | 1 h 30 | proposition de valeur, messages, allégations environnementales précises et prouvables | 6, niveau 3 |
+| 4. Launch plan and pitch | 1 h 30 | marketing mix, prix, KPI, risques, pitch ; seuil de rentabilité en variante exigeante | 6, niveau 4 |
+| 5. Final assessment, without AI | 45 min | 10 questions, puis un cas sur un nouveau produit (vestes de randonnée) | 10, niveau 5 |
+
+**Le rôle de l'IA dans la séance 2.** Le tuteur de Viabilis ne donne jamais de liste de réponses toutes faites. Pour que les étudiants obtiennent des propositions de positionnement, réglez cette séance sur « IA d'abord » et « IA qui donne des éléments » : chaque demande donne une proposition partielle. Les étudiants doivent ensuite réécrire chaque proposition retenue dans leurs propres mots et l'évaluer. Les critères de réussite demandent à la vérification de marquer « à revoir » une proposition de l'IA collée sans être réécrite ni évaluée. Pour les autres séances, « réflexion d'abord, puis IA qui questionne » convient ; aux séances 3 et 4, l'IA sert à proposer des messages puis à soulever des objections.
+
+**L'évaluation (séance 5)** se fait sans IA, sans coup de pouce et sans vérification. Elle vérifie que les étudiants savent positionner seuls un nouveau produit une fois l'IA retirée. Les critères de réussite du modèle servent de grille de correction, sur 10 points.
+
+**Les allégations environnementales.** Les séances 3 et 5 s'appuient sur la directive (UE) 2024/825, applicable depuis le 27 septembre 2026. Elle interdit les allégations environnementales génériques (« eco-friendly ») sans performance environnementale excellente reconnue, et la neutralité d'un produit fondée sur la compensation. Elle impose aussi que les labels de durabilité reposent sur un système de certification ou soient établis par les autorités publiques. Vérifiez la transposition dans le pays de vos étudiants.
+
+**Banques d'exercices** (`serveur/exemples/master/`) : `marketing_niveau1.gift` à `marketing_niveau4.gift` (6 questions chacune) et `marketing_evaluation.gift` (10 questions, aucune reprise des séances précédentes). Les calculs (marge sur coût variable, seuil de rentabilité) ont été vérifiés.
+
+**Avant de l'utiliser :** un modèle de langage capable de bien écrire en anglais est conseillé pour le tuteur et la vérification. Les estimations de l'état et les règles de viabilité n'ont pas été éprouvées dans ce public.
+
+## 6 quinquies ter. Créer une séance vide, ou à partir d'un document PDF
+
+L'onglet Réglages commence par la carte « Créer la séance N ». Elle propose deux façons de créer une séance, en plus des modèles de la carte suivante :
+- **une séance vide**, que vous écrivez entièrement : consigne, coups de pouce, variantes, vérification ;
+- **une séance à partir d'un document PDF** (10 Mo au plus), avec deux options cochées par défaut :
+  - **l'IA prépare la séance** : elle lit le texte du PDF et propose une consigne ouverte, trois coups de pouce gradués, une variante accessible, une variante exigeante et des critères de réussite pour la vérification. Un champ facultatif permet de dire ce que vous attendez (durée, niveau, notion à travailler) ;
+  - **les élèves peuvent ouvrir le PDF** pendant la séance : un bouton « 📄 Ouvrir le document de la séance » apparaît sous la consigne.
+
+**La nouvelle séance est créée fermée.** Les élèves ne la voient pas : relisez et corrigez ce que l'IA a proposé, puis cliquez sur « Enregistrer et ouvrir la séance N aux élèves ». Les séances précédentes gardent leur consigne et leur document.
+
+**Joindre ou retirer un document** sur une séance existante : dans la carte « La tâche » (Réglages, ou « Modifier » pour une séance précédente). Cela enregistre aussi les réglages de la séance. Un document retiré de toutes les séances est effacé du serveur.
+
+**Ce qu'il faut savoir :**
+- **lecture du PDF** : avec `pypdf` s'il est installé (paquet `python3-pypdf`, que l'installateur Ubuntu tente d'installer), sinon avec un lecteur intégré, sans dépendance. Un PDF scanné (des images, sans texte) ne peut pas être lu par l'IA : il peut seulement être montré aux élèves ;
+- **données** : pour préparer la séance, le texte du PDF (40 000 caractères au plus) est envoyé au fournisseur d'IA de la plateforme. N'utilisez pas de document contenant des données personnelles ;
+- **accès** : un élève n'ouvre que le document d'une séance ouverte ou d'une séance qu'il a déjà travaillée, dans sa propre classe ;
+- **hors ligne** : les documents ne sont pas copiés dans le kit de la clé USB ;
+- **qualité du brouillon** : elle dépend du modèle de langage. Avec un petit modèle local, relisez particulièrement les critères de réussite.
+
+Test : `test_documents.py` (21 vérifications).
+
 ## 6 sexies. Travail hors ligne (clé USB)
 
 Ce mode sert à un étudiant qui ne peut pas joindre le serveur de la classe : il travaille sur son propre ordinateur, puis rapporte son travail.

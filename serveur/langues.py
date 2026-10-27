@@ -18,6 +18,14 @@ _D = {
     "Mot de passe incorrect.": ("Wrong password.", "Contrasenya incorrecta."),
     "Session enseignant requise.": ("Teacher session required.", "Cal una sessió docent."),
     "Code de classe inconnu.": ("Unknown class code.", "Codi de classe desconegut."),
+    # ---- documents PDF des séances
+    "Le fichier n'est pas un PDF.": ("The file is not a PDF.", "El fitxer no és un PDF."),
+    "PDF trop volumineux : {mo} Mo au plus.": ("PDF too large: {mo} MB at most.", "PDF massa gran: {mo} MB com a màxim."),
+    "Document introuvable.": ("Document not found.", "Document no trobat."),
+    "Aucun document pour cette séance.": ("No document for this session.", "Cap document per a aquesta sessió."),
+    "Aucun texte lisible dans ce PDF (document scanné ?) : écrivez la consigne vous-même.": (
+        "No readable text in this PDF (scanned document?): write the task yourself.", "Cap text llegible en aquest PDF (document escanejat?): escriviu la consigna vosaltres mateixos."),
+    "L'IA n'a pas pu préparer la séance : {exc}.": ("The AI could not prepare the session: {exc}.", "La IA no ha pogut preparar la sessió: {exc}."),
     "Pseudonyme : 1 à 24 lettres, chiffres ou espaces.": ("Nickname: 1 to 24 letters, digits or spaces.", "Pseudònim: d'1 a 24 lletres, xifres o espais."),
     "Ce pseudonyme existe déjà. Si c'est le vôtre, touchez-le dans la liste ; sinon, choisissez-en un autre.": (
         "This nickname already exists. If it is yours, tap it in the list; otherwise, choose another one.",

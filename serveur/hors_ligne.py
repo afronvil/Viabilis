@@ -33,6 +33,7 @@ def preparer_kit(cl, cfg, exercices, maintenant, toutes=True):
     for c in [cfg] + list((cfg.get("archives") or {}).values()):
         if isinstance(c.get("verification"), dict):
             c["verification"]["criteres"] = ""           # les critères contiennent les réponses attendues
+        c["document"] = 0                                  # les documents PDF restent sur le serveur
     cfg.update({"eleves": {}, "groupes": {}, "galerie": {}, "codePersonnel": False})   # rien sur les autres élèves
     if toutes:                                            # hors ligne, l'étudiant avance à son rythme : toutes les séances sont ouvertes
         existantes = [n for n in range(1, cfg["seance"] + 1) if n not in cfg.get("supprimees", [])

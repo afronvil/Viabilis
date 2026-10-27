@@ -244,9 +244,9 @@ ELEVE = {"ecole": "un élève d'école élémentaire", "college": "un élève de
 
 def consigne_ia(tache, criteres, idees, public="ecole", code=False, langue="fr"):
     liste = "\n".join(f"{i + 1}. {t}" for i, t in enumerate(idees))
-    rigueur = ("Vérifie chaque affirmation mathématique avec rigueur : une idée vraie mais mal justifiée est « a_revoir ». "
+    rigueur = ("Vérifie chaque affirmation avec rigueur, selon les exigences de la discipline : une idée vraie mais mal justifiée est « a_revoir ». "
                "Si tu n'es pas certain qu'une affirmation est exacte, mets « a_revoir » et demande une justification plutôt que "
-               "de la valider. Écris les formules en texte simple (√2, ∛2, ζ₅, Gal(K/Q), [K:Q]). " if public == "superieur" else "")
+               "de la valider. S'il y a des formules, écris-les en texte simple (√2, ∛2, ζ₅, Gal(K/Q), [K:Q]). " if public == "superieur" else "")
     if code:
         rigueur += ("Les idées sont des programmes. Tu ne peux pas les exécuter : déroule-les à la main sur un ou deux petits "
                     "exemples, et signale les erreurs probables (bornes des boucles, indices, types, division entière, cas limites, "

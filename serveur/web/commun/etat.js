@@ -199,6 +199,19 @@ export function listeIdees(liste, tag) {
     (i.avant || []).length ? el("details", {class: "small muted"}, el("summary", {}, tx`Version${i.avant.length > 1 ? "s" : ""} précédente${i.avant.length > 1 ? "s" : ""} (${i.avant.length})`),
       el("ol", {}, i.avant.map(x => el("li", {}, texteIdee(x.texte))))) : null)));
 }
+/** Ouvre dans un nouvel onglet un PDF servi par l'API (avec le jeton) ; si l'onglet est bloqué, le télécharge. */
+export async function ouvrirPdf(chemin, jeton, nom = "document.pdf") {
+  const w = window.open("", "_blank");             // ouvert tout de suite, au clic : sinon le navigateur bloque la fenêtre
+  try {
+    const r = await fetch("/api/" + chemin, {headers: {"X-Viabilis-Langue": LANGUE, ...(jeton ? {Authorization: "Bearer " + jeton} : {})}});
+    if (!r.ok) { const d = await r.json().catch(() => ({})); throw Object.assign(new Error(d.erreur || tx("Erreur ") + r.status), {statut: r.status}); }
+    const url = URL.createObjectURL(await r.blob());
+    if (w) w.location.href = url;
+    else { const a = el("a", {href: url, download: nom}); document.body.append(a); a.click(); a.remove(); }
+    setTimeout(() => URL.revokeObjectURL(url), 120000);
+  } catch (e) { if (w) w.close(); throw e; }
+}
+
 export async function api(chemin, {methode = "GET", corps, jeton} = {}) {
   const r = await fetch("/api/" + chemin, {method: methode, headers: {"Content-Type": "application/json", "X-Viabilis-Langue": LANGUE, ...(jeton ? {Authorization: "Bearer " + jeton} : {})},
     body: corps === undefined ? undefined : JSON.stringify(corps)});
