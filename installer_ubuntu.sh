@@ -36,7 +36,7 @@ echo "== Viabilis : installation =="
 #   3. le fichier installer_ubuntu.conf, à côté de ce script : ce que vous y écrivez est toujours proposé.
 DEFAUT_DOMAINE=""; DEFAUT_COURRIEL=""; DEFAUT_ADMIN=""; DEFAUT_NOTIFICATIONS=""; DEFAUT_DOMAINES=""
 DEFAUT_SMTP_HOTE=""; DEFAUT_SMTP_PORT="587"; DEFAUT_SMTP_UTILISATEUR=""; DEFAUT_SMTP_EXPEDITEUR=""
-DEFAUT_MODELE="mistral-small-3-2-24b-instruct-2506"
+DEFAUT_MODELE="gpt-oss-120b"
 NOMS="DOMAINE COURRIEL ADMIN NOTIFICATIONS DOMAINES SMTP_HOTE SMTP_PORT SMTP_UTILISATEUR SMTP_EXPEDITEUR MODELE"
 ANCIEN=/etc/viabilis/viabilis.env
 ancien() { [ -f "$ANCIEN" ] && sed -n "s/^$1=//p" "$ANCIEN" | tr -d '\r' | tail -1 || true; }   # lu, jamais exécuté
@@ -109,7 +109,7 @@ demander SMTP_UTILISATEUR "Identifiant sur ce serveur de mail" "$DEFAUT_SMTP_UTI
 demander_secret SMTP_MDP "Mot de passe de ce compte de messagerie" VIABILIS_SMTP_MDP
 demander SMTP_EXPEDITEUR "Adresse d'expédition des mails" "${DEFAUT_SMTP_EXPEDITEUR:-$SMTP_UTILISATEUR}"
 demander_secret CLE "Clé d'API Albert (vide : configurer l'IA plus tard)" VIABILIS_IA_CLE
-demander MODELE "Modèle Albert" "$DEFAUT_MODELE"
+demander MODELE "Modèle Albert (gpt-oss-120b conseillé, surtout en maths)" "$DEFAUT_MODELE"
 
 echo "-- 1. Paquets"
 apt-get update -qq

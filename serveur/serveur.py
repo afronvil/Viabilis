@@ -286,6 +286,32 @@ def verifier_config_ia():
     return f
 
 
+# Modèles qui raisonnent avant de répondre : leur raisonnement compte dans max_tokens (gpt-oss d'Albert, DeepSeek R1, o1…)
+RAISONNEURS = re.compile(r"gpt-oss|deepseek-r1|deepseek-reasoner|(^|/)o[134](-|$)|qwq|magistral", re.I)
+
+
+def effort_raisonnement(modele):
+    """Effort de raisonnement à demander : VIABILIS_IA_RAISONNEMENT (low, medium, high, ou « aucun »),
+    sinon « low » pour un modèle qui raisonne (réponses rapides et courtes en classe), sinon rien."""
+    v = os.environ.get("VIABILIS_IA_RAISONNEMENT", "").strip().lower()
+    if v in ("low", "medium", "high"):
+        return v
+    if v in ("aucun", "none", "non", "0"):
+        return None
+    return "low" if RAISONNEURS.search(modele or "") else None
+
+
+def corps_compatible(modele, systeme, tours, max_tokens):
+    """Requête pour une API compatible OpenAI. Pour un modèle qui raisonne, on demande un raisonnement court
+    et on laisse assez de place pour raisonner PUIS répondre (sinon la réponse visible serait vide)."""
+    corps = {"model": modele, "max_tokens": max_tokens, "messages": [{"role": "system", "content": systeme}] + tours}
+    effort = effort_raisonnement(modele)
+    if effort:
+        corps["reasoning_effort"] = effort
+        corps["max_tokens"] = max_tokens + {"low": 2000, "medium": 4000, "high": 8000}[effort]
+    return corps
+
+
 def appeler_ia(systeme, tours, max_tokens=300, delai=60):
     fournisseur = os.environ.get("VIABILIS_IA", "fausse")
     if fournisseur == "fausse":
@@ -300,19 +326,31 @@ def appeler_ia(systeme, tours, max_tokens=300, delai=60):
     else:  # API compatible OpenAI (OpenAI, Gemini, Mistral, Ollama, Albert, vLLM…)
         url_def, modele_def = COMPATIBLES.get(fournisseur, COMPATIBLES["ollama"])
         url = os.environ.get("VIABILIS_IA_URL", url_def)
-        corps = {"model": modele or modele_def, "max_tokens": max_tokens, "messages": [{"role": "system", "content": systeme}] + tours}
+        corps = corps_compatible(modele or modele_def, systeme, tours, max_tokens)
+        delai = max(delai, 120) if "reasoning_effort" in corps else delai     # un modèle qui raisonne répond moins vite
         entetes = {"content-type": "application/json"}
         if cle:
             entetes["authorization"] = "Bearer " + cle
     req = urllib.request.Request(url, data=json.dumps(corps).encode(), headers=entetes, method="POST")
-    with urllib.request.urlopen(req, timeout=delai) as r:
-        rep = json.loads(r.read())
+    try:
+        with urllib.request.urlopen(req, timeout=delai) as r:
+            rep = json.loads(r.read())
+    except urllib.error.HTTPError as exc:
+        if exc.code != 400 or "reasoning_effort" not in corps:
+            raise
+        # le fournisseur ne connaît pas reasoning_effort : même requête sans ce champ (la place pour raisonner reste)
+        print(f"[IA] reasoning_effort refusé (HTTP 400) : nouvel essai sans ce réglage — {exc.read()[:200].decode('utf-8', 'replace')}", flush=True)
+        corps = {k: v for k, v in corps.items() if k != "reasoning_effort"}
+        req = urllib.request.Request(url, data=json.dumps(corps).encode(), headers=entetes, method="POST")
+        with urllib.request.urlopen(req, timeout=delai) as r:
+            rep = json.loads(r.read())
     if fournisseur == "anthropic":
         return "".join(b.get("text", "") for b in rep.get("content", []) if b.get("type") == "text").strip()
-    texte = rep["choices"][0]["message"].get("content")
-    if not texte:                                       # réponse vide (certains modèles ne renvoient que leur raisonnement)
-        raise ValueError("réponse vide de l'IA")
-    return texte.strip()
+    choix = rep["choices"][0]
+    texte = re.sub(r"(?s)<think>.*?</think>", "", choix["message"].get("content") or "").strip()   # raisonnement écrit dans la réponse
+    if not texte:                                       # réponse vide : le raisonnement a pris toute la place, ou le modèle n'a rien écrit
+        raise ValueError(f"réponse vide de l'IA (fin : {choix.get('finish_reason')})")
+    return texte
 
 
 # ---------------------------------------------------------------- banques d'exercices (.gift)

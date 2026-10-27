@@ -57,7 +57,7 @@ VIABILIS_MDP_ENSEIGNANT=…
 # Modèle de langage : Albert (API compatible OpenAI)
 VIABILIS_IA=openai
 VIABILIS_IA_URL=https://albert.api.etalab.gouv.fr/v1/chat/completions
-VIABILIS_IA_MODELE=…            # nom donné par GET https://albert.api.etalab.gouv.fr/v1/models
+VIABILIS_IA_MODELE=gpt-oss-120b   # conseillé (le plus fiable en maths) ; liste : GET https://albert.api.etalab.gouv.fr/v1/models
 VIABILIS_IA_CLE=…
 
 # Durée de conservation des traces des élèves, en jours (purge automatique quotidienne)
@@ -82,6 +82,8 @@ Autres fournisseurs possibles :
 | `gemini` | Gemini |
 | `ollama` | modèle local, sur la même machine (il faut alors une machine bien plus puissante) |
 | `fausse` | réponses factices, pour les essais |
+
+**Modèles qui raisonnent** (`gpt-oss-120b` d'Albert, DeepSeek R1…). Ils réfléchissent avant de répondre, ce qui les rend plus fiables en maths, mais leur réflexion compte dans la longueur de la réponse. Viabilis les reconnaît à leur nom : il leur demande une réflexion courte (`reasoning_effort: low`) et leur laisse assez de place pour réfléchir puis répondre. Pour changer l'effort, ajoutez `VIABILIS_IA_RAISONNEMENT=medium` (ou `high`, plus lent) ; `VIABILIS_IA_RAISONNEMENT=aucun` désactive ce réglage.
 
 Au démarrage, le serveur refuse un fournisseur inconnu ou une clé manquante, avec un message explicite. La clé d'API reste sur le serveur : elle n'est jamais envoyée aux navigateurs.
 
