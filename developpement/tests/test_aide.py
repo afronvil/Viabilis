@@ -75,7 +75,7 @@ ok(s == 200 and "5 + 5" not in ia["texte"] and "solution" in ia["texte"], "répo
 sig = r("GET", f"classes/{code}/signalements", None, J)[1]
 ok(len(sig) == 1 and sig[0]["auteur"] == "auto" and "5 + 5" in sig[0]["texte"], "blocage enregistré pour l'enseignant")
 s, ia = r("POST", "eleve/ia?seance=1", {"echanges": [{"role": "el", "texte": "aide-moi"}]}, je)
-ok("5 + 5" not in ia["texte"] and "idée" in ia["texte"], "réponse normale : transmise")
+ok("5 + 5" not in ia["texte"] and "technique" in ia["texte"], "réponse normale : transmise")
 r("PUT", "eleve/seance/1", {**corps2, "phase": "ia", "echanges": [{"role": "el", "texte": "aide"}, {"role": "ia", "texte": ia["texte"]}]}, je)
 ok(r("POST", f"classes/{code}/signalements", {"eleve": e["id"], "seance": 1, "indice": 0, "motif": "x"}, J)[0] == 404, "seule une réponse de l'IA peut être signalée")
 ok(r("POST", f"classes/{code}/signalements", {"eleve": e["id"], "seance": 1, "indice": 1, "motif": "donne la réponse"}, J)[0] == 200, "l'enseignant signale une réponse")

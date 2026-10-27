@@ -225,40 +225,43 @@ def consignes_ia(mode, public="ecole", code=False, langue="fr"):
     longueur = "Trois phrases au maximum" if public == "superieur" else "Deux phrases au maximum"
     if mode == "questionner":
         return ("Tu accompagnes un élève de façon socratique. Tu ne donnes JAMAIS la réponse, ni une liste d'idées, "
-                "ni un exemple d'idée. Tu poses UNE seule question courte à la fois, qui l'aide à approfondir, justifier "
-                "ou explorer une piste différente de celles qu'il a déjà ; ou tu proposes un contre-exemple. "
+                "ni un exemple d'idée. Appuie-toi sur UNE technique de résolution précise, adaptée à la tâche et à ce qu'il a "
+                "déjà écrit, et nomme-la (par exemple : essayer un cas plus simple, faire un schéma ou un tableau, chercher "
+                "méthodiquement, procéder par étapes, partir de la fin, vérifier avec l'opération inverse, chercher un "
+                "contre-exemple). Puis pose UNE seule question courte qui lui fait appliquer lui-même l'étape suivante de "
+                "cette technique ; garde la même technique d'un message à l'autre tant qu'elle l'aide. "
                 f"{longueur}, {NOM_POUR_IA.get(langue, 'en français')}, {pour}.")
     return ("Tu aides un élève qui a besoin d'un coup de pouce. Tu donnes UN seul élément de réponse ou un exemple partiel, "
             "jamais une liste complète, puis tu poses une courte question pour qu'il continue seul. "
             f"{'Quatre' if public == 'superieur' else 'Trois'} phrases au maximum, {NOM_POUR_IA.get(langue, 'en français')}, {pour}.")
 
 
-REMEDIATION_MAX = 3          # réponses de l'élève dans un dialogue de remédiation, par réponse à un exercice
+REMEDIATION_MAX = 5          # réponses de l'élève dans un dialogue de remédiation, par réponse à un exercice
 
 
 def consignes_remediation(mode, public="ecole", langue="fr", fini=False, code=False):
-    """Consignes de la remédiation : faire comprendre à l'élève l'erreur qu'il a faite, en court dialogue, sans jamais donner la réponse."""
+    """Consignes de la remédiation : faire comprendre l'erreur, puis enseigner une technique de résolution précise,
+    pas à pas, par des questions, sans jamais donner la réponse."""
     pour = DESTINATAIRE.get(public, DESTINATAIRE["ecole"]) + ("." + CODE_TUTEUR if code else "")
-    if mode == "questionner":
-        premier = ("Dans ton premier message, ne donne pas encore la règle : montre-lui ce qui cloche dans SA réponse (par exemple en lui "
-                   "faisant vérifier sa démarche sur un cas simple, pris en dehors de l'exercice) et pose UNE question pour qu'il repère "
-                   "lui-même son erreur. Dans les messages suivants, explique l'erreur et la règle en jeu si besoin. ")
-    else:
-        premier = ("Dans ton premier message, identifie l'erreur probable à partir de SA réponse (la confusion, la règle mal appliquée, "
-                   "l'étape oubliée), explique pourquoi ce raisonnement ne marche pas, au besoin avec un contre-exemple simple pris en dehors "
-                   "de l'exercice, rappelle la règle ou la notion en jeu, puis pose UNE question pour vérifier qu'il a compris (par exemple : "
-                   "reformuler la règle avec ses mots, ou dire ce qu'il changerait dans sa démarche). ")
-    suite = ("invite-le à réessayer l'exercice" if not fini else
-             "dis-lui qu'il saura éviter cette erreur la prochaine fois (il n'a plus d'essai sur cet exercice)")
-    return ("Tu fais une remédiation avec un élève qui s'est trompé à un exercice. Ton but : qu'il comprenne l'erreur qu'il a faite, "
-            "pas qu'il obtienne la réponse. RÈGLE ABSOLUE : tu ne donnes JAMAIS la bonne réponse, ni directement, ni par un calcul, "
-            "un exemple ou un indice qui la livre, et tu ne dis jamais quel choix cocher. La bonne réponse t'est donnée seulement pour "
-            "comprendre l'erreur : ne la contredis pas, ne la cite pas. Si l'élève propose une réponse à l'exercice ou demande si c'est "
-            "juste, ne confirme pas et n'infirme pas : invite-le à la saisir dans l'exercice. " + premier +
-            f"Ensuite, réagis à ce qu'il écrit : s'il a compris, dis-le simplement et {suite} ; sinon, réexplique autrement, plus "
-            "simplement, avec un autre exemple, et pose une nouvelle question. Ne juge jamais l'élève : se tromper fait partie de "
-            f"l'apprentissage. {'Cinq' if public == 'superieur' else 'Quatre'} phrases au maximum par message, en texte simple, sans "
-            f"titre ni liste, {NOM_POUR_IA.get(langue, 'en français')}, {pour}.")
+    erreur = ("fais-lui repérer son erreur par une courte question sur SA réponse (par exemple en lui faisant vérifier sa démarche "
+              "sur un cas simple)" if mode == "questionner" else
+              "dis en une phrase l'erreur probable, à partir de SA réponse (la confusion, la règle mal appliquée, l'étape oubliée)")
+    suite = ("il pourra réessayer l'exercice" if not fini else
+             "il saura l'utiliser la prochaine fois (il n'a plus d'essai sur cet exercice)")
+    return ("Tu fais une remédiation avec un élève qui s'est trompé à un exercice. Ton but : qu'il comprenne son erreur et qu'il "
+            "apprenne une TECHNIQUE précise pour résoudre ce type de problème, pas qu'il obtienne la réponse. RÈGLE ABSOLUE : tu ne "
+            "donnes JAMAIS la bonne réponse, ni directement, ni par un calcul, un exemple ou un indice qui la livre, et tu ne dis jamais "
+            "quel choix cocher. La bonne réponse t'est donnée seulement pour comprendre l'erreur : ne la contredis pas, ne la cite pas. "
+            "Si l'élève propose une réponse à l'exercice ou demande si c'est juste, ne confirme pas et n'infirme pas : invite-le à la "
+            f"saisir dans l'exercice. Dans ton premier message, {erreur} ; puis présente la technique adaptée à ce problème et "
+            "nomme-la (par exemple : « décomposer en étapes », « revenir à la définition », « chercher le dénominateur commun », "
+            "« faire un schéma », « repérer les données et la question », « vérifier avec l'opération inverse ») ; enfin pose UNE "
+            "question qui lui fait faire lui-même la première étape. Ensuite, un message par étape : réagis à ce qu'il a écrit (s'il "
+            "se trompe, réexplique cette étape autrement, avec un exemple pris en dehors de l'exercice), puis pose UNE question pour "
+            "l'étape suivante. Ne fais jamais une étape à sa place et ne fais pas le calcul final. Quand il a parcouru la technique, "
+            f"résume-la en une phrase pour qu'{suite}. Ne juge jamais l'élève : se tromper fait partie de l'apprentissage. "
+            f"{'Cinq' if public == 'superieur' else 'Quatre'} phrases au maximum par message, en texte simple, sans titre ni liste, "
+            f"{NOM_POUR_IA.get(langue, 'en français')}, {pour}.")
 
 
 def revele_reponse(texte, q):
@@ -330,7 +333,8 @@ def appeler_ia(systeme, tours, max_tokens=300, delai=60):
     if fournisseur == "fausse":
         if "[fuite]" in tours[-1]["content"]:          # IA factice : simule une IA qui donne une solution (pour tester le garde-fou)
             return "Facile : 5 + 5, et voilà !"
-        return "Qu'est-ce qui te fait penser à cette idée ? Peux-tu en imaginer une toute différente ?"
+        return ("[IA factice : aucune vraie IA n'est configurée sur ce serveur (VIABILIS_IA=fausse), ce message est un exemple.] "
+                "Quelle technique pourrais-tu utiliser ici ? Essaie d'abord avec un cas plus simple : que trouves-tu ?")
     cle, modele = os.environ.get("VIABILIS_IA_CLE", ""), os.environ.get("VIABILIS_IA_MODELE", "")
     if fournisseur == "anthropic":
         url = os.environ.get("VIABILIS_IA_URL", "https://api.anthropic.com/v1/messages")

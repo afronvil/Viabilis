@@ -26,7 +26,7 @@ ok(S.revele_reponse("3 × 4 = 12, donc…", num) and not S.revele_reponse("Pense
 courte = {"type": "reponse_courte", "reponses": [{"texte": "Paris", "fraction": 1}]}
 ok(S.revele_reponse("C'est Paris !", courte) and not S.revele_reponse("Les Parisiens…", courte), "garde-fou : mot entier repéré")
 c = S.consignes_remediation("questionner", "college", "fr", fini=False)
-ok("JAMAIS la bonne réponse" in c and "question" in c and "règle" in c and "réessayer" in c, "consignes : faire repérer l'erreur, la règle, jamais la réponse")
+ok("JAMAIS la bonne réponse" in c and "TECHNIQUE" in c and "UNE question" in c and "réessayer" in c, "consignes : l'erreur, puis une technique pas à pas par des questions, jamais la réponse")
 ok("JAMAIS la bonne réponse" in S.consignes_remediation("donner", "ecole", "fr", fini=True), "consignes : jamais la réponse, même après le dernier essai")
 
 # le parcours, avec le serveur
@@ -46,12 +46,13 @@ ok(r("POST", f"eleve/exercices/{p}/expliquer", {}, e)[0] == 409, "pas de remédi
 r("POST", f"eleve/exercices/{p}/reponse", {"reponse": "13"}, e)
 ok(r("POST", f"eleve/exercices/{p}/expliquer", {"message": "pourquoi ?"}, e)[0] == 409, "répondre à l'IA demande d'abord d'ouvrir la remédiation")
 st, d = r("POST", f"eleve/exercices/{p}/expliquer", {}, e)
-ok(st == 200 and [m["role"] for m in d["echanges"]] == ["ia"] and d["restantes"] == 3 and d["fini"] is False, "1re erreur : l'IA ouvre la remédiation")
+ok(st == 200 and [m["role"] for m in d["echanges"]] == ["ia"] and d["restantes"] == S.REMEDIATION_MAX and d["fini"] is False, "1re erreur : l'IA ouvre la remédiation")
 st, d2 = r("POST", f"eleve/exercices/{p}/expliquer", {}, e)
 ok(st == 200 and d2["echanges"] == d["echanges"], "rouvrir renvoie le même dialogue (page rechargée)")
-for k, msg in enumerate(["J'ai ajouté au lieu de multiplier ?", "Multiplier c'est additionner plusieurs fois", "Je réessaie"]):
+for k in range(S.REMEDIATION_MAX):
+    msg = f"Étape {k + 1} : j'essaie"
     st, d = r("POST", f"eleve/exercices/{p}/expliquer", {"message": msg}, e)
-    ok(st == 200 and d["restantes"] == 2 - k and len(d["echanges"]) == 3 + 2 * k and d["echanges"][-2] == {"role": "eleve", "texte": msg}, f"réponse {k + 1} de l'élève : l'IA réagit")
+    ok(st == 200 and d["restantes"] == S.REMEDIATION_MAX - 1 - k and len(d["echanges"]) == 3 + 2 * k and d["echanges"][-2] == {"role": "eleve", "texte": msg}, f"réponse {k + 1} de l'élève : l'IA réagit")
 ok(r("POST", f"eleve/exercices/{p}/expliquer", {"message": "encore"}, e)[0] == 429, f"{S.REMEDIATION_MAX} réponses au plus par remédiation")
 st, rep = r("POST", f"eleve/exercices/{p}/reponse", {"reponse": "14"}, e)
 ok(rep["fini"] and rep["attendu"] is None and rep["retourGeneral"] == "", "2e erreur : la bonne réponse n'est pas montrée à l'élève")
@@ -70,7 +71,7 @@ ok(sig[0] != 200 or any("remédiation bloquée" in json.dumps(x, ensure_ascii=Fa
 tr = r("GET", f"classes/{code}/traces", None, J)[1]
 lina = {x["titre"]: x for x in next(v for v in tr.values() if v["pseudo"] == "Lina")["seances"]["1"]["exercices"]}
 ok(lina["Produit"]["explications"] == 2 and lina["Somme"]["explications"] == 0, "nombre de remédiations visible côté enseignant")
-ok(len(lina["Produit"]["remediation"]["1"]) == 7 and len(lina["Produit"]["remediation"]["2"]) == 1, "dialogues de remédiation lisibles par l'enseignant, par essai")
+ok(len(lina["Produit"]["remediation"]["1"]) == 1 + 2 * S.REMEDIATION_MAX and len(lina["Produit"]["remediation"]["2"]) == 1, "dialogues de remédiation lisibles par l'enseignant, par essai")
 ok(lina["Produit"]["reponse"] == "14" and lina["Produit"]["attendu"] == "12", "l'enseignant voit la réponse donnée et la bonne réponse")
 # réglages de l'enseignant
 cfg["exercices"]["montrerReponse"] = True

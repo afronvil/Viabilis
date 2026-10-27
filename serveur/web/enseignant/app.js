@@ -1097,7 +1097,7 @@ function ongletExercices() {
     el("div", {class: "field"}, el("label", {for: "ex-niveau"}, tx("Niveau de la classe")), selNiv("ex-niveau", ex.niveau),
       el("p", {class: "small muted"}, tx("Chaque élève reçoit des exercices de ce niveau, sauf si un niveau individuel lui est appliqué depuis l'onglet Classe."))),
     el("label", {for: "ex-explications", class: "row", style: "gap:8px"}, explications, tx("Remédiation : après une erreur, l'élève peut échanger avec l'IA pour comprendre son erreur")),
-    el("p", {class: "small muted"}, tx("L'IA explique l'erreur faite et la règle en jeu, sans jamais donner la bonne réponse, puis l'élève peut lui répondre (3 fois au plus). Jamais en évaluation ni hors ligne.")),
+    el("p", {class: "small muted"}, tx("L'IA explique l'erreur faite, puis enseigne pas à pas une technique pour résoudre ce type de problème, en posant des questions, sans jamais donner la bonne réponse. L'élève peut lui répondre 5 fois au plus. Jamais en évaluation ni hors ligne.")),
     el("label", {for: "ex-montrer", class: "row", style: "gap:8px"}, montrer, tx("Montrer la bonne réponse à l'élève après son dernier essai")),
     el("p", {class: "small muted"}, tx("Sinon, seule l'enseignante ou l'enseignant la voit, dans le détail de chaque élève.")),
     ex.source ? el("label", {for: "ex-source", class: "row", style: "gap:8px"}, el("input", {type: "checkbox", id: "ex-source", checked: true}),
