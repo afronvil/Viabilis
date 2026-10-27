@@ -558,17 +558,30 @@ function carteExo(x, i) {
     res.attendu ? el("p", {class: "small"}, tx("Réponse attendue : ") + res.attendu) : null,
     res.retourGeneral ? el("p", {class: "small muted"}, res.retourGeneral) : null)
     : fin ? el("p", {class: "small muted"}, x.score >= 1 ? tx("Réussi.") : tx("Terminé.")) : null;
+  // après une erreur : l'IA explique ce qui ne va pas et la règle en jeu (une explication par réponse)
+  const peutExpliquer = res && res.tentatives && !res.juste && moi.config.exercices?.explications;
+  const expliquer = async () => {
+    x.explication = {attente: true}; seance();
+    try { const r = await api(`eleve/exercices/${x.id}/expliquer` + q(), {methode: "POST", jeton: session.jeton}); x.explication = {texte: r.texte}; }
+    catch (e) { x.explication = {erreur: e.message}; }
+    seance();
+  };
+  const explication = !peutExpliquer ? null : !x.explication ? el("div", {class: "row"}, el("button", {class: "ghost", onclick: expliquer}, tx("Comprendre mon erreur")))
+    : x.explication.attente ? el("p", {class: "small muted", role: "status"}, tx("L'IA prépare une explication…"))
+    : x.explication.erreur ? el("p", {class: "small muted", role: "status"}, x.explication.erreur)
+    : el("div", {class: "notice", role: "status"}, el("div", {class: "row", style: "justify-content:space-between"}, el("p", {style: "font-weight:700"}, tx("Comprendre mon erreur")), ecoute(() => x.explication.texte)),
+        el("p", {class: "small", style: "white-space:pre-wrap"}, x.explication.texte));
   const valider = el("button", {class: "primary", disabled: fin, onclick: async () => {
     valider.disabled = true;
     try {
       const r = await api(`eleve/exercices/${x.id}/reponse` + q(), {methode: "POST", jeton: session.jeton, corps: {reponse: x.saisie, duree: Math.round((Date.now() - x.t0) / 1000)}});
-      x.resultat = r; x.tentatives = r.tentatives; x.score = Math.max(x.score ?? 0, r.score); x.t0 = Date.now();
+      x.resultat = r; x.explication = null; x.tentatives = r.tentatives; x.score = Math.max(x.score ?? 0, r.score); x.t0 = Date.now();
     } catch (e) { x.resultat = {juste: false, fini: false, score: 0, retour: e.message}; }
     seance();
   }}, tx("Valider"));
   const aLire = () => [x.texte, ...(x.choix || []).map((ch, k) => tx`Choix ${k + 1} : ${ch.texte}`), ...(x.gauches || [])].join(". ");
   return el("div", {class: "card"}, el("div", {class: "row", style: "justify-content:space-between"}, el("p", {class: "eyebrow"}, tx`Exercice ${i + 1}`), ecoute(aLire)),
-    ...enonce(x.texte), ...champs, retour, fin ? null : el("div", {class: "row"}, valider));
+    ...enonce(x.texte), ...champs, retour, explication, fin ? null : el("div", {class: "row"}, valider));
 }
 
 function saisieIdee(ajouter) {

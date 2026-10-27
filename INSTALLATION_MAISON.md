@@ -37,7 +37,7 @@ Le port 80 sert à obtenir et renouveler le certificat, puis à rediriger vers h
 
 Sur le Mac :
 1. Arrêtez le serveur Viabilis (Ctrl+C dans sa fenêtre), pour que la base soit complète.
-2. Copiez **tout le dossier** `~/Documents/Claude/Viabilis/application` sur une clé USB. Ne prenez pas l'archive `.zip`, qui ne contient pas la base de vos classes.
+2. Copiez **tout le dossier** `~/Viabilis/application` sur une clé USB. Ne prenez pas l'archive `.zip`, qui ne contient pas la base de vos classes.
 
 ## 5. Lancer l'installation sur l'ordinateur Ubuntu
 

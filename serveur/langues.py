@@ -164,6 +164,13 @@ _D = {
     "zéro fois": ("zero times", "cap vegada"), "une fois": ("once", "una vegada"), "deux fois": ("twice", "dues vegades"),
     "trois fois": ("three times", "tres vegades"), "{k} fois": ("{k} times", "{k} vegades"),
     "Relis la consigne et vérifie ton idée.": ("Read the instructions again and check your idea.", "Rellegeix la consigna i comprova la teva idea."),
+    # ---- explications d'erreurs d'exercices par l'IA
+    "Hors ligne, l'IA ne peut pas expliquer les erreurs : relisez le commentaire de l'exercice.": ("Offline, the AI cannot explain mistakes: read the exercise comment again.", "Fora de línia, la IA no pot explicar els errors: rellegeix el comentari de l'exercici."),
+    "Votre enseignant n'a pas activé les explications de l'IA pour les exercices.": ("Your teacher has not turned on AI explanations for the exercises.", "El teu docent no ha activat les explicacions de la IA per als exercicis."),
+    "Répondez d'abord à l'exercice.": ("Answer the exercise first.", "Respon primer l'exercici."),
+    "Cette réponse est juste : il n'y a pas d'erreur à expliquer.": ("This answer is correct: there is no mistake to explain.", "Aquesta resposta és correcta: no hi ha cap error per explicar."),
+    "Vous avez déjà une explication pour cette réponse : relisez-la, puis réessayez.": ("You already have an explanation for this answer: read it again, then try again.", "Ja tens una explicació per a aquesta resposta: rellegeix-la i torna-ho a provar."),
+    "Relis l'énoncé mot par mot et compare-le à ta réponse : où se trouve la différence ? Pense à la règle que tu as apprise sur cette notion, puis réessaie.": ("Read the question word by word and compare it with your answer: where is the difference? Think of the rule you learned about this, then try again.", "Rellegeix l'enunciat paraula per paraula i compara'l amb la teva resposta: on és la diferència? Pensa en la regla que has après sobre aquesta noció i torna-ho a provar."),
 }
 
 

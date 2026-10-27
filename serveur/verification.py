@@ -254,7 +254,8 @@ def consigne_ia(tache, criteres, idees, public="ecole", code=False, langue="fr")
     return (
         f"Tu aides un enseignant à donner un retour formatif à {ELEVE.get(public, ELEVE['ecole'])}. " + rigueur +
         "Pour chaque idée, dis si elle répond à la consigne (statut \"juste\") ou si elle est à revoir (statut \"a_revoir\"), "
-        "puis écris un retour d'une phrase, bienveillant et précis. Si l'idée est à revoir, explique ce qui ne va pas et pose une question "
+        "puis écris un retour court (une ou deux phrases), bienveillant et précis. Si l'idée est à revoir, explique ce qui ne va pas, "
+        "rappelle en quelques mots la règle ou la notion en jeu (sans l'appliquer à sa place), et pose une question "
         "pour aider l'élève à corriger, SANS JAMAIS donner la bonne réponse ni proposer une idée à sa place. "
         "Si deux idées disent la même chose, mets le statut \"doublon\" à la seconde. Termine par un bilan d'une phrase qui encourage "
         "à chercher des idées différentes, puis un conseil d'une phrase sur la façon de chercher (comment s'organiser, par où commencer, "

@@ -31,6 +31,7 @@ import json
 import os
 import random
 import re
+import unicodedata
 import secrets
 import sqlite3
 import sys
@@ -78,7 +79,7 @@ DEFAUT_CONFIG = {
     "ordre": "adaptatif", "mode": "questionner", "minIdees": 3,
     "seuilCharge": 0.7, "retraitAgentivite": 0.8, "seuilMaitrise": 0.5,
     "eleves": {},
-    "exercices": {"actifs": False, "nombre": 3, "placement": "avant", "niveau": 2, "choix": "niveau", "source": ""},   # choix : niveau fixé ou adaptatif (ZPDES) ; source : seulement les questions de ce fichier
+    "exercices": {"actifs": False, "nombre": 3, "placement": "avant", "niveau": 2, "choix": "niveau", "source": "", "explications": True},   # choix : niveau fixé ou adaptatif (ZPDES) ; source : seulement les questions de ce fichier ; explications : l'élève peut demander à l'IA d'expliquer son erreur
     "niveauTache": 3,
     "verification": {"mode": "aucune", "cible": 10, "nombres": "", "attendu": 0, "criteres": "", "maximum": 3, "uneFois": False},
     "indices": [],
@@ -161,8 +162,11 @@ class Base:
                 c.execute("ALTER TABLE eleves ADD COLUMN pin TEXT")
             if "preferences" not in colonnes:               # bases créées avant les préférences d'affichage
                 c.execute("ALTER TABLE eleves ADD COLUMN preferences TEXT")
-            if "reponse" not in [r["name"] for r in c.execute("PRAGMA table_info(reponses)")]:   # bases créées avant la correction
+            col_rep = [r["name"] for r in c.execute("PRAGMA table_info(reponses)")]
+            if "reponse" not in col_rep:                    # bases créées avant la correction
                 c.execute("ALTER TABLE reponses ADD COLUMN reponse TEXT")
+            if "explications" not in col_rep:               # bases créées avant les explications d'erreurs par l'IA
+                c.execute("ALTER TABLE reponses ADD COLUMN explications INTEGER NOT NULL DEFAULT 0")
             if "enseignant" not in [r["name"] for r in c.execute("PRAGMA table_info(classes)")]:   # bases créées avant les comptes enseignants
                 c.execute("ALTER TABLE classes ADD COLUMN enseignant INTEGER")
             col_ens = [r["name"] for r in c.execute("PRAGMA table_info(enseignants)")]
@@ -225,6 +229,41 @@ def consignes_ia(mode, public="ecole", code=False, langue="fr"):
     return ("Tu aides un élève qui a besoin d'un coup de pouce. Tu donnes UN seul élément de réponse ou un exemple partiel, "
             "jamais une liste complète, puis tu poses une courte question pour qu'il continue seul. "
             f"{'Quatre' if public == 'superieur' else 'Trois'} phrases au maximum, {NOM_POUR_IA.get(langue, 'en français')}, {pour}.")
+
+
+def consignes_explication(mode, public="ecole", langue="fr", fini=False, code=False):
+    """Consignes pour expliquer une erreur d'exercice : ce qui ne va pas, la règle, puis réessayer (ou un cas semblable)."""
+    pour = DESTINATAIRE.get(public, DESTINATAIRE["ecole"]) + ("." + CODE_TUTEUR if code else "")
+    debut = ("Commence par UNE courte question qui l'aide à repérer lui-même son erreur. Ensuite, " if mode == "questionner" else "")
+    fin = ("Montre en une phrase comment la règle mène à la bonne réponse, puis propose un petit cas semblable, différent de "
+           "l'exercice, qu'il peut essayer seul (sans en donner la réponse)." if fini else
+           "L'élève a encore un essai : ne donne JAMAIS la bonne réponse, ni directement, ni par un calcul ou un exemple qui y mène, "
+           "et ne dis pas quel choix cocher. Termine en l'invitant à réessayer en appliquant la règle.")
+    return ("Tu aides un élève qui s'est trompé à un exercice à comprendre son erreur. Tu t'appuies sur la bonne réponse donnée par "
+            "l'enseignant et tu ne la contredis jamais ; si l'énoncé te semble ambigu, invite l'élève à en parler à son enseignant. "
+            "Ne juge jamais l'élève : se tromper fait partie de l'apprentissage. "
+            f"{debut}Dis ce qui ne va pas dans SA réponse, en partant de ce qu'il a écrit (la confusion probable). "
+            "Puis énonce la règle, la notion ou la méthode en jeu, simplement, en une ou deux phrases. " + fin + " "
+            f"{'Six' if public == 'superieur' else 'Cinq'} phrases au maximum, en texte simple, sans titre ni liste, "
+            f"{NOM_POUR_IA.get(langue, 'en français')}, {pour}.")
+
+
+def revele_reponse(texte, q):
+    """Vrai si le texte de l'IA contient la bonne réponse d'un exercice à réponse courte, numérique ou à choix unique."""
+    t = " " + re.sub(r"\s+", " ", unicodedata.normalize("NFC", texte or "")).lower() + " "
+    bonnes = [r for r in q.get("reponses") or [] if r.get("fraction", 0) >= 1]
+    if q.get("type") == "numerique":
+        for r in bonnes:
+            v = r["valeur"]
+            formes = {f"{v:g}", f"{v:g}".replace(".", ",")} | ({str(int(v))} if float(v).is_integer() else set())
+            if any(re.search(r"(?<![\d.,])" + re.escape(f) + r"(?![\d]|[.,]\d)", t) for f in formes):
+                return True
+    elif q.get("type") in ("reponse_courte", "choix_unique"):
+        for r in bonnes:
+            b = re.sub(r"\s+", " ", unicodedata.normalize("NFC", str(r.get("texte", "")))).lower().replace("*", "").strip()
+            if len(b) >= 2 and re.search(r"(?<!\w)" + re.escape(b) + r"(?!\w)", t):
+                return True
+    return False
 
 
 # Fournisseurs à API compatible OpenAI connus par leur nom : point d'accès et modèle par défaut
@@ -427,7 +466,7 @@ def config_valide(cfg):
                         "placement": ex.get("placement") if ex.get("placement") in ("avant", "apres") else "avant",
                         "niveau": min(5, max(1, int(ex.get("niveau", 2)))),
                         "choix": ex.get("choix") if ex.get("choix") in ("niveau", "adaptatif") else "niveau",
-                        "source": str(ex.get("source") or "")[:120]}
+                        "source": str(ex.get("source") or "")[:120], "explications": bool(ex.get("explications", True))}
     # séances ouvertes : compatibilité avec l'ancien réglage (une seule séance, « ouverte »)
     ouv = cfg.get("ouvertes")
     if ouv is None:
@@ -1130,7 +1169,8 @@ class Gestionnaire(SimpleHTTPRequestHandler):
         for r in reps:
             s = out.get(r["eleve"], {}).get("seances", {}).setdefault(str(r["seance"]), {})
             s.setdefault("exercices", []).append({"id": r["exercice"], "titre": r["titre"], "niveau": r["niveau"], "type": r["type"],
-                                                  "tentatives": r["tentatives"], "score": r["score"], "premierScore": r["premier_score"], "duree": r["duree"]})
+                                                  "tentatives": r["tentatives"], "score": r["score"], "premierScore": r["premier_score"], "duree": r["duree"],
+                                                  "explications": r["explications"]})
         for v in verifs:
             s = out.get(v["eleve"], {}).get("seances", {}).setdefault(str(v["seance"]), {})
             s["verification"] = {"nombre": v["nombre"], **json.loads(v["donnees"] or "{}")}
@@ -1309,7 +1349,8 @@ class Gestionnaire(SimpleHTTPRequestHandler):
                                               "discipline": DISCIPLINE_DU_MODELE.get(cfgS.get("modele") or "") or (cfg.get("discipline") if cfg.get("discipline") != "*" else ""),
                                               "saisieCode": bool(cfgS.get("saisieCode")), "evaluation": bool(cfgS.get("evaluation")), "tache": consigne,
                                               "document": self.nom_document(e["classe"], cfgS.get("document")),
-                                              "exercices": {"actifs": ex["actifs"], "placement": ex["placement"]},
+                                              "exercices": {"actifs": ex["actifs"], "placement": ex["placement"],
+                                                             "explications": bool(ex.get("explications", True)) and not HORS_LIGNE and not cfgS.get("evaluation")},
                                               "verification": {k: (cfgS.get("verification") or DEFAUT_CONFIG["verification"])[k] for k in ("mode", "maximum")}},
                                    "perso": {k: v for k, v in perso.items() if k != "variante"}, "seances": {str(k): v for k, v in rows.items()}, "derniereVerification": derniere})
         if p == ["document"] and verbe == "GET":            # document PDF de la séance (ouverte, ou déjà travaillée par l'élève)
@@ -1392,6 +1433,8 @@ class Gestionnaire(SimpleHTTPRequestHandler):
             return self.coup_de_pouce(e, cfgS)
         if len(p) == 3 and p[0] == "exercices" and p[2] == "reponse" and verbe == "POST":
             return self.repondre(e, cfgS, int(p[1]))
+        if len(p) == 3 and p[0] == "exercices" and p[2] == "expliquer" and verbe == "POST":
+            return self.expliquer(e, cfgS, int(p[1]))
         return self.erreur(404, "Ressource inconnue.")
 
     # ---------------------------------------------------------------- viabilité (expérimental)
@@ -1537,6 +1580,62 @@ class Gestionnaire(SimpleHTTPRequestHandler):
         return self.json(200, {"score": score, "juste": score >= 1, "retour": traduire_texte(lg, retour), "tentatives": tent, "fini": fini,
                                "attendu": traduire_texte(lg, attendu) if fini and score < 1 else None,
                                "retourGeneral": q.get("retour_general", "") if fini else ""})
+
+    def expliquer(self, e, cfg, xid):
+        """Après une réponse fausse, l'IA explique l'erreur et la règle en jeu, en s'appuyant sur la bonne réponse de l'enseignant.
+        Tant qu'il reste un essai, elle ne donne pas la bonne réponse. Une explication par réponse donnée."""
+        if not cfg.get("ouverte"):
+            return self.erreur(409, "Aucune séance ouverte.")
+        if cfg.get("evaluation"):
+            return self.erreur(403, "Pendant une évaluation, pas d'IA ni de coup de pouce.")
+        if HORS_LIGNE:
+            return self.erreur(403, "Hors ligne, l'IA ne peut pas expliquer les erreurs : relisez le commentaire de l'exercice.")
+        if not (cfg.get("exercices") or {}).get("explications", True):
+            return self.erreur(403, "Votre enseignant n'a pas activé les explications de l'IA pour les exercices.")
+        n = cfg["seance"]
+        if xid not in self.tirage(e, cfg):
+            return self.erreur(404, "Exercice inconnu pour cette séance.")
+        with self.base.cnx() as c:
+            x = c.execute("SELECT donnees FROM exercices WHERE id = ?", (xid,)).fetchone()
+            r = c.execute("SELECT * FROM reponses WHERE eleve = ? AND seance = ? AND exercice = ?", (e["id"], n, xid)).fetchone()
+        if not x:
+            return self.erreur(404, "Exercice supprimé.")
+        if not r or r["reponse"] is None:
+            return self.erreur(409, "Répondez d'abord à l'exercice.")
+        q, donnee = json.loads(x["donnees"]), json.loads(r["reponse"])
+        score, retour, _ = EX.corriger(q, donnee)
+        if score >= 1:
+            return self.erreur(409, "Cette réponse est juste : il n'y a pas d'erreur à expliquer.")
+        if r["explications"] >= r["tentatives"]:
+            return self.erreur(429, "Vous avez déjà une explication pour cette réponse : relisez-la, puis réessayez.")
+        fini = r["tentatives"] >= 2
+        lg = langue_valide(cfg.get("langue"))
+        choix = "".join(f"\n- {c_['texte']}" for c_ in q["reponses"]) if q["type"] in ("choix_unique", "choix_multiple") else ""
+        contexte = (f"Énoncé de l'exercice : {q.get('texte', '')}" + (f"\nChoix proposés :{choix}" if choix else "")
+                    + f"\n\nRéponse de l'élève : {EX.reponse_lisible(q, donnee) or '(vide)'}"
+                    + f"\nBonne réponse, donnée par l'enseignant : {EX.reponse_attendue(q)}"
+                    + (f"\nCommentaire prévu par l'enseignant pour cette réponse : {retour}" if retour else "")
+                    + (f"\nExplication générale prévue par l'enseignant : {q['retour_general']}" if q.get("retour_general") else "")
+                    + ("\n\nL'élève a encore un essai." if not fini else "\n\nL'élève n'a plus d'essai : il connaît maintenant la bonne réponse."))
+        try:
+            texte = appeler_ia(consignes_explication(cfg.get("mode"), cfg.get("public", "ecole"), lg, fini, cfg.get("saisieCode", False)),
+                              [{"role": "user", "content": contexte}], max_tokens=600 if cfg.get("public") == "superieur" else 400)
+        except urllib.error.HTTPError as exc:     # la cause va dans le terminal du serveur, sans donnée d'élève
+            print(f"[IA] explication refusée par le fournisseur : HTTP {exc.code} — {exc.read()[:300].decode('utf-8', 'replace')}", flush=True)
+            return self.erreur(502, "L'IA n'a pas répondu. Réessayez dans un moment.")
+        except (urllib.error.URLError, KeyError, ValueError, TimeoutError, IndexError, OSError, AttributeError, TypeError) as exc:
+            print(f"[IA] explication impossible : {type(exc).__name__} — {exc}", flush=True)
+            return self.erreur(502, "L'IA n'a pas répondu. Réessayez dans un moment.")
+        if not fini and revele_reponse(texte, q):  # garde-fou : la bonne réponse n'est jamais montrée avant le second essai
+            with VERROU, self.base.cnx() as c:
+                c.execute("INSERT INTO signalements (eleve, seance, indice, texte, motif, auteur, cree) VALUES (?, ?, NULL, ?, ?, 'auto', ?)",
+                          (e["id"], n, texte[:2000], "explication bloquée : elle contenait la bonne réponse", maintenant()))
+            texte = T(lg, "Relis l'énoncé mot par mot et compare-le à ta réponse : où se trouve la différence ? "
+                          "Pense à la règle que tu as apprise sur cette notion, puis réessaie.")
+        with VERROU, self.base.cnx() as c:
+            c.execute("UPDATE reponses SET explications = explications + 1 WHERE eleve = ? AND seance = ? AND exercice = ?", (e["id"], n, xid))
+            c.execute("UPDATE traces SET appels_ia = appels_ia + 1 WHERE eleve = ? AND seance = ?", (e["id"], n))
+        return self.json(200, {"texte": texte, "fini": fini})
 
     # ---------------------------------------------------------------- reprise d'une séance terminée
     def reprendre(self, e, cfg):
