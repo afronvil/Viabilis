@@ -1,0 +1,32 @@
+// Collège (cycle 4) — Fractions
+$CATEGORY: College/Mathematiques/Fractions
+
+::Fraction égale::Quelle fraction est égale à 1/2 ?{
+=2/4 #Oui : on multiplie numérateur et dénominateur par 2.
+~1/4 #Non : 1/4 est la moitié de 1/2.
+~2/3
+~3/4
+}
+
+::Vrai ou faux::3/4 est plus grand que 2/3.{T#Comparez avec le même dénominateur : 9/12 et 8/12.#Bien vu : 9/12 > 8/12.}
+
+::Somme::Combien font 1/3 + 1/6 ? Donnez une fraction simplifiée.{=1/2 =3/6#Juste, mais simplifiez.}
+
+::Décimal::Écrivez 3/4 en nombre décimal.{#0.75:0.001}
+
+::Encadrement::Donnez un nombre décimal compris entre 1/3 et 1/2.{#0.34..0.49}
+
+::Plusieurs bonnes réponses::Quelles fractions sont égales à 2/3 ?{
+~%50%4/6
+~%50%6/9
+~%-100%3/2
+~%-100%2/6
+}
+
+::Associer::Associez chaque fraction à son écriture décimale.{
+=1/2 -> 0,5
+=1/4 -> 0,25
+=3/4 -> 0,75
+}
+
+::Phrase à trous::Le dénominateur de 5/8 est {=8 =huit} et son numérateur est 5.

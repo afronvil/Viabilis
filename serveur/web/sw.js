@@ -1,5 +1,5 @@
 // Service worker : met en cache l'interface (pas les données) pour une ouverture rapide et l'installation sur l'écran d'accueil.
-const CACHE = "viabilis-v37";
+const CACHE = "viabilis-v43";
 const FICHIERS = ["eleve/", "eleve/index.html", "eleve/app.js", "eleve/manifest.webmanifest",
   "enseignant/", "enseignant/index.html", "enseignant/app.js", "enseignant/manifest.webmanifest",
   "commun/etat.js", "commun/style.css", "commun/icone.svg", "commun/modeles.json", "commun/suites.js", "commun/langues.js", "commun/traductions.js", "commun/visuels.js"];

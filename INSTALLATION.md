@@ -1,20 +1,20 @@
 # Viabilis — procédure d'installation sur un serveur
 
-À l'attention du service informatique. Demande d'Alexandra Fronville (INSPÉ de Bretagne, LaTIM), pour des séances avec les étudiants du M1 de microbiologie.
+À l'attention du service informatique de l'établissement qui héberge Viabilis.
 
 ## 1. En bref
 
-Viabilis est une application web pédagogique : une page pour les étudiants (`/eleve/`) et une page pour l'enseignante (`/enseignant/`).
+Viabilis est une application web pédagogique : une page pour les élèves ou étudiants (`/eleve/`) et une page pour les enseignants (`/enseignant/`).
 
 | Élément | Besoin |
 |---|---|
-| Machine | une petite machine virtuelle Linux (Debian 12 ou Ubuntu 22.04 et plus récents) : 1 vCPU, 1 Go de mémoire, 2 Go de disque suffisent pour un groupe de master |
+| Machine | une petite machine virtuelle Linux (Debian 12 ou Ubuntu 22.04 et plus récents) : 1 vCPU, 1 Go de mémoire, 2 Go de disque suffisent pour quelques classes |
 | Logiciel | Python 3.9 ou plus récent, **bibliothèque standard uniquement** : aucun paquet pip, aucune base de données à installer (SQLite, un fichier) |
 | Réseau entrant | HTTPS seulement, par le proxy inverse de l'université (nginx ou Apache). L'application écoute sur 127.0.0.1:8080 |
-| Nom de domaine | **un sous-domaine dédié**, par exemple `viabilis.univ-brest.fr`. L'application doit être servie à la racine du domaine : ses pages appellent `/api/…` en chemin absolu, et elle ne fonctionne pas sous un sous-chemin (`…/viabilis/`) |
+| Nom de domaine | **un sous-domaine dédié**, par exemple `viabilis.mon-etablissement.fr`. L'application doit être servie à la racine du domaine : ses pages appellent `/api/…` en chemin absolu, et elle ne fonctionne pas sous un sous-chemin (`…/viabilis/`) |
 | Réseau sortant | HTTPS (443) vers l'API du modèle de langage, par exemple `albert.api.etalab.gouv.fr` (Albert, DINUM) ou `api.mistral.ai` |
-| Comptes | un seul compte enseignant, protégé par mot de passe ; les étudiants entrent avec un code de classe et un pseudonyme, sans compte ni adresse électronique |
-| Adresses | `/eleve/` pour les étudiants (la racine `/` y renvoie), `/enseignant/` pour l'enseignante, `/api/…` pour les échanges |
+| Comptes | un mot de passe enseignant unique, ou des comptes enseignants validés par une administratrice ou un administrateur (chacun ne voit que ses classes) ; les élèves entrent avec un code de classe et un pseudonyme, sans compte ni adresse électronique |
+| Adresses | `/eleve/` pour les élèves (la racine `/` y renvoie), `/enseignant/` pour les enseignants, `/api/…` pour les échanges |
 
 ```
 navigateur ──HTTPS──> proxy de l'université ──HTTP──> 127.0.0.1:8080 (python3 serveur.py) ──> /var/lib/viabilis/viabilis.sqlite3
@@ -51,7 +51,7 @@ Le code est dans `/opt/viabilis/application/serveur/` et reste en lecture seule 
 Créer `/etc/viabilis/viabilis.env` :
 
 ```bash
-# Mot de passe du compte enseignant (10 caractères au moins), à transmettre à l'enseignante par un canal sûr
+# Mot de passe du compte enseignant (10 caractères au moins), à transmettre aux enseignants par un canal sûr
 VIABILIS_MDP_ENSEIGNANT=…
 
 # Modèle de langage : Albert (API compatible OpenAI)
@@ -60,11 +60,11 @@ VIABILIS_IA_URL=https://albert.api.etalab.gouv.fr/v1/chat/completions
 VIABILIS_IA_MODELE=…            # nom donné par GET https://albert.api.etalab.gouv.fr/v1/models
 VIABILIS_IA_CLE=…
 
-# Durée de conservation des traces des étudiants, en jours (purge automatique quotidienne)
+# Durée de conservation des traces des élèves, en jours (purge automatique quotidienne)
 VIABILIS_CONSERVATION_JOURS=365
 
 # Si la sortie vers Internet passe par un proxy :
-# HTTPS_PROXY=http://proxy.univ-brest.fr:3128
+# HTTPS_PROXY=http://proxy.mon-etablissement.fr:3128
 ```
 
 ```bash
@@ -118,7 +118,7 @@ systemctl enable --now viabilis
 systemctl status viabilis
 ```
 
-Au démarrage, le journal (`journalctl -u viabilis`) affiche les deux adresses et le fournisseur d'IA. Il ne contient aucune donnée d'étudiant : les requêtes ne sont pas journalisées, et une erreur de l'IA n'y laisse que sa cause.
+Au démarrage, le journal (`journalctl -u viabilis`) affiche les deux adresses et le fournisseur d'IA. Il ne contient aucune donnée d'élève : les requêtes ne sont pas journalisées, et une erreur de l'IA n'y laisse que sa cause.
 
 **2.5. Proxy inverse HTTPS**
 
@@ -127,11 +127,11 @@ nginx :
 ```nginx
 server {
     listen 443 ssl http2;
-    server_name viabilis.univ-brest.fr;
+    server_name viabilis.mon-etablissement.fr;
     # ssl_certificate … ; ssl_certificate_key … ;   (certificat de l'université)
 
     add_header Strict-Transport-Security "max-age=31536000" always;
-    client_max_body_size 1m;                # le serveur refuse lui-même les requêtes de plus de 256 Ko
+    client_max_body_size 16m;               # documents PDF jusqu'à 10 Mo ; le serveur borne lui-même chaque requête
 
     location / {
         proxy_pass http://127.0.0.1:8080;
@@ -141,7 +141,7 @@ server {
 }
 server {
     listen 80;
-    server_name viabilis.univ-brest.fr;
+    server_name viabilis.mon-etablissement.fr;
     return 301 https://$host$request_uri;
 }
 ```
@@ -150,7 +150,7 @@ Apache (avec `mod_proxy`, `mod_proxy_http` et `mod_headers`) :
 
 ```apache
 <VirtualHost *:443>
-    ServerName viabilis.univ-brest.fr
+    ServerName viabilis.mon-etablissement.fr
     # SSLEngine on ; SSLCertificateFile … ; SSLCertificateKeyFile …
     Header always set Strict-Transport-Security "max-age=31536000"
     ProxyPass        / http://127.0.0.1:8080/ timeout=300
@@ -167,37 +167,29 @@ Il suffit d'ouvrir le port 443 (et 80 pour la redirection) au proxy. Le port 808
 ## 3. Vérification
 
 ```bash
-curl -I https://viabilis.univ-brest.fr/eleve/        # 200, avec Content-Security-Policy et X-Content-Type-Options
-curl -I https://viabilis.univ-brest.fr/api/eleve/moi # 401 : l'API répond
+curl -I https://viabilis.mon-etablissement.fr/eleve/        # 200, avec Content-Security-Policy et X-Content-Type-Options
+curl -I https://viabilis.mon-etablissement.fr/api/eleve/moi # 401 : l'API répond
 ```
 
 Ensuite, dans un navigateur :
-1. Sur `https://viabilis.univ-brest.fr/enseignant/`, se connecter avec le mot de passe enseignant.
+1. Sur `https://viabilis.mon-etablissement.fr/enseignant/`, se connecter avec le mot de passe enseignant.
 2. Créer une classe d'essai.
 3. Sur `/eleve/`, entrer avec son code et un pseudonyme, puis poser une question au tuteur. Une réponse doit s'afficher.
 4. Effacer la classe d'essai (onglet Données).
 
-Si l'IA ne répond pas, l'étudiant voit « L'IA n'a pas répondu ». La cause exacte (clé refusée, modèle inconnu, réseau) apparaît dans `journalctl -u viabilis`.
+Si l'IA ne répond pas, l'élève voit « L'IA n'a pas répondu ». La cause exacte (clé refusée, modèle inconnu, réseau) apparaît dans `journalctl -u viabilis`.
 
-**Tests automatiques (facultatif).** Ils se lancent sur une base jetable et avec une IA factice, sans toucher la base réelle :
-
-```bash
-cd /opt/viabilis/application/serveur
-VIABILIS_MDP_ENSEIGNANT=motdepasse-test VIABILIS_IA=fausse python3 serveur.py --port 8790 --base /tmp/essai.sqlite3 &
-python3 test_api.py 8790
-kill %1; rm -f /tmp/essai.sqlite3*
-```
 
 ## 4. Sécurité et données
 
 **Ce que fait le serveur**
 - En-têtes : Content-Security-Policy (`default-src 'self'`), `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer`. Aucune ressource externe (polices, scripts, traceurs).
-- Corps des requêtes limité à 256 Ko ; un mauvais mot de passe enseignant coûte une seconde d'attente.
-- 40 appels à l'IA au plus par étudiant et par séance. Les consignes données à l'IA sont écrites côté serveur.
-- Les étudiants ne peuvent ni lire la classe ni les autres étudiants. Effacement possible d'un étudiant ou de toute la classe ; purge automatique après `VIABILIS_CONSERVATION_JOURS`.
-- Ce qui part vers l'API d'IA : la consigne de la tâche et les messages et programmes de l'étudiant, jamais son pseudonyme ni un identifiant.
+- Corps des requêtes limité : 256 Ko en général, 2 Mo pour les réglages d'une classe, 10 Mo pour un document PDF ; un mauvais mot de passe enseignant coûte une seconde d'attente.
+- 40 appels à l'IA au plus par élève et par séance. Les consignes données à l'IA sont écrites côté serveur.
+- Les élèves ne peuvent ni lire la classe ni les autres élèves. Effacement possible d'un élève ou de toute la classe ; purge automatique après `VIABILIS_CONSERVATION_JOURS`.
+- Ce qui part vers l'API d'IA : la consigne de la tâche et les messages et programmes de l'élève, jamais son pseudonyme ni un identifiant.
 
-**Données personnelles.** Les traces des étudiants (pseudonymes, réponses, échanges avec l'IA) sont des données personnelles pseudonymisées. L'enseignante prévoit de les utiliser aussi pour la recherche. Le traitement doit donc être inscrit au registre, avec la DPO de l'université. Pour la même raison, une API d'IA hébergée en France sans réutilisation des données, comme Albert, est préférable.
+**Données personnelles.** Les traces des élèves (pseudonymes, réponses, échanges avec l'IA) sont des données personnelles pseudonymisées. Le traitement doit être inscrit au registre des traitements, avec le délégué ou la déléguée à la protection des données de l'établissement, en particulier si les traces servent aussi à la recherche. Pour la même raison, une API d'IA hébergée en France sans réutilisation des données, comme Albert, est préférable.
 
 ## 5. Exploitation
 
@@ -231,12 +223,12 @@ Les navigateurs récupèrent la nouvelle version d'eux-mêmes : le cache hors co
 
 **Changer le mot de passe enseignant ou la clé d'API.** Modifier `/etc/viabilis/viabilis.env`, puis `systemctl restart viabilis`.
 
-## 6. Ce que nous demandons au service informatique
+## 6. Ce que l'équipe pédagogique demande au service informatique
 
 1. Une machine virtuelle Linux, comme décrit en section 1.
-2. Le sous-domaine `viabilis.univ-brest.fr` (ou un autre), son certificat et la configuration du proxy (section 2.5).
+2. Un sous-domaine, par exemple `viabilis.mon-etablissement.fr`,, son certificat et la configuration du proxy (section 2.5).
 3. L'accès sortant en HTTPS vers l'API du modèle de langage. Si possible, une clé Albert ou une autre API hébergée en France.
 4. La sauvegarde quotidienne de `/var/lib/viabilis/` (section 5).
-5. Le mot de passe enseignant, transmis à Alexandra Fronville par un canal sûr.
+5. Le mot de passe enseignant (ou l'adresse de l'administratrice ou de l'administrateur des comptes), transmis par un canal sûr.
 
-Pour toute question sur l'application : Alexandra Fronville (INSPÉ de Bretagne, LaTIM). La description complète des fonctions est dans `LISEZMOI.md`.
+La description des fonctions est dans `LISEZMOI.md`.

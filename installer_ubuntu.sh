@@ -99,7 +99,7 @@ demander DOMAINE "Nom de domaine de Viabilis (par exemple viabilis.mondomaine.fr
 demander COURRIEL "Adresse électronique pour le certificat HTTPS (avis d'expiration de Let's Encrypt)" "$DEFAUT_COURRIEL"
 echo "Comptes enseignants : chacun demande un compte avec une adresse confirmée par mail ; vous validez chaque demande"
 echo "(mail reçu, puis carte « Comptes enseignants » de votre page). Chacun ne voit que ses propres classes."
-demander ADMIN "Votre adresse d'administratrice (elle reçoit les demandes et reprend les classes déjà créées)" "${DEFAUT_ADMIN:-$COURRIEL}"
+demander ADMIN "Votre adresse d'administration (elle reçoit les demandes et reprend les classes déjà créées)" "${DEFAUT_ADMIN:-$COURRIEL}"
 [ -n "$ADMIN" ] || { echo "Il faut l'adresse de l'administratrice."; exit 1; }
 demander NOTIFICATIONS "Adresse qui reçoit les demandes de compte (plusieurs : séparées par des virgules)" "${DEFAUT_NOTIFICATIONS:-$ADMIN}"
 demander DOMAINES "Limiter les demandes à certains domaines (par exemple univ-brest.fr), vide = toute adresse" "$DEFAUT_DOMAINES"

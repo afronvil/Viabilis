@@ -1,4 +1,4 @@
-// Viabilis — langue de l'interface : français (langue du code), anglais, catalan.
+// Viabilis — langue de l'interface : français (langue du code), anglais, catalan, italien, espagnol, allemand.
 // Les textes sont écrits en français dans le code et passent par tx :
 //   tx("Texte")                 un texte simple
 //   tx`Séance ${n} ouverte`     un gabarit : la clé est « Séance {} ouverte » ; la traduction place les valeurs avec {0}, {1}…
@@ -6,9 +6,9 @@
 // Les consignes, les modèles de séances et les exercices ne sont pas traduits : ils restent ceux de l'enseignant.
 import TRADUCTIONS from "./traductions.js";
 
-export const LANGUES = {fr: "Français", en: "English", ca: "Català"};
-const RANG = {en: 0, ca: 1};
-const POUR_LES_DATES = {fr: "fr-FR", en: "en-GB", ca: "ca-ES"};
+export const LANGUES = {fr: "Français", en: "English", ca: "Català", it: "Italiano", es: "Español", de: "Deutsch"};
+const RANG = {en: 0, ca: 1, it: 2, es: 3, de: 4};
+const POUR_LES_DATES = {fr: "fr-FR", en: "en-GB", ca: "ca-ES", it: "it-IT", es: "es-ES", de: "de-DE"};
 // élève et enseignant gardent chacun leur langue, même sur le même navigateur
 const CLE = location.pathname.includes("/enseignant") ? "viabilis-langue-enseignant" : "viabilis-langue-eleve";
 
@@ -34,12 +34,12 @@ function remplir(modele, valeurs) {
 export function tx(textes, ...valeurs) {
   if (Array.isArray(textes) && textes.raw) {
     const trad = LANGUE !== "fr" && TRADUCTIONS[textes.join("{}")];
-    if (trad) return remplir(trad[RANG[LANGUE]], valeurs);
+    if (trad && trad[RANG[LANGUE]]) return remplir(trad[RANG[LANGUE]], valeurs);     // traduction absente : le français
     return textes.reduce((s, t, i) => s + (valeurs[i - 1] == null ? "" : String(valeurs[i - 1])) + t);
   }
   if (LANGUE === "fr" || typeof textes !== "string") return textes;
   const trad = TRADUCTIONS[textes];
-  return trad ? trad[RANG[LANGUE]] : textes;
+  return (trad && trad[RANG[LANGUE]]) || textes;
 }
 
 /** Adopte la langue choisie (par l'enseignant pour la classe, ou pour sa propre page).

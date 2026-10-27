@@ -1,0 +1,18 @@
+// Licence — Démarche expérimentale en microbiologie : témoins, réplicats, dilutions
+$CATEGORY: Superieur/Biologie
+
+::Témoin négatif::Un témoin négatif est…{=une condition sans le traitement testé, traitée de la même façon par ailleurs ~une condition qui produit à coup sûr l'effet attendu ~une erreur de manipulation ~un échantillon jeté}
+
+::Témoin positif::Un témoin positif est…{=une condition dont on sait qu'elle produit l'effet attendu ~une condition sans traitement ~le résultat le plus élevé ~un échantillon non stérile}
+
+::Réplicats biologiques::Des réplicats biologiques sont…{=des échantillons indépendants (cultures, individus) soumis à la même condition ~des mesures répétées du même tube ~des copies du protocole ~des témoins négatifs}
+
+::CMI::La concentration minimale inhibitrice (CMI) d'un antibiotique est…{=la plus faible concentration qui empêche la croissance visible des bactéries ~la concentration qui tue toutes les bactéries ~la dose maximale tolérée ~la concentration dans le sang du patient}
+
+::Dilution au dixième::On ajoute 1 mL d'une solution à 100 µg/mL dans 9 mL d'eau. Quelle est la concentration obtenue, en µg/mL ?{#10}
+
+::Dilutions de deux en deux::On réalise des dilutions successives de raison 2 à partir de 64 µg/mL (64, 32, …). Quelle est la concentration du quatrième tube, en µg/mL ?{#8}
+
+::Une seule boîte::Pour conclure, une seule boîte de Petri par condition suffit.{F#Sans réplicats, on ne peut pas distinguer l'effet du traitement de la variabilité.}
+
+::Variable mesurée::Dans une expérience sur l'effet d'un antibiotique, le diamètre de la zone d'inhibition est…{=la variable mesurée (variable dépendante) ~la variable contrôlée par l'expérimentateur ~le témoin ~une constante}

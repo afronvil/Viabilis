@@ -4,13 +4,15 @@ import {$, el, fr, api, ouvrirPdf, listeIdees, etatEleve, ruptures, recommandati
 const N = n => numeroSeance(S.config, n);          // numéro affiché (rang parmi les séances qui existent encore)
 import {proposerSuites, GENRES, PROFILS, modeleDeSeance} from "../commun/suites.js";
 
-const S = {jeton: null, classes: [], code: null, config: null, traces: {}, notes: {}, onglet: "classe", detail: null, confirmer: null, exos: null, importMsg: null, viab: {}, brouillon: null, seanceEditee: null, modeles: null, modele: null, modeleChoisi: null, suite: false, suiteChoisie: null, messages: [], signalements: [], galerieChoix: null, documents: null, pdfEtat: null};
+const S = {jeton: null, classes: [], code: null, config: null, traces: {}, notes: {}, onglet: "classe", detail: null, confirmer: null, exos: null, importMsg: null, viab: {}, brouillon: null, seanceEditee: null, modeles: null, modele: null, modeleChoisi: null, suite: false, suiteChoisie: null, messages: [], signalements: [], galerieChoix: null, documents: null, pdfEtat: null, banques: null, gift: null};
 const PUBLICS = {ecole: tx("École élémentaire"), college: tx("Collège"), lycee: tx("Lycée"), superieur: tx("Enseignement supérieur")};
 const DEFAUT = {seance: 0, ouverte: false, tache: "", public: "ecole", ordre: "adaptatif", mode: "questionner", minIdees: 3, seuilCharge: 0.7, retraitAgentivite: 0.8, seuilMaitrise: 0.5, eleves: {},
   exercices: {actifs: false, nombre: 3, placement: "avant", niveau: 2, choix: "niveau"}, niveauTache: 3,
   verification: {mode: "aucune", cible: 10, nombres: "", attendu: 0, criteres: "", maximum: 3, uneFois: false},
   groupes: {}, lecture: {active: true, langue: "fr-FR"}, langue: "fr",
   indices: [], variantes: {actives: false, accessible: {consigne: "", indices: [], cible: null, attendu: null}, exigeante: {consigne: "", indices: [], cible: null, attendu: null}}};
+/** Minuscule pour l'insérer dans une phrase, sauf en allemand (les noms y prennent une majuscule). */
+const minuscule = t => LANGUE === "de" ? t : t.toLowerCase();
 const NOM_TYPE = {choix_unique: tx("choix unique"), choix_multiple: tx("choix multiple"), vrai_faux: tx("vrai ou faux"), reponse_courte: tx("réponse courte"), numerique: tx("numérique"), appariement: "appariement"};
 
 
@@ -510,8 +512,9 @@ function ongletReglages() {
     c.seance ? el("div", {class: "notice"}, el("p", {}, tx`La tâche, les variantes et la vérification ci-dessous sont celles de la séance ${N(c.seance)}, la plus récente. Pour une séance précédente, utilisez « Modifier » dans la carte Séances (onglet Classe).`)) : null,
     fermee ? el("div", {class: "notice warn"}, el("p", {}, tx`La séance ${N(c.seance)} est fermée : les élèves ne la voient pas encore. Relisez la consigne et les réglages ci-dessous, puis ouvrez-la.`),
       el("button", {class: "primary", onclick: ouvrir}, tx`Enregistrer et ouvrir la séance ${N(c.seance)} aux élèves`)) : null,
-    carteNouvelle(c),
     carteModeles(n, true),
+    carteNouvelle(c),
+    carteGift(c),
     el("div", {class: "card"}, el("h2", {}, tx("La tâche")), el("label", {for: "tache"}, tx("Consigne affichée aux élèves")), tache, caseCode(c),
       champsIndices("std", c.indices), c.seance ? ligneDocument(c, v => majConfig({...lire(), document: v})) : null),
     carteVariantes(c),
@@ -593,8 +596,11 @@ function disciplineDe(c) {
 /** Modèles de séances de la classe : ceux de son public (tous si aucun ne correspond), puis ceux de sa discipline. */
 function modelesDuPublic(c) {
   const l0 = (S.modeles || []).filter(m => (m.public || "ecole") === (c.public || "ecole")), l = l0.length ? l0 : (S.modeles || []);
-  const d = disciplineDe(c), dl = d ? (S.modeles || []).filter(m => m.discipline === d) : [];
-  return dl.length ? dl : l;
+  // la discipline au niveau de la classe ; si ce niveau n'en a pas (classe réglée sur un autre public), la discipline à tous les niveaux
+  const d = disciplineDe(c);
+  if (!d) return l;
+  const auNiveau = l.filter(m => m.discipline === d), partout = (S.modeles || []).filter(m => m.discipline === d);
+  return auNiveau.length ? auNiveau : partout.length ? partout : l;
 }
 function carteModeles(n, courante) {
   if (S.modeles == null) { chargerModeles(); return el("div", {class: "card"}, el("h2", {}, tx("Modèles de séances")), el("p", {class: "small muted"}, tx("Chargement…"))); }
@@ -604,40 +610,46 @@ function carteModeles(n, courante) {
   let der = c.seance || 0; while (der > 0 && effacees.includes(der)) der--;
   const derModele = der ? modeleDeSeance(liste, c, der) : null;
   const parDefaut = (derModele && (liste.find(x => x.id === derModele.suites?.prolonger) || liste.find(x => x.discipline === derModele.discipline && x.id !== derModele.id))) || liste[0];
-  const m = liste.find(x => x.id === S.modeleChoisi) || parDefaut;
+  const vide = S.modeleChoisi === MODELE_VIDE;           // modèle vide : l'enseignant écrit toute la séance
+  const m = vide ? {id: MODELE_VIDE, titre: tx("Séance vide"), discipline: tx("Modèle vide")} : (liste.find(x => x.id === S.modeleChoisi) || parDefaut);
   const disciplines = [...new Set(liste.map(x => x.discipline))];
-  const sel = el("select", {id: "modele"}, disciplines.map(d => el("optgroup", {label: d},
-    liste.filter(x => x.discipline === d).map(x => el("option", {value: x.id, selected: x.id === m.id}, x.titre)))));
+  const sel = el("select", {id: "modele"}, el("optgroup", {label: tx("Modèle vide")}, el("option", {value: MODELE_VIDE, selected: vide}, tx("Séance vide : vous écrivez tout vous-même"))),
+    disciplines.map(d => el("optgroup", {label: d},
+      liste.filter(x => x.discipline === d).map(x => el("option", {value: x.id, selected: x.id === m.id}, x.titre)))));
   sel.addEventListener("change", () => { S.modeleChoisi = sel.value; rendre(); });
   const ver = m.verification || {};
   const nomVer = ver.mode === "calcul" ? tx`par calculs : chaque idée doit valoir ${String(ver.cible).replace(".", ",")}` + (ver.nombres ? tx`, avec ${ver.nombres}` : "") + (ver.uneFois ? tx(", chaque nombre une fois") : "") + (ver.attendu ? tx` ; ${ver.attendu} solutions à trouver` : "")
     : ver.mode === "ia" ? tx("par l'IA, selon des critères de réussite") : "aucune";
-  const remplir = () => { S.modele = {seance: n, id: m.id, reglages: reglagesDuModele(m, c)}; rendre(); window.scrollTo(0, 0); };
-  const creer = async () => {
+  const remplir = () => { S.modele = {seance: n, id: m.id, reglages: vide ? seanceVide() : reglagesDuModele(m, c)}; rendre(); window.scrollTo(0, 0); };
+  const creer = vide ? () => creerSeanceFermee({}, tx`Séance ${prochainNumero(c)} créée, vide et fermée : écrivez la consigne et les réglages ci-dessous, enregistrez, puis ouvrez-la aux élèves.`) : async () => {
     const k = (c.seance || 0) + 1, ouv = c.ouvertes || [];
     await majConfig({...reglagesDuModele(m, c), seance: k, ouvertes: [...ouv, k], ouverte: true});
     S.modele = null; toast(tx`Séance ${N(k)} créée et ouverte : « ${m.titre} ».`);
   };
-  const charge = S.modele && S.modele.seance === n ? S.modeles.find(x => x.id === S.modele.id) : null;
+  const charge = S.modele && S.modele.seance === n ? (S.modele.id === MODELE_VIDE ? {titre: tx("Séance vide")} : S.modeles.find(x => x.id === S.modele.id)) : null;
   return el("div", {class: "card"}, el("h2", {}, tx("Modèles de séances")),
     charge ? el("div", {class: "notice warn"}, el("p", {}, tx`Modèle « ${charge.titre} » chargé dans les champs ci-dessous. Relisez et adaptez, puis enregistrez : rien n'est envoyé aux élèves avant.`),
       el("button", {class: "ghost", onclick: () => { S.modele = null; rendre(); }}, tx("Annuler le modèle"))) : null,
-    el("p", {class: "small muted"}, tx`Des tâches ouvertes prêtes à l'emploi (${(c.public || "ecole") === "superieur" ? tx("licence de mathématiques") : (c.public || "ecole") === "ecole" ? "CM1" : PUBLICS[c.public].toLowerCase()}) : consigne, coups de pouce, variantes et vérification déjà réglés. Le public se règle dans « Règle de la classe ».`),
+    el("p", {class: "small muted"}, tx`Des tâches ouvertes prêtes à l'emploi (${minuscule(PUBLICS[c.public || "ecole"])}) : consigne, coups de pouce, variantes et vérification déjà réglés. Le public se règle dans « Règle de la classe ».`),
     el("div", {class: "field"}, el("label", {for: "modele"}, tx("Choisir un modèle")), sel),
-    el("details", {open: true}, el("summary", {}, `${m.discipline} · ${m.titre}`),
+    vide ? el("details", {open: true}, el("summary", {}, m.titre),
+      el("p", {}, tx("Aucune consigne : vous écrivez vous-même la consigne, les coups de pouce, les variantes et la vérification dans les cartes ci-dessous. La séance est créée fermée : ouvrez-la aux élèves quand elle est prête.")))
+    : el("details", {open: true}, el("summary", {}, `${m.discipline} · ${m.titre}`),
       el("p", {class: "small"}, el("b", {}, tx("Objectif : ")), m.objectif),
       el("p", {}, m.tache),
       el("p", {class: "small"}, el("b", {}, tx("Coups de pouce : ")), (m.indices || []).join(" → ")),
       m.variantes ? el("p", {class: "small"}, el("b", {}, tx("Accessible : ")), m.variantes.accessible?.consigne || "") : null,
       m.variantes ? el("p", {class: "small"}, el("b", {}, tx("Exigeante : ")), m.variantes.exigeante?.consigne || "") : null,
       el("p", {class: "small"}, el("b", {}, tx("Vérification : ")), nomVer + "."),
-      m.exercices ? el("p", {class: "small"}, el("b", {}, tx("Exercices conseillés : ")), m.exercices.includes("/") ? m.exercices.split("/").pop() : m.exercices, tx` — à importer dans l'onglet Exercices (dossier serveur/exemples/${m.exercices.includes("/") ? m.exercices.split("/")[0] : "cm1"}).`) : null),
+      m.exercices ? el("p", {class: "small"}, el("b", {}, tx("Exercices conseillés : ")), m.exercices.split("/").pop(), tx` — à importer dans l'onglet Exercices (dossier serveur/exemples/${m.exercices.split(" ")[0].split("/").slice(0, -1).join("/")}).`) : null),
     el("div", {class: "row"},
       el("button", {class: courante && c.seance ? "ghost" : "primary", onclick: remplir}, n ? tx`Remplir la séance ${N(n)} avec ce modèle` : tx("Remplir les réglages avec ce modèle")),
       courante ? el("button", {class: "primary", onclick: creer}, tx`Créer la séance ${prochainNumero(c)} avec ce modèle`) : null),
-    courante && c.seance ? el("p", {class: "small muted"}, tx`« Créer la séance ${prochainNumero(c)} » garde la séance ${N(c.seance)} telle quelle et ouvre aussitôt la nouvelle séance aux élèves.`) : null);
+    courante && c.seance ? el("p", {class: "small muted"}, vide ? tx`« Créer la séance ${prochainNumero(c)} » garde la séance ${N(c.seance)} telle quelle ; la nouvelle séance reste fermée jusqu'à ce que vous l'ouvriez.`
+      : tx`« Créer la séance ${prochainNumero(c)} » garde la séance ${N(c.seance)} telle quelle et ouvre aussitôt la nouvelle séance aux élèves.`) : null);
 }
-/* ---------- nouvelle séance : vide, ou à partir d'un document PDF ---------- */
+/* ---------- nouvelle séance : vide (modèle vide), ou à partir d'un document PDF ---------- */
+const MODELE_VIDE = "__vide";
 const TAILLE_PDF = 10 * 1024 * 1024;
 const seanceVide = () => ({tache: "", indices: [], variantes: JSON.parse(JSON.stringify(DEFAUT.variantes)), verification: {...DEFAUT.verification}, modele: "", saisieCode: false, evaluation: false, document: 0, niveauTache: 3});
 function lireBase64(f) { return new Promise((ok, ko) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(",")[1] || ""); r.onerror = ko; r.readAsDataURL(f); }); }
@@ -659,7 +671,6 @@ async function creerSeanceFermee(reglages, message) {
 }
 function carteNouvelle(c) {
   const k = prochainNumero(c);
-  const vide = () => creerSeanceFermee({}, tx`Séance ${k} créée, vide et fermée : écrivez la consigne et les réglages ci-dessous, enregistrez, puis ouvrez-la aux élèves.`);
   const depuisPdf = async () => {
     const f = $("#pdf-fichier").files[0], montrer = $("#pdf-eleves").checked, avecIA = $("#pdf-ia").checked, souhait = $("#pdf-souhait").value.trim();
     if (!montrer && !avecIA) return toast(tx("Cochez au moins une des deux cases : faire préparer la séance par l'IA, ou montrer le PDF aux élèves."));
@@ -679,12 +690,8 @@ function carteNouvelle(c) {
         : tx`Séance ${k} créée avec « ${doc.nom} » et fermée : écrivez la consigne ci-dessous, enregistrez, puis ouvrez-la aux élèves.`) + note);
     } catch (e) { S.pdfEtat = null; rendre(); toast(e.message); }
   };
-  return el("div", {class: "card"}, el("h2", {}, tx`Créer la séance ${k}`),
-    el("p", {class: "small muted"}, tx("À partir d'un modèle (carte suivante), d'une séance vide que vous écrivez entièrement, ou d'un document PDF. La nouvelle séance est créée fermée : les élèves ne la voient qu'une fois ouverte, et les séances précédentes gardent leur consigne.")),
-    el("h3", {}, tx("Séance vide")),
-    el("p", {class: "small muted"}, tx("Vous écrivez vous-même la consigne, les coups de pouce, les variantes et la vérification.")),
-    el("button", {class: "ghost", onclick: vide, disabled: !!S.pdfEtat}, tx`Créer la séance ${k} vide`),
-    el("h3", {}, tx("À partir d'un document PDF")),
+  return el("div", {class: "card"}, el("h2", {}, tx`Créer la séance ${k} à partir d'un PDF`),
+    el("p", {class: "small muted"}, tx("La nouvelle séance est créée fermée : les élèves ne la voient qu'une fois ouverte, et les séances précédentes gardent leur consigne. Pour une séance vide ou un modèle, voyez la carte « Modèles de séances » ci-dessus.")),
     el("div", {class: "field"}, el("label", {for: "pdf-fichier"}, tx("Document PDF (10 Mo au plus)")), el("input", {type: "file", id: "pdf-fichier", accept: "application/pdf,.pdf"})),
     el("label", {for: "pdf-ia", class: "row", style: "gap:8px"}, el("input", {type: "checkbox", id: "pdf-ia", checked: true}),
       tx("L'IA prépare la consigne, les coups de pouce, les variantes et les critères de réussite à partir du PDF")),
@@ -715,6 +722,87 @@ function ligneDocument(src, ecrire) {
           el("button", {class: "ghost", onclick: retirer}, tx("Retirer")))
       : el("div", {class: "row"}, el("input", {type: "file", id: "doc-fichier", accept: "application/pdf,.pdf"}), el("button", {class: "ghost", onclick: joindre}, tx("Joindre"))),
     el("p", {class: "small muted"}, tx("Les élèves l'ouvrent depuis la carte « La tâche ». Joindre ou retirer un document enregistre aussi les réglages de la séance. Le document n'est pas copié dans le kit hors ligne.")));
+}
+/* ---------- séance à partir d'une banque d'exercices (.gift), modifiable et enregistrable sous un nouveau nom ---------- */
+async function chargerBanques() { try { S.banques = await appel("banques"); } catch { S.banques = {mes: [], fournies: []}; } rendre(); }
+function carteGift(c) {
+  if (S.banques == null) { chargerBanques(); return null; }
+  const G = S.gift || (S.gift = {contenu: "", nom: "", id: null, origine: "", verif: null});
+  const k = prochainNumero(c);
+  const vider = () => Object.assign(G, {contenu: "", nom: "", id: null, origine: "", verif: null});
+  const charger = async v => {
+    try {
+      if (v.startsWith("m:")) { const b = await appel(`banques/${v.slice(2)}`); Object.assign(G, {contenu: b.contenu, nom: b.nom, id: b.id, origine: v, verif: null}); }
+      else if (v.startsWith("f:")) { const b = await appel(`banques/fournie?chemin=${encodeURIComponent(v.slice(2))}`); Object.assign(G, {contenu: b.contenu, nom: b.nom + tx(" (copie)"), id: null, origine: v, verif: null}); }
+      else vider();
+    } catch (e) { toast(e.message); }
+    rendre();
+  };
+  const ouvrirFichier = async f => { if (!f) return; Object.assign(G, {contenu: await lireFichier(f), nom: f.name.replace(/\.(gift|txt)$/i, ""), id: null, origine: "fichier", verif: null}); rendre(); };
+  const verifier = async () => { try { G.verif = await appel("banques/verifier", {methode: "POST", corps: {contenu: G.contenu}}); } catch (e) { toast(e.message); } rendre(); };
+  const enregistrer = async () => {
+    // même nom que la banque ouverte : on la remplace ; nouveau nom : nouvelle banque, l'ancienne est gardée
+    const meme = G.id && S.banques.mes.find(b => b.id === G.id)?.nom === G.nom.trim();
+    try {
+      const r = meme ? await appel(`banques/${G.id}`, {methode: "PUT", corps: {nom: G.nom, contenu: G.contenu}})
+                     : await appel("banques", {methode: "POST", corps: {nom: G.nom, contenu: G.contenu}});
+      Object.assign(G, {id: r.id, nom: r.nom, origine: "m:" + r.id, verif: r}); S.banques = null;
+      toast(tx`Banque « ${r.nom} » enregistrée dans Viabilis (${r.questions} questions).`);
+    } catch (e) { toast(e.message); }
+    rendre();
+  };
+  const telechargerGift = () => G.contenu.trim() ? telecharger((G.nom.trim() || "banque") + ".gift", G.contenu, "text/plain;charset=utf-8") : toast(tx("Le fichier est vide."));
+  const supprimer = async () => {
+    try { await appel(`banques/${G.id}`, {methode: "DELETE"}); toast(tx`Banque « ${G.nom} » supprimée de Viabilis.`); vider(); S.banques = null; } catch (e) { toast(e.message); }
+    rendre();
+  };
+  const creer = async () => {
+    const niveau = +$("#gift-niveau").value, nom = G.nom.trim() || tx("banque");
+    const source = `${nom} · ${new Date().toLocaleString(LOCALE, {dateStyle: "short", timeStyle: "short"})}`.slice(0, 120);
+    try {
+      const r = await appel(`classes/${S.code}/exercices/import`, {methode: "POST", corps: {contenu: G.contenu, format: "gift", niveau, source}});
+      if (!r.importes) return toast(tx("Aucune question reconnue : vérifiez le format GIFT."));
+      S.exos = null;
+      await creerSeanceFermee({tache: tx("Après les exercices, écris tes idées : ce que tu as compris, une erreur que tu as faite ou évitée et pourquoi, et une question que tu te poses encore."),
+        exercices: {...(c.exercices || DEFAUT.exercices), actifs: true, nombre: Math.min(20, r.importes), placement: "avant", niveau, choix: "niveau", source}},
+        tx`Séance ${k} créée avec ${r.importes} exercices de « ${nom} », fermée : relisez la tâche ouverte ci-dessous (une consigne de départ est proposée), enregistrez, puis ouvrez-la aux élèves.`);
+    } catch (e) { toast(e.message); }
+  };
+  const parDossier = {};
+  for (const b of S.banques.fournies) (parDossier[b.dossier] ||= []).push(b);
+  const sel = el("select", {id: "gift-source"},
+    el("option", {value: "", selected: !G.origine || G.origine === "fichier"}, G.origine === "fichier" ? tx("— Fichier ouvert depuis l'ordinateur —") : tx("— Nouveau fichier vide —")),
+    S.banques.mes.length ? el("optgroup", {label: tx("Mes banques")}, S.banques.mes.map(b => el("option", {value: "m:" + b.id, selected: G.origine === "m:" + b.id}, tx`${b.nom} (${b.questions} questions)`))) : null,
+    Object.entries(parDossier).map(([d, l]) => el("optgroup", {label: tx`Fournies avec Viabilis : ${d}`}, l.map(b => el("option", {value: "f:" + b.chemin, selected: G.origine === "f:" + b.chemin}, b.nom)))));
+  sel.addEventListener("change", () => charger(sel.value));
+  const fichier = el("input", {type: "file", id: "gift-fichier", accept: ".gift,.txt,text/plain"});
+  fichier.addEventListener("change", () => ouvrirFichier(fichier.files[0]));
+  const zone = el("textarea", {id: "gift-contenu", rows: "14", spellcheck: "false", style: "font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px",
+    placeholder: "::Titre::Énoncé de la question ?{=bonne réponse ~mauvaise réponse ~autre mauvaise réponse}"});
+  zone.value = G.contenu;
+  zone.addEventListener("input", () => { G.contenu = zone.value; });
+  const nom = el("input", {id: "gift-nom", placeholder: tx("Par exemple : linux_revision_v2")});
+  nom.value = G.nom;
+  nom.addEventListener("input", () => { G.nom = nom.value; });
+  const v = G.verif;
+  return el("div", {class: "card"}, el("h2", {}, tx`Créer la séance ${k} à partir d'un fichier .gift`),
+    el("p", {class: "small muted"}, tx("Choisissez une banque d'exercices au format GIFT (Moodle) : une des vôtres, une banque fournie avec Viabilis ou un fichier de votre ordinateur. Modifiez-la ici, enregistrez-la sous un nouveau nom si vous le souhaitez, puis créez la séance : ses questions deviennent les exercices de la séance, suivis d'une tâche ouverte.")),
+    el("div", {class: "field"}, el("label", {for: "gift-source"}, tx("Banque d'exercices")), sel),
+    el("div", {class: "field"}, el("label", {for: "gift-fichier"}, tx("Ou ouvrir un fichier .gift de l'ordinateur")), fichier),
+    el("div", {class: "field"}, el("label", {for: "gift-contenu"}, tx("Contenu (format GIFT)")), zone),
+    el("div", {class: "row"}, el("button", {class: "ghost", onclick: verifier}, tx("Vérifier le fichier"))),
+    v ? el("div", {class: "notice" + (v.questions ? "" : " ko"), role: "status"}, el("p", {}, tx`${v.questions} question${v.questions > 1 ? "s" : ""} reconnue${v.questions > 1 ? "s" : ""}.`),
+      v.avertissements?.length ? el("ul", {class: "small"}, v.avertissements.map(a => el("li", {}, a))) : null,
+      v.titres?.length ? el("details", {}, el("summary", {}, tx("Questions reconnues")), el("ul", {class: "small"}, v.titres.map(t => el("li", {}, t)))) : null) : null,
+    el("div", {class: "field"}, el("label", {for: "gift-nom"}, tx("Nom de la banque")), nom),
+    el("p", {class: "small muted"}, tx("« Enregistrer dans Viabilis » : avec un nouveau nom, une nouvelle banque est créée et l'ancienne est gardée ; avec le même nom, votre banque est remplacée. Vos banques servent dans toutes vos classes. Les banques fournies avec Viabilis ne sont jamais modifiées.")),
+    el("div", {class: "row"}, el("button", {class: "ghost", onclick: enregistrer}, tx("Enregistrer dans Viabilis")),
+      el("button", {class: "ghost", onclick: telechargerGift}, tx("Télécharger le fichier .gift")),
+      G.id ? el("button", {class: "danger", onclick: supprimer}, tx("Supprimer cette banque")) : null),
+    el("div", {class: "field"}, el("label", {for: "gift-niveau"}, tx("Niveau donné à ces exercices")),
+      el("select", {id: "gift-niveau"}, [1, 2, 3, 4, 5].map(n => el("option", {value: n, selected: n === ((c.exercices || DEFAUT.exercices).niveau ?? 2)}, tx("Niveau ") + n)))),
+    el("p", {class: "small muted"}, tx("Les questions sont ajoutées à la banque de la classe (onglet Exercices). La séance ne tire que celles-ci, avant la tâche ouverte ; vous pouvez le changer dans l'onglet Exercices.")),
+    el("button", {class: "primary", onclick: creer}, tx`Créer la séance ${k} avec ces exercices`));
 }
 function carteLecture(c) {
   return el("div", {class: "card"}, el("h2", {}, tx("Lecture à voix haute")),
@@ -749,7 +837,7 @@ function carteSuites(c) {
   const parVariante = ["accessible", "standard", "exigeante"].map(v => {
     const l = P.eleves.filter(x => x.variante === v);
     return l.length ? el("div", {}, el("p", {style: "font-weight:700;margin-bottom:4px"}, `${NOMS[v]} (${l.length})`),
-      el("ul", {class: "small", style: "margin:0 0 8px;padding-left:18px"}, l.map(x => el("li", {}, el("b", {}, x.pseudo), ` — ${PROFILS[x.profil]} : ${x.raison} → ${GROUPES[x.groupe].nom.toLowerCase()}`)))) : null;
+      el("ul", {class: "small", style: "margin:0 0 8px;padding-left:18px"}, l.map(x => el("li", {}, el("b", {}, x.pseudo), ` — ${PROFILS[x.profil]} : ${x.raison} → ${minuscule(GROUPES[x.groupe].nom)}`)))) : null;
   });
   const repr = P.aReprendre.map(x => x.pseudo);
   const creer = async () => {
@@ -849,7 +937,7 @@ function csvIndicateurs() {
   }
   return "﻿" + lignes.join("\n");
 }
-/** Données pour calibrer le modèle (serveur/calibrer.py) : par élève et par séance, l'état estimé de la séance (C, A, M, D, sans lissage),
+/** Données pour calibrer le modèle (developpement/outils/calibrer.py) : par élève et par séance, l'état estimé de la séance (C, A, M, D, sans lissage),
     l'aide reçue traduite en commandes du modèle (s, φ, r) et le niveau de la tâche. Identifiants d'élèves seulement, pas de pseudonymes. */
 function csvCalibration() {
   const c = S.config, tete = ["classe", "eleve", "seance", "rang", "niveau", "s", "phi", "r", "C", "A", "M", "D"];
@@ -915,7 +1003,7 @@ function ongletDonnees() {
         el("button", {onclick: async () => { try { telecharger(`journal_${S.code}.csv`, await appel(`classes/${S.code}/journal.csv`)); } catch (e) { toast(e.message); } }}, tx("Journal des décisions (CSV)"))),
       el("div", {class: "row"},
         el("button", {disabled: !nb, onclick: () => telecharger(`calibration_${S.code}.csv`, csvCalibration())}, tx("Données pour calibrer le modèle (CSV)"))),
-      el("p", {class: "small muted"}, tx("Pour recalculer le noyau de viabilité avec des paramètres estimés sur vos classes : exportez ce fichier dans chaque classe réelle (pas les simulations), puis lancez serveur/calibrer.py (voir LISEZMOI, section 9 bis).")),
+      el("p", {class: "small muted"}, tx("Pour recalculer le noyau de viabilité avec des paramètres estimés sur vos classes : exportez ce fichier dans chaque classe réelle (pas les simulations), puis lancez developpement/outils/calibrer.py (voir developpement/NOTES_DEVELOPPEMENT.md, section 9 bis).")),
       el("p", {class: "small muted"}, tx("Le journal garde chaque changement de réglage d'un élève, avec son origine (recommandation appliquée, groupes, suite proposée ou choix manuel). Croisé avec les indicateurs, il sert à vérifier si les recommandations aident vraiment."))),
     carteHorsLigne(),
     el("div", {class: "card"}, el("h2", {}, tx("Qualité des réponses de l'IA")),
@@ -959,7 +1047,7 @@ function ongletGroupes() {
         const deplace = props[u].groupe !== g;
         return el("li", {style: "flex-direction:column;align-items:stretch;gap:6px"},
           el("div", {class: "row", style: "justify-content:space-between"}, el("b", {}, S.traces[u].pseudo), (c.groupes || {})[u] === g ? el("span", {class: "tag"}, tx("déjà appliqué")) : null),
-          el("p", {class: "small muted"}, deplace ? tx`Déplacé par vous (proposé : ${GROUPES[props[u].groupe].nom.toLowerCase()}, ${props[u].raison})` : props[u].raison),
+          el("p", {class: "small muted"}, deplace ? tx`Déplacé par vous (proposé : ${minuscule(GROUPES[props[u].groupe].nom)}, ${props[u].raison})` : props[u].raison),
           el("div", {style: "max-width:240px"}, sel));
       })) : el("p", {class: "small muted"}, tx("Personne dans ce groupe.")));
   };
@@ -1003,7 +1091,10 @@ function ongletExercices() {
       el("p", {class: "small muted"}, tx("Adaptatif : à la manière de l'algorithme ZPDES, chaque élève a une zone de niveaux ouverts. Elle part du niveau ci-dessous, s'ouvre au niveau supérieur quand il réussit, se referme sur les niveaux maîtrisés et rouvre le niveau inférieur en cas d'échec. Les exercices sont tirés de préférence dans les niveaux où il progresse le plus."))),
     el("div", {class: "field"}, el("label", {for: "ex-niveau"}, tx("Niveau de la classe")), selNiv("ex-niveau", ex.niveau),
       el("p", {class: "small muted"}, tx("Chaque élève reçoit des exercices de ce niveau, sauf si un niveau individuel lui est appliqué depuis l'onglet Classe."))),
-    el("button", {class: "primary", onclick: async () => { await majConfig({exercices: {actifs: actifs.checked, nombre: +nombre.value, placement: placement.value, niveau: +$("#ex-niveau").value, choix: $("#ex-choix").value}}); toast(tx("Réglages des exercices enregistrés.")); }}, tx("Enregistrer")));
+    ex.source ? el("label", {for: "ex-source", class: "row", style: "gap:8px"}, el("input", {type: "checkbox", id: "ex-source", checked: true}),
+      tx`Seulement les questions de « ${ex.source} » (séance créée à partir d'un fichier .gift)`) : null,
+    el("button", {class: "primary", onclick: async () => { await majConfig({exercices: {actifs: actifs.checked, nombre: +nombre.value, placement: placement.value, niveau: +$("#ex-niveau").value, choix: $("#ex-choix").value,
+      source: ex.source && $("#ex-source")?.checked ? ex.source : ""}}); toast(tx("Réglages des exercices enregistrés.")); }}, tx("Enregistrer")));
   // import
   const fichier = el("input", {type: "file", id: "ex-fichier", accept: ".gift,.txt,.xml"});
   const colle = el("textarea", {id: "ex-texte", rows: "5", placeholder: tx("Ou collez ici le contenu d'un fichier GIFT ou Moodle XML")});

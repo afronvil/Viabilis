@@ -9,7 +9,7 @@ les élèves n'envoient jamais de clé et ne choisissent pas les consignes donn�
     VIABILIS_MDP_ENSEIGNANT='…' python3 serveur.py          # http://127.0.0.1:8080
     python3 serveur.py --port 8080 --base viabilis.sqlite3
 
-Variables d'environnement (voir LISEZMOI.md) :
+Variables d'environnement (voir LISEZMOI.md et INSTALLATION.md) :
     VIABILIS_MDP_ENSEIGNANT   mot de passe unique enseignant (mode sans comptes)
     VIABILIS_ADMIN            active les comptes enseignants : adresse de l'administratrice, qui valide chaque demande ; voir comptes.py
     VIABILIS_NOTIFICATIONS    (facultatif) adresse(s) qui reçoivent les demandes de compte, par défaut VIABILIS_ADMIN
@@ -70,6 +70,7 @@ DISCIPLINE_DU_MODELE = _disciplines_des_modeles()
 TAILLE_MAX = 256 * 1024
 TAILLE_MAX_TRAVAIL = 4 * 1024 * 1024    # travail hors ligne d'un étudiant, importé par l'enseignante
 TAILLE_MAX_PDF = 10 * 1024 * 1024       # document PDF d'une séance
+TAILLE_MAX_CONFIG = 2 * 1024 * 1024     # réglages d'une classe : chaque séance y garde sa consigne et ses critères
 HORS_LIGNE = None                      # {code, nom, kit} quand le serveur tourne sur l'ordinateur d'un étudiant (--hors-ligne)
 IA_MAX_PAR_SEANCE = 40
 DEFAUT_CONFIG = {
@@ -77,7 +78,7 @@ DEFAUT_CONFIG = {
     "ordre": "adaptatif", "mode": "questionner", "minIdees": 3,
     "seuilCharge": 0.7, "retraitAgentivite": 0.8, "seuilMaitrise": 0.5,
     "eleves": {},
-    "exercices": {"actifs": False, "nombre": 3, "placement": "avant", "niveau": 2, "choix": "niveau"},   # choix : niveau fixé ou adaptatif (ZPDES)
+    "exercices": {"actifs": False, "nombre": 3, "placement": "avant", "niveau": 2, "choix": "niveau", "source": ""},   # choix : niveau fixé ou adaptatif (ZPDES) ; source : seulement les questions de ce fichier
     "niveauTache": 3,
     "verification": {"mode": "aucune", "cible": 10, "nombres": "", "attendu": 0, "criteres": "", "maximum": 3, "uneFois": False},
     "indices": [],
@@ -143,6 +144,8 @@ CREATE TABLE IF NOT EXISTS journal (id INTEGER PRIMARY KEY AUTOINCREMENT, classe
     eleve TEXT, seance INTEGER, origine TEXT, avant TEXT, apres TEXT, cree TEXT);
 CREATE TABLE IF NOT EXISTS reponses (eleve TEXT NOT NULL REFERENCES eleves(id) ON DELETE CASCADE, seance INTEGER NOT NULL, exercice INTEGER NOT NULL,
     tentatives INTEGER NOT NULL DEFAULT 0, score REAL, premier_score REAL, duree INTEGER, maj TEXT, PRIMARY KEY(eleve, seance, exercice));
+CREATE TABLE IF NOT EXISTS banques (id INTEGER PRIMARY KEY AUTOINCREMENT, enseignant TEXT NOT NULL, nom TEXT NOT NULL,
+    contenu TEXT NOT NULL, questions INTEGER NOT NULL DEFAULT 0, cree TEXT, maj TEXT, UNIQUE(enseignant, nom));
 CREATE TABLE IF NOT EXISTS documents (id INTEGER PRIMARY KEY AUTOINCREMENT, classe TEXT NOT NULL REFERENCES classes(code) ON DELETE CASCADE,
     nom TEXT NOT NULL, contenu BLOB NOT NULL, texte TEXT NOT NULL DEFAULT '', taille INTEGER NOT NULL, cree TEXT);
 """
@@ -273,6 +276,39 @@ def appeler_ia(systeme, tours, max_tokens=300, delai=60):
     return texte.strip()
 
 
+# ---------------------------------------------------------------- banques d'exercices (.gift)
+EXEMPLES = os.path.join(RACINE, "exemples")
+
+
+NIVEAUX = ("ecole", "college", "lycee", "superieur")
+
+
+def banques_fournies():
+    """Fichiers .gift fournis avec Viabilis (serveur/exemples/<niveau>/<matière>/<nom>.gift), par niveau, matière puis nom."""
+    out = []
+    for racine, dossiers, fichiers in os.walk(EXEMPLES):
+        dossiers.sort()
+        rel = os.path.relpath(racine, EXEMPLES).replace(os.sep, "/")
+        out += [{"chemin": f"{rel}/{f}", "dossier": rel, "nom": f[:-5]} for f in sorted(fichiers) if f.endswith(".gift") and rel != "."]
+    rang = lambda b: (NIVEAUX.index(b["dossier"].split("/")[0]) if b["dossier"].split("/")[0] in NIVEAUX else 9, b["chemin"])
+    return sorted(out, key=rang)
+
+
+def nom_banque(nom):
+    """Nom de banque sûr : 80 caractères, sans « .gift » final ni caractères de chemin."""
+    nom = re.sub(r"\.gift$", "", str(nom or "").strip(), flags=re.I)
+    return re.sub(r"[\x00-\x1f/\\:*?\"<>|]", " ", nom).strip()[:80]
+
+
+def verifier_gift(contenu, langue="fr"):
+    """Questions reconnues dans un texte GIFT : nombre, titres, types et avertissements (pour l'éditeur de l'enseignant)."""
+    if not contenu.strip():
+        return {"questions": 0, "titres": [], "avertissements": []}
+    questions, avert = EX.importer(contenu, "gift")
+    return {"questions": len(questions), "titres": [f'{q["titre"][:80]} ({q["type"]})' for q in questions][:60],
+            "avertissements": [traduire_texte(langue, a) for a in avert]}
+
+
 # ---------------------------------------------------------------- séance préparée par l'IA à partir d'un document
 CONSIGNE_BROUILLON = (
     "Tu es concepteur pédagogique. À partir du document fourni par l'enseignant, tu prépares UNE séance de travail pour Viabilis, "
@@ -390,7 +426,8 @@ def config_valide(cfg):
     out["exercices"] = {"actifs": bool(ex.get("actifs", False)), "nombre": min(20, max(1, int(ex.get("nombre", 3)))),
                         "placement": ex.get("placement") if ex.get("placement") in ("avant", "apres") else "avant",
                         "niveau": min(5, max(1, int(ex.get("niveau", 2)))),
-                        "choix": ex.get("choix") if ex.get("choix") in ("niveau", "adaptatif") else "niveau"}
+                        "choix": ex.get("choix") if ex.get("choix") in ("niveau", "adaptatif") else "niveau",
+                        "source": str(ex.get("source") or "")[:120]}
     # séances ouvertes : compatibilité avec l'ancien réglage (une seule séance, « ouverte »)
     ouv = cfg.get("ouvertes")
     if ouv is None:
@@ -629,6 +666,11 @@ class Gestionnaire(SimpleHTTPRequestHandler):
                 with VERROU, self.base.cnx() as c:
                     c.execute("INSERT INTO sessions_enseignant (jeton, expire) VALUES (?, ?)", (j, time.time() + 12 * 3600))
                 return self.json(200, {"jeton": j})
+            if p and p[0] == "banques":
+                ens = self.enseignant()
+                if ens is None:
+                    return self.erreur(401, "Session enseignant requise.")
+                return self.api_banques(verbe, p[1:], str(ens))
             if p and p[0] == "classes":
                 ens = self.enseignant()
                 if ens is None:
@@ -869,7 +911,7 @@ class Gestionnaire(SimpleHTTPRequestHandler):
             if verbe == "GET":                             # normalisée : les classes plus anciennes reçoivent les nouveaux champs
                 return self.json(200, config_valide(json.loads(cl["config"])))
             if verbe == "PUT":
-                corps = self.corps()
+                corps = self.corps(TAILLE_MAX_CONFIG)
                 cfg, ancien = config_valide(corps), config_valide(json.loads(cl["config"]))
                 origine = corps.get("origine") if corps.get("origine") in ORIGINES else "manuel"
                 with VERROU, self.base.cnx() as c:
@@ -938,6 +980,54 @@ class Gestionnaire(SimpleHTTPRequestHandler):
             except (ValueError, KeyError, TypeError) as exc:
                 return self.erreur(400, "Import impossible : {exc}.", exc=exc)
             return self.json(200, res)
+        return self.erreur(404, "Ressource inconnue.")
+
+    # -- banques d'exercices (.gift) : celles fournies avec Viabilis, et la bibliothèque de chaque enseignant
+    def api_banques(self, verbe, p, ens):
+        """Bibliothèque de l'enseignant `ens` ("*" sans comptes) : lister, lire, vérifier, enregistrer sous un nom, effacer."""
+        if p == [] and verbe == "GET":
+            with self.base.cnx() as c:
+                mes = [dict(r) for r in c.execute("SELECT id, nom, questions, maj FROM banques WHERE enseignant = ? ORDER BY nom COLLATE NOCASE", (ens,))]
+            return self.json(200, {"mes": mes, "fournies": banques_fournies()})
+        if p == ["fournie"] and verbe == "GET":
+            chemin = (getattr(self, "requete", {}).get("chemin") or [""])[0]
+            if chemin not in {b["chemin"] for b in banques_fournies()}:
+                return self.erreur(404, "Banque introuvable.")
+            with open(os.path.join(EXEMPLES, *chemin.split("/")), encoding="utf-8") as f:
+                return self.json(200, {"nom": chemin.split("/")[-1][:-5], "contenu": f.read()})
+        if p == ["verifier"] and verbe == "POST":
+            return self.json(200, verifier_gift(str(self.corps().get("contenu", "")), self.langue()))
+        if p == [] and verbe == "POST" or len(p) == 1 and p[0].isdigit() and verbe == "PUT":
+            d = self.corps()
+            nom = nom_banque(d.get("nom"))
+            if not nom:
+                return self.erreur(400, "Donnez un nom à la banque.")
+            res = verifier_gift(str(d.get("contenu", "")), self.langue())
+            if not res["questions"]:
+                return self.erreur(400, "Aucune question reconnue : vérifiez le format GIFT.")
+            with VERROU, self.base.cnx() as c:
+                autre = c.execute("SELECT id FROM banques WHERE enseignant = ? AND nom = ?", (ens, nom)).fetchone()
+                if verbe == "POST":
+                    if autre:
+                        return self.erreur(409, "Une de vos banques porte déjà ce nom : choisissez-en un autre.")
+                    ident = c.execute("INSERT INTO banques (enseignant, nom, contenu, questions, cree, maj) VALUES (?, ?, ?, ?, ?, ?)",
+                                      (ens, nom, d["contenu"], res["questions"], maintenant(), maintenant())).lastrowid
+                else:
+                    ident = int(p[0])
+                    if autre and autre["id"] != ident:
+                        return self.erreur(409, "Une de vos banques porte déjà ce nom : choisissez-en un autre.")
+                    if not c.execute("UPDATE banques SET nom = ?, contenu = ?, questions = ?, maj = ? WHERE id = ? AND enseignant = ?",
+                                     (nom, d["contenu"], res["questions"], maintenant(), ident, ens)).rowcount:
+                        return self.erreur(404, "Banque introuvable.")
+            return self.json(201 if verbe == "POST" else 200, {"id": ident, "nom": nom, **res})
+        if len(p) == 1 and p[0].isdigit():
+            with VERROU, self.base.cnx() as c:
+                if verbe == "GET":
+                    r = c.execute("SELECT id, nom, contenu, questions, maj FROM banques WHERE id = ? AND enseignant = ?", (int(p[0]), ens)).fetchone()
+                    return self.json(200, dict(r)) if r else self.erreur(404, "Banque introuvable.")
+                if verbe == "DELETE":
+                    c.execute("DELETE FROM banques WHERE id = ? AND enseignant = ?", (int(p[0]), ens))
+                    return self.json(200, {"supprime": int(p[0])})
         return self.erreur(404, "Ressource inconnue.")
 
     # -- documents PDF des séances
@@ -1374,7 +1464,9 @@ class Gestionnaire(SimpleHTTPRequestHandler):
                 return json.loads(t["ids"])
             ex = cfg.get("exercices") or DEFAUT_CONFIG["exercices"]
             niveau = (cfg.get("eleves", {}).get(e["id"], {}) or {}).get("niveau") or ex["niveau"]
-            dispo = c.execute("SELECT id, niveau FROM exercices WHERE classe = ? AND actif = 1", (e["classe"],)).fetchall()
+            dispo = c.execute("SELECT id, niveau, source FROM exercices WHERE classe = ? AND actif = 1", (e["classe"],)).fetchall()
+        if ex.get("source"):                    # séance créée à partir d'un fichier .gift : seulement ses questions
+            dispo = [r for r in dispo if r["source"] == ex["source"]]
         deja = set()
         with self.base.cnx() as c:
             for r in c.execute("SELECT exercice FROM reponses WHERE eleve = ?", (e["id"],)).fetchall():

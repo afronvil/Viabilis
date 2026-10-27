@@ -3,4 +3,4 @@
 .DS_Store
 __pycache__/
 *.env
-installer_ubuntu.conf
+developpement/installer_ubuntu_perso.conf

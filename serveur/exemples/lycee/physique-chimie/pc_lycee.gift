@@ -1,0 +1,18 @@
+// Lycée — Chute libre, mesure et incertitudes
+$CATEGORY: Lycee/Physique-chimie
+
+::Hauteur de chute::Un objet est lâché sans vitesse initiale. La hauteur parcourue vaut h \= ½ g t². Avec g \= 9,8 m/s² et t \= 1 s, que vaut h, en mètres ?{#4.9:0.05}
+
+::Unité de g::Quelle est l'unité de l'intensité de la pesanteur g ?{=m/s² ~m/s ~N ~kg}
+
+::Répéter les mesures::Répéter une mesure et calculer la moyenne sert surtout à…{=réduire l'effet des erreurs aléatoires ~supprimer les erreurs systématiques ~changer la valeur vraie ~éviter de noter les résultats}
+
+::Erreur systématique::Une erreur systématique est une erreur qui…{=décale toutes les mesures dans le même sens ~change au hasard d'une mesure à l'autre ~n'existe qu'en chimie ~disparaît quand on fait la moyenne}
+
+::Poids::Quel est le poids, en newtons, d'un objet de masse 2 kg, avec g \= 9,8 N/kg ?{#19.6:0.1}
+
+::Plume et bille::Dans le vide, une plume et une bille lâchées ensemble touchent le sol en même temps.{T}
+
+::Pendule::Pour de petites oscillations, la période d'un pendule simple dépend surtout de…{=la longueur du fil ~la masse accrochée ~la couleur du fil ~l'heure de la mesure}
+
+::Incertitude::On note t \= 0,45 s ± 0,02 s. Quelle est l'incertitude sur t, en secondes ?{#0.02:0.001}

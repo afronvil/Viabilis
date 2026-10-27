@@ -1,0 +1,18 @@
+// Lycée — Suites (abonnements) et probabilités (jeux équitables)
+$CATEGORY: Lycee/Mathematiques
+
+::Suite arithmétique::La suite arithmétique (uₙ) a pour premier terme u₀ \= 50 et pour raison 5. Que vaut u₁₀ ?{#100}
+
+::Suite géométrique::La suite géométrique (vₙ) a pour premier terme v₀ \= 100 et pour raison 1,1. Que vaut v₂ ?{#121}
+
+::Coût annuel::Un abonnement coûte 20 € par mois. Quel est son coût sur 12 mois, en euros ?{#240}
+
+::Somme des entiers::Que vaut la somme 1 + 2 + 3 + … + 100 ?{#5050}
+
+::Un six::On lance un dé équilibré à six faces. Quelle est la probabilité d'obtenir 6 ?{=1/6 ~1/2 ~1/3 ~6/6}
+
+::Somme 7::On lance deux dés équilibrés. Quelle est la probabilité que la somme des deux faces soit 7 ?{=1/6 ~1/12 ~7/36 ~1/7}
+
+::Espérance::On paie 2 € pour jouer. On lance un dé équilibré et on reçoit 10 € si l'on obtient 6, rien sinon. Quelle est l'espérance du gain net, en euros (arrondie au centième) ?{#-0.33:0.01}
+
+::Jeu équitable::Un jeu est équitable lorsque l'espérance du gain net est nulle.{T}

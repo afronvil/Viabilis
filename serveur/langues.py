@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
-"""Langues des messages du serveur (français, anglais, catalan).
+"""Langues des messages du serveur (français, anglais, catalan ; italien, espagnol et allemand dans langues_autres.py).
 
 Chaque message est écrit en français dans le code ; T(langue, message, **valeurs) donne sa traduction,
 puis remplace les {champs}. Un message absent du dictionnaire reste en français.
 Les textes des séances et des banques d'exercices ne sont pas traduits : ils restent ceux de l'enseignant."""
 import re
 
-LANGUES = ("fr", "en", "ca")
+from langues_autres import AUTRES, AUTRES_TEXTES
+
+LANGUES = ("fr", "en", "ca", "it", "es", "de")
+AUTRES_LANGUES = {"it": 0, "es": 1, "de": 2}           # rang dans AUTRES et AUTRES_TEXTES
 # pour les consignes données à l'IA (rédigées en français) : la langue dans laquelle elle doit répondre
-NOM_POUR_IA = {"fr": "en français", "en": "en anglais", "ca": "en catalan"}
+NOM_POUR_IA = {"fr": "en français", "en": "en anglais", "ca": "en catalan", "it": "en italien", "es": "en espagnol", "de": "en allemand"}
 
 _D = {
     # ---- connexion, classe, droits
@@ -18,6 +21,11 @@ _D = {
     "Mot de passe incorrect.": ("Wrong password.", "Contrasenya incorrecta."),
     "Session enseignant requise.": ("Teacher session required.", "Cal una sessió docent."),
     "Code de classe inconnu.": ("Unknown class code.", "Codi de classe desconegut."),
+    # ---- banques d'exercices (.gift)
+    "Banque introuvable.": ("Bank not found.", "Banc no trobat."),
+    "Donnez un nom à la banque.": ("Give the bank a name.", "Doneu un nom al banc."),
+    "Aucune question reconnue : vérifiez le format GIFT.": ("No question recognised: check the GIFT format.", "Cap pregunta reconeguda: comproveu el format GIFT."),
+    "Une de vos banques porte déjà ce nom : choisissez-en un autre.": ("One of your banks already has this name: choose another one.", "Un dels vostres bancs ja té aquest nom: trieu-ne un altre."),
     # ---- documents PDF des séances
     "Le fichier n'est pas un PDF.": ("The file is not a PDF.", "El fitxer no és un PDF."),
     "PDF trop volumineux : {mo} Mo au plus.": ("PDF too large: {mo} MB at most.", "PDF massa gran: {mo} MB com a màxim."),
@@ -241,9 +249,15 @@ _D.update({
 def T(langue, message, **valeurs):
     """Message traduit dans `langue` (fr, en, ca), avec ses {champs} remplis."""
     if message in _TEXTES:
-        message = _TEXTES[message][{"en": 1, "ca": 2}.get(langue, 0)]
+        k = AUTRES_LANGUES.get(langue)
+        if k is not None:                                  # italien, espagnol, allemand ; sinon le français
+            message = (AUTRES_TEXTES.get(message) or ("", "", ""))[k] or _TEXTES[message][0]
+        else:
+            message = _TEXTES[message][{"en": 1, "ca": 2}.get(langue, 0)]
     elif langue in ("en", "ca") and message in _D:
         message = _D[message][0 if langue == "en" else 1]
+    elif langue in AUTRES_LANGUES and message in AUTRES:
+        message = AUTRES[message][AUTRES_LANGUES[langue]]
     return message.format(**valeurs) if valeurs else message
 
 
@@ -266,7 +280,7 @@ _MOTIFS = [(m, _motif(m)) for m in _D if "{" in m]
 
 def traduire_texte(langue, texte):
     """Traduit un message déjà rempli en français (par exemple « 12 (à 0,5 près) ») en retrouvant son modèle."""
-    if langue not in ("en", "ca") or not isinstance(texte, str) or not texte:
+    if langue not in LANGUES[1:] or not isinstance(texte, str) or not texte:
         return texte
     if texte in _D:
         return T(langue, texte)

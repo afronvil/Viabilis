@@ -1,0 +1,18 @@
+// Collège (cycle 4) — Calcul littéral et programmes de calcul
+$CATEGORY: College/Mathematiques/Calcul litteral
+
+::Programme avec 5::Programme de calcul. Choisir un nombre, ajouter 3, multiplier le résultat par 2, puis soustraire 6. Quel résultat obtient-on en choisissant 5 ?{#10}
+
+::Programme avec x::Avec le même programme (ajouter 3, multiplier par 2, soustraire 6), quelle expression obtient-on en choisissant le nombre x ?{=2x ~x + 3 ~2x + 6 ~2x − 3}
+
+::Développer::Quelle est la forme développée de 3(x + 4) ?{=3x + 12 ~3x + 4 ~x + 12 ~7x}
+
+::Calculer une valeur::Quelle est la valeur de 2x + 5 lorsque x vaut 4 ?{#13}
+
+::Réduire::Quelle est la forme réduite de 5x + 2 − 3x + 4 ?{=2x + 6 ~8x + 6 ~2x − 2 ~8x}
+
+::Toujours vrai ?::Pour tout nombre x, (x + 1)² = x² + 1.{F#Essayez avec x \= 1 \: (1 + 1)² \= 4, alors que 1² + 1 \= 2.}
+
+::Factoriser::Quelle est une forme factorisée de 6x + 9 ?{=3(2x + 3) ~6(x + 9) ~3(2x + 9) ~9(6x + 1)}
+
+::Résoudre::Quelle est la solution de l'équation 3x − 4 \= 11 ?{#5}

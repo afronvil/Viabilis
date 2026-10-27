@@ -1,0 +1,20 @@
+// Licence — Choix d'un test statistique, régression linéaire
+$CATEGORY: Superieur/Statistiques
+
+::Deux groupes::On compare la moyenne d'une variable quantitative, à peu près normale, entre deux groupes indépendants. Quel test convient ?{=Un test t de Student pour échantillons indépendants ~Un test du khi-deux d'indépendance ~Un test t pour échantillons appariés ~Une régression logistique}
+
+::Deux variables qualitatives::On étudie le lien entre deux variables qualitatives (par exemple filière et réussite). Quel test convient ?{=Un test du khi-deux d'indépendance ~Un test t de Student ~Une corrélation de Pearson ~Une analyse de variance}
+
+::Avant et après::On mesure les mêmes sujets avant et après une intervention. Quel test convient pour une variable quantitative à peu près normale ?{=Un test t pour échantillons appariés ~Un test t pour échantillons indépendants ~Un test du khi-deux ~Aucun test n'est possible}
+
+::p-valeur::La p-valeur est…{=la probabilité d'observer un résultat au moins aussi extrême que celui obtenu si l'hypothèse nulle est vraie ~la probabilité que l'hypothèse nulle soit vraie ~la probabilité que l'hypothèse alternative soit vraie ~la taille de l'effet}
+
+::Moyenne::Quelle est la moyenne de 2, 4, 6 et 8 ?{#5}
+
+::Prédiction::Une régression donne y \= 2x + 1. Quelle valeur de y le modèle prédit-il pour x \= 3 ?{#7}
+
+::R²::Un coefficient de détermination R² \= 0,81 signifie que…{=81 % de la variance de y est expliquée par le modèle ~la corrélation vaut 0,81 ~81 % des points sont sur la droite ~la pente vaut 0,81}
+
+::Corrélation et cause::Une corrélation forte entre deux variables prouve un lien de cause à effet.{F}
+
+::Corrélation::Pour une régression linéaire simple de pente positive avec R² \= 0,81, que vaut le coefficient de corrélation r ?{#0.9:0.001}
