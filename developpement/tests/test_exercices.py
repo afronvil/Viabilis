@@ -26,7 +26,7 @@ s, liste = r("GET", f"classes/{code}/exercices", None, J)
 ok(len(liste) == 13, f"{len(liste)} exercices listés")
 xml_ids = [x["id"] for x in liste if x["niveau"] == 3]
 cfg = r("GET", f"classes/{code}/config", None, J)[1]
-cfg.update(tache="Inventez des problèmes avec des fractions", seance=1, ouverte=True, exercices={"actifs": True, "nombre": 3, "placement": "avant", "niveau": 3})
+cfg.update(tache="Inventez des problèmes avec des fractions", seance=1, ouverte=True, exercices={"actifs": True, "nombre": 3, "placement": "avant", "niveau": 3, "montrerReponse": True})
 cfg = r("PUT", f"classes/{code}/config", cfg, J)[1]
 e1 = r("POST", "eleve/connexion", {"code": code, "pseudo": "Ana"})[1]
 s, exos = r("GET", "eleve/exercices", None, e1["jeton"])

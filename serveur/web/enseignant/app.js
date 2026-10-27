@@ -7,7 +7,7 @@ import {proposerSuites, GENRES, PROFILS} from "../commun/suites.js";
 const S = {jeton: null, classes: [], code: null, config: null, traces: {}, notes: {}, onglet: "classe", detail: null, confirmer: null, exos: null, importMsg: null, viab: {}, brouillon: null, seanceEditee: null, modeles: null, modele: null, modeleChoisi: null, suite: false, suiteChoisie: null, messages: [], signalements: [], galerieChoix: null, documents: null, pdfEtat: null, banques: null, gift: null};
 const PUBLICS = {ecole: tx("École élémentaire"), college: tx("Collège"), lycee: tx("Lycée"), superieur: tx("Enseignement supérieur")};
 const DEFAUT = {seance: 0, ouverte: false, tache: "", public: "ecole", ordre: "adaptatif", mode: "questionner", minIdees: 3, seuilCharge: 0.7, retraitAgentivite: 0.8, seuilMaitrise: 0.5, eleves: {},
-  exercices: {actifs: false, nombre: 3, placement: "avant", niveau: 2, choix: "niveau", explications: true}, niveauTache: 3,
+  exercices: {actifs: false, nombre: 3, placement: "avant", niveau: 2, choix: "niveau", explications: true, montrerReponse: false}, niveauTache: 3,
   verification: {mode: "aucune", cible: 10, nombres: "", attendu: 0, criteres: "", maximum: 3, uneFois: false},
   groupes: {}, lecture: {active: true, langue: "fr-FR"}, langue: "fr",
   indices: [], variantes: {actives: false, accessible: {consigne: "", indices: [], cible: null, attendu: null}, exigeante: {consigne: "", indices: [], cible: null, attendu: null}}};
@@ -362,7 +362,7 @@ function ongletClasse() {
       S.messages.some(m => m.eleve === u && !m.lu) ? el("p", {class: "small muted"}, tx("✉ Message pas encore lu")) : null,
       s?.verification ? el("p", {class: "small"}, tx`Idées vérifiées : ${s.verification.justes}/${s.verification.idees?.length ?? 0} justes (${s.verification.nombre} vérification${s.verification.nombre > 1 ? "s" : ""})`) : null,
       exosN.length ? el("p", {class: "small"}, tx`Exercices de la séance : ${Math.round(100 * exosN.reduce((a, x) => a + x.score, 0) / exosN.length)} % de réussite, ${exosN.filter(x => (x.premierScore ?? x.score) >= 1).length}/${exosN.length} au premier essai`) : null,
-      exosN.some(x => x.explications) ? el("p", {class: "small"}, tx`Explications d'erreurs demandées à l'IA : ${exosN.reduce((a, x) => a + (x.explications || 0), 0)}`) : null,
+      exosN.some(x => x.explications) ? el("p", {class: "small"}, tx`Remédiations avec l'IA : ${exosN.reduce((a, x) => a + (x.explications || 0), 0)}`) : null,
       el("div", {class: "row"},
         reco.ordre ? el("button", {disabled: applique, onclick: () => appliquer(u, reco)}, applique ? tx("Recommandation appliquée") : tx("Appliquer")) : null,
         Object.keys(perso).length ? el("button", {class: "ghost", onclick: () => appliquer(u, null)}, tx("Règle de la classe")) : null,
@@ -470,8 +470,13 @@ function detailEleve(u) {
       el("p", {class: "small", style: "font-weight:700"}, tx("Idées après l'IA")), listeIdees(s.ideesApres || [], tx("après")),
       (s.ideesRetirees || []).length ? el("details", {class: "small"}, el("summary", {}, tx`Idées retirées par l'élève (${s.ideesRetirees.length})`), listeIdees(s.ideesRetirees, tx("retirée"))) : null,
       (s.exercices || []).length ? el("div", {class: "field"}, el("p", {class: "small", style: "font-weight:700"}, tx("Exercices")),
-        el("ol", {class: "ideas"}, s.exercices.map(x => el("li", {}, el("span", {}, tx`${x.titre || tx("Exercice")} (niveau ${x.niveau ?? "–"})`),
-          el("span", {class: "tag"}, x.score == null ? tx("non fait") : tx`${Math.round(x.score * 100)} % · ${x.tentatives} essai${x.tentatives > 1 ? "s" : ""} · ${x.duree ?? 0} s` + (x.explications ? tx` · explications de l'IA : ${x.explications}` : "")))))) : null,
+        el("ol", {class: "ideas"}, s.exercices.map(x => el("li", {style: "flex-direction:column"},
+          el("div", {class: "row", style: "justify-content:space-between;width:100%"}, el("span", {}, tx`${x.titre || tx("Exercice")} (niveau ${x.niveau ?? "–"})`),
+            el("span", {class: "tag"}, x.score == null ? tx("non fait") : tx`${Math.round(x.score * 100)} % · ${x.tentatives} essai${x.tentatives > 1 ? "s" : ""} · ${x.duree ?? 0} s`)),
+          x.reponse != null && x.score < 1 ? el("p", {class: "small muted"}, tx`Dernière réponse : ${x.reponse} · bonne réponse : ${x.attendu ?? "–"}`) : null,
+          ...Object.entries(x.remediation || {}).map(([essai, d]) => el("details", {class: "small", style: "width:100%"},
+            el("summary", {}, tx`Remédiation après l'essai ${essai} (${d.filter(m => m.role === "eleve").length} réponse(s) de l'élève)`),
+            el("div", {class: "chat"}, d.map(m => el("div", {class: "msg " + (m.role === "ia" ? "ia" : "el")}, m.texte))))))))) : null,
       ligneDemarche(s),
       (s.historique || []).length ? el("p", {class: "small"}, el("b", {}, tx("Essais : ")), [...s.historique, {essai: s.essais, justes: s.verification?.justes, idees: (s.ideesAvant || []).length + (s.ideesApres || []).length}]
         .map(x => tx`essai ${x.essai} : ` + (x.justes != null ? tx`${x.justes} juste${x.justes > 1 ? "s" : ""}` : tx`${x.idees} idée${x.idees > 1 ? "s" : ""}`)).join(" → ")) : null,
@@ -1079,6 +1084,7 @@ function ongletExercices() {
   const nombre = el("input", {type: "range", id: "ex-nombre", min: 1, max: 20, step: 1, value: ex.nombre}), nbOut = el("output", {}, ex.nombre);
   nombre.addEventListener("input", () => nbOut.textContent = nombre.value);
   const explications = el("input", {type: "checkbox", id: "ex-explications", checked: ex.explications !== false});
+  const montrer = el("input", {type: "checkbox", id: "ex-montrer", checked: !!ex.montrerReponse});
   const placement = el("select", {id: "ex-placement"}, el("option", {value: "avant", selected: ex.placement === "avant"}, tx("Avant la tâche ouverte")), el("option", {value: "apres", selected: ex.placement === "apres"}, tx("Après la tâche ouverte")));
   const reglages = el("div", {class: "card"}, el("h2", {}, tx("Dans la séance")),
     el("label", {for: "ex-actifs", class: "row", style: "gap:8px"}, actifs, tx("Proposer des exercices aux élèves")),
@@ -1090,11 +1096,13 @@ function ongletExercices() {
       el("p", {class: "small muted"}, tx("Adaptatif : à la manière de l'algorithme ZPDES, chaque élève a une zone de niveaux ouverts. Elle part du niveau ci-dessous, s'ouvre au niveau supérieur quand il réussit, se referme sur les niveaux maîtrisés et rouvre le niveau inférieur en cas d'échec. Les exercices sont tirés de préférence dans les niveaux où il progresse le plus."))),
     el("div", {class: "field"}, el("label", {for: "ex-niveau"}, tx("Niveau de la classe")), selNiv("ex-niveau", ex.niveau),
       el("p", {class: "small muted"}, tx("Chaque élève reçoit des exercices de ce niveau, sauf si un niveau individuel lui est appliqué depuis l'onglet Classe."))),
-    el("label", {for: "ex-explications", class: "row", style: "gap:8px"}, explications, tx("Après une erreur, l'élève peut demander à l'IA d'expliquer son erreur et la règle en jeu")),
-    el("p", {class: "small muted"}, tx("Tant qu'il lui reste un essai, l'IA ne donne pas la bonne réponse. Une explication par réponse ; jamais en évaluation ni hors ligne.")),
+    el("label", {for: "ex-explications", class: "row", style: "gap:8px"}, explications, tx("Remédiation : après une erreur, l'élève peut échanger avec l'IA pour comprendre son erreur")),
+    el("p", {class: "small muted"}, tx("L'IA explique l'erreur faite et la règle en jeu, sans jamais donner la bonne réponse, puis l'élève peut lui répondre (3 fois au plus). Jamais en évaluation ni hors ligne.")),
+    el("label", {for: "ex-montrer", class: "row", style: "gap:8px"}, montrer, tx("Montrer la bonne réponse à l'élève après son dernier essai")),
+    el("p", {class: "small muted"}, tx("Sinon, seule l'enseignante ou l'enseignant la voit, dans le détail de chaque élève.")),
     ex.source ? el("label", {for: "ex-source", class: "row", style: "gap:8px"}, el("input", {type: "checkbox", id: "ex-source", checked: true}),
       tx`Seulement les questions de « ${ex.source} » (séance créée à partir d'un fichier .gift)`) : null,
-    el("button", {class: "primary", onclick: async () => { await majConfig({exercices: {actifs: actifs.checked, nombre: +nombre.value, placement: placement.value, niveau: +$("#ex-niveau").value, choix: $("#ex-choix").value, explications: explications.checked,
+    el("button", {class: "primary", onclick: async () => { await majConfig({exercices: {actifs: actifs.checked, nombre: +nombre.value, placement: placement.value, niveau: +$("#ex-niveau").value, choix: $("#ex-choix").value, explications: explications.checked, montrerReponse: montrer.checked,
       source: ex.source && $("#ex-source")?.checked ? ex.source : ""}}); toast(tx("Réglages des exercices enregistrés.")); }}, tx("Enregistrer")));
   // import
   const fichier = el("input", {type: "file", id: "ex-fichier", accept: ".gift,.txt,.xml"});

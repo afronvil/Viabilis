@@ -578,15 +578,15 @@ La séance **ne tire que les questions de ce fichier**, et pas le reste de la ba
 
 Chaque enseignant ne voit que ses propres banques (sans comptes : une seule bibliothèque). Test : `developpement/tests/test_banques.py` (23 vérifications).
 
-## 6 quinquies quinquies. Comprendre ses erreurs : explications de l'IA sur les exercices
+## 6 quinquies quinquies. Remédiation : comprendre ses erreurs, en dialogue avec l'IA
 
-Après une réponse fausse ou partiellement juste, l'élève touche « Comprendre mon erreur » (`POST /api/eleve/exercices/<id>/expliquer`). L'IA reçoit l'énoncé, les choix, la réponse de l'élève, la bonne réponse et les commentaires du fichier GIFT ; elle s'appuie sur la bonne réponse et ne la contredit jamais (`consignes_explication` dans `serveur.py`).
+Après une réponse fausse ou partiellement juste, l'élève touche « Comprendre mon erreur » (`POST /api/eleve/exercices/<id>/expliquer`). L'IA reçoit l'énoncé, les choix, la réponse de l'élève, la bonne réponse et les commentaires du fichier GIFT, marqués « pour toi seulement » (`consignes_remediation` dans `serveur.py`).
 
-- **Contenu** : ce qui ne va pas dans la réponse de l'élève, puis la règle ou la notion en jeu. Avec « IA qui questionne », elle commence par une question pour que l'élève repère lui-même son erreur.
-- **Tant qu'il reste un essai**, elle ne donne pas la bonne réponse et invite à réessayer. Garde-fou (`revele_reponse`) : pour une réponse numérique, courte ou à choix unique, une explication qui contient la bonne réponse est remplacée par un conseil général et signalée à l'enseignant.
-- **Une fois l'exercice terminé**, elle montre comment la règle mène à la bonne réponse et propose un petit cas semblable.
-- **Limites** : une explication par réponse donnée (deux au plus par exercice) ; jamais en évaluation ni hors ligne. Réglage de l'enseignant : onglet Exercices, case « Après une erreur… » (`exercices.explications`, activé par défaut).
-- **Suivi** : le nombre d'explications par exercice (`reponses.explications`) apparaît dans le détail de l'élève et le résumé de la séance.
+- **But** : faire comprendre l'erreur faite (confusion, règle mal appliquée, étape oubliée), pas donner la réponse. L'IA explique pourquoi ce raisonnement ne marche pas, au besoin avec un contre-exemple pris en dehors de l'exercice, rappelle la règle en jeu et pose une question de vérification. Avec « IA qui questionne », elle fait d'abord repérer l'erreur par l'élève.
+- **Dialogue** : l'élève répond (corps `{"message": …}`), l'IA réagit ; `REMEDIATION_MAX` = 3 réponses de l'élève par réponse à l'exercice. L'historique est gardé par le serveur (`reponses.remediation`, par numéro d'essai) : le navigateur n'envoie que le nouveau message. Corps vide : ouvre le dialogue, ou le renvoie s'il existe déjà (page rechargée).
+- **Jamais la bonne réponse** : ni avant ni après le dernier essai. Consigne explicite, et garde-fou (`revele_reponse`) pour les réponses numériques, courtes ou à choix unique : un message qui contient la bonne réponse est remplacé par un conseil général et signalé à l'enseignant. Si l'élève propose une réponse dans le dialogue, l'IA ne la confirme pas : elle l'invite à la saisir dans l'exercice.
+- **La bonne réponse n'est pas montrée à l'élève** (après le dernier essai, ni dans la correction finale) : réglage `exercices.montrerReponse`, non par défaut. Le corrigé général du GIFT est caché de même. L'enseignant voit, dans le détail de chaque élève, la dernière réponse donnée, la bonne réponse et les dialogues de remédiation.
+- **Limites** : jamais en évaluation ni hors ligne ; compte dans les appels à l'IA de la séance (`IA_MAX_PAR_SEANCE`). Réglage `exercices.explications` (activé par défaut), onglet Exercices.
 - **Vérification des idées** : le retour d'une idée « à revoir » rappelle aussi la règle ou la notion en jeu, sans l'appliquer à la place de l'élève.
 
 Test : `python3 developpement/tests/lancer_tests.py explications`.

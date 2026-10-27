@@ -79,7 +79,7 @@ DEFAUT_CONFIG = {
     "ordre": "adaptatif", "mode": "questionner", "minIdees": 3,
     "seuilCharge": 0.7, "retraitAgentivite": 0.8, "seuilMaitrise": 0.5,
     "eleves": {},
-    "exercices": {"actifs": False, "nombre": 3, "placement": "avant", "niveau": 2, "choix": "niveau", "source": "", "explications": True},   # choix : niveau fixé ou adaptatif (ZPDES) ; source : seulement les questions de ce fichier ; explications : l'élève peut demander à l'IA d'expliquer son erreur
+    "exercices": {"actifs": False, "nombre": 3, "placement": "avant", "niveau": 2, "choix": "niveau", "source": "", "explications": True, "montrerReponse": False},   # choix : niveau fixé ou adaptatif (ZPDES) ; source : seulement les questions de ce fichier ; explications : l'élève peut demander à l'IA d'expliquer son erreur
     "niveauTache": 3,
     "verification": {"mode": "aucune", "cible": 10, "nombres": "", "attendu": 0, "criteres": "", "maximum": 3, "uneFois": False},
     "indices": [],
@@ -167,6 +167,8 @@ class Base:
                 c.execute("ALTER TABLE reponses ADD COLUMN reponse TEXT")
             if "explications" not in col_rep:               # bases créées avant les explications d'erreurs par l'IA
                 c.execute("ALTER TABLE reponses ADD COLUMN explications INTEGER NOT NULL DEFAULT 0")
+            if "remediation" not in col_rep:                # dialogues de remédiation, par numéro d'essai
+                c.execute("ALTER TABLE reponses ADD COLUMN remediation TEXT")
             if "enseignant" not in [r["name"] for r in c.execute("PRAGMA table_info(classes)")]:   # bases créées avant les comptes enseignants
                 c.execute("ALTER TABLE classes ADD COLUMN enseignant INTEGER")
             col_ens = [r["name"] for r in c.execute("PRAGMA table_info(enseignants)")]
@@ -231,21 +233,32 @@ def consignes_ia(mode, public="ecole", code=False, langue="fr"):
             f"{'Quatre' if public == 'superieur' else 'Trois'} phrases au maximum, {NOM_POUR_IA.get(langue, 'en français')}, {pour}.")
 
 
-def consignes_explication(mode, public="ecole", langue="fr", fini=False, code=False):
-    """Consignes pour expliquer une erreur d'exercice : ce qui ne va pas, la règle, puis réessayer (ou un cas semblable)."""
+REMEDIATION_MAX = 3          # réponses de l'élève dans un dialogue de remédiation, par réponse à un exercice
+
+
+def consignes_remediation(mode, public="ecole", langue="fr", fini=False, code=False):
+    """Consignes de la remédiation : faire comprendre à l'élève l'erreur qu'il a faite, en court dialogue, sans jamais donner la réponse."""
     pour = DESTINATAIRE.get(public, DESTINATAIRE["ecole"]) + ("." + CODE_TUTEUR if code else "")
-    debut = ("Commence par UNE courte question qui l'aide à repérer lui-même son erreur. Ensuite, " if mode == "questionner" else "")
-    fin = ("Montre en une phrase comment la règle mène à la bonne réponse, puis propose un petit cas semblable, différent de "
-           "l'exercice, qu'il peut essayer seul (sans en donner la réponse)." if fini else
-           "L'élève a encore un essai : ne donne JAMAIS la bonne réponse, ni directement, ni par un calcul ou un exemple qui y mène, "
-           "et ne dis pas quel choix cocher. Termine en l'invitant à réessayer en appliquant la règle.")
-    return ("Tu aides un élève qui s'est trompé à un exercice à comprendre son erreur. Tu t'appuies sur la bonne réponse donnée par "
-            "l'enseignant et tu ne la contredis jamais ; si l'énoncé te semble ambigu, invite l'élève à en parler à son enseignant. "
-            "Ne juge jamais l'élève : se tromper fait partie de l'apprentissage. "
-            f"{debut}Dis ce qui ne va pas dans SA réponse, en partant de ce qu'il a écrit (la confusion probable). "
-            "Puis énonce la règle, la notion ou la méthode en jeu, simplement, en une ou deux phrases. " + fin + " "
-            f"{'Six' if public == 'superieur' else 'Cinq'} phrases au maximum, en texte simple, sans titre ni liste, "
-            f"{NOM_POUR_IA.get(langue, 'en français')}, {pour}.")
+    if mode == "questionner":
+        premier = ("Dans ton premier message, ne donne pas encore la règle : montre-lui ce qui cloche dans SA réponse (par exemple en lui "
+                   "faisant vérifier sa démarche sur un cas simple, pris en dehors de l'exercice) et pose UNE question pour qu'il repère "
+                   "lui-même son erreur. Dans les messages suivants, explique l'erreur et la règle en jeu si besoin. ")
+    else:
+        premier = ("Dans ton premier message, identifie l'erreur probable à partir de SA réponse (la confusion, la règle mal appliquée, "
+                   "l'étape oubliée), explique pourquoi ce raisonnement ne marche pas, au besoin avec un contre-exemple simple pris en dehors "
+                   "de l'exercice, rappelle la règle ou la notion en jeu, puis pose UNE question pour vérifier qu'il a compris (par exemple : "
+                   "reformuler la règle avec ses mots, ou dire ce qu'il changerait dans sa démarche). ")
+    suite = ("invite-le à réessayer l'exercice" if not fini else
+             "dis-lui qu'il saura éviter cette erreur la prochaine fois (il n'a plus d'essai sur cet exercice)")
+    return ("Tu fais une remédiation avec un élève qui s'est trompé à un exercice. Ton but : qu'il comprenne l'erreur qu'il a faite, "
+            "pas qu'il obtienne la réponse. RÈGLE ABSOLUE : tu ne donnes JAMAIS la bonne réponse, ni directement, ni par un calcul, "
+            "un exemple ou un indice qui la livre, et tu ne dis jamais quel choix cocher. La bonne réponse t'est donnée seulement pour "
+            "comprendre l'erreur : ne la contredis pas, ne la cite pas. Si l'élève propose une réponse à l'exercice ou demande si c'est "
+            "juste, ne confirme pas et n'infirme pas : invite-le à la saisir dans l'exercice. " + premier +
+            f"Ensuite, réagis à ce qu'il écrit : s'il a compris, dis-le simplement et {suite} ; sinon, réexplique autrement, plus "
+            "simplement, avec un autre exemple, et pose une nouvelle question. Ne juge jamais l'élève : se tromper fait partie de "
+            f"l'apprentissage. {'Cinq' if public == 'superieur' else 'Quatre'} phrases au maximum par message, en texte simple, sans "
+            f"titre ni liste, {NOM_POUR_IA.get(langue, 'en français')}, {pour}.")
 
 
 def revele_reponse(texte, q):
@@ -504,7 +517,8 @@ def config_valide(cfg):
                         "placement": ex.get("placement") if ex.get("placement") in ("avant", "apres") else "avant",
                         "niveau": min(5, max(1, int(ex.get("niveau", 2)))),
                         "choix": ex.get("choix") if ex.get("choix") in ("niveau", "adaptatif") else "niveau",
-                        "source": str(ex.get("source") or "")[:120], "explications": bool(ex.get("explications", True))}
+                        "source": str(ex.get("source") or "")[:120], "explications": bool(ex.get("explications", True)),
+                        "montrerReponse": bool(ex.get("montrerReponse", False))}
     # séances ouvertes : compatibilité avec l'ancien réglage (une seule séance, « ouverte »)
     ouv = cfg.get("ouvertes")
     if ouv is None:
@@ -543,6 +557,15 @@ def historique_exercices(c, eleve):
                           WHERE r.eleve = ? AND COALESCE(r.premier_score, r.score) IS NOT NULL ORDER BY r.maj, r.seance""", (eleve,)):
         hist.setdefault(r["niveau"], []).append(float(r["s"]))
     return hist
+
+
+def reponse_et_attendu(question, reponse):
+    """Pour l'enseignant : la réponse donnée par l'élève et la bonne réponse, en texte."""
+    try:
+        q = json.loads(question)
+        return {"reponse": EX.reponse_lisible(q, json.loads(reponse)) if reponse else None, "attendu": EX.reponse_attendue(q)}
+    except (TypeError, ValueError, KeyError, IndexError):
+        return {"reponse": None, "attendu": None}
 
 
 def limite_inscription():
@@ -1195,7 +1218,7 @@ class Gestionnaire(SimpleHTTPRequestHandler):
         with self.base.cnx() as c:
             rows = c.execute("""SELECT e.id, e.pseudo, e.pin, e.preferences, t.seance, t.donnees FROM eleves e LEFT JOIN traces t ON t.eleve = e.id
                                 WHERE e.classe = ?""", (code,)).fetchall()
-            reps = c.execute("""SELECT r.*, x.titre, x.niveau, x.type FROM reponses r JOIN eleves e ON e.id = r.eleve
+            reps = c.execute("""SELECT r.*, x.titre, x.niveau, x.type, x.donnees AS question FROM reponses r JOIN eleves e ON e.id = r.eleve
                                 LEFT JOIN exercices x ON x.id = r.exercice WHERE e.classe = ?""", (code,)).fetchall()
             verifs = c.execute("""SELECT v.* FROM verifications v JOIN eleves e ON e.id = v.eleve WHERE e.classe = ?""", (code,)).fetchall()
             pouces = c.execute("""SELECT i.* FROM indices_vus i JOIN eleves e ON e.id = i.eleve WHERE e.classe = ?""", (code,)).fetchall()
@@ -1208,7 +1231,8 @@ class Gestionnaire(SimpleHTTPRequestHandler):
             s = out.get(r["eleve"], {}).get("seances", {}).setdefault(str(r["seance"]), {})
             s.setdefault("exercices", []).append({"id": r["exercice"], "titre": r["titre"], "niveau": r["niveau"], "type": r["type"],
                                                   "tentatives": r["tentatives"], "score": r["score"], "premierScore": r["premier_score"], "duree": r["duree"],
-                                                  "explications": r["explications"]})
+                                                  "explications": r["explications"], "remediation": json.loads(r["remediation"] or "{}"),
+                                                  **reponse_et_attendu(r["question"], r["reponse"])})
         for v in verifs:
             s = out.get(v["eleve"], {}).get("seances", {}).setdefault(str(v["seance"]), {})
             s["verification"] = {"nombre": v["nombre"], **json.loads(v["donnees"] or "{}")}
@@ -1614,14 +1638,16 @@ class Gestionnaire(SimpleHTTPRequestHandler):
         if evaluation:
             return self.json(200, {"enregistre": True, "tentatives": tent, "fini": True})
         fini = score >= 1 or tent >= 2
+        montrer = bool((cfg.get("exercices") or {}).get("montrerReponse"))   # sinon, seule l'enseignante voit la bonne réponse
         lg = self.langue()
         return self.json(200, {"score": score, "juste": score >= 1, "retour": traduire_texte(lg, retour), "tentatives": tent, "fini": fini,
-                               "attendu": traduire_texte(lg, attendu) if fini and score < 1 else None,
-                               "retourGeneral": q.get("retour_general", "") if fini else ""})
+                               "attendu": traduire_texte(lg, attendu) if montrer and fini and score < 1 else None,
+                               "retourGeneral": q.get("retour_general", "") if montrer and fini else ""})
 
     def expliquer(self, e, cfg, xid):
-        """Après une réponse fausse, l'IA explique l'erreur et la règle en jeu, en s'appuyant sur la bonne réponse de l'enseignant.
-        Tant qu'il reste un essai, elle ne donne pas la bonne réponse. Une explication par réponse donnée."""
+        """Remédiation après une réponse fausse : l'IA fait comprendre l'erreur, en court dialogue, sans jamais donner la bonne réponse.
+        Corps vide : ouvre (ou rouvre) le dialogue de la dernière réponse. {"message": …} : réponse de l'élève, REMEDIATION_MAX au plus.
+        L'historique est gardé par le serveur (colonne reponses.remediation), par numéro d'essai ; l'enseignant le lit dans le suivi."""
         if not cfg.get("ouverte"):
             return self.erreur(409, "Aucune séance ouverte.")
         if cfg.get("evaluation"):
@@ -1636,6 +1662,7 @@ class Gestionnaire(SimpleHTTPRequestHandler):
         with self.base.cnx() as c:
             x = c.execute("SELECT donnees FROM exercices WHERE id = ?", (xid,)).fetchone()
             r = c.execute("SELECT * FROM reponses WHERE eleve = ? AND seance = ? AND exercice = ?", (e["id"], n, xid)).fetchone()
+            t = c.execute("SELECT appels_ia FROM traces WHERE eleve = ? AND seance = ?", (e["id"], n)).fetchone()
         if not x:
             return self.erreur(404, "Exercice supprimé.")
         if not r or r["reponse"] is None:
@@ -1644,36 +1671,58 @@ class Gestionnaire(SimpleHTTPRequestHandler):
         score, retour, _ = EX.corriger(q, donnee)
         if score >= 1:
             return self.erreur(409, "Cette réponse est juste : il n'y a pas d'erreur à expliquer.")
-        if r["explications"] >= r["tentatives"]:
-            return self.erreur(429, "Vous avez déjà une explication pour cette réponse : relisez-la, puis réessayez.")
         fini = r["tentatives"] >= 2
+        historique = json.loads(r["remediation"] or "{}")
+        cle = str(r["tentatives"])                              # un dialogue par réponse donnée
+        dialogue = historique.get(cle) or []
+        message = str(self.corps().get("message") or "").strip()[:1000]
+        nb_eleve = sum(1 for m in dialogue if m["role"] == "eleve")
+        if not message:
+            if dialogue:                                         # dialogue déjà ouvert (page rechargée) : on le renvoie tel quel
+                return self.json(200, {"echanges": dialogue, "restantes": max(0, REMEDIATION_MAX - nb_eleve), "fini": fini})
+        elif not dialogue:
+            return self.erreur(409, "Touchez d'abord « Comprendre mon erreur ».")
+        elif nb_eleve >= REMEDIATION_MAX:
+            return self.erreur(429, "La remédiation est terminée pour cette réponse : réessayez l'exercice.")
+        if t and t["appels_ia"] >= IA_MAX_PAR_SEANCE:
+            return self.erreur(429, "Nombre de questions à l'IA atteint pour cette séance.")
         lg = langue_valide(cfg.get("langue"))
         choix = "".join(f"\n- {c_['texte']}" for c_ in q["reponses"]) if q["type"] in ("choix_unique", "choix_multiple") else ""
         contexte = (f"Énoncé de l'exercice : {q.get('texte', '')}" + (f"\nChoix proposés :{choix}" if choix else "")
                     + f"\n\nRéponse de l'élève : {EX.reponse_lisible(q, donnee) or '(vide)'}"
-                    + f"\nBonne réponse, donnée par l'enseignant : {EX.reponse_attendue(q)}"
+                    + f"\nBonne réponse (pour toi seulement, à ne JAMAIS révéler) : {EX.reponse_attendue(q)}"
                     + (f"\nCommentaire prévu par l'enseignant pour cette réponse : {retour}" if retour else "")
-                    + (f"\nExplication générale prévue par l'enseignant : {q['retour_general']}" if q.get("retour_general") else "")
-                    + ("\n\nL'élève a encore un essai." if not fini else "\n\nL'élève n'a plus d'essai : il connaît maintenant la bonne réponse."))
+                    + (f"\nCorrigé de l'enseignant (pour toi seulement, ne le révèle pas) : {q['retour_general']}" if q.get("retour_general") else "")
+                    + ("\n\nL'élève a encore un essai." if not fini else "\n\nL'élève n'a plus d'essai sur cet exercice."))
+        nouveau = dialogue + ([{"role": "eleve", "texte": message}] if message else [])
+        tours = [{"role": "user", "content": contexte}]
+        for m in nouveau:
+            role = "assistant" if m["role"] == "ia" else "user"
+            if tours[-1]["role"] == role:
+                tours[-1]["content"] += "\n\n" + m["texte"]
+            else:
+                tours.append({"role": role, "content": m["texte"]})
         try:
-            texte = appeler_ia(consignes_explication(cfg.get("mode"), cfg.get("public", "ecole"), lg, fini, cfg.get("saisieCode", False)),
-                              [{"role": "user", "content": contexte}], max_tokens=600 if cfg.get("public") == "superieur" else 400)
+            texte = appeler_ia(consignes_remediation(cfg.get("mode"), cfg.get("public", "ecole"), lg, fini, cfg.get("saisieCode", False)),
+                              tours, max_tokens=600 if cfg.get("public") == "superieur" else 400)
         except urllib.error.HTTPError as exc:     # la cause va dans le terminal du serveur, sans donnée d'élève
-            print(f"[IA] explication refusée par le fournisseur : HTTP {exc.code} — {exc.read()[:300].decode('utf-8', 'replace')}", flush=True)
+            print(f"[IA] remédiation refusée par le fournisseur : HTTP {exc.code} — {exc.read()[:300].decode('utf-8', 'replace')}", flush=True)
             return self.erreur(502, "L'IA n'a pas répondu. Réessayez dans un moment.")
         except (urllib.error.URLError, KeyError, ValueError, TimeoutError, IndexError, OSError, AttributeError, TypeError) as exc:
-            print(f"[IA] explication impossible : {type(exc).__name__} — {exc}", flush=True)
+            print(f"[IA] remédiation impossible : {type(exc).__name__} — {exc}", flush=True)
             return self.erreur(502, "L'IA n'a pas répondu. Réessayez dans un moment.")
-        if not fini and revele_reponse(texte, q):  # garde-fou : la bonne réponse n'est jamais montrée avant le second essai
+        if revele_reponse(texte, q):              # garde-fou : la bonne réponse n'est jamais montrée à l'élève
             with VERROU, self.base.cnx() as c:
                 c.execute("INSERT INTO signalements (eleve, seance, indice, texte, motif, auteur, cree) VALUES (?, ?, NULL, ?, ?, 'auto', ?)",
-                          (e["id"], n, texte[:2000], "explication bloquée : elle contenait la bonne réponse", maintenant()))
+                          (e["id"], n, texte[:2000], "remédiation bloquée : elle contenait la bonne réponse", maintenant()))
             texte = T(lg, "Relis l'énoncé mot par mot et compare-le à ta réponse : où se trouve la différence ? "
                           "Pense à la règle que tu as apprise sur cette notion, puis réessaie.")
+        historique[cle] = nouveau + [{"role": "ia", "texte": texte}]
         with VERROU, self.base.cnx() as c:
-            c.execute("UPDATE reponses SET explications = explications + 1 WHERE eleve = ? AND seance = ? AND exercice = ?", (e["id"], n, xid))
+            c.execute("UPDATE reponses SET explications = explications + ?, remediation = ? WHERE eleve = ? AND seance = ? AND exercice = ?",
+                      (0 if dialogue else 1, json.dumps(historique, ensure_ascii=False), e["id"], n, xid))
             c.execute("UPDATE traces SET appels_ia = appels_ia + 1 WHERE eleve = ? AND seance = ?", (e["id"], n))
-        return self.json(200, {"texte": texte, "fini": fini})
+        return self.json(200, {"echanges": historique[cle], "restantes": max(0, REMEDIATION_MAX - nb_eleve - (1 if message else 0)), "fini": fini})
 
     # ---------------------------------------------------------------- reprise d'une séance terminée
     def reprendre(self, e, cfg):
@@ -1833,6 +1882,7 @@ class Gestionnaire(SimpleHTTPRequestHandler):
             exos = {r["id"]: json.loads(r["donnees"]) for r in c.execute(f"SELECT id, donnees FROM exercices WHERE id IN ({','.join('?' * len(ids))})", ids)} if ids else {}
             reps = {r["exercice"]: r for r in c.execute("SELECT * FROM reponses WHERE eleve = ? AND seance = ?", (e["id"], n))}
         exercices = []
+        montrer = bool((cfg.get("exercices") or {}).get("montrerReponse"))
         for i in ids:
             q = exos.get(i)
             if not q:
@@ -1840,11 +1890,12 @@ class Gestionnaire(SimpleHTTPRequestHandler):
             r = reps.get(i)
             donnee = json.loads(r["reponse"]) if r and r["reponse"] else None
             score, retour, _ = EX.corriger(q, donnee) if r else (0.0, "", "")
-            attendu = EX.reponse_attendue(q)
+            attendu = EX.reponse_attendue(q) if montrer else None
             lg = self.langue()
             exercices.append({"titre": q.get("titre", ""), "texte": q.get("texte", ""), "reponse": traduire_texte(lg, EX.reponse_lisible(q, donnee)) if r else None,
                               "score": round(r["score"] if r and r["score"] is not None else score, 2), "juste": bool(r) and (r["score"] or 0) >= 1,
-                              "retour": traduire_texte(lg, retour), "attendu": traduire_texte(lg, attendu), "retourGeneral": q.get("retour_general", "")})
+                              "retour": traduire_texte(lg, retour), "attendu": traduire_texte(lg, attendu) if attendu else None,
+                              "retourGeneral": q.get("retour_general", "") if montrer else ""})
         return self.json(200, {"definitif": s["definitif"], "idees": (s.get("correction") or {}).get("idees"),
                                "message": traduire_texte(self.langue(), (s.get("correction") or {}).get("message")), "exercices": exercices})
 

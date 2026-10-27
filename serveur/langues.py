@@ -169,7 +169,8 @@ _D = {
     "Votre enseignant n'a pas activé les explications de l'IA pour les exercices.": ("Your teacher has not turned on AI explanations for the exercises.", "El teu docent no ha activat les explicacions de la IA per als exercicis."),
     "Répondez d'abord à l'exercice.": ("Answer the exercise first.", "Respon primer l'exercici."),
     "Cette réponse est juste : il n'y a pas d'erreur à expliquer.": ("This answer is correct: there is no mistake to explain.", "Aquesta resposta és correcta: no hi ha cap error per explicar."),
-    "Vous avez déjà une explication pour cette réponse : relisez-la, puis réessayez.": ("You already have an explanation for this answer: read it again, then try again.", "Ja tens una explicació per a aquesta resposta: rellegeix-la i torna-ho a provar."),
+    "Touchez d'abord « Comprendre mon erreur ».": ("First tap “Understand my mistake”.", "Toca primer «Entendre el meu error»."),
+    "La remédiation est terminée pour cette réponse : réessayez l'exercice.": ("The remediation is over for this answer: try the exercise again.", "La remediació s'ha acabat per a aquesta resposta: torna a provar l'exercici."),
     "Relis l'énoncé mot par mot et compare-le à ta réponse : où se trouve la différence ? Pense à la règle que tu as apprise sur cette notion, puis réessaie.": ("Read the question word by word and compare it with your answer: where is the difference? Think of the rule you learned about this, then try again.", "Rellegeix l'enunciat paraula per paraula i compara'l amb la teva resposta: on és la diferència? Pensa en la regla que has après sobre aquesta noció i torna-ho a provar."),
 }
 

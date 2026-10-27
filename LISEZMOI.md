@@ -2,7 +2,7 @@
 
 Viabilis est une application web pour la classe, sur smartphone, tablette ou ordinateur. Elle aide l'enseignant à garder chaque élève dans une zone où il apprend : ni débordé, ni ennuyé, et toujours acteur de sa réflexion, y compris quand une IA générative l'accompagne.
 
-- **Viabilis élève.** L'élève rejoint la classe avec un code et un pseudonyme. Il déclare la difficulté qu'il ressent, écrit ses idées, puis échange avec une IA. L'enseignant fixe l'ordre (réflexion d'abord ou IA d'abord) et le rôle de l'IA (questionner ou donner des éléments). Il fait aussi des exercices tirés de banques adaptées à son niveau. Après une erreur, il peut demander à l'IA de lui expliquer ce qui ne va pas et la règle en jeu ; tant qu'il lui reste un essai, l'IA ne donne pas la bonne réponse.
+- **Viabilis élève.** L'élève rejoint la classe avec un code et un pseudonyme. Il déclare la difficulté qu'il ressent, écrit ses idées, puis échange avec une IA. L'enseignant fixe l'ordre (réflexion d'abord ou IA d'abord) et le rôle de l'IA (questionner ou donner des éléments). Il fait aussi des exercices tirés de banques adaptées à son niveau. Après une erreur, il peut échanger avec l'IA pour comprendre l'erreur qu'il a faite et la règle en jeu : c'est une remédiation, et l'IA ne donne jamais la bonne réponse.
 - **Viabilis enseignant.** L'enseignant prépare ses séances et suit l'état estimé de chaque élève : charge, agentivité, pensée divergente et maîtrise. Il voit les ruptures qui menacent et reçoit une recommandation, qu'il applique à un élève ou à toute la classe. Il peut exporter les données pour la recherche, ou tout effacer.
 
 Langues de l'interface : français, anglais, catalan, italien, espagnol et allemand.

@@ -51,7 +51,7 @@ corr = r("POST", "eleve/terminer?seance=1", {}, e["jeton"])
 verif(corr.get("definitif") and corr["idees"]["idees"] == ["5+5", "5+4"], "fin définitive : la correction porte sur les idées")
 st = [x["statut"] for x in corr["idees"]["retours"]]
 verif(st[0] == "juste" and st[1] != "juste", f"correction des idées : 5+5 juste, 5+4 à revoir ({st})")
-verif(len(corr["exercices"]) == 3 and all(x["attendu"] for x in corr["exercices"]), "correction des exercices : les trois exercices tirés, avec la bonne réponse")
+verif(len(corr["exercices"]) == 3 and all(x["attendu"] is None for x in corr["exercices"]), "correction des exercices : les trois exercices tirés, sans la bonne réponse (cachée par défaut)")
 x = corr["exercices"][0]
 verif(x["reponse"] not in (None, "pas de réponse") and ("juste" in x), f"l'élève voit sa propre réponse ({x['reponse']}) et si elle est juste")
 verif(all(y["reponse"] is None for y in corr["exercices"][1:]), "les exercices non faits apparaissent comme sans réponse, avec la bonne réponse")
